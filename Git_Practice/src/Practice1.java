@@ -1,4 +1,8 @@
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Practice1 {
 	public static class DB{
@@ -8,31 +12,56 @@ public class Practice1 {
 			con = null;
 		}
 		
-		void open(String id, String pw) {
-			/* Fill */
+		void open() throws SQLException, ClassNotFoundException {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://35.201.230.135/jch?useSSL=false", "javateam", "boradori1");
 		}
 		
-		String[] list() {
+		String[] list() throws SQLException {
 			String item[] = null;
-			/* Fill */
+
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery("select * from test");
+			
+			rs.last();
+			int num_row = rs.getRow();
+			rs.beforeFirst();
+			item = new String[num_row];
+			
+			int i = 0;
+			while(rs.next()){
+				item[i] = rs.getString(2) + " ,\t" + rs.getString(3);
+				i++;
+			}
+			
 			return item;
 		}
 		
-		boolean find(String item) {
-			/* Fill */
-			return false;
+		boolean find(String item) throws SQLException {
+
+			
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery("select * from test where Name =\"" + item + "\"");
+
+			rs.last();
+			int num_row = rs.getRow();
+			
+			if(num_row >= 1){
+				return true;
+			}else{
+				return false;
+			}
 		}
 	}
 	
-	public static void main(String[] argv) {
+	public static void main(String[] argv) throws ClassNotFoundException, SQLException {
 		DB myDB = new DB();
 		
-		String id = null;
-		String pw = null;
-		String[] items = null;
-		String find_item = null;
 		
-		myDB.open(id, pw);
+		String[] items = null;
+		String find_item = "a";
+		
+		myDB.open();
 		
 		items = myDB.list();
 		for(String item : items) {
