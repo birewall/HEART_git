@@ -118,17 +118,6 @@
                            </font>
                         </Button>
                      </center>
-                     <effect>
-                        <Blend opacity="0.34">
-                           <topInput>
-                              <ImageInput>
-                                 <source>
-                                    <Image url="file:/C:/Users/ghkde/OneDrive/Desktop/untitled.png" />
-                                 </source>
-                              </ImageInput>
-                           </topInput>
-                        </Blend>
-                     </effect>
                   </BorderPane>
                </children>
                <opaqueInsets>
