@@ -22,7 +22,7 @@ public class MBookDB {
 		return false;
 	}
 	
-	public void insert(MItem item) {
+	public void insert(MBook item) {
 		/* Fill */
 	}
 	
