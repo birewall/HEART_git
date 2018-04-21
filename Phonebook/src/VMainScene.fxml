@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -7,8 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<TitledPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" text="Library Management Program" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" text="Library Management Program" type="TitledPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CManager">
    <content>
       <SplitPane dividerPositions="0.7" prefHeight="160.0" prefWidth="200.0">
          <items>
@@ -16,13 +18,15 @@
                <center>
                   <TableView fx:id="tblBook" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn prefWidth="127.0" text="Book ID" />
+                      <TableColumn prefWidth="123.0" text="Book Name" />
+                        <TableColumn prefWidth="144.0" text="Rent Date" />
+                        <TableColumn prefWidth="160.0" text="Return Date" />
                     </columns>
                   </TableView>
                </center>
             </BorderPane>
-            <GridPane style="-fx-background-color: violet;">
+            <GridPane style="-fx-background-color: lightsteelblue;">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -34,14 +38,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="btnExit" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: skyblue;" text="EXIT" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Button>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightyellow;">
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightyellow;" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <bottom>
-                        <Button fx:id="btnBookRent" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: skyblue;" text="BOOK RENT" BorderPane.alignment="CENTER">
+                        <Button fx:id="btnBookRent" mnemonicParsing="false" onAction="#OnBookRent" prefHeight="30.0" prefWidth="150.0" text="BOOK RENT" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -53,10 +52,13 @@
                      <center>
                         <TextField fx:id="RentBookName" alignment="CENTER" maxHeight="30.0" maxWidth="200.0" minHeight="30.0" minWidth="200.0" prefHeight="30.0" prefWidth="200.0" promptText="Book Name" BorderPane.alignment="CENTER" />
                      </center>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
                   </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgreen;" GridPane.rowIndex="1">
                      <bottom>
-                        <Button fx:id="btnBookReturn" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: skyblue;" text="BOOK RETURN" BorderPane.alignment="CENTER">
+                        <Button fx:id="btnBookReturn" mnemonicParsing="false" onAction="#OnBookReturn" prefHeight="30.0" prefWidth="200.0" text="BOOK RETURN" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -66,12 +68,21 @@
                         <TextField fx:id="ReturnBookName" alignment="CENTER" maxHeight="30.0" maxWidth="200.0" minHeight="30.0" minWidth="200.0" prefHeight="30.0" prefWidth="200.0" promptText="Book Name" BorderPane.alignment="CENTER" />
                      </center>
                      <top>
-                        <TextField fx:id="ReturnBookID" alignment="CENTER" maxHeight="30.0" maxWidth="200.0" minHeight="30.0" minWidth="200.0" prefHeight="30.0" prefWidth="200.0" promptText="Book ID" BorderPane.alignment="CENTER" />
+                        <TextField fx:id="ReturnBookID" alignment="CENTER" maxHeight="30.0" maxWidth="200.0" minHeight="30.0" minWidth="200.0" prefHeight="30.0" prefWidth="200.0" promptText="Book ID" BorderPane.alignment="CENTER">
+                           <opaqueInsets>
+                              <Insets bottom="10.0" top="10.0" />
+                           </opaqueInsets></TextField>
                      </top>
+                     <opaqueInsets>
+                        <Insets bottom="10.0" top="10.0" />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
                   </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: pink;" GridPane.rowIndex="2">
                      <bottom>
-                        <Button fx:id="btnAdd" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: skyblue;" text="ADD" BorderPane.alignment="CENTER">
+                        <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#OnAdd" prefHeight="30.0" prefWidth="200.0" text="ADD" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -80,10 +91,13 @@
                      <center>
                         <TextField fx:id="AddBookName" alignment="CENTER" maxHeight="30.0" maxWidth="200.0" minHeight="30.0" minWidth="200.0" prefHeight="30.0" prefWidth="200.0" promptText="Book Name" BorderPane.alignment="CENTER" />
                      </center>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
                   </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: orange;" GridPane.rowIndex="3">
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: mistyrose;" GridPane.rowIndex="3">
                      <bottom>
-                        <Button fx:id="btnDelete" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: skyblue;" text="DELETE" BorderPane.alignment="CENTER">
+                        <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#OnDelete" prefHeight="30.0" prefWidth="200.0" text="DELETE" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -92,10 +106,36 @@
                      <center>
                         <TextField fx:id="DeleteBookName" alignment="CENTER" maxHeight="30.0" maxWidth="200.0" minHeight="30.0" minWidth="200.0" prefHeight="30.0" prefWidth="200.0" promptText="Book Name" BorderPane.alignment="CENTER" />
                      </center>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                     <center>
+                        <Button fx:id="btnExit" mnemonicParsing="false" onAction="#OnExit" prefHeight="30.0" prefWidth="200.0" text="EXIT" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Button>
+                     </center>
+                     <effect>
+                        <Blend opacity="0.34">
+                           <topInput>
+                              <ImageInput>
+                                 <source>
+                                    <Image url="file:/C:/Users/ghkde/OneDrive/Desktop/untitled.png" />
+                                 </source>
+                              </ImageInput>
+                           </topInput>
+                        </Blend>
+                     </effect>
                   </BorderPane>
                </children>
+               <opaqueInsets>
+                  <Insets bottom="10.0" top="10.0" />
+               </opaqueInsets>
             </GridPane>
          </items>
       </SplitPane>
    </content>
-</TitledPane>
+</fx:root>
