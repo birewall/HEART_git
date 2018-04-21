@@ -1,3 +1,4 @@
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
@@ -40,6 +41,33 @@ public class CManager {
 
     @FXML
     private TextField ReturnBookID;
+    
+
+    @FXML
+    void OnBookRent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnBookReturn(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnAdd(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnDelete(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnExit(ActionEvent event) {
+
+    }
+
     
       //initialize
     
