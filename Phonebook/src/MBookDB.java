@@ -1,9 +1,9 @@
 import java.sql.Connection;
 
-public class MPhonebookDB {
+public class MBookDB {
 	Connection conn;
 	
-	MPhonebookDB(){
+	MBookDB(){
 		
 	}
 	

@@ -1,7 +1,7 @@
 
 public class Main {
 	public static void main(String[] argv) {
-		MPhonebookDB database = new MPhonebookDB();
+		MBookDB database = new MBookDB();
 		CManager manager = new CManager();
 
 	}
