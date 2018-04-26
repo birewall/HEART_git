@@ -1,23 +1,35 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 public class CManager {
 
-	MBookDB database = new MBookDB();
+MBookDB database = new MBookDB();
 	
 	public CManager(){
 		database = new MBookDB();
 	}
 	
-	
     @FXML
-    private Button btnBookReturn;
+    private Button btnSearch;
 
     @FXML
-    private TextField ReturnBookName;
+    private TableColumn<?, ?> col_ID;
+
+    @FXML
+    private TextField txtName;
+
+    @FXML
+    private TextField txtRent;
+
+    @FXML
+    private TableColumn<?, ?> col_Rent;
+
+    @FXML
+    private TextField txtID;
 
     @FXML
     private Button btnDelete;
@@ -26,38 +38,25 @@ public class CManager {
     private Button btnAdd;
 
     @FXML
-    private TextField AddBookName;
+    private TextField txtReturn;
 
     @FXML
-    private TextField RentBookID;
-
-    @FXML
-    private TextField ReturnBookID;
+    private Button btnReturn;
 
     @FXML
     private TableView<?> tblBook;
 
     @FXML
-    private TextField RentBookName;
+    private TableColumn<?, ?> col_Name;
 
     @FXML
-    private TextField DeleteBookName;
+    private TableColumn<?, ?> col_Return;
+
+    @FXML
+    private Button btnRent;
 
     @FXML
     private Button btnExit;
-
-    @FXML
-    private Button btnBookRent;
-
-    @FXML
-    void OnBookRent(ActionEvent event) {
-
-    }
-
-    @FXML
-    void OnBookReturn(ActionEvent event) {
-
-    }
 
     @FXML
     void OnAdd(ActionEvent event) {
@@ -70,12 +69,25 @@ public class CManager {
     }
 
     @FXML
+    void OnReturn(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnRent(ActionEvent event) {
+
+    }
+
+    @FXML
     void OnExit(ActionEvent event) {
 
     }
-    
-    
+
+    @FXML
+    void OnSearch(ActionEvent event) {
+
+    }
+
     //initialize
-
-
+    
 }
