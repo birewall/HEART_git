@@ -11,27 +11,19 @@ public class CManager {
 	public CManager(){
 		database = new MBookDB();
 	}
-
-    @FXML
-    private TableView<?> tblBook;
-
+	
+	
     @FXML
     private Button btnBookReturn;
 
     @FXML
+    private TextField ReturnBookName;
+
+    @FXML
     private Button btnDelete;
-    
+
     @FXML
     private Button btnAdd;
-
-    @FXML
-    private Button btnExit;
-
-    @FXML
-    private Button btnBookRent;
-    
-    @FXML
-    private TextField ReturnBookName;
 
     @FXML
     private TextField AddBookName;
@@ -41,7 +33,21 @@ public class CManager {
 
     @FXML
     private TextField ReturnBookID;
-    
+
+    @FXML
+    private TableView<?> tblBook;
+
+    @FXML
+    private TextField RentBookName;
+
+    @FXML
+    private TextField DeleteBookName;
+
+    @FXML
+    private Button btnExit;
+
+    @FXML
+    private Button btnBookRent;
 
     @FXML
     void OnBookRent(ActionEvent event) {
@@ -67,8 +73,9 @@ public class CManager {
     void OnExit(ActionEvent event) {
 
     }
+    
+    
+    //initialize
 
-    
-      //initialize
-    
+
 }
