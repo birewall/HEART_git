@@ -7,7 +7,7 @@ public class MBookDB {
 	Connection conn;
 	
 	MBookDB(){
-		
+		conn = null;
 	}
 	
 	public void open() throws ClassNotFoundException, SQLException {
@@ -35,32 +35,29 @@ public class MBookDB {
 //				connection.close();
 			}
 	
-	public MBook[] search() {
-		String[] items = null;
+	public MBook[] search(MBook item) {
+		MBook[] items = null;
 		/* Fill */
 		return items;
 	}
 	
-	public boolean isExist(String item) {
-		/* Fill */
-		return false;
-	}
-	
-	public void insert(MBook item) {
+	public boolean insert(MBook item) {
 		
 		String id, name;
 		id = item.getId();
 		name = item.getName();
 		String sql = "Insert into Library(id, book_name) Values (" + id + " " + name + ")";
 		System.out.println(sql);
-		
+
+		return false;
 	}
 	
-	public void delete(String item, String colume) {
-		/* Fill */
+	public boolean delete(MBook item) {
+
+		return false;
 	}
 	
-	public void rent(MBook item){
+	public boolean rent(MBook item){
 
 		// SQL
 		String sql = "";
@@ -68,6 +65,16 @@ public class MBookDB {
 		// Check
 		
 		
-		
+
+		return false;
 	}
+	
+	public boolean retreive(MBook item) {
+		
+		return false;
+	}
+	
+	public void close() throws SQLException {
+		conn.close();
+	}	
 }

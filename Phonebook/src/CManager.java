@@ -1,4 +1,5 @@
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -65,39 +66,58 @@ public class CManager implements Initializable {
     
     @FXML
     void OnAdd(ActionEvent event) {
-    	
+    	MBook item = new MBook("hungry", "spirit");
+    	database.insert(item);
     }
 
     @FXML
     void OnDelete(ActionEvent event) {
-
+    	MBook item = new MBook("hungry", "spirit");
+    	database.delete(item);
     }
 
     @FXML
     void OnReturn(ActionEvent event) {
-
+    	MBook item = new MBook("hungry", "spirit");
+    	database.retreive(item);
     }
 
     @FXML
     void OnRent(ActionEvent event) {
-
+    	MBook item = new MBook("hungry", "spirit");
+    	database.rent(item);
     }
 
     @FXML
     void OnExit(ActionEvent event) {
-
+    	try {
+			database.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	System.exit(0);
     }
 
     @FXML
     void OnSearch(ActionEvent event) {
-
+    	MBook item = new MBook("hungry", "spirit");
+    	database.search(item);
     }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		database = new MBookDB();
-		//database.open();
+		try {
+			database.open();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
   
 }
