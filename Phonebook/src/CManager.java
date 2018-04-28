@@ -65,25 +65,25 @@ public class CManager implements Initializable {
     private TextField txtReturn;
     
     @FXML
-    void OnAdd(ActionEvent event) {
+    void OnAdd(ActionEvent event) throws SQLException {
     	MBook item = new MBook("hungry", "spirit");
     	database.insert(item);
     }
 
     @FXML
-    void OnDelete(ActionEvent event) {
+    void OnDelete(ActionEvent event) throws SQLException {
     	MBook item = new MBook("hungry", "spirit");
     	database.delete(item);
     }
 
     @FXML
-    void OnReturn(ActionEvent event) {
+    void OnReturn(ActionEvent event) throws SQLException {
     	MBook item = new MBook("hungry", "spirit");
     	database.retreive(item);
     }
 
     @FXML
-    void OnRent(ActionEvent event) {
+    void OnRent(ActionEvent event) throws SQLException {
     	MBook item = new MBook("hungry", "spirit");
     	database.rent(item);
     }
