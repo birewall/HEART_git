@@ -34,7 +34,7 @@ public class MBookDB {
 //				connection.close();
 			}
 	
-	public MBook[] search(MBook item) throws SQLException {
+	public ArrayList<MBook> search(MBook item) throws SQLException {
 		ArrayList <MBook> result = new ArrayList<>();
 		int count = 0;
 		String sql = "selected * from Library where";
@@ -83,7 +83,7 @@ public class MBookDB {
 			System.out.println("Searching was failed.");
 		}
 		
-		return items;
+		return result;
 	}
 	
 	public boolean insert(MBook item) throws SQLException {
