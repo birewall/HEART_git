@@ -86,6 +86,7 @@ public class CManager implements Initializable {
     void OnRent(ActionEvent event) {
     	MBook item = new MBook("hungry", "spirit");
     	database.rent(item);
+    	
     }
 
     @FXML
@@ -119,5 +120,4 @@ public class CManager implements Initializable {
 			e.printStackTrace();
 		}
 	}
-  
 }
