@@ -11,14 +11,13 @@ public class MBookDB {
 	}
 	
 	public void open() throws ClassNotFoundException, SQLException {
-		Connection connection = null;
-        Statement st = null;
+		Statement st = null;
         
         Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(
+			conn = DriverManager.getConnection(
 					"jdbc:mysql://35.201.230.135/javateaM?useSSL=false", 
 					"javateam", "boradori1");
-//				st = connection.createStatement();
+			st = conn.createStatement();
 //				
 //				String sql = "insert into Library_books values("
 //						+ "\"" + this.txtName_b.getText() + "\","
@@ -36,7 +35,7 @@ public class MBookDB {
 //				connection.close();
 			}
 	
-	public String[] list() {
+	public MBook[] search() {
 		String[] items = null;
 		/* Fill */
 		return items;
@@ -48,10 +47,27 @@ public class MBookDB {
 	}
 	
 	public void insert(MBook item) {
-		/* Fill */
+		
+		String id, name;
+		id = item.getId();
+		name = item.getName();
+		String sql = "Insert into Library(id, book_name) Values (" + id + " " + name + ")";
+		System.out.println(sql);
+		
 	}
 	
 	public void delete(String item, String colume) {
 		/* Fill */
+	}
+	
+	public void rent(MBook item){
+
+		// SQL
+		String sql = "";
+		
+		// Check
+		
+		
+		
 	}
 }

@@ -5,7 +5,7 @@ public class MBook {
 	private String rent_date;
 	private String retreive_date;
 	
-	public MBook(String name, String id) {
+	public MBook(String id, String name) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -13,7 +13,7 @@ public class MBook {
 		this.retreive_date = null;
 	}
 	
-	public MBook(String name, String id, String rent_date, String retreive_date) {
+	public MBook(String id, String name, String rent_date, String retreive_date) {
 		super();
 		this.name = name;
 		this.id = id;
