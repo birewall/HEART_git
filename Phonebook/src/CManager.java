@@ -1,5 +1,6 @@
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -38,19 +39,19 @@ public class CManager implements Initializable {
     private Button btnExit;
     
     @FXML
-    private TableView<?> tblBook;
+    private TableView<MBook> tblBook;
 
     @FXML
-    private TableColumn<?, ?> col_ID;
+    private TableColumn<MBook, String> col_ID;
 
     @FXML
-    private TableColumn<?, ?> col_Rent;
+    private TableColumn<MBook, String> col_Name;
     
     @FXML
-    private TableColumn<?, ?> col_Name;
-
+    private TableColumn<MBook, String> col_Rent;
+  
     @FXML
-    private TableColumn<?, ?> col_Return;
+    private TableColumn<MBook, String> col_Return;
 
     @FXML
     private TextField txtName;
@@ -66,26 +67,45 @@ public class CManager implements Initializable {
     
     @FXML
     void OnAdd(ActionEvent event) {
-    	MBook item = new MBook("hungry", "spirit");
-    	database.insert(item);
-    }
+    	String id_text = this.txtID.getText();
+    	String name_text = this.txtName.getText();
+    	MBook item = new MBook(id_text, name_text);
+
+    	if (id_text.length() == 0) {return;}
+    	else {database.insert(item);}
+    	}
+    	
 
     @FXML
     void OnDelete(ActionEvent event) {
-    	MBook item = new MBook("hungry", "spirit");
-    	database.delete(item);
-    }
+     	String id_text = this.txtID.getText();
+    	String name_text = this.txtName.getText();
+    	MBook item = new MBook(id_text, name_text);
 
+    	if (id_text.length() == 0) {return;}
+    	else {database.delete(item);}
+    	}
+    
     @FXML
     void OnReturn(ActionEvent event) {
-    	MBook item = new MBook("hungry", "spirit");
-    	database.retreive(item);
-    }
+     	String id_text = this.txtID.getText();
+    	String name_text = this.txtName.getText();
+    	MBook item = new MBook(id_text, name_text);
+
+    	if (id_text.length() == 0 ) {return;}
+    	else {database.retreive(item);}
+    	}
 
     @FXML
     void OnRent(ActionEvent event) {
-    	MBook item = new MBook("hungry", "spirit");
-    	database.rent(item);
+    	String id_text = this.txtID.getText();
+    	String name_text = this.txtName.getText();
+    	String rent_text = this.txtRent.getText();
+    	String retreive_text = this.txtReturn.getText();
+    	MBook item = new MBook(id_text, name_text, rent_text, retreive_text);
+    	
+    	if (id_text.length() == 0) {return;}
+    	else {database.rent(item);}
     }
 
     @FXML
@@ -102,7 +122,14 @@ public class CManager implements Initializable {
     @FXML
     void OnSearch(ActionEvent event) {
     	MBook item = new MBook("hungry", "spirit");
-    	database.search(item);
+    	
+    	ArrayList<MBook> items = database.search(item);
+    	
+    	for(MBook now_item : items){
+    		tblBook.getItems().add(now_item);
+    	}
+    	
+
     }
 
 	@Override
@@ -118,6 +145,19 @@ public class CManager implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		tblBook.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+		    if (newSelection != null) {
+		        MBook selectedItem = tblBook.getSelectionModel().getSelectedItem();
+		        this.txtID.setText(selectedItem.getId());
+		        this.txtName.setText(selectedItem.getName());
+		        this.txtRent.setText(selectedItem.getRent_date());
+		        this.txtReturn.setText(selectedItem.getRetreive_date());
+		        
+		    }});
+		
+		col_ID.setCellValueFactory(new PropertyValueFactory<MBook, String>("id"));
+		col_Name.setCellValueFactory(new PropertyValueFactory<MBook, String>("name"));
+		col_Rent.setCellValueFactory(new PropertyValueFactory<MBook, String>("rent_date"));
+		col_Return.setCellValueFactory(new PropertyValueFactory<MBook, String>("retreive_date"));
 	}
-  
 }
