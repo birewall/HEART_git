@@ -20,92 +20,116 @@ public class CManager implements Initializable {
 		database = new MBookDB();
 	}
 	
-    @FXML
-    private Button btnSearch;
-    
-    @FXML
-    private Button btnDelete;
-    
-    @FXML
-    private Button btnAdd;
-    
-    @FXML
-    private Button btnReturn;
 
     @FXML
-    private Button btnRent;
+    private Button btnBookDelete;
+
+    @FXML
+    private TextField txtResistUserName;
+
+    @FXML
+    private TableView<?> tblUser;
+
+    @FXML
+    private TableColumn<?, ?> UserTableCol_UserID;
+    
+    @FXML
+    private TableColumn<?, ?> UserTableCol_UserName;
+    
+    @FXML
+    private TableColumn<?, ?> UserTableCol_UserPhone;
+
+    @FXML
+    private TextField txtResistBookName;
+
+    @FXML
+    private TextField txtResistBookID;
+
+    @FXML
+    private Button btnUserAdd;
+
+    @FXML
+    private Button btnBookAdd;
+
+    @FXML
+    private TableView<MBook> tblBook;
+    
+    @FXML
+    private TableColumn<MBook, String> BookTableCol_BookID;
+    
+    @FXML
+    private TableColumn<MBook, String> BookTableCol_BookName;
+    
+    @FXML
+    private TableColumn<MBook, String> BookTableCol_BookAuthor;
 
     @FXML
     private Button btnExit;
+
+    @FXML
+    private TextField txtSearchBookName;
+
+    @FXML
+    private TextField txtSearchUserName;
+
+    @FXML
+    private Button btnRetrieve;
+
+    @FXML
+    private Button btnSearch;
+
+    @FXML
+    private Button btnUserDelete;
+
+    @FXML
+    private Button btnBorrow;
+
+    @FXML
+    private TableView<?> tblRent;
     
     @FXML
-    private TableView<MBook> tblBook;
+    private TableColumn<?, ?> RentTableCol_BookID;
 
     @FXML
-    private TableColumn<MBook, String> col_ID;
+    private TableColumn<?, ?> RentTableCol_UserID;
 
     @FXML
-    private TableColumn<MBook, String> col_Name;
-    
-    @FXML
-    private TableColumn<MBook, String> col_Rent;
-  
-    @FXML
-    private TableColumn<MBook, String> col_Return;
+    private TableColumn<?, ?> RentTableCol_BorrowDate;
 
     @FXML
-    private TextField txtName;
+    private TableColumn<?, ?> RentTableCol_RetrieveDate;
 
     @FXML
-    private TextField txtRent;
+    private TextField txtResistUserID;
 
     @FXML
-    private TextField txtID;
-
-    @FXML
-    private TextField txtReturn;
-    
-    @FXML
-    void OnAdd(ActionEvent event) {
-    	String id_text = this.txtID.getText();
-    	String name_text = this.txtName.getText();
+    void OnBookAdd(ActionEvent event) throws SQLException {
+    	String id_text = this.txtResistBookID.getText();
+    	String name_text = this.txtResistBookName.getText();
     	MBook item = new MBook(id_text, name_text);
 
     	if (id_text.length() == 0) {return;}
     	else {database.insert(item);}
-    	}
-    	
+    }
 
     @FXML
-    void OnDelete(ActionEvent event) {
-     	String id_text = this.txtID.getText();
-    	String name_text = this.txtName.getText();
+    void OnBookDelete(ActionEvent event) throws SQLException {
+     	String id_text = this.txtResistBookID.getText();
+    	String name_text = this.txtResistBookName.getText();
     	MBook item = new MBook(id_text, name_text);
 
     	if (id_text.length() == 0) {return;}
     	else {database.delete(item);}
-    	}
-    
-    @FXML
-    void OnReturn(ActionEvent event) {
-     	String id_text = this.txtID.getText();
-    	String name_text = this.txtName.getText();
-    	MBook item = new MBook(id_text, name_text);
-
-    	if (id_text.length() == 0 ) {return;}
-    	else {database.retreive(item);}
-    	}
+    }
 
     @FXML
-    void OnRent(ActionEvent event) {
-    	String id_text = this.txtID.getText();
-    	String name_text = this.txtName.getText();
-    	String rent_text = this.txtRent.getText();
-    	String retreive_text = this.txtReturn.getText();
-    	MBook item = new MBook(id_text, name_text, rent_text, retreive_text);
-    	
-    	if (id_text.length() == 0) {return;}
-    	else {database.rent(item);}
+    void OnUserAdd(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnUserDelete(ActionEvent event) {
+
     }
 
     @FXML
@@ -120,7 +144,30 @@ public class CManager implements Initializable {
     }
 
     @FXML
-    void OnSearch(ActionEvent event) {
+    void OnBorrow(ActionEvent event)  throws SQLException {
+    	String id_text = this.txtResistBookID.getText();
+    	String name_text = this.txtResistBookName.getText();
+    	String rent_text = this.txtRent.getText();
+    	String retreive_text = this.txtReturn.getText();
+    	MBook item = new MBook(id_text, name_text, rent_text, retreive_text);
+    	
+    	if (id_text.length() == 0) {return;}
+    	else {database.rent(item);}
+
+    }
+
+    @FXML
+    void OnRetrieve(ActionEvent event) throws SQLException {
+     	String id_text = tblBook.getSelectionModel().getSelectedItem().getName();
+    	String name_text = this.txtName.getText();
+    	MBook item = new MBook(id_text, name_text);
+
+    	if (id_text.length() == 0 ) {return;}
+    	else {database.retreive(item);}
+    }
+
+    @FXML
+    void OnSearch(ActionEvent event) throws SQLException {
     	MBook item = new MBook("hungry", "spirit");
     	
     	ArrayList<MBook> items = database.search(item);
@@ -128,7 +175,6 @@ public class CManager implements Initializable {
     	for(MBook now_item : items){
     		tblBook.getItems().add(now_item);
     	}
-    	
 
     }
 
@@ -148,16 +194,16 @@ public class CManager implements Initializable {
 		tblBook.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 		    if (newSelection != null) {
 		        MBook selectedItem = tblBook.getSelectionModel().getSelectedItem();
-		        this.txtID.setText(selectedItem.getId());
+		        this.txtBook.setText(selectedItem.getId());
 		        this.txtName.setText(selectedItem.getName());
 		        this.txtRent.setText(selectedItem.getRent_date());
 		        this.txtReturn.setText(selectedItem.getRetreive_date());
 		        
 		    }});
 		
-		col_ID.setCellValueFactory(new PropertyValueFactory<MBook, String>("id"));
-		col_Name.setCellValueFactory(new PropertyValueFactory<MBook, String>("name"));
-		col_Rent.setCellValueFactory(new PropertyValueFactory<MBook, String>("rent_date"));
+		BookTableCol_BookID.setCellValueFactory(new PropertyValueFactory<MBook, String>("id"));
+		BookTableCol_BookName.setCellValueFactory(new PropertyValueFactory<MBook, String>("name"));
+		BookTableCol_BookAuthor.setCellValueFactory(new PropertyValueFactory<MBook, String>("author"));
 		col_Return.setCellValueFactory(new PropertyValueFactory<MBook, String>("retreive_date"));
 	}
 }
