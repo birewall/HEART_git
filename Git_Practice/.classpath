@@ -1,17 +1,7 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_161/jre/lib/mysql-connector-java-5.1.46-bin.jar"/>
+	<classpathentry excluding=".settings/|src/" kind="src" path=""/>
+	<classpathentry kind="lib" path="C:/JavaProgramming/mysql-connector-java-5.1.46/mysql-connector-java-5.1.46-bin.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_65"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/ghkde/Downloads/mysql-connector-java-5.1.46/mysql-connector-java-5.1.46-bin.jar"/>
-	<classpathentry kind="output" path="bin"/>
-</classpath>
->>>>>>> branch 'master' of https://github.com/birewall/HEART_git.git
