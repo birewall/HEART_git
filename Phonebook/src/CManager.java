@@ -204,6 +204,6 @@ public class CManager implements Initializable {
 		BookTableCol_BookID.setCellValueFactory(new PropertyValueFactory<MBook, String>("id"));
 		BookTableCol_BookName.setCellValueFactory(new PropertyValueFactory<MBook, String>("name"));
 		BookTableCol_BookAuthor.setCellValueFactory(new PropertyValueFactory<MBook, String>("author"));
-		col_Return.setCellValueFactory(new PropertyValueFactory<MBook, String>("retreive_date"));
+		col_Return.setCellValueFactory(new PropertyValueFactory<MBook, String>("retrieve_date"));
 	}
 }
