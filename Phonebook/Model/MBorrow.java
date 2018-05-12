@@ -1,3 +1,4 @@
+package Model;
 
 public class MBorrow {
 	private String book_id;
