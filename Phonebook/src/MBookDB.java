@@ -34,7 +34,11 @@ public class MBookDB {
 //				connection.close();
 			}
 	
-	public ArrayList<MBook> search(MBook item) throws SQLException {
+	public ArrayList<MBook> search(MBook book, MUser user) throws SQLException {
+		/*if(book != null){
+			String bookname = book.getName();
+		}
+		
 		ArrayList <MBook> result = new ArrayList<>();
 		int count = 0;
 		String sql = "selected * from Library where";
@@ -82,15 +86,29 @@ public class MBookDB {
 		if (error){
 			System.out.println("Searching was failed.");
 		}
-		
-		return result;
+		*/
+		//return result;
 	}
 	
-	public boolean insert(MBook item) throws SQLException {
-		String sql = "Insert into Library(id, book_name) Values (" 
-					+ "'" + item.getId() + "'" + ", " 
-				+ "'" + item.getName() + "'" + ")";
+	public boolean insert(MBook name) throws SQLException {
+		String sql = "Insert into Library(book_name) Values (" 
+					+ "'" + name.getName() + ")";
 		
+		System.out.println(sql);
+		Statement st = conn.createStatement();
+		boolean error = st.execute(sql);
+		if (error){
+			System.out.println("Insertion was failed.");
+		}
+		
+
+		return false;
+	}
+	
+	public boolean insert(MUser name) throws SQLException {
+		String sql = "Insert into Library(user_name) Values (" 
+				+ "'" + name.getName() + ")";
+	
 		System.out.println(sql);
 		Statement st = conn.createStatement();
 		boolean error = st.execute(sql);

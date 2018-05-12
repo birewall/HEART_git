@@ -10,82 +10,173 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TitledPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" text="Library Management Program" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CManager">
+<TitledPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" text="Library Management Program" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CManager">
    <content>
-      <SplitPane dividerPositions="0.7" prefHeight="160.0" prefWidth="200.0">
+      <SplitPane dividerPositions="0.56" prefHeight="160.0" prefWidth="200.0">
          <items>
-            <BorderPane prefHeight="200.0" prefWidth="200.0">
-               <center>
-                  <TableView fx:id="tblBook" prefHeight="570.0" prefWidth="539.0" BorderPane.alignment="CENTER">
+            <SplitPane dividerPositions="0.3, 0.6" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+                  <TableView fx:id="tblBook" prefHeight="165.0" prefWidth="555.0">
                     <columns>
-                      <TableColumn fx:id="col_ID" prefWidth="89.0" text="Book ID" />
-                      <TableColumn fx:id="col_Name" prefWidth="142.0" text="Book Name" />
-                        <TableColumn fx:id="col_Rent" prefWidth="108.0" text="Rent Date" />
-                        <TableColumn fx:id="col_Return" prefWidth="112.0" text="Return Date" />
+                      <TableColumn fx:id="BookTableCol_BookID" prefWidth="150.0" text="Book ID" />
+                      <TableColumn fx:id="BookTableCol_BookName" prefWidth="150.0" text="Book Name" />
+                        <TableColumn fx:id="BookTableCol_BookAuthor" prefWidth="150.0" text="Author" />
                     </columns>
                   </TableView>
-               </center>
-            </BorderPane>
+                  <TableView fx:id="tblUser" prefHeight="243.0" prefWidth="555.0">
+                    <columns>
+                      <TableColumn fx:id="UserTableCol_UserID" prefWidth="150.0" text="User ID" />
+                      <TableColumn fx:id="UserTableCol_UserName" prefWidth="150.0" text="User Name" />
+                        <TableColumn fx:id="UserTableCol_UserPhone" prefWidth="150.0" text="Phone Number" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="tblRent" prefHeight="264.0" prefWidth="555.0">
+                     <columns>
+                        <TableColumn fx:id="RentTableCol_BookID" prefWidth="140.0" text="Book ID" />
+                        <TableColumn fx:id="RentTableCol_UserID" prefWidth="140.0" text="User ID" />
+                        <TableColumn fx:id="col_Name11" prefWidth="142.0" text="Rent History">
+                           <columns>
+                              <TableColumn fx:id="RentTableCol_BorrowDate" prefWidth="140.0" text="Borrow Date" />
+                              <TableColumn fx:id="RentTableCol_RetrieveDate" prefWidth="140.0" text="Retrieve Date" />
+                           </columns>
+                        </TableColumn>
+                     </columns>
+                  </TableView>
+              </items>
+            </SplitPane>
             <GridPane prefHeight="460.0" prefWidth="235.0">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <GridPane prefHeight="318.0" prefWidth="235.0" GridPane.rowIndex="5">
                     <columnConstraints>
-                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#OnAdd" prefHeight="80.0" prefWidth="100.0" text="ADD" GridPane.rowIndex="1">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#OnDelete" prefHeight="80.0" prefWidth="100.0" text="DELETE" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="btnReturn" mnemonicParsing="false" onAction="#OnReturn" prefHeight="80.0" prefWidth="100.0" text="BOOK&#10;RETURN" textAlignment="CENTER" GridPane.columnIndex="1">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="btnRent" mnemonicParsing="false" onAction="#OnRent" prefHeight="80.0" prefWidth="100.0" text="BOOK&#10;RENT" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Button>
+                        <HBox alignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                           <children>
+                              <Button fx:id="btnBookAdd" alignment="CENTER" mnemonicParsing="false" onAction="#OnBookAdd" prefHeight="40.0" prefWidth="80.0" text="BOOK&#10;ADD" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="5.0" right="5.0" />
+                                 </padding>
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnBookDelete" alignment="CENTER" mnemonicParsing="false" onAction="#OnBookDelete" prefHeight="40.0" prefWidth="80.0" text="BOOK&#10;DELETE" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="5.0" right="5.0" />
+                                 </padding>
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                           <children>
+                              <Button fx:id="btnUserAdd" mnemonicParsing="false" onAction="#OnUserAdd" prefHeight="40.0" prefWidth="80.0" text="USER&#10;ADD" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="5.0" right="5.0" />
+                                 </padding>
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnUserDelete" mnemonicParsing="false" onAction="#OnUserDelete" prefHeight="40.0" prefWidth="80.0" text="USER&#10;DELETE" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="5.0" right="5.0" />
+                                 </padding>
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <TextField fx:id="txtResistBookName" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" promptText="Book Name" GridPane.rowIndex="1" />
+                        <TextField fx:id="txtResistUserName" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" promptText="User Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="txtResistBookID" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" promptText="Book ID" />
+                        <TextField fx:id="txtResistUserID" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" promptText="User ID" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
-                  <Button fx:id="btnExit" mnemonicParsing="false" onAction="#OnExit" prefHeight="60.0" prefWidth="200.0" text="EXIT" GridPane.rowIndex="6">
+                  <Button fx:id="btnExit" mnemonicParsing="false" onAction="#OnExit" prefHeight="10.0" prefWidth="200.0" text="EXIT" GridPane.rowIndex="6">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="txtID" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" promptText="Book ID" />
-                  <TextField fx:id="txtName" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" promptText="Book Name" GridPane.rowIndex="1" />
-                  <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#OnSearch" prefHeight="60.0" prefWidth="200.0" text="Book Search" GridPane.rowIndex="4">
+                  <Button fx:id="btnBorrow" mnemonicParsing="false" onAction="#OnBorrow" prefHeight="10.0" prefWidth="200.0" text="Borrow" textAlignment="CENTER" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="txtRent" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" promptText="Rent Date" GridPane.rowIndex="2" />
-                  <TextField fx:id="txtReturn" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" promptText="Return" GridPane.rowIndex="3" />
+                  <Button fx:id="btnRetrieve" mnemonicParsing="false" onAction="#OnRetrieve" prefHeight="10.0" prefWidth="200.0" text="Retrieve" textAlignment="CENTER" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <GridPane prefHeight="318.0" prefWidth="235.0">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <TextField fx:id="txtSearchBookName" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" promptText="Book Name" GridPane.rowIndex="1" />
+                        <TextField fx:id="txtSearchUserName" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" promptText="User Name" GridPane.rowIndex="2" />
+                        <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#OnSearch" prefHeight="10.0" prefWidth="200.0" text="Search" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Button>
+                        <Label text="Search">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+                  <Label text="Rent History" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Book or User Resistration " GridPane.rowIndex="4">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
                </children>
                <opaqueInsets>
                   <Insets bottom="10.0" top="10.0" />
