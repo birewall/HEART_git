@@ -104,7 +104,6 @@ public class MBookDB {
 			System.out.println("Insertion was failed.");
 		}
 		
-
 		return false;
 	}
 	
@@ -118,7 +117,6 @@ public class MBookDB {
 		if (error){
 			System.out.println("Insertion was failed.");
 		}
-		
 
 		return false;
 	}
@@ -132,7 +130,6 @@ public class MBookDB {
 		if (error){
 			System.out.println("Deletion was failed.");
 		}
-
 
 		return false;
 	}
@@ -151,8 +148,8 @@ public class MBookDB {
 		return false;
 	}
 	public boolean rent(MBook bookid, MUser userid) throws SQLException{
-		String sql = "Insert Library set book_rent =" + "'" + bookid.getName() + "'" 
-					+ "where id = "+ "'" + bookid.getId() + "'";
+		String sql = "Insert into Rent(book_rent) Values (" + bookid.getName() + ")" ;
+				
 		
 		System.out.println(sql);
 		Statement st = conn.createStatement();
@@ -163,8 +160,8 @@ public class MBookDB {
 		return false;
 	}
 	
-	public boolean retreive(MBook item) throws SQLException {
-		String sql = "Update Library set book_rent =" + "''"
+	public boolean retreive(MBook bookid, MUser userid) throws SQLException {
+		String sql = "Update Rent set book_rent =" + "''"
 					+ ", book_return ="+ "''";
 	
 		System.out.println(sql);
