@@ -36,6 +36,8 @@ public class MBookDB {
 			}
 	
 	public ArrayList<MBook> search(MBook book, MUser user) throws SQLException {
+		return null;
+		
 		/*if(book != null){
 			String bookname = book.getName();
 		}
@@ -92,7 +94,7 @@ public class MBookDB {
 	}
 	
 	public boolean insert(MBook name) throws SQLException {
-		String sql = "Insert into Library(book_name) Values (" 
+		String sql = "Insert into Book(book_name) Values (" 
 					+ "'" + name.getName() + ")";
 		
 		System.out.println(sql);
@@ -107,7 +109,7 @@ public class MBookDB {
 	}
 	
 	public boolean insert(MUser name) throws SQLException {
-		String sql = "Insert into Library(user_name) Values (" 
+		String sql = "Insert into User(user_name) Values (" 
 				+ "'" + name.getName() + ")";
 	
 		System.out.println(sql);
@@ -122,7 +124,7 @@ public class MBookDB {
 	}
 	
 	public boolean delete(MBook item) throws SQLException {
-		String sql = "Delete From Library where id =" 
+		String sql = "Delete From Book where id =" 
 					+ "'" + item.getId() + "'";
 		System.out.println(sql);
 		Statement st = conn.createStatement();
@@ -135,10 +137,22 @@ public class MBookDB {
 		return false;
 	}
 	
-	public boolean rent(MBook item) throws SQLException{
-		String sql = "Update Library set book_rent =" + "'" + item.getRent_date() + "'" 
-					+ ", book_return ="+ "'" + item.getRetreive_date() + "'"
-					+ "where id = "+ "'" + item.getId() + "'";
+	public boolean delete(MUser item) throws SQLException {
+		String sql = "Delete From User where id =" 
+					+ "'" + item.getId() + "'";
+		System.out.println(sql);
+		Statement st = conn.createStatement();
+		boolean error = st.execute(sql);
+		if (error){
+			System.out.println("Deletion was failed.");
+		}
+
+
+		return false;
+	}
+	public boolean rent(MBook bookid, MUser userid) throws SQLException{
+		String sql = "Insert Library set book_rent =" + "'" + bookid.getName() + "'" 
+					+ "where id = "+ "'" + bookid.getId() + "'";
 		
 		System.out.println(sql);
 		Statement st = conn.createStatement();
