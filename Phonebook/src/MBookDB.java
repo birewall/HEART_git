@@ -73,7 +73,7 @@ public class MBookDB {
 		
 		ArrayList <MBook> rs = new ArrayList<>();
 		
-		while()
+		//while()
 		System.out.println(sql);
 		Statement st = conn.createStatement();
 		boolean error = st.execute(sql);
