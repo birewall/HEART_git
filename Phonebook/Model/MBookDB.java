@@ -36,25 +36,11 @@ public class MBookDB {
 	public void open() throws ClassNotFoundException, SQLException {
 		Statement st = null;
         Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(
+		conn = DriverManager.getConnection(
 					"jdbc:mysql://35.201.230.135/library?useSSL=false", 
 					"javateam", "boradori1");
-			st = conn.createStatement();
-			
-//				String sql = "insert into Library_books values("
-//						+ "\"" + this.txtName_b.getText() + "\","
-//						+  this.txtDate_b.getText() + ","
-//						+ this.txtRental_b.getText() + ")";
-//				
-//				boolean error = st.execute(sql);
-//				if(error){
-//					System.out.println("Insertion was failed.");
-//					return;
-//				}
-//				
-//				st.close();
-//				connection.close();
-			}
+		st = conn.createStatement();
+	}
 	
 	public ArrayList<MBook> search(MBook book, MUser user) throws SQLException {
 		return null;
@@ -115,8 +101,8 @@ public class MBookDB {
 	}
 	
 	public boolean insert(MBook book) throws SQLException {
-		String sql = "Insert into Book Values (" 
-					+ "('" + book.getId() + "', '"
+		String sql = "Insert into Book Values ('" 
+					+ book.getId() + "', '"
 					+ book.getName() + "', '"
 					+ book.getAuthor() + "')";
 		
@@ -131,8 +117,8 @@ public class MBookDB {
 	}
 	
 	public boolean insert(MUser name) throws SQLException {
-		String sql = "Insert into Book Values (" 
-				+ "('" + name.getId() + "', '"
+		String sql = "Insert into User Values ('" 
+				+ name.getId() + "', '"
 				+ name.getName() + "', '"
 				+ name.getPhonenumber() + "')";
 	
@@ -172,8 +158,12 @@ public class MBookDB {
 
 		return false;
 	}
-	public boolean rent(MBook bookid, MUser userid) throws SQLException{
-		String sql = "Insert into Rent(book_rent) Values (" + bookid.getName() + ")" ;
+	public boolean rent(MBook book, MUser user) throws SQLException{
+		String sql = "Insert into Rent Values ('"
+					+ book.getId() + "', '"
+					+ user.getId() + "', "
+					+ "" + ","
+					+ "" + "')";
 		
 		System.out.println(sql);
 		Statement st = conn.createStatement();
@@ -184,10 +174,11 @@ public class MBookDB {
 		return false;
 	}
 	
-	public boolean retreive(MBorrow borrow) throws SQLException {
-		String sql = "Update Rent set book_rent =" + "''"
-					+ ", book_return ="+ "''";
-	
+	public boolean retreive(MBorrow rent) throws SQLException {
+		String sql = "Delete From Rent where book_id =" 
+				+ "'" + rent.getBook_id() + "' and"
+				+ "'" + rent.getUser_id() + "'";
+		
 		System.out.println(sql);
 		Statement st = conn.createStatement();
 		boolean error = st.execute(sql);

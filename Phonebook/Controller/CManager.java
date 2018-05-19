@@ -121,6 +121,9 @@ public class CManager implements Initializable {
     	if( book_id.length() * book_name.length() == 0 ) return;
     	
     	this.database.insert(new MBook(book_id, book_name, author_list[random.nextInt(author_list.length)]));
+    	
+    	this.txtResistBookID.clear();
+    	this.txtResistBookName.clear();
     }
 
     @FXML
@@ -136,6 +139,8 @@ public class CManager implements Initializable {
     	}else {
         	this.database.delete(this.focused_book);
     	}    	
+    	this.txtResistBookID.clear();
+    	this.txtResistBookName.clear();
     }
 
     @FXML
@@ -146,6 +151,8 @@ public class CManager implements Initializable {
     	if( user_id.length() * user_name.length() == 0 ) return;
     	
     	this.database.insert(new MUser(user_id, user_name, phone_list[random.nextInt(phone_list.length)]));
+    	this.txtResistUserName.clear();
+    	this.txtResistUserID.clear();
     }
 
     @FXML
@@ -161,6 +168,8 @@ public class CManager implements Initializable {
     	}else {
         	this.database.delete(this.focused_user);
         	this.focused_user = null;
+        	this.txtResistUserName.clear();
+        	this.txtResistUserID.clear();
     	}
     }
 
@@ -208,6 +217,8 @@ public class CManager implements Initializable {
     	
     	this.database.search(new MBook(null, book_name, null), new MUser(null, user_name, null));
     	view_refresh();
+    	this.txtSearchBookName.clear();
+    	this.txtSearchUserName.clear();
     }
 
 	@Override
