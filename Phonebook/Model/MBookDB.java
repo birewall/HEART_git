@@ -1,6 +1,7 @@
 package Model;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -9,11 +10,34 @@ import com.sun.beans.introspect.PropertyInfo.Name;
 
 public class MBookDB {
 	Connection conn;
-	
+	ArrayList<MBook> book_result = null;
+	ArrayList<MUser> user_result = null;
+	ArrayList<MBorrow> rent_result = null;
 	public MBookDB(){
 		conn = null;
+		this.book_result = new ArrayList<MBook>();
+		this.user_result = new ArrayList<MUser>();
+		this.rent_result = new ArrayList<MBorrow>();
 	}
 	
+	public ArrayList<MBook> getBook_result() {
+		return book_result;
+	}
+
+
+
+	public ArrayList<MUser> getUser_result() {
+		return user_result;
+	}
+
+
+
+	public ArrayList<MBorrow> getRent_result() {
+		return rent_result;
+	}
+
+
+
 	public void open() throws ClassNotFoundException, SQLException {
 		Statement st = null;
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -23,7 +47,7 @@ public class MBookDB {
 		st = conn.createStatement();
 	}
 	
-	public void search(MBook book, MUser user) throws SQLException {
+	public void search(MBook book, MUser user, MBorrow Rent) throws SQLException {
 		//return null;
 		String Name_Book = null, Name_User = null;			
 
@@ -33,34 +57,29 @@ public class MBookDB {
 		if(user != null) {
 			Name_User = user.getName();
 		}
+				
+		String sql_book = "Select * From Book Where name = " + "'" + Name_Book + "'";
+		String sql_user = "Select * From User Where name = " + "'" + Name_User + "'";
 		
-		int count = 0;
+		System.out.println(sql_book);
+		System.out.println(sql_user);
 		
-		String sql = "selected * from book where ";
-		if(Name_Book != null) {
-			if(count >0 ) {
-				sql += "and name = " + "'" + Name_Book + "'";
-			}else {
-				count ++;
-				sql += "name = " + "'" + Name_Book + "'";
-			}
+		ResultSet rs_book = null, rs_user = null;
+		Statement st_book = conn.createStatement();
+		if(Name_Book.length()>0) {
+			rs_book = st_book.executeQuery(sql_book);
 		}
-		if(Name_User != null) {
-			if(count >0 ) {
-				sql += "and name = " + "'" + Name_User + "'";
-			}else {
-				count ++;
-				sql += "name = " + "'" + Name_User + "'";
-			}
+		Statement st_user = conn.createStatement();
+		if(Name_User.length()>0) {
+			rs_user = st_user.executeQuery(sql_user);
 		}
-		System.out.println(sql);
-		Statement st = conn.createStatement();
-		boolean error = st.execute(sql);
+		//boolean error = st.execute(sql);
 		
-		
-		if (error){
-			System.out.println("Searching was failed.");
+		while(rs_user.next()) {
+			MUser item = new MUser(rs_user.getString(1), rs_user.getString(2), rs_user.getString(3));
+			this.user_result.add(item);
 		}
+		
 		/*if(book != null){
 			String bookname = book.getName();
 		}

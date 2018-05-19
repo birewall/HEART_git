@@ -5,7 +5,7 @@ public class MUser {
 	private String id;
 	private String phonenumber;
 	
-	public MUser(String name, String id, String phonenumber) {
+	public MUser(String id, String name, String phonenumber) {
 		super();
 		this.name = name;
 		this.id = id;

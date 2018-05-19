@@ -3,7 +3,6 @@ package Controller;
 import Model.*;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -215,7 +214,7 @@ public class CManager implements Initializable {
     	
     	if(book_name.length() + user_name.length() == 0) return;
     	
-    	this.database.search(new MBook(null, book_name, null), new MUser(null, user_name, null));
+    	this.database.search(new MBook(null, book_name, null), new MUser(null, user_name, null), null);
     	view_refresh();
     	this.txtSearchBookName.clear();
     	this.txtSearchUserName.clear();
