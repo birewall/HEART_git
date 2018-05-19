@@ -5,37 +5,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.sun.beans.introspect.PropertyInfo.Name;
+
 public class MBookDB {
 	Connection conn;
-	ArrayList<MBook> book_result = null;
-	ArrayList<MUser> user_result = null;
-	ArrayList<MBorrow> rent_result = null;
 	
 	public MBookDB(){
 		conn = null;
 	}
 	
-
-	public ArrayList<MBook> getBook_result() {
-		return book_result;
-	}
-
-
-
-	public ArrayList<MUser> getUser_result() {
-		return user_result;
-	}
-
-
-
-	public ArrayList<MBorrow> getRent_result() {
-		return rent_result;
-	}
-
-
 	public void open() throws ClassNotFoundException, SQLException {
 		Statement st = null;
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(
 					"jdbc:mysql://35.201.230.135/library?useSSL=false", 
 					"javateam", "boradori1");
@@ -56,9 +37,44 @@ public class MBookDB {
 //				connection.close();
 			}
 	
-	public ArrayList<MBook> search(MBook book, MUser user) throws SQLException {
-		return null;
+	public void search(MBook book, MUser user) throws SQLException {
+		//return null;
+		String Name_Book = null, Name_User = null;			
+
+		if(book != null) {
+			Name_Book = book.getName();			
+		}
+		if(user != null) {
+			Name_User = user.getName();
+		}
 		
+		int count = 0;
+		
+		String sql = "selected * from book where ";
+		if(Name_Book != null) {
+			if(count >0 ) {
+				sql += "and name = " + "'" + Name_Book + "'";
+			}else {
+				count ++;
+				sql += "name = " + "'" + Name_Book + "'";
+			}
+		}
+		if(Name_User != null) {
+			if(count >0 ) {
+				sql += "and name = " + "'" + Name_User + "'";
+			}else {
+				count ++;
+				sql += "name = " + "'" + Name_User + "'";
+			}
+		}
+		System.out.println(sql);
+		Statement st = conn.createStatement();
+		boolean error = st.execute(sql);
+		
+		
+		if (error){
+			System.out.println("Searching was failed.");
+		}
 		/*if(book != null){
 			String bookname = book.getName();
 		}
@@ -114,11 +130,9 @@ public class MBookDB {
 		//return result;
 	}
 	
-	public boolean insert(MBook book) throws SQLException {
-		String sql = "Insert into Book Values (" 
-					+ "('" + book.getId() + "', '"
-					+ book.getName() + "', '"
-					+ book.getAuthor() + "')";
+	public boolean insert(MBook name) throws SQLException {
+		String sql = "Insert into Book(book_name) Values (" 
+					+ "'" + name.getName() + ")";
 		
 		System.out.println(sql);
 		Statement st = conn.createStatement();
@@ -131,10 +145,8 @@ public class MBookDB {
 	}
 	
 	public boolean insert(MUser name) throws SQLException {
-		String sql = "Insert into Book Values (" 
-				+ "('" + name.getId() + "', '"
-				+ name.getName() + "', '"
-				+ name.getPhonenumber() + "')";
+		String sql = "Insert into User(user_name) Values (" 
+				+ "'" + name.getName() + ")";
 	
 		System.out.println(sql);
 		Statement st = conn.createStatement();
@@ -174,6 +186,7 @@ public class MBookDB {
 	}
 	public boolean rent(MBook bookid, MUser userid) throws SQLException{
 		String sql = "Insert into Rent(book_rent) Values (" + bookid.getName() + ")" ;
+				
 		
 		System.out.println(sql);
 		Statement st = conn.createStatement();
@@ -184,7 +197,7 @@ public class MBookDB {
 		return false;
 	}
 	
-	public boolean retreive(MBorrow borrow) throws SQLException {
+	public boolean retreive(MBook bookid, MUser userid) throws SQLException {
 		String sql = "Update Rent set book_rent =" + "''"
 					+ ", book_return ="+ "''";
 	
