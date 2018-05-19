@@ -114,9 +114,11 @@ public class MBookDB {
 		//return result;
 	}
 	
-	public boolean insert(MBook name) throws SQLException {
-		String sql = "Insert into Book(book_name) Values (" 
-					+ "'" + name.getName() + ")";
+	public boolean insert(MBook book) throws SQLException {
+		String sql = "Insert into Book Values (" 
+					+ "('" + book.getId() + "', '"
+					+ book.getName() + "', '"
+					+ book.getAuthor() + "')";
 		
 		System.out.println(sql);
 		Statement st = conn.createStatement();
@@ -129,8 +131,10 @@ public class MBookDB {
 	}
 	
 	public boolean insert(MUser name) throws SQLException {
-		String sql = "Insert into User(user_name) Values (" 
-				+ "'" + name.getName() + ")";
+		String sql = "Insert into Book Values (" 
+				+ "('" + name.getId() + "', '"
+				+ name.getName() + "', '"
+				+ name.getPhonenumber() + "')";
 	
 		System.out.println(sql);
 		Statement st = conn.createStatement();

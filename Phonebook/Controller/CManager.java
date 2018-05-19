@@ -121,12 +121,11 @@ public class CManager implements Initializable {
     	if( book_id.length() * book_name.length() == 0 ) return;
     	
     	this.database.insert(new MBook(book_id, book_name, author_list[random.nextInt(author_list.length)]));
-    	
-    	view_refresh();
     }
 
     @FXML
     void OnBookDelete(ActionEvent event) throws SQLException {
+    	this.focused_book = this.tblBook.getSelectionModel().getSelectedItem();    	
     	if(this.focused_book == null) {
     		String book_id = this.txtResistBookID.getText();
         	String book_name = this.txtResistBookName.getText();
@@ -136,9 +135,7 @@ public class CManager implements Initializable {
         	this.database.delete(new MBook(book_id, book_name, null));
     	}else {
         	this.database.delete(this.focused_book);
-    	}
-    	
-    	view_refresh();
+    	}    	
     }
 
     @FXML
@@ -149,12 +146,11 @@ public class CManager implements Initializable {
     	if( user_id.length() * user_name.length() == 0 ) return;
     	
     	this.database.insert(new MUser(user_id, user_name, phone_list[random.nextInt(phone_list.length)]));
-
-    	view_refresh();
     }
 
     @FXML
     void OnUserDelete(ActionEvent event) throws SQLException {
+    	this.focused_user = this.tblUser.getSelectionModel().getSelectedItem();
     	if(this.focused_user == null) {
     		String user_id = this.txtResistBookID.getText();
         	String user_name = this.txtResistBookName.getText();
@@ -166,8 +162,6 @@ public class CManager implements Initializable {
         	this.database.delete(this.focused_user);
         	this.focused_user = null;
     	}
-
-    	view_refresh();
     }
 
     @FXML
@@ -192,7 +186,6 @@ public class CManager implements Initializable {
     	
     	this.focused_book = null;
     	this.focused_user = null;
-    	view_refresh();
     }
 
     @FXML
@@ -204,7 +197,6 @@ public class CManager implements Initializable {
     	this.database.retreive(this.focused_rent);
     	
     	this.focused_rent = null;
-    	view_refresh();
     }
 
     @FXML
@@ -263,16 +255,27 @@ public class CManager implements Initializable {
 	}
 	
 	void view_refresh() {
+		view_book_refresh();
+		view_user_refresh();
+		view_rent_refresh();
+	}
+	
+	void view_book_refresh() {
 		this.tblBook.getItems().clear();
-		this.tblRent.getItems().clear();
-		this.tblUser.getItems().clear();
-		
 		for(MBook book : this.database.getBook_result()) {
 			this.tblBook.getItems().add(book);
 		}
+	}
+	
+	void view_user_refresh() {
+		this.tblUser.getItems().clear();
 		for(MUser user : this.database.getUser_result()) {
 			this.tblUser.getItems().add(user);
 		}
+	}
+	
+	void view_rent_refresh() {
+		this.tblRent.getItems().clear();
 		for(MBorrow rent : this.database.getRent_result()) {
 			this.tblRent.getItems().add(rent);
 		}
