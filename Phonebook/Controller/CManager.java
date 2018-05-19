@@ -107,22 +107,12 @@ public class CManager implements Initializable {
 
     @FXML
     void OnBookAdd(ActionEvent event) throws SQLException {
-    	String id_text = this.txtResistBookID.getText();
-    	String name_text = this.txtResistBookName.getText();
-    	MBook item = new MBook(id_text, name_text);
 
-    	if (id_text.length() == 0) {return;}
-    	else {database.insert(item);}
     }
 
     @FXML
     void OnBookDelete(ActionEvent event) throws SQLException {
-     	String id_text = this.txtResistBookID.getText();
-    	String name_text = this.txtResistBookName.getText();
-    	MBook item = new MBook(id_text, name_text);
-
-    	if (id_text.length() == 0) {return;}
-    	else {database.delete(item);}
+    	
     }
 
     @FXML
@@ -148,36 +138,16 @@ public class CManager implements Initializable {
 
     @FXML
     void OnBorrow(ActionEvent event)  throws SQLException {
-    	String id_text = this.txtResistBookID.getText();
-    	String name_text = this.txtResistBookName.getText();
-    	String rent_text = this.txtRent.getText();
-    	String retreive_text = this.txtReturn.getText();
-    	MBook item = new MBook(id_text, name_text, rent_text, retreive_text);
     	
-    	if (id_text.length() == 0) {return;}
-    	else {database.rent(item);}
-
     }
 
     @FXML
     void OnRetrieve(ActionEvent event) throws SQLException {
-     	String id_text = tblBook.getSelectionModel().getSelectedItem().getName();
-    	String name_text = this.txtName.getText();
-    	MBook item = new MBook(id_text, name_text);
 
-    	if (id_text.length() == 0 ) {return;}
-    	else {database.retreive(item);}
     }
 
     @FXML
     void OnSearch(ActionEvent event) throws SQLException {
-    	MBook item = new MBook("hungry", "spirit");
-    	
-    	ArrayList<MBook> items = database.search(item);
-    	
-    	for(MBook now_item : items){
-    		tblBook.getItems().add(now_item);
-    	}
 
     }
 
@@ -196,17 +166,16 @@ public class CManager implements Initializable {
 		}
 		tblBook.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 		    if (newSelection != null) {
-		        MBook selectedItem = tblBook.getSelectionModel().getSelectedItem();
+		        /*MBook selectedItem = tblBook.getSelectionModel().getSelectedItem();
 		        this.txtBook.setText(selectedItem.getId());
 		        this.txtName.setText(selectedItem.getName());
 		        this.txtRent.setText(selectedItem.getRent_date());
 		        this.txtReturn.setText(selectedItem.getRetreive_date());
-		        
+		        */
 		    }});
 		
 		BookTableCol_BookID.setCellValueFactory(new PropertyValueFactory<MBook, String>("id"));
 		BookTableCol_BookName.setCellValueFactory(new PropertyValueFactory<MBook, String>("name"));
 		BookTableCol_BookAuthor.setCellValueFactory(new PropertyValueFactory<MBook, String>("author"));
-		col_Return.setCellValueFactory(new PropertyValueFactory<MBook, String>("retrieve_date"));
 	}
 }
