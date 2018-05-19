@@ -4,6 +4,7 @@ import Model.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -18,6 +19,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class CManager implements Initializable {
 
 	MBookDB database = null;
+	MBook focused_book = null;
+	MUser focused_user = null;
+	MBorrow focused_rent = null;
+	
+	Random random = new Random();
+	String[] author_list = {"Ash", "Jager", "Tachanka", "Sledge", "Frost"};
+	String[] phone_list = {"010-1234-2345", "010-8573-2353", "010-1235-5437", "010-9786-3790"};
 	
 	public CManager(){
 		database = new MBookDB();
@@ -31,16 +39,16 @@ public class CManager implements Initializable {
     private TextField txtResistUserName;
 
     @FXML
-    private TableView<?> tblUser;
+    private TableView<MUser> tblUser;
 
     @FXML
-    private TableColumn<?, ?> UserTableCol_UserID;
+    private TableColumn<MUser, String> UserTableCol_UserID;
     
     @FXML
-    private TableColumn<?, ?> UserTableCol_UserName;
+    private TableColumn<MUser, String> UserTableCol_UserName;
     
     @FXML
-    private TableColumn<?, ?> UserTableCol_UserPhone;
+    private TableColumn<MUser, String> UserTableCol_UserPhone;
 
     @FXML
     private TextField txtResistBookName;
@@ -88,41 +96,78 @@ public class CManager implements Initializable {
     private Button btnBorrow;
 
     @FXML
-    private TableView<?> tblRent;
+    private TableView<MBorrow> tblRent;
     
     @FXML
-    private TableColumn<?, ?> RentTableCol_BookID;
+    private TableColumn<MBorrow, String> RentTableCol_BookID;
 
     @FXML
-    private TableColumn<?, ?> RentTableCol_UserID;
+    private TableColumn<MBorrow, String> RentTableCol_UserID;
 
     @FXML
-    private TableColumn<?, ?> RentTableCol_BorrowDate;
+    private TableColumn<MBorrow, String> RentTableCol_BorrowDate;
 
     @FXML
-    private TableColumn<?, ?> RentTableCol_RetrieveDate;
+    private TableColumn<MBorrow, String> RentTableCol_RetrieveDate;
 
     @FXML
     private TextField txtResistUserID;
 
     @FXML
     void OnBookAdd(ActionEvent event) throws SQLException {
-
+    	String book_id = this.txtResistBookID.getText();
+    	String book_name = this.txtResistBookName.getText();
+    	
+    	if( book_id.length() * book_name.length() == 0 ) return;
+    	
+    	this.database.insert(new MBook(book_id, book_name, author_list[random.nextInt(author_list.length)]));
+    	
+    	view_refresh();
     }
 
     @FXML
     void OnBookDelete(ActionEvent event) throws SQLException {
+    	if(this.focused_book == null) {
+    		String book_id = this.txtResistBookID.getText();
+        	String book_name = this.txtResistBookName.getText();
+        
+        	if( book_id.length() * book_name.length() == 0 ) return;
+        	
+        	this.database.delete(new MBook(book_id, book_name, null));
+    	}else {
+        	this.database.delete(this.focused_book);
+    	}
     	
+    	view_refresh();
     }
 
     @FXML
-    void OnUserAdd(ActionEvent event) {
+    void OnUserAdd(ActionEvent event) throws SQLException {
+    	String user_id = this.txtResistUserID.getText();
+    	String user_name = this.txtResistUserName.getText();
+    	
+    	if( user_id.length() * user_name.length() == 0 ) return;
+    	
+    	this.database.insert(new MUser(user_id, user_name, phone_list[random.nextInt(phone_list.length)]));
 
+    	view_refresh();
     }
 
     @FXML
-    void OnUserDelete(ActionEvent event) {
+    void OnUserDelete(ActionEvent event) throws SQLException {
+    	if(this.focused_user == null) {
+    		String user_id = this.txtResistBookID.getText();
+        	String user_name = this.txtResistBookName.getText();
+        
+        	if( user_id.length() * user_name.length() == 0 ) return;
+        	
+        	this.database.delete(new MUser(user_id, user_name, null));
+    	}else {
+        	this.database.delete(this.focused_user);
+        	this.focused_user = null;
+    	}
 
+    	view_refresh();
     }
 
     @FXML
@@ -138,17 +183,39 @@ public class CManager implements Initializable {
 
     @FXML
     void OnBorrow(ActionEvent event)  throws SQLException {
+    	this.focused_book = this.tblBook.getSelectionModel().getSelectedItem();
+    	this.focused_user = this.tblUser.getSelectionModel().getSelectedItem();
     	
+    	if(this.focused_book == null || this.focused_user == null) return;
+    	
+    	this.database.rent(this.focused_book, this.focused_user);
+    	
+    	this.focused_book = null;
+    	this.focused_user = null;
+    	view_refresh();
     }
 
     @FXML
     void OnRetrieve(ActionEvent event) throws SQLException {
-
+    	this.focused_rent = this.tblRent.getSelectionModel().getSelectedItem();
+    	
+    	if(this.focused_rent == null) return;
+    	
+    	this.database.retreive(this.focused_rent);
+    	
+    	this.focused_rent = null;
+    	view_refresh();
     }
 
     @FXML
     void OnSearch(ActionEvent event) throws SQLException {
-
+    	String book_name = this.txtSearchBookName.getText();
+    	String user_name = this.txtSearchUserName.getText();
+    	
+    	if(book_name.length() + user_name.length() == 0) return;
+    	
+    	this.database.search(new MBook(null, book_name, null), new MUser(null, user_name, null));
+    	view_refresh();
     }
 
 	@Override
@@ -160,22 +227,54 @@ public class CManager implements Initializable {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.exit(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.exit(1);
 		}
 		tblBook.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 		    if (newSelection != null) {
-		        /*MBook selectedItem = tblBook.getSelectionModel().getSelectedItem();
-		        this.txtBook.setText(selectedItem.getId());
-		        this.txtName.setText(selectedItem.getName());
-		        this.txtRent.setText(selectedItem.getRent_date());
-		        this.txtReturn.setText(selectedItem.getRetreive_date());
-		        */
+		        this.focused_book = tblBook.getSelectionModel().getSelectedItem();
 		    }});
+		this.tblRent.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+		    if (newSelection != null) {
+		        this.focused_rent = tblRent.getSelectionModel().getSelectedItem();
+		    }});
+		this.tblUser.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+		    if (newSelection != null) {
+		        this.focused_user = tblUser.getSelectionModel().getSelectedItem();
+		    }});
+		
 		
 		BookTableCol_BookID.setCellValueFactory(new PropertyValueFactory<MBook, String>("id"));
 		BookTableCol_BookName.setCellValueFactory(new PropertyValueFactory<MBook, String>("name"));
 		BookTableCol_BookAuthor.setCellValueFactory(new PropertyValueFactory<MBook, String>("author"));
+		
+		this.RentTableCol_BookID.setCellValueFactory(new PropertyValueFactory<MBorrow, String>("book_id"));
+		this.RentTableCol_UserID.setCellValueFactory(new PropertyValueFactory<MBorrow, String>("user_id"));
+		this.RentTableCol_BorrowDate.setCellValueFactory(new PropertyValueFactory<MBorrow, String>("borrow_date"));
+		this.RentTableCol_RetrieveDate.setCellValueFactory(new PropertyValueFactory<MBorrow, String>("retreive_date"));
+
+		this.UserTableCol_UserID.setCellValueFactory(new PropertyValueFactory<MUser, String>("id"));
+		this.UserTableCol_UserName.setCellValueFactory(new PropertyValueFactory<MUser, String>("name"));
+		this.UserTableCol_UserPhone.setCellValueFactory(new PropertyValueFactory<MUser, String>("phonenumber"));
+		
+	}
+	
+	void view_refresh() {
+		this.tblBook.getItems().clear();
+		this.tblRent.getItems().clear();
+		this.tblUser.getItems().clear();
+		
+		for(MBook book : this.database.getBook_result()) {
+			this.tblBook.getItems().add(book);
+		}
+		for(MUser user : this.database.getUser_result()) {
+			this.tblUser.getItems().add(user);
+		}
+		for(MBorrow rent : this.database.getRent_result()) {
+			this.tblRent.getItems().add(rent);
+		}
 	}
 }

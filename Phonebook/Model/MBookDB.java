@@ -7,16 +7,37 @@ import java.util.ArrayList;
 
 public class MBookDB {
 	Connection conn;
+	ArrayList<MBook> book_result = null;
+	ArrayList<MUser> user_result = null;
+	ArrayList<MBorrow> rent_result = null;
 	
 	public MBookDB(){
 		conn = null;
 	}
 	
+
+	public ArrayList<MBook> getBook_result() {
+		return book_result;
+	}
+
+
+
+	public ArrayList<MUser> getUser_result() {
+		return user_result;
+	}
+
+
+
+	public ArrayList<MBorrow> getRent_result() {
+		return rent_result;
+	}
+
+
 	public void open() throws ClassNotFoundException, SQLException {
 		Statement st = null;
         Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://35.201.230.135/javateam?useSSL=false", 
+					"jdbc:mysql://35.201.230.135/library?useSSL=false", 
 					"javateam", "boradori1");
 			st = conn.createStatement();
 			
@@ -149,7 +170,6 @@ public class MBookDB {
 	}
 	public boolean rent(MBook bookid, MUser userid) throws SQLException{
 		String sql = "Insert into Rent(book_rent) Values (" + bookid.getName() + ")" ;
-				
 		
 		System.out.println(sql);
 		Statement st = conn.createStatement();
@@ -160,7 +180,7 @@ public class MBookDB {
 		return false;
 	}
 	
-	public boolean retreive(MBook bookid, MUser userid) throws SQLException {
+	public boolean retreive(MBorrow borrow) throws SQLException {
 		String sql = "Update Rent set book_rent =" + "''"
 					+ ", book_return ="+ "''";
 	

@@ -32,7 +32,7 @@ public class MBook {
 		this.id = id;
 	}
 
-	public void setIssn(String author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
 
