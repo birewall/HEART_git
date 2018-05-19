@@ -6,13 +6,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.sun.beans.introspect.PropertyInfo.Name;
-
 public class MBookDB {
 	Connection conn;
 	ArrayList<MBook> book_result = null;
 	ArrayList<MUser> user_result = null;
 	ArrayList<MBorrow> rent_result = null;
+	
+	final static boolean FLAG_DEBUG = true;
+	
 	public MBookDB(){
 		conn = null;
 		this.book_result = new ArrayList<MBook>();
@@ -40,99 +41,63 @@ public class MBookDB {
 
 	public void open() throws ClassNotFoundException, SQLException {
 		Statement st = null;
-        Class.forName("com.mysql.cj.jdbc.Driver");
+        Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(
 					"jdbc:mysql://35.201.230.135/library?useSSL=false", 
 					"javateam", "boradori1");
 		st = conn.createStatement();
 	}
 	
-	public void search(MBook book, MUser user, MBorrow Rent) throws SQLException {
-		//return null;
-		String Name_Book = null, Name_User = null;			
-
-		if(book != null) {
-			Name_Book = book.getName();			
-		}
-		if(user != null) {
-			Name_User = user.getName();
-		}
-				
-		String sql_book = "Select * From Book Where name = " + "'" + Name_Book + "'";
-		String sql_user = "Select * From User Where name = " + "'" + Name_User + "'";
+	/**
+	 * @param book
+	 * @param user
+	 * @throws SQLException
+	 */
+	public void search(MBook book, MUser user) throws SQLException {
+		this.book_result.clear();
+		this.user_result.clear();
+		this.rent_result.clear();
 		
-		System.out.println(sql_book);
-		System.out.println(sql_user);
+		String where_statement = null;
 		
-		ResultSet rs_book = null, rs_user = null;
-		Statement st_book = conn.createStatement();
-		if(Name_Book.length()>0) {
-			rs_book = st_book.executeQuery(sql_book);
-		}
-		Statement st_user = conn.createStatement();
-		if(Name_User.length()>0) {
-			rs_user = st_user.executeQuery(sql_user);
-		}
-		//boolean error = st.execute(sql);
-		
-		while(rs_user.next()) {
-			MUser item = new MUser(rs_user.getString(1), rs_user.getString(2), rs_user.getString(3));
-			this.user_result.add(item);
-		}
-		
-		/*if(book != null){
-			String bookname = book.getName();
-		}
-		
-		ArrayList <MBook> result = new ArrayList<>();
-		int count = 0;
-		String sql = "selected * from Library where";
-		if(item.getId() != null){
-			if(count>0){
-				sql += " and id = " + "'" + item.getId() + "'" ;
-			}else {
-				count ++;
-				sql += " id = " + "'" + item.getId() + "'" ;
-			}
-		}
-		if(item.getName() != null){
-			if(count >0){
-				sql += " and book_name =" + "'" + item.getName() + "'";
-			}else{
-				count ++;
-				sql += " book_name =" + "'" + item.getName() + "'";
-			}
-		}
-		if(item.getRent_date() != null){
-			if(count > 0 ){
-				sql += " and book_rent = " + "'" + item.getRent_date() + "'";
-			}else {
-				count ++;
-				sql += " book_rent = " + "'" + item.getRent_date() + "'";
-			}			
-		}
-		if(item.getRetreive_date() != null){
-			if(count >0){
-				sql += " and book_return = " + "'" + item.getRetreive_date() + "'";
-			}else {
-				count ++;
-				sql += " book_return = " + "'" + item.getRetreive_date() + "'";
-			}
-		}
-		
-		ArrayList <MBook> rs = new ArrayList<>();
-		
-		//while()
-		System.out.println(sql);
+		ResultSet rs = null;
 		Statement st = conn.createStatement();
-		boolean error = st.execute(sql);
 		
-		
-		if (error){
-			System.out.println("Searching was failed.");
+		if(book.getName().length()>0) {
+			if(FLAG_DEBUG) System.out.println("Select * From Book Where name = " + "'" + book.getName() + "'");
+			rs = st.executeQuery("Select * From Book Where name = " + "'" + book.getName() + "'");
+			while(rs.next()) {
+				MBook item = new MBook(rs.getString(1), rs.getString(2), rs.getString(3));
+				this.book_result.add(item);
+			}
+			if(where_statement == null) {
+				where_statement = "where book_id = ( select id from Book where name = '" 
+								+ book.getName() + "')";
+			}
 		}
-		*/
-		//return result;
+		
+		if(user.getName().length()>0) {
+			if(FLAG_DEBUG) System.out.println("Select * From User Where name = " + "'" + user.getName() + "'");
+			rs = st.executeQuery("Select * From User Where name = " + "'" + user.getName() + "'");
+			while(rs.next()) {
+				MUser item = new MUser(rs.getString(1), rs.getString(2), rs.getString(3));
+				this.user_result.add(item);
+			}
+			if(where_statement == null) {
+				where_statement = "where user_id = ( select id from User where name = '" 
+								+ user.getName() + "')";
+			}else {
+				where_statement += " or user_id = ( select id from User where name = '" 
+						+ user.getName() + "')";
+			}
+		}
+		
+		rs = st.executeQuery("Select * From Borrow " + where_statement);
+		if(FLAG_DEBUG) System.out.println("Select * From Borrow " + where_statement);
+		while(rs.next()) {
+			MBorrow item = new MBorrow(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+			this.rent_result.add(item);
+		}
 	}
 	
 	public boolean insert(MBook book) throws SQLException {
@@ -141,7 +106,7 @@ public class MBookDB {
 					+ book.getName() + "', '"
 					+ book.getAuthor() + "')";
 		
-		System.out.println(sql);
+		if(FLAG_DEBUG) System.out.println(sql);
 		Statement st = conn.createStatement();
 		boolean error = st.execute(sql);
 		if (error){
@@ -157,7 +122,7 @@ public class MBookDB {
 				+ name.getName() + "', '"
 				+ name.getPhonenumber() + "')";
 	
-		System.out.println(sql);
+		if(FLAG_DEBUG) System.out.println(sql);
 		Statement st = conn.createStatement();
 		boolean error = st.execute(sql);
 		if (error){
@@ -170,7 +135,8 @@ public class MBookDB {
 	public boolean delete(MBook item) throws SQLException {
 		String sql = "Delete From Book where id =" 
 					+ "'" + item.getId() + "'";
-		System.out.println(sql);
+
+		if(FLAG_DEBUG) System.out.println(sql);
 		Statement st = conn.createStatement();
 		boolean error = st.execute(sql);
 		if (error){
@@ -183,7 +149,8 @@ public class MBookDB {
 	public boolean delete(MUser item) throws SQLException {
 		String sql = "Delete From User where id =" 
 					+ "'" + item.getId() + "'";
-		System.out.println(sql);
+
+		if(FLAG_DEBUG) System.out.println(sql);
 		Statement st = conn.createStatement();
 		boolean error = st.execute(sql);
 		if (error){
@@ -195,34 +162,32 @@ public class MBookDB {
 	}
 	
 	public boolean rent(MBook book, MUser user) throws SQLException{
-		String sql = "Insert into Rent Values ('"
+		String sql = "Insert into Borrow Values ('"
 					+ book.getId() + "', '"
-					+ user.getId() + "', "
-					+ "" + ","
-					+ "" + "')";
+					+ user.getId() + "', null, null)";
 		
-		System.out.println(sql);
+
+		if(FLAG_DEBUG) System.out.println(sql);
 		Statement st = conn.createStatement();
 		boolean error = st.execute(sql);
 		if (error){
-		System.out.println("Rent was failed.");
+			System.out.println("Rent was failed.");
 		}
 		return false;
 	}
 	
 	public boolean retreive(MBorrow rent) throws SQLException {
-		String sql = "Delete From Rent where book_id =" 
-				+ "'" + rent.getBook_id() + "' and"
+		String sql = "Delete From Borrow where book_id = " 
+				+ "'" + rent.getBook_id() + "' and user_id = "
 				+ "'" + rent.getUser_id() + "'";
 		
-		System.out.println(sql);
+		if(FLAG_DEBUG) System.out.println(sql);
 		Statement st = conn.createStatement();
 		boolean error = st.execute(sql);
 		if (error){
 			System.out.println("Return was failed.");
 		}
 
-		
 		return false;
 	}
 	

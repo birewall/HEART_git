@@ -214,7 +214,7 @@ public class CManager implements Initializable {
     	
     	if(book_name.length() + user_name.length() == 0) return;
     	
-    	this.database.search(new MBook(null, book_name, null), new MUser(null, user_name, null), null);
+    	this.database.search(new MBook(null, book_name, null), new MUser(null, user_name, null));
     	view_refresh();
     	this.txtSearchBookName.clear();
     	this.txtSearchUserName.clear();
