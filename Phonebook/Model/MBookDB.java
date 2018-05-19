@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class MBookDB {
 	Connection conn;
 	
-	MBookDB(){
+	public MBookDB(){
 		conn = null;
 	}
 	
