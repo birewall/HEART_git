@@ -4,8 +4,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
 
 public class ModifyController {
+	MDatabase database;
 
     @FXML
     private Button btnSubmit;
@@ -30,12 +32,15 @@ public class ModifyController {
 
     @FXML
     void OnCancel(ActionEvent event) {
-
+    	Stage nowStage = (Stage) this.btnCancel.getScene().getWindow();
+    	nowStage.close();
     }
 
     @FXML
     void OnSubmit(ActionEvent event) {
-
+    	/* Fill */
+    	Stage nowStage = (Stage) this.btnCancel.getScene().getWindow();
+    	nowStage.close();
     }
 
 }
