@@ -40,7 +40,7 @@ public class InsertController {
 
     @FXML
     void OnSubmit(ActionEvent event) throws SQLException {
-    	/* Fill */
+    	
     	Stage nowStage = (Stage) this.btnCancel.getScene().getWindow();
     	nowStage.close();
     }

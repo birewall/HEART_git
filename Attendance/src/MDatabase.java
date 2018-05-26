@@ -57,7 +57,7 @@ public class MDatabase {
 		if(this.connection != null) this.connection.close();
 	}
 	public boolean insert(int id, String name, int attendance) {
-		/* Fill */
+		
 		
 		return false;
 	}
