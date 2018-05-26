@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.net.URL;
+import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -58,7 +61,42 @@ public class AttendanceController implements Initializable {
 
     @FXML
     void OnDelete(ActionEvent event) {
-    	/* Fill */
+    	try {	    	
+			Statement st = this.database.connection.createStatement();
+    		String sql;
+    		sql = "drop table " + lsvStudent.getSelectionModel().getSelectedItem();
+    		boolean error = st.execute(sql);
+    		
+    		if(error) {
+		         System.out.println("Drop was failed.");
+		         System.exit(1);
+		    }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	this.database.connection = connection;
+    	    	
+		try {
+			Statement st = this.database.connection.createStatement();
+			DatabaseMetaData md = connection.getMetaData();
+			ResultSet rs = md.getTables(null, null, null);
+			cmb_DB.getItems().clear();
+			while (rs.next()) {
+				System.out.println(rs.getString(3));
+				this.cmb_DB.getItems().add(rs.getString(3));
+			}
+			
+			rs.close();
+			st.close();
+			
+		} catch (SQLException SQLex) {
+			// TODO Auto-generated catch block
+			SQLex.printStackTrace();
+			System.out.println("SQLException:"+SQLex.getMessage());
+		}
+
     }
 
     @FXML
