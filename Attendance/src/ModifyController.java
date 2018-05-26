@@ -1,3 +1,5 @@
+import java.sql.SQLException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -37,10 +39,23 @@ public class ModifyController {
     }
 
     @FXML
-    void OnSubmit(ActionEvent event) {
-    	/* Fill */
+    void OnSubmit(ActionEvent event) throws NumberFormatException, SQLException {
+    	if (this.txtName.getText().length() > 0) {
+    		this.database.modify(this.txtName.getText(), this.radAttend.isSelected()?1:0);
+    	}
     	Stage nowStage = (Stage) this.btnCancel.getScene().getWindow();
     	nowStage.close();
     }
 
+    void setDatabase(MDatabase db) {
+    	this.database = db;
+    	this.txtID.setText(Integer.toString(this.database.getCurrent_id()));
+    	this.txtName.setText(this.database.getCurrent_name());
+    	if(this.database.getCurrent_attendance() == 1) {
+    		this.radAttend.setSelected(true);
+    	}else {
+    		this.radNonattend.setSelected(true);
+    	}
+    	
+    }
 }

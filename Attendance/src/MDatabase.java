@@ -1,6 +1,8 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class MDatabase {
@@ -12,6 +14,7 @@ public class MDatabase {
 	
 	public MDatabase() {
 		super();
+		this.result = new ArrayList<String>();
 		this.connection = null;
 		this.current_attendance = 0;
 		this.current_id = 0;
@@ -56,14 +59,62 @@ public class MDatabase {
 	public void disconnect() throws SQLException {
 		if(this.connection != null) this.connection.close();
 	}
-	public boolean insert(int id, String name, int attendance) {
-		
-		
-		return false;
+	public boolean insert(int id, String name, int attendance) throws SQLException {
+		Statement st = this.connection.createStatement();
+		boolean error = st.execute("insert into attendance values ("
+								+ id + ","
+								+ "'" + name + "',"
+								+ attendance + ")");
+		if(error) {
+	        System.out.println("Insert failed.");
+	 		return false;
+		}else {
+			return true;
+		}
 	}
-	public boolean modify(int id, String name, int attendance) {
-		/* Fill */
-		
-		return false;
+	public boolean modify(String name, int attendance) throws SQLException {
+		Statement st = this.connection.createStatement();
+		boolean error = st.execute("update attendance set attendance = " + attendance
+								+ " where name = '" + name + "'");
+		if(error) {
+	        System.out.println("Modify failed.");
+	 		return false;
+		}else {
+			return true;
+		}
+	}
+	public boolean delete(String name) throws SQLException {
+		Statement st = this.connection.createStatement();
+		boolean error = st.execute("delete from attendance where name = '" + name + "'");
+		if(error) {
+	         System.out.println("Delete failed.");
+	         return false;
+		}else {
+			return false;
+		}
+	}
+	public void search(String name) throws SQLException {
+		Statement st = this.connection.createStatement();
+		ResultSet search_result = st.executeQuery("select name from attendance where name = '" + name + "'");
+		this.result.clear();
+		while(search_result.next()) {
+			this.result.add(search_result.getString(1));
+		}
+	}
+	public void searchAttendant() throws SQLException {
+		Statement st = this.connection.createStatement();
+		ResultSet search_result = st.executeQuery("select name from attendance where attendance = 1");
+		this.result.clear();
+		while(search_result.next()) {
+			this.result.add(search_result.getString(1));
+		}
+	}
+	public void searchNonattendant() throws SQLException {
+		Statement st = this.connection.createStatement();
+		ResultSet search_result = st.executeQuery("select name from attendance where attendance = 0");
+		this.result.clear();
+		while(search_result.next()) {
+			this.result.add(search_result.getString(1));
+		}
 	}
 }

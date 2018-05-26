@@ -60,43 +60,14 @@ public class AttendanceController implements Initializable {
     }
 
     @FXML
-    void OnDelete(ActionEvent event) {
-    	try {	    	
-			Statement st = this.database.connection.createStatement();
-    		String sql;
-    		sql = "drop table " + lsvStudent.getSelectionModel().getSelectedItem();
-    		boolean error = st.execute(sql);
-    		
-    		if(error) {
-		         System.out.println("Drop was failed.");
-		         System.exit(1);
-		    }
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    void OnDelete(ActionEvent event) throws SQLException {
+    	if(this.lsvStudent.getSelectionModel() == null) return;
     	
-    	this.database.connection = connection;
-    	    	
-		try {
-			Statement st = this.database.connection.createStatement();
-			DatabaseMetaData md = connection.getMetaData();
-			ResultSet rs = md.getTables(null, null, null);
-			cmb_DB.getItems().clear();
-			while (rs.next()) {
-				System.out.println(rs.getString(3));
-				this.cmb_DB.getItems().add(rs.getString(3));
-			}
-			
-			rs.close();
-			st.close();
-			
-		} catch (SQLException SQLex) {
-			// TODO Auto-generated catch block
-			SQLex.printStackTrace();
-			System.out.println("SQLException:"+SQLex.getMessage());
-		}
-
+    	String selected_name = this.lsvStudent.getSelectionModel().getSelectedItem();
+    	if(selected_name != null) {
+    		this.database.delete(selected_name);
+    	}
+    	this.lsvStudent.getItems().remove(this.lsvStudent.getSelectionModel().getSelectedIndex());
     }
 
     @FXML
@@ -107,44 +78,63 @@ public class AttendanceController implements Initializable {
 
     @FXML
     void OnInsert(ActionEvent event) throws IOException {
-    	/* Fill */
     	Stage newStage = new Stage();
-    	Parent root = FXMLLoader.load(getClass().getResource("InsertView.fxml"));
-        Scene scene = new Scene(root);
+    	FXMLLoader loader = new FXMLLoader();
+    	Parent root = loader.load(getClass().getResource("InsertView.fxml").openStream());
+        InsertController controller = (InsertController)loader.getController();
+        controller.setDatabase(this.database);
+    	Scene scene = new Scene(root);
         newStage.setScene(scene);
         newStage.show();
     }
 
     @FXML
     void OnModify(ActionEvent event) throws IOException {
-    	/* Fill */
-    	Stage newStage = new Stage();
-    	Parent root = FXMLLoader.load(getClass().getResource("ModifyView.fxml"));
-        Scene scene = new Scene(root);
-        newStage.setScene(scene);
-        newStage.show();
+    	if (this.lsvStudent.getSelectionModel().getSelectedItem() != null) {
+    		this.database.setCurrent_name(this.lsvStudent.getSelectionModel().getSelectedItem());
+	    	Stage newStage = new Stage();
+	    	FXMLLoader loader = new FXMLLoader();
+	    	Parent root = loader.load(getClass().getResource("ModifyView.fxml").openStream());
+	        ModifyController controller = (ModifyController)loader.getController();
+	        controller.setDatabase(this.database);
+	    	Scene scene = new Scene(root);
+	        newStage.setScene(scene);
+	        newStage.show();
+    	}
     }
 
     @FXML
     void OnSearch(ActionEvent event) throws IOException {
-    	/* Fill */
     	Stage newStage = new Stage();
-    	Parent root = FXMLLoader.load(getClass().getResource("SearchView.fxml"));
-        Scene scene = new Scene(root);
+    	FXMLLoader loader = new FXMLLoader();
+    	Parent root = loader.load(getClass().getResource("SearchView.fxml").openStream());
+        SearchController controller = (SearchController)loader.getController();
+        controller.setDatabase(this.database);
+        controller.setRootController(this);
+    	Scene scene = new Scene(root);
         newStage.setScene(scene);
         newStage.show();
     }
 
     @FXML
-    void OnShowAttendant(ActionEvent event) {
-    	/* Fill */
+    void OnShowAttendant(ActionEvent event) throws SQLException {
+    	this.database.searchAttendant();
+    	printScreen();
     }
 
     @FXML
-    void OnShowNonattendant(ActionEvent event) {
-    	/* Fill */
+    void OnShowNonattendant(ActionEvent event) throws SQLException {
+    	this.database.searchNonattendant();
+    	printScreen();
     }
 
+    public void printScreen() {
+    	this.lsvStudent.getItems().clear();
+    	for( int i = 0 ; i < this.database.getResult().size() ; i++ ) {
+    		this.lsvStudent.getItems().add(this.database.getResult().get(i));
+    	}
+    }
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
