@@ -20,7 +20,7 @@
             <ToggleGroup fx:id="AttendanceGroup" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="radNonattend" layoutX="130.0" layoutY="164.0" mnemonicParsing="false" text="Non-Attend" />
+      <RadioButton fx:id="radNonattend" layoutX="130.0" layoutY="164.0" mnemonicParsing="false" text="Non-Attend" toggleGroup="$AttendanceGroup" />
       <Button fx:id="btnCancel" layoutX="139.0" layoutY="200.0" mnemonicParsing="false" onAction="#OnCancel" text="Cancel" />
    </children>
 </Pane>
