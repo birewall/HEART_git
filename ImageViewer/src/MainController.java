@@ -1,19 +1,24 @@
+import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 
 public class MainController implements Initializable {
 
 	MDatabase db;
 	
+    @FXML
+    private MenuBar mnbMenu;
+    
     @FXML
     private TreeView<String> trvExplorer;
 
@@ -40,14 +45,43 @@ public class MainController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	
+		// Set Menu
+		MenuItem exit_menu = this.mnbMenu.getMenus().get(0).getItems().get(0);
+		exit_menu.setOnAction(e -> {
+		    try {
+				this.db.disconnect();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		    System.exit(0);
+		});
+		MenuItem sync_menu = this.mnbMenu.getMenus().get(1).getItems().get(0);
+		sync_menu.setOnAction(e -> {
+		    this.db.synchronize();
+		});
+		MenuItem delete_menu = this.mnbMenu.getMenus().get(1).getItems().get(1);
+		delete_menu.setOnAction(e -> {
+			try {
+				this.db.delete(this.trvExplorer.getSelectionModel().getSelectedItem().getValue().substring(0, this.trvExplorer.getSelectionModel().getSelectedItem().getValue().length()-4));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 		
 		// Set Root
 		TreeItem<String> tree_root = new TreeItem<String>("./img");
 		this.trvExplorer.setRoot(tree_root);
 		
+		File test_file = new File("./img");
+		for(File file : test_file.listFiles()) {
+			System.out.println(file.getName());
+		}
+		
 		// Example
 		TreeItem<String> tree_item = new TreeItem<String>("±âÀû.jpg");
 		tree_root.getChildren().add(tree_item);
 	}
-
 }

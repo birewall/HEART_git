@@ -52,4 +52,7 @@ public class MDatabase {
 			return false;
 		}
 	}
+	public void synchronize() {
+		
+	}
 }
