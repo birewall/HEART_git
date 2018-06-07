@@ -9,6 +9,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
@@ -28,7 +29,9 @@ public class MainController implements Initializable {
     @FXML
     void OnClick(MouseEvent event) {
     	if(event.getClickCount() == 2) {
-    		System.out.println(this.trvExplorer.getSelectionModel().getSelectedItem());
+    		File file = new File("img/" + this.trvExplorer.getSelectionModel().getSelectedItem().getValue());
+    		Image image = new Image(file.toURI().toString());
+    		this.imvImage.setImage(image);
     	}
     }
     
@@ -71,17 +74,14 @@ public class MainController implements Initializable {
 			}
 		});
 		
-		// Set Root
+		// Set Root & Add Children
 		TreeItem<String> tree_root = new TreeItem<String>("./img");
 		this.trvExplorer.setRoot(tree_root);
 		
 		File test_file = new File("./img");
 		for(File file : test_file.listFiles()) {
-			System.out.println(file.getName());
+			TreeItem<String> tree_item = new TreeItem<String>(file.getName());
+			tree_root.getChildren().add(tree_item);
 		}
-		
-		// Example
-		TreeItem<String> tree_item = new TreeItem<String>("±âÀû.jpg");
-		tree_root.getChildren().add(tree_item);
 	}
 }
