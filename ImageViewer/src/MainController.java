@@ -30,6 +30,7 @@ public class MainController implements Initializable {
     void OnClick(MouseEvent event) {
     	if(event.getClickCount() == 2) {
     		System.out.println(this.trvExplorer.getSelectionModel().getSelectedItem());
+    		this.imvImage.setImage(this.trvExplorer.getSelectionModel().getSelectedItem());
     	}
     }
     
