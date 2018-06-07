@@ -1,6 +1,7 @@
 import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -78,10 +79,9 @@ public class MainController implements Initializable {
 		File test_file = new File("./img");
 		for(File file : test_file.listFiles()) {
 			System.out.println(file.getName());
+			TreeItem<String> tree_item = new TreeItem<String>(file.getName());
+    		tree_root.getChildren().add(tree_item);
 		}
 		
-		// Example
-		TreeItem<String> tree_item = new TreeItem<String>("±âÀû.jpg");
-		tree_root.getChildren().add(tree_item);
 	}
 }
