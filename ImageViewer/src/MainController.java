@@ -2,12 +2,17 @@ import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
@@ -41,7 +46,7 @@ public class MainController implements Initializable {
     					this.trvExplorer.getSelectionModel().getSelectedItem().getValue());
     	}
     }
-    
+        
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// DB open
@@ -67,8 +72,14 @@ public class MainController implements Initializable {
 		// General - Load
 		MenuItem load_menu = this.mnbMenu.getMenus().get(0).getItems().get(0);
 		load_menu.setOnAction(e -> {
-		    /* Fill */
+			TextInputDialog dialog = new TextInputDialog("walter");
+			dialog.setTitle("Text Input Dialog");
+			dialog.setHeaderText("Look, a Text Input Dialog");
+			dialog.setContentText("Please enter image file name:");
+			Optional<String> ImageName = dialog.showAndWait();
+			ImageName.ifPresent(name -> System.out.println("imagefile: " + name));
 		});
+		
 		// General - Save
 		MenuItem save_menu = this.mnbMenu.getMenus().get(0).getItems().get(1);
 		save_menu.setOnAction(e -> {

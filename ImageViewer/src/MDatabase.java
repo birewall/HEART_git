@@ -1,4 +1,5 @@
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -52,6 +53,30 @@ public class MDatabase {
 			return false;
 		}
 	}
+	
+	public void set_TableName() {
+		ArrayList<String> table_names = new ArrayList<String>();
+
+    	/*Statement st;
+		try {
+			st = conn.createStatement();
+			DatabaseMetaData md = conn.getMetaData();
+			ResultSet rs = md.getTables(null, null, "%", null);
+			
+			
+			while (rs.next()) {
+				table_names.add(rs.getString(3));
+			}
+			
+			rs.close();
+			st.close();
+			
+		} catch (SQLException SQLex) {
+			// TODO Auto-generated catch block
+			SQLex.printStackTrace();
+		} */
+	}
+	
 	public void synchronize() {
 		/* Fill */
 	}
