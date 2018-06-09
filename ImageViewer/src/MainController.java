@@ -31,9 +31,14 @@ public class MainController implements Initializable {
     void OnClick(MouseEvent event) {
     	if(event.getClickCount() == 2) {
 
-    		File file = new File("img/" + this.trvExplorer.getSelectionModel().getSelectedItem().getValue());
-    		Image image = new Image(file.toURI().toString());
-    		this.imvImage.setImage(image);
+    		//DB request
+    		/* Fill */
+    		//DB reply
+    		/* Fill */
+    		//Set image
+    		/* Modify */
+    		File file = new File("img/" +
+    					this.trvExplorer.getSelectionModel().getSelectedItem().getValue());
     	}
     }
     
@@ -52,7 +57,25 @@ public class MainController implements Initializable {
 		}
 	
 		// Set Menu
-		MenuItem exit_menu = this.mnbMenu.getMenus().get(0).getItems().get(0);
+		InitMenu();
+		
+		// Set Root & Add Children
+		InitTree();
+	}
+	
+	public void	InitMenu() {
+		// General - Load
+		MenuItem load_menu = this.mnbMenu.getMenus().get(0).getItems().get(0);
+		load_menu.setOnAction(e -> {
+		    /* Fill */
+		});
+		// General - Save
+		MenuItem save_menu = this.mnbMenu.getMenus().get(0).getItems().get(1);
+		save_menu.setOnAction(e -> {
+		    /* Fill */
+		});
+		// General - Exit
+		MenuItem exit_menu = this.mnbMenu.getMenus().get(0).getItems().get(2);
 		exit_menu.setOnAction(e -> {
 		    try {
 				this.db.disconnect();
@@ -62,11 +85,19 @@ public class MainController implements Initializable {
 			}
 		    System.exit(0);
 		});
+		
+		// File - Sync
 		MenuItem sync_menu = this.mnbMenu.getMenus().get(1).getItems().get(0);
 		sync_menu.setOnAction(e -> {
 		    this.db.synchronize();
 		});
-		MenuItem delete_menu = this.mnbMenu.getMenus().get(1).getItems().get(1);
+		// File - Insert
+		MenuItem insert_menu = this.mnbMenu.getMenus().get(1).getItems().get(1);
+		insert_menu.setOnAction(e -> {
+		    /* Fill */
+		});
+		// File - Delete
+		MenuItem delete_menu = this.mnbMenu.getMenus().get(1).getItems().get(2);
 		delete_menu.setOnAction(e -> {
 			try {
 				this.db.delete(this.trvExplorer.getSelectionModel().getSelectedItem().getValue().substring(0, this.trvExplorer.getSelectionModel().getSelectedItem().getValue().length()-4));
@@ -75,8 +106,26 @@ public class MainController implements Initializable {
 				e1.printStackTrace();
 			}
 		});
+		// File - Rename
+		MenuItem rename_menu = this.mnbMenu.getMenus().get(1).getItems().get(3);
+		rename_menu.setOnAction(e -> {
+		    /* Fill */
+		});
 		
-		// Set Root & Add Children
+		// View - Next
+		MenuItem next_menu = this.mnbMenu.getMenus().get(2).getItems().get(0);
+		next_menu.setOnAction(e -> {
+		    /* Fill */
+		});
+		// View - Previous
+		MenuItem previous_menu = this.mnbMenu.getMenus().get(2).getItems().get(1);
+		previous_menu.setOnAction(e -> {
+		    /* Fill */
+		});
+
+	}
+	
+	public void InitTree() {
 		TreeItem<String> tree_root = new TreeItem<String>("./img");
 		this.trvExplorer.setRoot(tree_root);
 		
