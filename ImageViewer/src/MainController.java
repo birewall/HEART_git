@@ -9,7 +9,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+<<<<<<< HEAD
 import javafx.scene.control.ButtonType;
+=======
+>>>>>>> branch 'master' of https://github.com/birewall/HEART_git.git
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputDialog;
@@ -35,7 +38,6 @@ public class MainController implements Initializable {
     @FXML
     void OnClick(MouseEvent event) {
     	if(event.getClickCount() == 2) {
-
     		//DB request
     		/* Fill */
     		//DB reply
@@ -44,22 +46,15 @@ public class MainController implements Initializable {
     		/* Modify */
     		File file = new File("img/" +
     					this.trvExplorer.getSelectionModel().getSelectedItem().getValue());
+    		Image image = new Image(file.toURI().toString());
+    		this.imvImage.setImage(image);
     	}
     }
         
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// DB open
+		// Set db
 		this.db = new MDatabase();
-		try {
-			this.db.connect();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	
 		// Set Menu
 		InitMenu();
@@ -72,13 +67,40 @@ public class MainController implements Initializable {
 		// General - Load
 		MenuItem load_menu = this.mnbMenu.getMenus().get(0).getItems().get(0);
 		load_menu.setOnAction(e -> {
-			TextInputDialog dialog = new TextInputDialog("walter");
-			dialog.setTitle("Text Input Dialog");
-			dialog.setHeaderText("Look, a Text Input Dialog");
-			dialog.setContentText("Please enter image file name:");
-			Optional<String> TableName = dialog.showAndWait();
-			System.out.println(this.db.set_TableName());
-			TableName.ifPresent(name -> System.out.println("imagefile: " + name));
+
+		    /* Load DB */
+			TextInputDialog dialog = new TextInputDialog();
+			dialog.setTitle("Load");
+			dialog.setHeaderText(null);
+			dialog.setContentText("Insert DB name");
+			
+			try {
+				this.db.connect(dialog.showAndWait().get());
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				/* Alert */
+				Alert confirm_popup = new Alert(AlertType.ERROR);
+				confirm_popup.setTitle("Load");
+				confirm_popup.setHeaderText(null);
+				confirm_popup.setContentText("Open failed. DB is not exist.");
+				confirm_popup.show();
+				return;
+			}
+			
+			/* Load Table */
+			dialog = new TextInputDialog();
+			dialog.setTitle("Load");
+			dialog.setHeaderText(null);
+			dialog.setContentText("Insert table name");
+			
+			this.db.setTablename(dialog.showAndWait().get());
+			
+			/* Confirm */
+			Alert confirm_popup = new Alert(AlertType.CONFIRMATION);
+			confirm_popup.setTitle("Load");
+			confirm_popup.setHeaderText(null);
+			confirm_popup.setContentText("DB opened");
+			confirm_popup.show();
 		});
 		
 		// General - Save
@@ -101,7 +123,12 @@ public class MainController implements Initializable {
 		// File - Sync
 		MenuItem sync_menu = this.mnbMenu.getMenus().get(1).getItems().get(0);
 		sync_menu.setOnAction(e -> {
-		    this.db.synchronize();
+		    try {
+				this.db.synchronize();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		});
 		// File - Insert
 		MenuItem insert_menu = this.mnbMenu.getMenus().get(1).getItems().get(1);

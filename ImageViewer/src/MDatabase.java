@@ -7,11 +7,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class MDatabase {
+	String table_name;
 	Connection connection;
+	Statement statement;
 	
 	public MDatabase() {
 		super();
 		this.connection = null;
+		this.statement = null;
 	}
 	public Connection getConnection() {
 		return connection;
@@ -19,10 +22,13 @@ public class MDatabase {
 	public void setConnection(Connection connection) {
 		this.connection = connection;
 	}
-	public boolean connect() throws SQLException, ClassNotFoundException {
+	public void setTablename(String table_name) {
+		this.table_name = table_name;
+	}
+	public boolean connect(String db_name) throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
 		this.connection = DriverManager.getConnection(
-				"jdbc:mysql://35.201.230.135/javateam?useSSL=false", 
+				"jdbc:mysql://35.201.230.135/" + db_name + "?useSSL=false", 
 				"javateam", "boradori1");
 		
 		if(this.connection == null) return false;
@@ -33,7 +39,7 @@ public class MDatabase {
 	}
 	public boolean insert(String image_name, String image_path) throws SQLException {
 		Statement st = this.connection.createStatement();
-		boolean error = st.execute("insert into image_repo values ('"
+		boolean error = st.execute("insert into " + this.table_name + " values ('"
 								+ image_name + "','"
 								+ image_path + "')");
 		if(error) {
@@ -45,7 +51,7 @@ public class MDatabase {
 	}
 	public boolean delete(String name) throws SQLException {
 		Statement st = this.connection.createStatement();
-		boolean error = st.execute("delete from image_repo where image_name = '" + name + "'");
+		boolean error = st.execute("delete from " + this.table_name + " where image_name = '" + name + "'");
 		if(error) {
 	         System.out.println("Delete failed.");
 	         return false;
@@ -53,33 +59,15 @@ public class MDatabase {
 			return false;
 		}
 	}
-	
-	public void set_TableName(Connection conn) {
-		this.connection = conn;
-	    	
-    	Statement st;
-		try {
-			st = conn.createStatement();
-			DatabaseMetaData md = conn.getMetaData();
-			ResultSet rs = md.getTables(null, null, "%", null);
-			
-			ArrayList<String> table_names = new ArrayList<String>();
-			
-			while (rs.next()) {
-				table_names.add(rs.getString(3));
-			}
-			
-			rs.close();
-			st.close();
-			
-		} catch (SQLException SQLex) {
-			// TODO Auto-generated catch block
-			SQLex.printStackTrace();
-		}
-	}
-	
-	public void synchronize() {
-		/* Fill */
+
+	public void synchronize() throws SQLException {
+		this.statement = this.connection.createStatement();
+		
+		/* Delete All */
+		this.statement.execute("delete from " + this.table_name);
+		
+		/* Insert All */
+		this.statement.execute("insert into " + this.table_name + " values ()");
 	}
 	public void insert() {
 		/* Fill */
