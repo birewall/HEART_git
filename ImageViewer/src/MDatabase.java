@@ -54,15 +54,16 @@ public class MDatabase {
 		}
 	}
 	
-	public void set_TableName() {
-		ArrayList<String> table_names = new ArrayList<String>();
-
-    	/*Statement st;
+	public void set_TableName(Connection conn) {
+		this.connection = conn;
+	    	
+    	Statement st;
 		try {
 			st = conn.createStatement();
 			DatabaseMetaData md = conn.getMetaData();
 			ResultSet rs = md.getTables(null, null, "%", null);
 			
+			ArrayList<String> table_names = new ArrayList<String>();
 			
 			while (rs.next()) {
 				table_names.add(rs.getString(3));
@@ -74,7 +75,7 @@ public class MDatabase {
 		} catch (SQLException SQLex) {
 			// TODO Auto-generated catch block
 			SQLex.printStackTrace();
-		} */
+		}
 	}
 	
 	public void synchronize() {

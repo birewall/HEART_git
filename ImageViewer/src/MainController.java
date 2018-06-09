@@ -76,8 +76,9 @@ public class MainController implements Initializable {
 			dialog.setTitle("Text Input Dialog");
 			dialog.setHeaderText("Look, a Text Input Dialog");
 			dialog.setContentText("Please enter image file name:");
-			Optional<String> ImageName = dialog.showAndWait();
-			ImageName.ifPresent(name -> System.out.println("imagefile: " + name));
+			Optional<String> TableName = dialog.showAndWait();
+			System.out.println(this.db.set_TableName());
+			TableName.ifPresent(name -> System.out.println("imagefile: " + name));
 		});
 		
 		// General - Save
