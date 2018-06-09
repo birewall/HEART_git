@@ -53,6 +53,15 @@ public class MDatabase {
 		}
 	}
 	public void synchronize() {
-		
+		/* Fill */
+	}
+	public void insert() {
+		/* Fill */
+	}
+	public void delete() {
+		/* Fill */
+	}
+	public void rename() {
+		/* Fill */
 	}
 }

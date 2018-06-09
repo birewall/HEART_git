@@ -13,15 +13,25 @@
         <menus>
           <Menu mnemonicParsing="false" text="General">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" text="Load" />
+                  <MenuItem mnemonicParsing="false" text="Save" />
+                  <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem mnemonicParsing="false" text="Synchronize" />
+                  <MenuItem mnemonicParsing="false" text="Insert" />
                   <MenuItem mnemonicParsing="false" text="Delete" />
+                  <MenuItem mnemonicParsing="false" text="Rename" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="View">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Next" />
+                  <MenuItem mnemonicParsing="false" text="Previous" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
       <TreeView fx:id="trvExplorer" layoutX="14.0" layoutY="37.0" onMouseClicked="#OnClick" prefHeight="351.0" prefWidth="181.0" />
