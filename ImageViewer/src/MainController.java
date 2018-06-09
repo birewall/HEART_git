@@ -9,10 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-<<<<<<< HEAD
-import javafx.scene.control.ButtonType;
-=======
->>>>>>> branch 'master' of https://github.com/birewall/HEART_git.git
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputDialog;
