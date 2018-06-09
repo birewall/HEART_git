@@ -67,6 +67,7 @@ public class MainController implements Initializable {
 			dialog.setTitle("Load");
 			dialog.setHeaderText(null);
 			dialog.setContentText("Insert DB name");
+			dialog.getEditor().setText("hooni");
 			
 			try {
 				this.db.connect(dialog.showAndWait().get());
@@ -86,7 +87,8 @@ public class MainController implements Initializable {
 			dialog.setTitle("Load");
 			dialog.setHeaderText(null);
 			dialog.setContentText("Insert table name");
-			
+			dialog.getEditor().setText("image_repo");
+
 			this.db.setTablename(dialog.showAndWait().get());
 			
 			/* Confirm */

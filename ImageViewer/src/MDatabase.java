@@ -1,9 +1,13 @@
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class MDatabase {
 	String table_name;
@@ -65,7 +69,20 @@ public class MDatabase {
 		this.statement.execute("delete from " + this.table_name);
 		
 		/* Insert All */
-		this.statement.execute("insert into " + this.table_name + " values ()");
+		File directory = new File("img");
+		for(File now : directory.listFiles()) {
+			this.statement.execute("insert into " + this.table_name + " values ('"
+					+ now.getName().substring(0, now.getName().length()-4)
+					+ "','"
+					+ now.getPath().replace('\\', '/')
+					+ "')");
+		}
+		
+		Alert confirm_popup = new Alert(AlertType.CONFIRMATION);
+		confirm_popup.setTitle("Synchronize");
+		confirm_popup.setHeaderText(null);
+		confirm_popup.setContentText("Synchronized");
+		confirm_popup.show();
 	}
 	public void insert() {
 		/* Fill */
