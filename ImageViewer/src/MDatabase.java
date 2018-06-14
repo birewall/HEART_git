@@ -1,5 +1,6 @@
 import java.io.File;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,6 +63,7 @@ public class MDatabase {
 			return false;
 		}
 	}
+
 	public void synchronize() throws SQLException {
 		this.statement = this.connection.createStatement();
 		

@@ -2,6 +2,7 @@ import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -45,7 +46,7 @@ public class MainController implements Initializable {
     		this.imvImage.setImage(image);
     	}
     }
-    
+        
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// Set db
@@ -62,6 +63,7 @@ public class MainController implements Initializable {
 		// General - Load
 		MenuItem load_menu = this.mnbMenu.getMenus().get(0).getItems().get(0);
 		load_menu.setOnAction(e -> {
+
 		    /* Load DB */
 			TextInputDialog dialog = new TextInputDialog();
 			dialog.setTitle("Load");
@@ -98,6 +100,7 @@ public class MainController implements Initializable {
 			confirm_popup.setContentText("DB opened");
 			confirm_popup.show();
 		});
+		
 		// General - Save
 		MenuItem save_menu = this.mnbMenu.getMenus().get(0).getItems().get(1);
 		save_menu.setOnAction(e -> {
