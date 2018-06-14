@@ -93,4 +93,14 @@ public class MDatabase {
 	public void rename() {
 		/* Fill */
 	}
+	public String request_path(String filename) throws SQLException {
+		this.statement = this.connection.createStatement();
+		ResultSet rs = this.statement.executeQuery("select path from " + this.table_name
+									+ " where name = '" + filename + "'");
+		if(rs.next()) {
+			return rs.getString(1);
+		}else {
+			return null;
+		}
+	}
 }

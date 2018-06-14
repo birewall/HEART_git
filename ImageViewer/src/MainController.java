@@ -31,16 +31,16 @@ public class MainController implements Initializable {
     private ImageView imvImage;
 
     @FXML
-    void OnClick(MouseEvent event) {
+    void OnClick(MouseEvent event) throws SQLException {
     	if(event.getClickCount() == 2) {
+    		if(this.trvExplorer.getSelectionModel() == null) return;
+    		String filename = this.trvExplorer.getSelectionModel().getSelectedItem().getValue();
+    		
     		//DB request
-    		/* Fill */
-    		//DB reply
-    		/* Fill */
+    		String filepath = this.db.request_path(filename.substring(0, filename.length()-4));
+    		
     		//Set image
-    		/* Modify */
-    		File file = new File("img/" +
-    					this.trvExplorer.getSelectionModel().getSelectedItem().getValue());
+    		File file = new File(filepath);
     		Image image = new Image(file.toURI().toString());
     		this.imvImage.setImage(image);
     	}
