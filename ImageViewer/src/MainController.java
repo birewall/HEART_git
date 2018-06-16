@@ -24,28 +24,29 @@ public class MainController implements Initializable {
 
 	@FXML
 	private MenuBar mnbMenu;
-
+	
 	@FXML
 	private TreeView<String> trvExplorer;
-
+	
 	@FXML
 	private ImageView imvImage;
 
-	@FXML
-	void OnClick(MouseEvent event) {
-		if (event.getClickCount() == 2) {
-			// DB request
-			/* Fill */
-			// DB reply
-			/* Fill */
-			// Set image
-			/* Modify */
-			File file = new File("img/" + this.trvExplorer.getSelectionModel().getSelectedItem().getValue());
-			Image image = new Image(file.toURI().toString());
-			this.imvImage.setImage(image);
-		}
-	}
-
+    @FXML
+    void OnClick(MouseEvent event) throws SQLException {
+    	if(event.getClickCount() == 2) {
+    		if(this.trvExplorer.getSelectionModel() == null) return;
+    		String filename = this.trvExplorer.getSelectionModel().getSelectedItem().getValue();
+    		
+    		//DB request
+    		String filepath = this.db.request_path(filename.substring(0, filename.length()-4));
+    		
+    		//Set image
+    		File file = new File(filepath);
+    		Image image = new Image(file.toURI().toString());
+    		this.imvImage.setImage(image);
+    	}
+    }
+        
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// Set db
@@ -68,7 +69,8 @@ public class MainController implements Initializable {
 			dialog.setTitle("Load");
 			dialog.setHeaderText(null);
 			dialog.setContentText("Insert DB name");
-
+			dialog.getEditor().setText("hooni");
+			
 			try {
 				this.db.connect(dialog.showAndWait().get());
 			} catch (ClassNotFoundException | SQLException e1) {
@@ -87,6 +89,7 @@ public class MainController implements Initializable {
 			dialog.setTitle("Load");
 			dialog.setHeaderText(null);
 			dialog.setContentText("Insert table name");
+			dialog.getEditor().setText("image_repo");
 
 			this.db.setTablename(dialog.showAndWait().get());
 
