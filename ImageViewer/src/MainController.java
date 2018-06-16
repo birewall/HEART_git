@@ -21,55 +21,54 @@ import javafx.scene.input.MouseEvent;
 public class MainController implements Initializable {
 
 	MDatabase db;
-	
-    @FXML
-    private MenuBar mnbMenu;
-    
-    @FXML
-    private TreeView<String> trvExplorer;
 
-    @FXML
-    private ImageView imvImage;
+	@FXML
+	private MenuBar mnbMenu;
 
-    @FXML
-    void OnClick(MouseEvent event) {
-    	if(event.getClickCount() == 2) {
-    		//DB request
-    		/* Fill */
-    		//DB reply
-    		/* Fill */
-    		//Set image
-    		/* Modify */
-    		File file = new File("img/" +
-    					this.trvExplorer.getSelectionModel().getSelectedItem().getValue());
-    		Image image = new Image(file.toURI().toString());
-    		this.imvImage.setImage(image);
-    	}
-    }
-        
+	@FXML
+	private TreeView<String> trvExplorer;
+
+	@FXML
+	private ImageView imvImage;
+
+	@FXML
+	void OnClick(MouseEvent event) {
+		if (event.getClickCount() == 2) {
+			// DB request
+			/* Fill */
+			// DB reply
+			/* Fill */
+			// Set image
+			/* Modify */
+			File file = new File("img/" + this.trvExplorer.getSelectionModel().getSelectedItem().getValue());
+			Image image = new Image(file.toURI().toString());
+			this.imvImage.setImage(image);
+		}
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// Set db
 		this.db = new MDatabase();
-	
+
 		// Set Menu
 		InitMenu();
-		
+
 		// Set Root & Add Children
 		InitTree();
 	}
-	
-	public void	InitMenu() {
+
+	public void InitMenu() {
 		// General - Load
 		MenuItem load_menu = this.mnbMenu.getMenus().get(0).getItems().get(0);
 		load_menu.setOnAction(e -> {
 
-		    /* Load DB */
+			/* Load DB */
 			TextInputDialog dialog = new TextInputDialog();
 			dialog.setTitle("Load");
 			dialog.setHeaderText(null);
 			dialog.setContentText("Insert DB name");
-			
+
 			try {
 				this.db.connect(dialog.showAndWait().get());
 			} catch (ClassNotFoundException | SQLException e1) {
@@ -82,15 +81,15 @@ public class MainController implements Initializable {
 				confirm_popup.show();
 				return;
 			}
-			
+
 			/* Load Table */
 			dialog = new TextInputDialog();
 			dialog.setTitle("Load");
 			dialog.setHeaderText(null);
 			dialog.setContentText("Insert table name");
-			
+
 			this.db.setTablename(dialog.showAndWait().get());
-			
+
 			/* Confirm */
 			Alert confirm_popup = new Alert(AlertType.CONFIRMATION);
 			confirm_popup.setTitle("Load");
@@ -98,28 +97,28 @@ public class MainController implements Initializable {
 			confirm_popup.setContentText("DB opened");
 			confirm_popup.show();
 		});
-		
+
 		// General - Save
 		MenuItem save_menu = this.mnbMenu.getMenus().get(0).getItems().get(1);
 		save_menu.setOnAction(e -> {
-		    /* Fill */
+			/* Fill */
 		});
 		// General - Exit
 		MenuItem exit_menu = this.mnbMenu.getMenus().get(0).getItems().get(2);
 		exit_menu.setOnAction(e -> {
-		    try {
+			try {
 				this.db.disconnect();
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		    System.exit(0);
+			System.exit(0);
 		});
-		
+
 		// File - Sync
 		MenuItem sync_menu = this.mnbMenu.getMenus().get(1).getItems().get(0);
 		sync_menu.setOnAction(e -> {
-		    try {
+			try {
 				this.db.synchronize();
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -129,13 +128,14 @@ public class MainController implements Initializable {
 		// File - Insert
 		MenuItem insert_menu = this.mnbMenu.getMenus().get(1).getItems().get(1);
 		insert_menu.setOnAction(e -> {
-		    /* Fill */
+			/* Fill */
 		});
 		// File - Delete
 		MenuItem delete_menu = this.mnbMenu.getMenus().get(1).getItems().get(2);
 		delete_menu.setOnAction(e -> {
 			try {
-				this.db.delete(this.trvExplorer.getSelectionModel().getSelectedItem().getValue().substring(0, this.trvExplorer.getSelectionModel().getSelectedItem().getValue().length()-4));
+				this.db.delete(this.trvExplorer.getSelectionModel().getSelectedItem().getValue().substring(0,
+						this.trvExplorer.getSelectionModel().getSelectedItem().getValue().length() - 4));
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -144,28 +144,28 @@ public class MainController implements Initializable {
 		// File - Rename
 		MenuItem rename_menu = this.mnbMenu.getMenus().get(1).getItems().get(3);
 		rename_menu.setOnAction(e -> {
-		    /* Fill */
+			/* Fill */
 		});
-		
+
 		// View - Next
 		MenuItem next_menu = this.mnbMenu.getMenus().get(2).getItems().get(0);
 		next_menu.setOnAction(e -> {
-		    /* Fill */
+			/* Fill */
 		});
 		// View - Previous
 		MenuItem previous_menu = this.mnbMenu.getMenus().get(2).getItems().get(1);
 		previous_menu.setOnAction(e -> {
-		    /* Fill */
+			/* Fill */
 		});
 
 	}
-	
+
 	public void InitTree() {
 		TreeItem<String> tree_root = new TreeItem<String>("./img");
 		this.trvExplorer.setRoot(tree_root);
-		
+
 		File test_file = new File("./img");
-		for(File file : test_file.listFiles()) {
+		for (File file : test_file.listFiles()) {
 
 			TreeItem<String> tree_item = new TreeItem<String>(file.getName());
 			tree_root.getChildren().add(tree_item);
