@@ -69,13 +69,4 @@ public class MDatabase {
 		/* Insert All */
 		this.statement.execute("insert into " + this.table_name + " values ()");
 	}
-	public void insert() {
-		/* Fill */
-	}
-	public void delete() {
-		/* Fill */
-	}
-	public void rename() {
-		/* Fill */
-	}
 }
