@@ -25,15 +25,15 @@ import javafx.stage.FileChooser;
 public class MainController implements Initializable {
 
 	MDatabase db;
-	
-    @FXML
-    private MenuBar mnbMenu;
-    
-    @FXML
-    private TreeView<String> trvExplorer;
 
-    @FXML
-    private ImageView imvImage;
+	@FXML
+	private MenuBar mnbMenu;
+	
+	@FXML
+	private TreeView<String> trvExplorer;
+	
+	@FXML
+	private ImageView imvImage;
 
     @FXML
     void OnClick(MouseEvent event) throws SQLException {
@@ -55,20 +55,20 @@ public class MainController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// Set db
 		this.db = new MDatabase();
-	
+
 		// Set Menu
 		InitMenu();
-		
+
 		// Set Root & Add Children
 		InitTree();
 	}
-	
-	public void	InitMenu() {
+
+	public void InitMenu() {
 		// General - Load
 		MenuItem load_menu = this.mnbMenu.getMenus().get(0).getItems().get(0);
 		load_menu.setOnAction(e -> {
 
-		    /* Load DB */
+			/* Load DB */
 			TextInputDialog dialog = new TextInputDialog();
 			dialog.setTitle("Load");
 			dialog.setHeaderText(null);
@@ -87,7 +87,7 @@ public class MainController implements Initializable {
 				confirm_popup.show();
 				return;
 			}
-			
+
 			/* Load Table */
 			dialog = new TextInputDialog();
 			dialog.setTitle("Load");
@@ -96,7 +96,7 @@ public class MainController implements Initializable {
 			dialog.getEditor().setText("image_repo");
 
 			this.db.setTablename(dialog.showAndWait().get());
-			
+
 			/* Confirm */
 			Alert confirm_popup = new Alert(AlertType.CONFIRMATION);
 			confirm_popup.setTitle("Load");
@@ -104,28 +104,28 @@ public class MainController implements Initializable {
 			confirm_popup.setContentText("DB opened");
 			confirm_popup.show();
 		});
-		
+
 		// General - Save
 		MenuItem save_menu = this.mnbMenu.getMenus().get(0).getItems().get(1);
 		save_menu.setOnAction(e -> {
-		    /* Fill */
+			/* Fill */
 		});
 		// General - Exit
 		MenuItem exit_menu = this.mnbMenu.getMenus().get(0).getItems().get(2);
 		exit_menu.setOnAction(e -> {
-		    try {
+			try {
 				this.db.disconnect();
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		    System.exit(0);
+			System.exit(0);
 		});
-		
+
 		// File - Sync
 		MenuItem sync_menu = this.mnbMenu.getMenus().get(1).getItems().get(0);
 		sync_menu.setOnAction(e -> {
-		    try {
+			try {
 				this.db.synchronize();
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -214,7 +214,7 @@ public class MainController implements Initializable {
 			/* Rename to DB */
 			
 		});
-		
+
 		// View - Next
 		MenuItem next_menu = this.mnbMenu.getMenus().get(2).getItems().get(0);
 		next_menu.setOnAction(e -> {
@@ -236,13 +236,13 @@ public class MainController implements Initializable {
 		
 		});
 	}
-	
+
 	public void InitTree() {
 		TreeItem<String> tree_root = new TreeItem<String>("./img");
 		this.trvExplorer.setRoot(tree_root);
-		
+
 		File test_file = new File("./img");
-		for(File file : test_file.listFiles()) {
+		for (File file : test_file.listFiles()) {
 
 			TreeItem<String> tree_item = new TreeItem<String>(file.getName());
 			tree_root.getChildren().add(tree_item);
