@@ -1,4 +1,7 @@
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,6 +20,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 
 public class MainController implements Initializable {
 
@@ -127,17 +131,72 @@ public class MainController implements Initializable {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		});
+		});     
 		// File - Insert
 		MenuItem insert_menu = this.mnbMenu.getMenus().get(1).getItems().get(1);
 		insert_menu.setOnAction(e -> {
-		    /* Fill */
+		    /* Choose file */
+			FileChooser fc = new FileChooser();
+			fc.setInitialDirectory(new File("."));
+			File selectedFile = fc.showOpenDialog(null);
+			
+			/* Copy to img folder */
+			try {
+				FileInputStream fis = new FileInputStream(selectedFile);
+				FileOutputStream fos = new FileOutputStream(new File("./img/"+selectedFile.getName()));
+				 
+				int data = 0;
+				while((data=fis.read())!=-1) {
+				    fos.write(data);
+				}
+				
+				fis.close();
+				fos.close();
+			} catch(IOException excep) {
+				excep.printStackTrace();
+				System.exit(0);
+			}
+			
+			/* Add to View */
+			this.trvExplorer.getRoot().getChildren().add(
+					new TreeItem<String>(selectedFile.getName())
+			);
+			
+			/* Add to DB */
+			try {
+				this.db.insert(
+						selectedFile.getName().substring(0,selectedFile.getName().length()-4),
+						"img/" + selectedFile.getName());
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		});
 		// File - Delete
 		MenuItem delete_menu = this.mnbMenu.getMenus().get(1).getItems().get(2);
 		delete_menu.setOnAction(e -> {
+			/* Choose file */
+			String filename = this.trvExplorer.getSelectionModel().getSelectedItem().getValue();
+			
+			/* Delete from img folder */
+			File selectedFile = new File("./img/" + filename);
+			if(!selectedFile.delete()) {
+				/* Alert */
+				Alert confirm_popup = new Alert(AlertType.ERROR);
+				confirm_popup.setTitle("Delete");
+				confirm_popup.setHeaderText(null);
+				confirm_popup.setContentText("Delete Failed.");
+				confirm_popup.show();
+				return;
+			}
+
+			/* Delete from View */
+			TreeItem<String> selectedItem = this.trvExplorer.getSelectionModel().getSelectedItem();
+			selectedItem.getParent().getChildren().remove(selectedItem);
+			
+			/* Delete from DB */
 			try {
-				this.db.delete(this.trvExplorer.getSelectionModel().getSelectedItem().getValue().substring(0, this.trvExplorer.getSelectionModel().getSelectedItem().getValue().length()-4));
+				this.db.delete(filename.substring(0, filename.length()-4));
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -146,20 +205,36 @@ public class MainController implements Initializable {
 		// File - Rename
 		MenuItem rename_menu = this.mnbMenu.getMenus().get(1).getItems().get(3);
 		rename_menu.setOnAction(e -> {
-		    /* Fill */
+			/* Choose file */
+			
+			/* Rename from img folder */
+			
+			/* Rename to View */
+			
+			/* Rename to DB */
+			
 		});
 		
 		// View - Next
 		MenuItem next_menu = this.mnbMenu.getMenus().get(2).getItems().get(0);
 		next_menu.setOnAction(e -> {
-		    /* Fill */
+		    /* Choose file */
+			
+			/* Get Path */
+			
+			/* Set to View */
+			
 		});
 		// View - Previous
 		MenuItem previous_menu = this.mnbMenu.getMenus().get(2).getItems().get(1);
 		previous_menu.setOnAction(e -> {
-		    /* Fill */
+			/* Choose file */
+			
+			/* Get Path */
+			
+			/* Set to View */
+		
 		});
-
 	}
 	
 	public void InitTree() {

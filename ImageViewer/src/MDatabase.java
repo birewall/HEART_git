@@ -55,7 +55,7 @@ public class MDatabase {
 	}
 	public boolean delete(String name) throws SQLException {
 		Statement st = this.connection.createStatement();
-		boolean error = st.execute("delete from " + this.table_name + " where image_name = '" + name + "'");
+		boolean error = st.execute("delete from " + this.table_name + " where name = '" + name + "'");
 		if(error) {
 	         System.out.println("Delete failed.");
 	         return false;
@@ -63,7 +63,16 @@ public class MDatabase {
 			return false;
 		}
 	}
-
+	public boolean rename(String src_name, String dest_name) throws SQLException {
+		Statement st = this.connection.createStatement();
+		boolean error = st.execute("delete from " + this.table_name + " where name = '" + src_name + "'");
+		if(error) {
+	         System.out.println("Delete failed.");
+	         return false;
+		}else {
+			return false;
+		}
+	}
 	public void synchronize() throws SQLException {
 		this.statement = this.connection.createStatement();
 		
@@ -85,15 +94,6 @@ public class MDatabase {
 		confirm_popup.setHeaderText(null);
 		confirm_popup.setContentText("Synchronized");
 		confirm_popup.show();
-	}
-	public void insert() {
-		/* Fill */
-	}
-	public void delete() {
-		/* Fill */
-	}
-	public void rename() {
-		/* Fill */
 	}
 	public String request_path(String filename) throws SQLException {
 		this.statement = this.connection.createStatement();
