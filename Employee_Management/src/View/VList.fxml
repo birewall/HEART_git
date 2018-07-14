@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="392.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CList">
+   <children>
+      <TableView fx:id="tblList" layoutX="6.0" layoutY="7.0" prefHeight="386.0" prefWidth="249.0">
+        <columns>
+          <TableColumn fx:id="tclName" prefWidth="75.0" text="이름" />
+          <TableColumn fx:id="tclDate" prefWidth="100.0" text="입사일" />
+            <TableColumn fx:id="tclDepart" prefWidth="73.0" text="부서" />
+        </columns>
+      </TableView>
+      <ImageView fx:id="imgFace" fitHeight="161.0" fitWidth="128.0" layoutX="260.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btnExit" layoutX="263.0" layoutY="356.0" mnemonicParsing="false" onAction="#OnExit" prefHeight="37.0" prefWidth="122.0" text="종료">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnDelete" layoutX="263.0" layoutY="313.0" mnemonicParsing="false" onAction="#OnDelete" prefHeight="37.0" prefWidth="122.0" text="삭제">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnRegister" layoutX="263.0" layoutY="270.0" mnemonicParsing="false" onAction="#OnRegister" prefHeight="37.0" prefWidth="122.0" text="등록">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
