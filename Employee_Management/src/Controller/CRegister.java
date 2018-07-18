@@ -4,8 +4,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import Model.MComboBoxAutoComplete;
 import Model.MEmployee;
-import View.ComboBoxAutoComplete;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +23,7 @@ public class CRegister implements Initializable {
 	MEmployee new_employee;
 	CList parent_controller;
 	String image_path;
-	ComboBoxAutoComplete<String> autocmb;
+	MComboBoxAutoComplete<String> autocmb;
 	
     @FXML
     private Button btnRegisterImage;
@@ -89,6 +89,6 @@ public class CRegister implements Initializable {
 		this.new_employee = null;
     	this.parent_controller = null;
     	this.cmbDepart.getItems().addAll("HILab", "MECSLab", "AIBILab");
-    	autocmb = new ComboBoxAutoComplete<String>(this.cmbDepart);
+    	autocmb = new MComboBoxAutoComplete<String>(this.cmbDepart);
 	}
 }
