@@ -63,8 +63,6 @@ public class CList implements Initializable {
 			return;
     }
 
-
-
     @FXML
     void OnExit(ActionEvent event) {
     	System.exit(0);
@@ -91,5 +89,7 @@ public class CList implements Initializable {
 		this.tclName.setCellValueFactory(new PropertyValueFactory<MEmployee, String>("name"));
 		this.tclDate.setCellValueFactory(new PropertyValueFactory<MEmployee, String>("enroll_date"));
 		this.tclDepart.setCellValueFactory(new PropertyValueFactory<MEmployee, String>("department"));
+		
+		this.tblList.getItems().add(new MEmployee("1234","2345","3456"));
 	}
 }
