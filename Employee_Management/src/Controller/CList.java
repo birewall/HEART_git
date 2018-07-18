@@ -14,8 +14,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TreeItem;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -49,8 +51,19 @@ public class CList implements Initializable {
 
     @FXML
     void OnDelete(ActionEvent event) {
-    	/* Fill */
+		int SelectedIndex = this.tblList.getSelectionModel().getSelectedIndex();
+    	tblList.getSelectionModel().getSelectedItems().remove(SelectedIndex);
+
+			/* Alert */
+			Alert confirm_popup = new Alert(AlertType.ERROR);
+			confirm_popup.setTitle("Delete");
+			confirm_popup.setHeaderText(null);
+			confirm_popup.setContentText("Delete Failed.");
+			confirm_popup.show();
+			return;
     }
+
+
 
     @FXML
     void OnExit(ActionEvent event) {
