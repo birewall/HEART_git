@@ -57,6 +57,14 @@ public class CRegister implements Initializable {
     @FXML
     void OnDepartInsert(ActionEvent event) {
     	/* Fill */
+    	TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("Add new department");
+		dialog.setHeaderText(null);
+		dialog.setContentText("Type department name");
+		dialog.showAndWait();
+		
+		/* Apply to view */
+		this.cmbDepart.getItems().add(dialog.getEditor().getText());
     }
 
     @FXML
