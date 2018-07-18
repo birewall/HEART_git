@@ -51,16 +51,7 @@ public class CList implements Initializable {
 
     @FXML
     void OnDelete(ActionEvent event) {
-		int SelectedIndex = this.tblList.getSelectionModel().getSelectedIndex();
-    	tblList.getSelectionModel().getSelectedItems().remove(SelectedIndex);
 
-			/* Alert */
-			Alert confirm_popup = new Alert(AlertType.ERROR);
-			confirm_popup.setTitle("Delete");
-			confirm_popup.setHeaderText(null);
-			confirm_popup.setContentText("Delete Failed.");
-			confirm_popup.show();
-			return;
     }
 
     @FXML
