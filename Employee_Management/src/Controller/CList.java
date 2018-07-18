@@ -1,6 +1,5 @@
 package Controller;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -52,16 +51,7 @@ public class CList implements Initializable {
 
     @FXML
     void OnDelete(ActionEvent event) {
-    	/* Fill */
-    	Alert confirm_dialog = new Alert(AlertType.CONFIRMATION);
-    	confirm_dialog.setHeaderText(null);
-    	confirm_dialog.setTitle("Delete");
-    	confirm_dialog.setContentText("Are you sure to delete " + this.tblList.getSelectionModel().getSelectedItem().getName() + "?");
-    	
-    	Optional<ButtonType> result = confirm_dialog.showAndWait();
-		if (result.get() == ButtonType.OK){
-			this.tblList.getItems().remove(this.tblList.getSelectionModel().getSelectedIndex());
-		}
+
     }
 
     @FXML
@@ -70,13 +60,8 @@ public class CList implements Initializable {
     }
 
     @FXML
-    void OnRegister(ActionEvent event) throws IOException {
+    void OnRegister(ActionEvent event) {
     	/* Fill */
-    	Parent root = FXMLLoader.load(getClass().getResource("/View/VRegister.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
     }
 
     void RegisterEmployee(MEmployee employee) {
@@ -95,7 +80,7 @@ public class CList implements Initializable {
 		this.tclName.setCellValueFactory(new PropertyValueFactory<MEmployee, String>("name"));
 		this.tclDate.setCellValueFactory(new PropertyValueFactory<MEmployee, String>("enroll_date"));
 		this.tclDepart.setCellValueFactory(new PropertyValueFactory<MEmployee, String>("department"));
-
+		
 		this.tblList.getItems().add(new MEmployee("1234","2345","3456"));
 	}
 }
