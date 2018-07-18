@@ -1,6 +1,7 @@
 package Controller;
 import java.io.File;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import Model.MEmployee;
@@ -57,6 +58,12 @@ public class CRegister implements Initializable {
     @FXML
     void OnDepartInsert(ActionEvent event) {
     	/* Fill */
+    	TextInputDialog textinput_dialog = new TextInputDialog();
+    	textinput_dialog.setHeaderText(null);
+    	textinput_dialog.setTitle("Department Insert");
+    	textinput_dialog.setContentText("Enter new department");
+    	Optional<String> text = textinput_dialog.showAndWait();
+    	this.cmbDepart.getItems().add(text.get());
     }
 
     @FXML
@@ -67,6 +74,9 @@ public class CRegister implements Initializable {
     @FXML
     void OnRegisterImage(ActionEvent event) {
     	/* Fill */
+    	/* FileChooser */
+    	this.image_path = "c://asdfasdf";
+    	this.imvFace.setImage(null);
     }
 
     void setPerentController(CList controller) {
