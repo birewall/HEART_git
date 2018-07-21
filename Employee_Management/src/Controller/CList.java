@@ -69,7 +69,18 @@ public class CList implements Initializable {
 
     @FXML
     void OnRegister(ActionEvent event) {
-    	/* Fill */
+    	try {
+	        Stage newStage = new Stage();
+	    	FXMLLoader loader = new FXMLLoader();
+	    	Parent root = loader.load(getClass().getResource("/View/VRegister.fxml").openStream());
+	        CRegister controller = (CRegister)loader.getController();
+	        controller.setPerentController(this);
+	    	Scene scene = new Scene(root);
+	        newStage.setScene(scene);
+	        newStage.show();
+	    } catch(Exception e) {
+	        e.printStackTrace();
+	    }
     }
 
     void RegisterEmployee(MEmployee employee) {
