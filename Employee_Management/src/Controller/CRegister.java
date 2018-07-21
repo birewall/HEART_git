@@ -7,7 +7,10 @@ import Model.MEmployee;
 import View.ComboBoxAutoComplete;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -67,6 +70,7 @@ public class CRegister implements Initializable {
     @FXML
     void OnRegisterImage(ActionEvent event) {
     	/* Fill */
+	        
     }
 
     void setPerentController(CList controller) {
