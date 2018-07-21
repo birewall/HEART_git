@@ -65,13 +65,19 @@ public class MDatabase {
 	}
 	public boolean rename(String src_name, String dest_name) throws SQLException {
 		Statement st = this.connection.createStatement();
-		boolean error = st.execute("delete from " + this.table_name + " where name = '" + src_name + "'");
+		boolean error = st.execute("update " + this.table_name + " set name = '" + dest_name.substring(0, dest_name.length()-4) + "' where name = '" + src_name.substring(0, src_name.length()-4) + "'");
 		if(error) {
-	         System.out.println("Delete failed.");
+	         System.out.println("Rename failed.");
 	         return false;
-		}else {
-			return false;
 		}
+		
+		error = st.execute("update " + this.table_name + " set path = 'img/" + dest_name + "' where path = 'img/" + src_name + "'");
+		if(error) {
+	         System.out.println("Rename failed.");
+	         return false;
+		}
+		
+		return true;
 	}
 	public void synchronize() throws SQLException {
 		this.statement = this.connection.createStatement();

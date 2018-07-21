@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TreeItem;
@@ -51,7 +52,15 @@ public class CList implements Initializable {
 
     @FXML
     void OnDelete(ActionEvent event) {
-    	/* Fill */
+    	Alert confirm_popup = new Alert(AlertType.CONFIRMATION);
+		confirm_popup.setTitle("Delete");
+		confirm_popup.setHeaderText(null);
+		confirm_popup.setContentText("Want to remove " + this.tblList.getSelectionModel().getSelectedItem().getName() + "?");
+		Optional<ButtonType> result = confirm_popup.showAndWait();
+		if (result.get() == ButtonType.OK){
+	    	this.tblList.getItems().remove(this.tblList.getSelectionModel().getSelectedIndex());
+	    	this.imgFace.setImage(null);
+		}
     }
 
     @FXML
@@ -80,5 +89,7 @@ public class CList implements Initializable {
 		this.tclName.setCellValueFactory(new PropertyValueFactory<MEmployee, String>("name"));
 		this.tclDate.setCellValueFactory(new PropertyValueFactory<MEmployee, String>("enroll_date"));
 		this.tclDepart.setCellValueFactory(new PropertyValueFactory<MEmployee, String>("department"));
+		
+		this.tblList.getItems().add(new MEmployee("1234","2345","3456"));
 	}
 }

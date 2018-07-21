@@ -206,34 +206,78 @@ public class MainController implements Initializable {
 		MenuItem rename_menu = this.mnbMenu.getMenus().get(1).getItems().get(3);
 		rename_menu.setOnAction(e -> {
 			/* Choose file */
+			String filename = this.trvExplorer.getSelectionModel().getSelectedItem().getValue();
+			TextInputDialog dialog = new TextInputDialog();
+			dialog.setTitle("Rename");
+			dialog.setHeaderText(null);
+			dialog.setContentText("Type new name");
+			dialog.showAndWait();
+			String new_name = dialog.getEditor().getText();
 			
 			/* Rename from img folder */
+			File selectedFile = new File("./img/" + filename);
+			if(!selectedFile.renameTo(new File("./img/" + new_name))) {
+				Alert confirm_popup = new Alert(AlertType.ERROR);
+				confirm_popup.setTitle("Rename");
+				confirm_popup.setHeaderText(null);
+				confirm_popup.setContentText("Rename failed.");
+				confirm_popup.show();
+				return;
+			}
 			
 			/* Rename to View */
+			this.trvExplorer.getSelectionModel().getSelectedItem().setValue(new_name);
 			
 			/* Rename to DB */
-			
+			try {
+				this.db.rename(filename, new_name);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		});
 
 		// View - Next
 		MenuItem next_menu = this.mnbMenu.getMenus().get(2).getItems().get(0);
 		next_menu.setOnAction(e -> {
 		    /* Choose file */
-			
+			int children_size = this.trvExplorer.getRoot().getChildren().size();
+			int selectedIndex = this.trvExplorer.getSelectionModel().getSelectedIndex() % children_size;
+			String next_filename = this.trvExplorer.getRoot().getChildren().get(selectedIndex).getValue();
+
 			/* Get Path */
+    		String next_filepath = null;
+			try {
+				next_filepath = this.db.request_path(next_filename.substring(0, next_filename.length()-4));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 			/* Set to View */
-			
+			this.imvImage.setImage(new Image(new File(next_filepath).toURI().toString()));
+			this.trvExplorer.getSelectionModel().select(selectedIndex + 1);	// for root(./img)
 		});
 		// View - Previous
 		MenuItem previous_menu = this.mnbMenu.getMenus().get(2).getItems().get(1);
 		previous_menu.setOnAction(e -> {
 			/* Choose file */
+			int children_size = this.trvExplorer.getRoot().getChildren().size();
+			int selectedIndex = (this.trvExplorer.getSelectionModel().getSelectedIndex() + children_size - 2) % children_size;
+			String next_filename = this.trvExplorer.getRoot().getChildren().get(selectedIndex).getValue();
 			
 			/* Get Path */
+    		String next_filepath = null;
+			try {
+				next_filepath = this.db.request_path(next_filename.substring(0, next_filename.length()-4));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 			/* Set to View */
-		
+			this.imvImage.setImage(new Image(new File(next_filepath).toURI().toString()));
+			this.trvExplorer.getSelectionModel().select(selectedIndex+1);	// for root(./img)
 		});
 	}
 
@@ -243,7 +287,6 @@ public class MainController implements Initializable {
 
 		File test_file = new File("./img");
 		for (File file : test_file.listFiles()) {
-
 			TreeItem<String> tree_item = new TreeItem<String>(file.getName());
 			tree_root.getChildren().add(tree_item);
 		}

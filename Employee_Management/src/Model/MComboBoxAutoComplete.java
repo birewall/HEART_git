@@ -1,4 +1,4 @@
-package View;
+package Model;
 
 
 import java.text.Normalizer;
@@ -26,13 +26,13 @@ import javafx.stage.Window;
  *
  * @param <T>
  */
-public class ComboBoxAutoComplete<T> {
+public class MComboBoxAutoComplete<T> {
 
 	private ComboBox<T> cmb;
 	String filter = "";
 	private ObservableList<T> originalItems;
 
-	public ComboBoxAutoComplete(ComboBox<T> cmb) {
+	public MComboBoxAutoComplete(ComboBox<T> cmb) {
 		this.cmb = cmb;
 		originalItems = FXCollections.observableArrayList(cmb.getItems());
 		cmb.setTooltip(new Tooltip());
