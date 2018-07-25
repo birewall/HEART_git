@@ -3,14 +3,11 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import Model.MComboBoxAutoComplete;
 import Model.MEmployee;
+import Model.MComboBoxAutoComplete;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -59,7 +56,6 @@ public class CRegister implements Initializable {
 
     @FXML
     void OnDepartInsert(ActionEvent event) {
-    	/* Fill */
     	TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle("Add new department");
 		dialog.setHeaderText(null);
@@ -68,17 +64,33 @@ public class CRegister implements Initializable {
 		
 		/* Apply to view */
 		this.cmbDepart.getItems().add(dialog.getEditor().getText());
+    	autocmb = new MComboBoxAutoComplete<String>(this.cmbDepart);
     }
 
     @FXML
     void OnDone(ActionEvent event) {
-    	/* Fill */
+    	/* Transfer data to parent controller */
+    	new_employee = new MEmployee(this.txtName.getText(), this.txtDate.getEditor().getText(), this.cmbDepart.getValue(), this.image_path);
+    	this.parent_controller.RegisterEmployee(new_employee);
+    	
+    	/* Close window */
+    	Stage thisStage = (Stage)this.btnDone.getScene().getWindow();
+    	thisStage.close();
     }
 
     @FXML
     void OnRegisterImage(ActionEvent event) {
-    	/* Fill */
-	        
+    	/* File Choose */
+    	FileChooser image_chooser = new FileChooser();
+    	image_chooser.setInitialDirectory(new File("."));
+    	File selectedFile = image_chooser.showOpenDialog(null);
+    	this.image_path = selectedFile.getPath();
+    	
+    	/* Set to employee variable */
+    	this.image_path = selectedFile.getPath();
+    	
+    	/* Set to imageview */
+    	this.imvFace.setImage(new Image(selectedFile.toURI().toString()));
     }
 
     void setPerentController(CList controller) {
