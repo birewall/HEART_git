@@ -85,7 +85,15 @@ public class CList implements Initializable {
     }
 
     void RegisterEmployee(MEmployee employee) {
-    	/* Fill */
+    	/* Add to listview */
+    	this.tblList.getItems().add(employee);
+    	
+    	/* Confirm */
+		Alert confirm_popup = new Alert(AlertType.CONFIRMATION);
+		confirm_popup.setTitle("Register");
+		confirm_popup.setHeaderText(null);
+		confirm_popup.setContentText("Successfully registered.");
+		confirm_popup.show();
     }
 
 	@Override
