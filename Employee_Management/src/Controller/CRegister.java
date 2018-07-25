@@ -4,14 +4,11 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import Model.MComboBoxAutoComplete;
 import Model.MEmployee;
+import Model.MComboBoxAutoComplete;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -61,7 +58,6 @@ public class CRegister implements Initializable {
 
     @FXML
     void OnDepartInsert(ActionEvent event) {
-    	/* Fill */
     	TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle("Add new department");
 		dialog.setHeaderText(null);
@@ -70,41 +66,30 @@ public class CRegister implements Initializable {
 		
 		/* Apply to view */
 		this.cmbDepart.getItems().add(dialog.getEditor().getText());
+    	autocmb = new MComboBoxAutoComplete<String>(this.cmbDepart);
     }
-    
-    
-	File selectedFile = null;
+
+    @FXML
+    void OnDone(ActionEvent event) {
+    	/* Transfer data to parent controller */
+    	new_employee = new MEmployee(this.txtName.getText(), this.txtDate.getEditor().getText(), this.cmbDepart.getValue(), this.image_path);
+    	this.parent_controller.RegisterEmployee(new_employee);
+    	
+    	/* Close window */
+    	Stage thisStage = (Stage)this.btnDone.getScene().getWindow();
+    	thisStage.close();
+    }
+
     @FXML
     void OnRegisterImage(ActionEvent event) {
 	    /* Choose file */
 		FileChooser fc = new FileChooser();
 		fc.setInitialDirectory(new File("."));
-		selectedFile = fc.showOpenDialog(null);    
+		File selectedFile = fc.showOpenDialog(null);    
 		
 		/*Set image*/
-
 		Image image = new Image(selectedFile.toURI().toString());
 		this.imvFace.setImage(image);	
-    }
-    
-    @FXML
-    void OnDone(ActionEvent event) {
-    	/*Save Name*/
-    	String new_txtName = this.txtName.toString();
-    	this.new_employee.setName(new_txtName);
-    	/*Save Date*/
-    	String new_txtDate = this.txtDate.toString();
-    	this.new_employee.setEnroll_date(new_txtDate);
-    	/*Save Department*/
-    	String new_txtDepartment = this.cmbDepart.toString();
-    	this.new_employee.setDepartment(new_txtDepartment);
-    	/*Save Image View Path*/
-		image_path = selectedFile.getPath().toString();
-		this.new_employee.setImage_path(image_path);
-		
-		parent_controller.RegisterEmployee(new_employee);
-		/*Send to CList*/
-		
     }
 
     void setPerentController(CList controller) {
