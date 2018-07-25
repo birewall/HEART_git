@@ -30,6 +30,13 @@ public class MEmployee {
 		this.image_path = image_path;
 	}
 
+	public void setEmployee(MEmployee paramEmployee) {
+		this.name = paramEmployee.getName();
+		this.enroll_date = paramEmployee.getEnroll_date();
+		this.department = paramEmployee.getDepartment();
+		this.image_path = paramEmployee.getImage_path();
+	}
+	
 	public String getName() {
 		return name;
 	}
