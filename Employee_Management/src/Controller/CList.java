@@ -76,6 +76,9 @@ public class CList implements Initializable {
 	    	Parent root = loader.load(getClass().getResource("/View/VRegister.fxml").openStream());
 	        CRegister controller = (CRegister)loader.getController();
 	        controller.setPerentController(this);
+	        if(this.tblList.getSelectionModel().getSelectedItem() != null) {
+	        	controller.setEmployee(this.tblList.getSelectionModel().getSelectedItem());
+	        }
 	    	Scene scene = new Scene(root);
 	        newStage.setScene(scene);
 	        newStage.show();
@@ -108,7 +111,16 @@ public class CList implements Initializable {
 		this.tclName.setCellValueFactory(new PropertyValueFactory<MEmployee, String>("name"));
 		this.tclDate.setCellValueFactory(new PropertyValueFactory<MEmployee, String>("enroll_date"));
 		this.tclDepart.setCellValueFactory(new PropertyValueFactory<MEmployee, String>("department"));
-		
-		this.tblList.getItems().add(new MEmployee("1234","2345","3456"));
 	}
+	
+	public void ModifyEmployee(MEmployee paramEmployee) {
+		this.tblList.getItems().remove(this.tblList.getSelectionModel().getSelectedIndex());
+		this.tblList.getItems().add(paramEmployee);
+	}
+	
+	public boolean isModifying() {
+		if(this.tblList.getSelectionModel().getSelectedItem() != null) return true;
+		else return false;
+	}
+	
 }

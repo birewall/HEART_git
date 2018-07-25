@@ -73,7 +73,13 @@ public class CRegister implements Initializable {
     void OnDone(ActionEvent event) {
     	/* Transfer data to parent controller */
     	new_employee = new MEmployee(this.txtName.getText(), this.txtDate.getEditor().getText(), this.cmbDepart.getValue(), this.image_path);
-    	this.parent_controller.RegisterEmployee(new_employee);
+    	
+    	/* If modifying, delete original information */
+    	if(this.parent_controller.isModifying()) {
+    		this.parent_controller.ModifyEmployee(new_employee);
+    	} else {
+        	this.parent_controller.RegisterEmployee(new_employee);
+    	}
     	
     	/* Close window */
     	Stage thisStage = (Stage)this.btnDone.getScene().getWindow();
@@ -89,7 +95,8 @@ public class CRegister implements Initializable {
 		
 		/*Set image*/
 		Image image = new Image(selectedFile.toURI().toString());
-		this.imvFace.setImage(image);	
+		this.imvFace.setImage(image);
+		this.image_path = selectedFile.getPath();
     }
 
     void setPerentController(CList controller) {
@@ -103,5 +110,16 @@ public class CRegister implements Initializable {
     	this.parent_controller = null;
     	this.cmbDepart.getItems().addAll("HILab", "MECSLab", "AIBILab");
     	autocmb = new MComboBoxAutoComplete<String>(this.cmbDepart);
+	}
+	
+	public void setEmployee(MEmployee paramEmployee) {
+		this.txtName.setText(paramEmployee.getName());
+		this.txtDate.getEditor().setText(paramEmployee.getEnroll_date());
+		this.cmbDepart.getSelectionModel().select(paramEmployee.getDepartment());
+		this.image_path = paramEmployee.getImage_path();
+		if(image_path != null) {
+			Image image = new Image(new File(image_path).toURI().toString());
+			this.imvFace.setImage(image);
+		}
 	}
 }
