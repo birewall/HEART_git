@@ -109,6 +109,5 @@ public class CList implements Initializable {
 		this.tclDate.setCellValueFactory(new PropertyValueFactory<MEmployee, String>("enroll_date"));
 		this.tclDepart.setCellValueFactory(new PropertyValueFactory<MEmployee, String>("department"));
 		
-		this.tblList.getItems().add(new MEmployee("1234","2345","3456"));
 	}
 }

@@ -89,7 +89,8 @@ public class CRegister implements Initializable {
 		
 		/*Set image*/
 		Image image = new Image(selectedFile.toURI().toString());
-		this.imvFace.setImage(image);	
+		this.imvFace.setImage(image);
+		this.image_path = selectedFile.getPath();
     }
 
     void setPerentController(CList controller) {
