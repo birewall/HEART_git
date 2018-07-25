@@ -102,6 +102,7 @@ public class CRegister implements Initializable {
 		image_path = selectedFile.getPath().toString();
 		this.new_employee.setImage_path(image_path);
 		
+		parent_controller.RegisterEmployee(new_employee);
 		/*Send to CList*/
 		
     }

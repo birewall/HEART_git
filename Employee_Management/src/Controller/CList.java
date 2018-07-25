@@ -85,7 +85,7 @@ public class CList implements Initializable {
     }
 
     void RegisterEmployee(MEmployee employee) {
-    	/* Fill */
+    	this.tblList.setSelectionModel(name);
     }
 
 	@Override
