@@ -5,11 +5,13 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import org.apache.log4j.*;
+import org.apache.log4j.spi.LoggerFactory;
 
 public class Main extends Application {
-	protected static Logger logger = Logger.getLogger(Main.class.getName());
+	protected static Logger logger = Logger.getLogger(Main.class);
 	@Override
 	public void start(Stage primaryStage) {
+		logger.info("Hi");
 	    try {
 	    	/*
 	        Parent root = FXMLLoader.load(getClass().getResource("MainView.fxml"));
@@ -17,7 +19,7 @@ public class Main extends Application {
 	        primaryStage.setScene(scene);
 	        primaryStage.show();
 	        */
-	    	logger.info("Hi");
+	    	
 	    } catch(Exception e) {
 	        e.printStackTrace();
 	    }
