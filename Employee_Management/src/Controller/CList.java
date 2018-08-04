@@ -122,5 +122,4 @@ public class CList implements Initializable {
 		if(this.tblList.getSelectionModel().getSelectedItem() != null) return true;
 		else return false;
 	}
-	
 }
