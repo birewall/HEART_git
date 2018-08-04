@@ -12,10 +12,10 @@ public class MDatabase {
 	String table_name;
 	Connection connection;
 	Statement statement;
-	static final String db_address = "jdbc:mysql://35.201.230.135/";
+	static final String db_address = "jdbc:mysql://35.234.16.88/";
 	static final String db_option = "?useSSL=false";
-	static final String db_id = "javateam";
-	static final String db_pw = "boradori1";
+	static final String db_id = "shroh";
+	static final String db_pw = "3124";
 	
 	public MDatabase() {
 		super();
