@@ -1,11 +1,15 @@
 package Controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -39,15 +43,19 @@ public class CMain implements Initializable {
     }
 
     @FXML
-    void mainInsert(ActionEvent event) {
-    	
+    void mainInsert(ActionEvent event) throws IOException {
+    	Parent root = FXMLLoader.load(getClass().getResource("/View/VInsert.fxml"));
+        Scene scene = new Scene(root);
+		Stage thisStage = (Stage)(this.btnMainExit.getScene().getWindow());
+		thisStage.setScene(scene);
+		thisStage.show();
     }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		Stage thisStage = (Stage)(this.btnMainExit.getScene().getWindow());
-		thisStage.setTitle("");
+		//Stage thisStage = (Stage)(this.btnMainExit.getScene().getWindow());
+		//thisStage.setTitle("HEARTLab Butterfly Manager");
 	}
 
 }
