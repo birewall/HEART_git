@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField fx:id="textLoginID" layoutX="97.0" layoutY="186.0" />
+      <Text layoutX="48.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+      <Text layoutX="45.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PW" />
+      <PasswordField fx:id="txtLoginPW" layoutX="97.0" layoutY="234.0" />
+      <Button fx:id="btnLoginExit" layoutX="167.0" layoutY="333.0" mnemonicParsing="false" onAction="#loginExit" text="종료" />
+      <Button fx:id="btnLogin" layoutX="85.0" layoutY="333.0" mnemonicParsing="false" onAction="#login" text="로그인" />
+      <Text layoutX="55.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="사용자 정보를 입력하십시오." />
+      <Label fx:id="lblLoginFail" layoutX="61.0" layoutY="287.0" text="존재하지 않는 아이디입니다." textAlignment="CENTER" textFill="#fc0000" />
+   </children>
+</Pane>
