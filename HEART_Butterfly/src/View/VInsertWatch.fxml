@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="33.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="관찰 날짜" />
+      <Text layoutX="33.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="시간대" />
+      <DatePicker fx:id="dateInsertWatchDate" layoutX="111.0" layoutY="69.0" onAction="#dateInsertWatch" promptText="(default=today)" />
+      <ComboBox fx:id="comboInsertWatchTime" layoutX="111.0" layoutY="117.0" onAction="#timeInsertWatch" prefHeight="29.0" prefWidth="203.0" promptText="오전" />
+      <Text layoutX="33.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="관찰 장소" />
+      <TextField fx:id="txtInsertWatchLoc" layoutX="111.0" layoutY="211.0" onAction="#locInsertWatch" promptText="금학산" />
+      <Button fx:id="btnInsertWatchSearchLoc" layoutX="300.0" layoutY="211.0" mnemonicParsing="false" onAction="#searchLocInsertWatch" text="검색" />
+      <Text layoutX="63.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="상세 주소" />
+      <Text layoutX="157.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="도" />
+      <Text layoutX="157.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="시,군,구" />
+      <Text layoutX="156.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="동,읍,면" />
+      <TextField fx:id="txtInsertWatchDo" layoutX="239.0" layoutY="265.0" onAction="#doInsertWatch" promptText="강원도" />
+      <TextField fx:id="txtInsertWatchSi" layoutX="239.0" layoutY="298.0" onAction="#siInsertWatch" promptText="철원군" />
+      <TextField fx:id="txtInsertWatchDong" layoutX="238.0" layoutY="333.0" onAction="#dongInsertWatch" promptText="동송읍" />
+      <Text layoutX="33.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="관찰자" />
+      <ComboBox fx:id="comboInsertWatchWho" layoutX="111.0" layoutY="386.0" onAction="#whoInsertWatch" prefHeight="29.0" prefWidth="203.0" promptText="조윤호" />
+      <Button fx:id="btnInsertWatchChoosewho" layoutX="325.0" layoutY="386.0" mnemonicParsing="false" onAction="#choosewhoInsertWatch" text="직접 입력" />
+      <Button fx:id="btnInsertWatchClear" layoutX="325.0" layoutY="452.0" mnemonicParsing="false" onAction="#clearInsertWatch" text="입력 초기화" />
+      <Text layoutX="33.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="나비 명" />
+      <TextField fx:id="txtInsertWatchBname" layoutX="111.0" layoutY="498.0" onAction="#bnameInsertWatch" promptText="배추흰나비" />
+      <Text layoutX="63.0" layoutY="569.0" strokeType="OUTSIDE" strokeWidth="0.0" text="과" />
+      <TextField fx:id="txtInsertWatchFamily" layoutX="111.0" layoutY="549.0" onAction="#familyInsertWatch" promptText="흰나비과" />
+      <TextField fx:id="txtInsertWatchZoological" layoutX="111.0" layoutY="590.0" onAction="#zoologicalInsertWatch" promptText="Pieris(Artogeia) rapae" />
+      <Text layoutX="63.0" layoutY="610.0" strokeType="OUTSIDE" strokeWidth="0.0" text="학명" />
+      <Text layoutX="33.0" layoutY="662.0" strokeType="OUTSIDE" strokeWidth="0.0" text="상태" />
+      <ComboBox fx:id="comboInsertWatchStatus" layoutX="109.0" layoutY="642.0" onAction="#statusInsertWatch" prefHeight="29.0" prefWidth="124.0" promptText="상" />
+      <ComboBox fx:id="comboInsertWatchSex" layoutX="359.0" layoutY="642.0" onAction="#sexInsertWatch" prefHeight="29.0" prefWidth="124.0" promptText="암" />
+      <Text layoutX="283.0" layoutY="662.0" strokeType="OUTSIDE" strokeWidth="0.0" text="성별" />
+      <Button fx:id="btnInsertWatchAdd" layoutX="314.0" layoutY="746.0" mnemonicParsing="false" onAction="#addInsertWatch" text="추가" />
+      <Button fx:id="btnInsertWatchExit" layoutX="396.0" layoutY="746.0" mnemonicParsing="false" onAction="#exitInsertWatch" text="종료" />
+      <TextField fx:id="txtInsertWatchNation" layoutX="111.0" layoutY="170.0" onAction="#NationInsertWatch" promptText="대한민국" />
+      <Text layoutX="33.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="국가" />
+      <Text layoutX="33.0" layoutY="706.0" strokeType="OUTSIDE" strokeWidth="0.0" text="비고" />
+      <TextField fx:id="txtInsertWatchRemark" layoutX="81.0" layoutY="686.0" onAction="#remarkInsertWatch" prefHeight="29.0" prefWidth="450.0" />
+   </children>
+</Pane>

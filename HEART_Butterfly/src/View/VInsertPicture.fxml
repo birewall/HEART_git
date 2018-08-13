@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="36.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="촬영 날짜" />
+      <Text layoutX="36.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="시간대" />
+      <DatePicker fx:id="dateInsertPictureDate" layoutX="114.0" layoutY="47.0" onAction="#dateInsertPicture" promptText="(default=today)" />
+      <ComboBox fx:id="comboInsertPictureTime" layoutX="114.0" layoutY="85.0" onAction="#timeInsertPicture" prefHeight="29.0" prefWidth="203.0" promptText="오전" />
+      <Text layoutX="37.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="촬영 장소" />
+      <TextField fx:id="txtInsertPictureLoc" layoutX="115.0" layoutY="170.0" onAction="#locInsertPicture" promptText="금학산" />
+      <Button fx:id="btnInsertPictureSearchLoc" layoutX="304.0" layoutY="170.0" mnemonicParsing="false" onAction="#searchLocInsertPicture" text="검색" />
+      <Text layoutX="67.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="상세 주소" />
+      <Text layoutX="161.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="도" />
+      <Text layoutX="161.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="시,군,구" />
+      <Text layoutX="160.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="동,읍,면" />
+      <TextField fx:id="txtInsertPictureDo" layoutX="243.0" layoutY="224.0" onAction="#doInsertPicture" promptText="강원도" />
+      <TextField fx:id="txtInsertPictureSi" layoutX="243.0" layoutY="257.0" onAction="#siInsertPicture" promptText="철원군" />
+      <TextField fx:id="txtInsertPictureDong" layoutX="242.0" layoutY="292.0" onAction="#dongInsertPicture" promptText="동송읍" />
+      <Text layoutX="37.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="촬영자" />
+      <ComboBox fx:id="comboInsertPictureWho" layoutX="115.0" layoutY="333.0" onAction="#whoInsertPicture" prefHeight="29.0" prefWidth="203.0" promptText="조윤호" />
+      <Button fx:id="btnInsertPictureChoosewho" layoutX="329.0" layoutY="333.0" mnemonicParsing="false" onAction="#choosewhoInsertPicture" text="직접 입력" />
+      <Button fx:id="btnInsertPictureClear" layoutX="329.0" layoutY="376.0" mnemonicParsing="false" onAction="#clearInsertPicture" text="입력 초기화" />
+      <Text layoutX="33.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="나비 명" />
+      <TextField fx:id="txtInsertPictureBname" layoutX="111.0" layoutY="447.0" onAction="#bnameInsertPicture" promptText="배추흰나비" />
+      <Text layoutX="301.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="과" />
+      <TextField fx:id="txtInsertPictureFamily" layoutX="349.0" layoutY="447.0" onAction="#familyInsertPicture" promptText="흰나비과" />
+      <TextField fx:id="txtInsertPictureZoological" layoutX="348.0" layoutY="484.0" onAction="#zoologicalInsertPicture" promptText="Pieris(Artogeia) rapae" />
+      <Text layoutX="300.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="학명" />
+      <Text layoutX="33.0" layoutY="548.0" strokeType="OUTSIDE" strokeWidth="0.0" text="상태" />
+      <ComboBox fx:id="comboInsertPictureStatus" layoutX="109.0" layoutY="528.0" onAction="#statusInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="상" />
+      <ComboBox fx:id="comboInsertPictureSex" layoutX="359.0" layoutY="528.0" onAction="#sexInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="암" />
+      <Text layoutX="283.0" layoutY="548.0" strokeType="OUTSIDE" strokeWidth="0.0" text="성별" />
+      <Button fx:id="btnInsertPictureAdd" layoutX="341.0" layoutY="847.0" mnemonicParsing="false" onAction="#addInsertPicture" text="추가" />
+      <Button fx:id="btnInsertPictureExit" layoutX="423.0" layoutY="847.0" mnemonicParsing="false" onAction="#exitInsertPicture" text="종료" />
+      <ComboBox fx:id="comboInsertPictureLtype" layoutX="104.0" layoutY="676.0" onAction="#ltypeInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="망원" />
+      <Text layoutX="28.0" layoutY="696.0" strokeType="OUTSIDE" strokeWidth="0.0" text="렌즈 유형" />
+      <ComboBox fx:id="comboInsertPictureBloc" layoutX="109.0" layoutY="566.0" onAction="#BlocInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="비행" />
+      <Text layoutX="33.0" layoutY="586.0" strokeType="OUTSIDE" strokeWidth="0.0" text="위치" />
+      <Text layoutX="283.0" layoutY="586.0" strokeType="OUTSIDE" strokeWidth="0.0" text="배경" />
+      <ComboBox fx:id="comboInsertPictureBground" layoutX="359.0" layoutY="566.0" onAction="#bgroundInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="꽃" />
+      <Text layoutX="33.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="날개" />
+      <ComboBox fx:id="comboInsertPictureWing" layoutX="109.0" layoutY="601.0" onAction="#wingInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="펼침" />
+      <ComboBox fx:id="comboInsertPictureSize" layoutX="359.0" layoutY="601.0" onAction="#sizeInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="소" />
+      <Text layoutX="283.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="크기" />
+      <Text layoutX="28.0" layoutY="731.0" strokeType="OUTSIDE" strokeWidth="0.0" text="보정 여부" />
+      <ComboBox fx:id="comboInsertPictureIscorrected" layoutX="104.0" layoutY="711.0" onAction="#iscorrectedInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="유" />
+      <Text layoutX="283.0" layoutY="696.0" strokeType="OUTSIDE" strokeWidth="0.0" text="파일 형식" />
+      <ComboBox fx:id="comboInsertPictureFtype" layoutX="359.0" layoutY="676.0" onAction="#ftypeInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="jpg" />
+      <ComboBox fx:id="comboInsertPictureSloc" layoutX="356.0" layoutY="711.0" onAction="#slocInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="cloud" />
+      <Text layoutX="280.0" layoutY="731.0" strokeType="OUTSIDE" strokeWidth="0.0" text="저장 위치" />
+      <Text layoutX="28.0" layoutY="817.0" strokeType="OUTSIDE" strokeWidth="0.0" text="저장 경로" />
+      <TextField fx:id="txtInsertPictureSpath" layoutX="144.0" layoutY="797.0" onAction="#spathInsertPicture" prefHeight="29.0" prefWidth="340.0" promptText="C:\Users\ffree\workspace\ImageViewer-hs\img" />
+      <TextField fx:id="txtInsertPictureRemark" layoutX="79.0" layoutY="749.0" onAction="#remarkInsertPicture" prefHeight="29.0" prefWidth="450.0" />
+      <Text layoutX="31.0" layoutY="769.0" strokeType="OUTSIDE" strokeWidth="0.0" text="비고" />
+      <Text layoutX="36.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="국가" />
+      <TextField fx:id="txtInsertPictureNation" layoutX="114.0" layoutY="130.0" onAction="#NationInsertPicture" promptText="대한민국" />
+   </children>
+</Pane>
