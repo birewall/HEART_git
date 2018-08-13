@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+  <tabs>
+    <Tab text="기본 검색">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ComboBox fx:id="comboAnalysisBasicDate" layoutX="14.0" layoutY="153.0" onAction="#dateAnalysisBasic" prefWidth="150.0" promptText="기간" />
+                  <Label layoutX="27.0" layoutY="40.0" text="검색 조건 설정" />
+                  <RadioButton fx:id="radioAnalysisBasicWhole" layoutX="27.0" layoutY="82.0" mnemonicParsing="false" onAction="#wholeAnalysisBasic" text="전체" />
+                  <RadioButton fx:id="radioAnalysisBasicWatch" layoutX="99.0" layoutY="82.0" mnemonicParsing="false" onAction="#watchAnalysisBasic" text="관찰" />
+                  <RadioButton fx:id="radioAnalysisBasicSpecimen" layoutX="243.0" layoutY="82.0" mnemonicParsing="false" onAction="#specimenAnalysisBasic" text="표본" />
+                  <RadioButton fx:id="radioAnalysisBasicPicture" layoutX="171.0" layoutY="82.0" mnemonicParsing="false" onAction="#pictureAnalysisBasic" text="사진" />
+                  <Label layoutX="41.0" layoutY="122.0" text="공통 정보" />
+                  <ComboBox fx:id="comboAnalysisBasicTime" layoutX="171.0" layoutY="153.0" onAction="#timeAnalysisBasic" prefWidth="150.0" promptText="시간대" />
+                  <Label layoutX="521.0" layoutY="158.0" text="장소" />
+                  <TextField fx:id="txtAnalysisBasicLoc" layoutX="563.0" layoutY="153.0" onAction="#LocAnalysisBasic" />
+                  <Button fx:id="btnAnalysisBasicSearchbloc" layoutX="746.0" layoutY="153.0" mnemonicParsing="false" onAction="#searchblocAnalysisBasic" text="검색" />
+                  <TextField fx:id="txtAnalysisBasicdo" layoutX="807.0" layoutY="153.0" onAction="#doAnalysisBasic" prefHeight="29.0" prefWidth="114.0" promptText="도" />
+                  <TextField fx:id="txtAnalysisBasicSi" layoutX="934.0" layoutY="153.0" onAction="#siAnalysisBasic" prefHeight="29.0" prefWidth="114.0" promptText="시,군,구" />
+                  <TextField fx:id="txtAnalysisBasicDong" layoutX="1063.0" layoutY="153.0" onAction="#dongAnalysisBasic" prefHeight="29.0" prefWidth="114.0" promptText="동,읍,면" />
+                  <TextField fx:id="txtAnalysisBasicNation" layoutX="391.0" layoutY="153.0" onAction="#nationAnalysisBasic" prefHeight="29.0" prefWidth="108.0" />
+                  <Label layoutX="349.0" layoutY="158.0" text="국가" />
+                  <Label layoutX="18.0" layoutY="209.0" text="나비 명" />
+                  <TextField fx:id="txtAnalysisBasicBname" layoutX="82.0" layoutY="204.0" onAction="#bnameAnalysisBasic" prefHeight="29.0" prefWidth="156.0" />
+                  <Label layoutX="258.0" layoutY="209.0" text="상태" />
+                  <ComboBox fx:id="comboAnalysisBasicStatus" layoutX="304.0" layoutY="204.0" onAction="#statusAnalysisBasic" prefHeight="29.0" prefWidth="79.0" promptText="상" />
+                  <ComboBox fx:id="comboAnalysisBasicSex" layoutX="446.0" layoutY="204.0" onAction="#sexAnalysisBasic" prefHeight="29.0" prefWidth="79.0" promptText="암" />
+                  <Label layoutX="400.0" layoutY="209.0" text="성별" />
+                  <Text layoutX="751.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="저장 위치" />
+                  <ComboBox fx:id="comboAnalysisBasicSloc" layoutX="827.0" layoutY="315.0" onAction="#slocAnalysisBasic" prefHeight="29.0" prefWidth="124.0" promptText="cloud" />
+                  <ComboBox fx:id="comboAnalysisBasicFtype" layoutX="347.0" layoutY="315.0" onAction="#ftypeAnalysisBasic" prefHeight="29.0" prefWidth="124.0" promptText="jpg" />
+                  <Text layoutX="271.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="파일 형식" />
+                  <ComboBox fx:id="comboAnalysisBasicIscorrected" layoutX="575.0" layoutY="315.0" onAction="#iscorrectedAnalysisBasic" prefHeight="29.0" prefWidth="124.0" promptText="유" />
+                  <Text layoutX="499.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="보정 여부" />
+                  <Text layoutX="754.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="크기" />
+                  <ComboBox fx:id="comboAnalysisBasicSize" layoutX="827.0" layoutY="275.0" onAction="#sizeAnalysisBasic" prefHeight="29.0" prefWidth="124.0" promptText="소" />
+                  <ComboBox fx:id="comboAnalysisBasicWing" layoutX="575.0" layoutY="275.0" onAction="#wingAnalysisBasic" prefHeight="29.0" prefWidth="124.0" promptText="펼침" />
+                  <Text layoutX="504.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="날개" />
+                  <ComboBox fx:id="comboAnalysisBasicBground" layoutX="347.0" layoutY="275.0" onAction="#bgroundAnalysisBasic" prefHeight="29.0" prefWidth="124.0" promptText="꽃" />
+                  <Text layoutX="268.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="배경" />
+                  <Text layoutX="18.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="위치" />
+                  <ComboBox fx:id="comboAnalysisBasicBloc" layoutX="92.0" layoutY="275.0" onAction="#BlocAnalysisBasic" prefHeight="29.0" prefWidth="124.0" promptText="비행" />
+                  <Text layoutX="16.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="렌즈 유형" />
+                  <ComboBox fx:id="comboAnalysisBasicLtype" layoutX="92.0" layoutY="315.0" onAction="#ltypeAnalysisBasic" prefHeight="29.0" prefWidth="124.0" promptText="망원" />
+                  <Text layoutX="28.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="사진 정보" />
+                  <TableView fx:id="tblAnalysisBasicWholetbl" layoutX="28.0" layoutY="368.0" prefHeight="557.0" prefWidth="1143.0">
+                    <columns>
+                      <TableColumn fx:id="tblcAnalysisBasicDate" prefWidth="91.0" text="날짜" />
+                        <TableColumn fx:id="tblcAnalysisBasicTime" prefWidth="78.0" text="시간대" />
+                        <TableColumn fx:id="tblcAnalysisBasicNation" prefWidth="81.0" text="국가" />
+                        <TableColumn fx:id="tblcAnalysisBasicLoc" prefWidth="81.0" text="장소" />
+                        <TableColumn fx:id="tblcAnalysisBasicDo" prefWidth="79.0" text="장소-도" />
+                        <TableColumn fx:id="tblcAnalysisBasicSi" prefWidth="127.0" text="장소-시,군,구" />
+                        <TableColumn fx:id="tblcAnalysisBasicDong" prefWidth="110.0" text="장소-동,읍,면" />
+                        <TableColumn fx:id="tblcAnalysisBasicZoological" prefWidth="120.0" text="학명" />
+                        <TableColumn fx:id="tblcAnalysisBasicFamily" minWidth="4.0" prefWidth="91.0" text="과" />
+                        <TableColumn fx:id="tblcAnalysisBasicBname" prefWidth="73.0" text="나비 명" />
+                        <TableColumn fx:id="tblcAnalysisBasicStatus" minWidth="0.0" prefWidth="49.0" text="상태" />
+                        <TableColumn fx:id="tblcAnalysisBasicSex" minWidth="0.0" prefWidth="63.0" text="성별" />
+                        <TableColumn fx:id="tblcAnalysisBasicInsert" minWidth="0.0" prefWidth="99.0" text="입력 방식" />
+                    </columns>
+                  </TableView>
+                  <Button fx:id="btnAnalysisBasicSearch" layoutX="1009.0" layoutY="280.0" mnemonicParsing="false" onAction="#searchAnalysisBasic" prefHeight="65.0" prefWidth="155.0" text="검색" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="통계 분석 - 위치 기반">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      </content>
+    </Tab>
+      <Tab text="통계 분석 - 데이터 플롯">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>
