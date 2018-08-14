@@ -58,7 +58,5 @@ public class CMain extends AbsMetaController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		//Stage thisStage = (Stage)(this.btnMainExit.getScene().getWindow());
-		//thisStage.setTitle("HEARTLab Butterfly Manager");
 	}
 }
