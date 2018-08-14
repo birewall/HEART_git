@@ -7,7 +7,7 @@ import java.sql.Statement;
 import org.apache.log4j.Logger;
 import Common.Main;
 
-public class MDatabase {
+public class MDatabase extends AbsMetaModel {
 	protected static Logger logger = Logger.getLogger(Main.class.getName());
 	String table_name;
 	Connection connection;
