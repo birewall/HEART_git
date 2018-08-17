@@ -35,8 +35,13 @@ public abstract class AbsMetaController {
         AbsMetaController controller = (AbsMetaController)loader.getController();
         controller.setParentController(this);
     	controller.setSharedModel(null);
+    	controller.init_procedure();
     	Scene scene = new Scene(root);
     	Stage nowStage = (Stage)nowWindow;
     	nowStage.setScene(scene);
+	}
+	
+	public void init_procedure() {
+		/* For Overridding */
 	}
 }

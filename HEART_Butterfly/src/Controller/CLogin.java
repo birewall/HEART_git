@@ -30,14 +30,36 @@ public class CLogin extends AbsMetaController {
     @FXML
     private Label lblLoginFail;
 
+    private String id = "developer";
+    private String password = "test";
+    
     @FXML
     void login(ActionEvent event) throws IOException {
-    	changeWindow(this.btnLogin.getScene().getWindow(), "VMain");
+    	// Exception Handling
+    	if(this.textLoginID.getText().length() == 0) {
+    		this.lblLoginFail.setText("아이디를 입력하세요.");
+    	}
+    	
+    	if(this.txtLoginPW.getText().length() == 0) {
+    		this.lblLoginFail.setText("비밀번호를 입력하세요.");
+    	}
+    	
+    	// Login Sequence
+    	if(this.textLoginID.getText().equals(id) && this.txtLoginPW.getText().equals(password)) {
+        	changeWindow(this.btnLogin.getScene().getWindow(), "VMain");
+    	} else {
+    		this.lblLoginFail.setText("정보가 일치하지 않습니다.");
+    	}
     }
 
     @FXML
     void loginExit(ActionEvent event) {
     	System.exit(0);
     }
-
+    
+    /* For Debug */
+    public void setForDebug() {
+    	this.textLoginID.setText(id);
+    	this.txtLoginPW.setText(password);
+    }
 }
