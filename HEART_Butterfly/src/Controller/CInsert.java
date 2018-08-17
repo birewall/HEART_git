@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class CInsert {
+public class CInsert extends AbsMetaController {
 
     @FXML
     private Button btnInsertWatch;
@@ -37,5 +37,4 @@ public class CInsert {
     void insertWatch(ActionEvent event) {
 
     }
-
 }

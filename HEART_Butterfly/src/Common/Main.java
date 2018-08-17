@@ -16,6 +16,7 @@ public class Main extends Application {
 	        Parent root = FXMLLoader.load(getClass().getResource("/View/VMain.fxml"));
 	        Scene scene = new Scene(root);
 	        primaryStage.setScene(scene);
+	        primaryStage.setTitle("HEARTLab Butterfly Manager v0.0");
 	        primaryStage.show();	    	
 	    } catch(Exception e) {
 	        e.printStackTrace();

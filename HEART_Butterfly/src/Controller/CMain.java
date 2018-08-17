@@ -15,7 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class CMain implements Initializable {
+public class CMain extends AbsMetaController implements Initializable {
 
     @FXML
     private Pane paneMain;
@@ -44,8 +44,12 @@ public class CMain implements Initializable {
 
     @FXML
     void mainInsert(ActionEvent event) throws IOException {
-    	Parent root = FXMLLoader.load(getClass().getResource("/View/VInsert.fxml"));
-        Scene scene = new Scene(root);
+    	FXMLLoader loader = new FXMLLoader();
+    	Parent root = loader.load(getClass().getResource("/View/VInsert.fxml").openStream());
+        CInsert controller = (CInsert)loader.getController();
+        controller.setParentController(this);
+    	controller.setSharedModel(null);
+    	Scene scene = new Scene(root);
 		Stage thisStage = (Stage)(this.btnMainExit.getScene().getWindow());
 		thisStage.setScene(scene);
 		thisStage.show();
@@ -54,8 +58,5 @@ public class CMain implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		//Stage thisStage = (Stage)(this.btnMainExit.getScene().getWindow());
-		//thisStage.setTitle("HEARTLab Butterfly Manager");
 	}
-
 }
