@@ -1,5 +1,7 @@
 package Controller;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -165,8 +167,8 @@ public class CInsertWatch extends AbsMetaController {
     }
 
     @FXML
-    void exitInsertWatch(ActionEvent event) {
-
+    void exitInsertWatch(ActionEvent event) throws IOException {
+    	changeWindow(this.btnInsertWatchExit.getScene().getWindow(), "VInsert");
     }
 
     @FXML

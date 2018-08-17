@@ -48,6 +48,6 @@
       <Button layoutX="439.0" layoutY="478.0" mnemonicParsing="false" text="찾아보기" />
       <TextField fx:id="txtInsertPictureLoc11" layoutX="138.0" layoutY="478.0" onAction="#locInsertPicture" prefHeight="29.0" prefWidth="283.0" promptText="C:\Users\ffree\Desktop\180810철원" />
       <Button layoutX="209.0" layoutY="537.0" mnemonicParsing="false" text="폴더 생성" />
-      <Button layoutX="309.0" layoutY="537.0" mnemonicParsing="false" text="종료" />
+      <Button fx:id="btnExit" layoutX="309.0" layoutY="537.0" mnemonicParsing="false" onAction="#OnExit" text="종료" />
    </children>
 </Pane>

@@ -1,5 +1,7 @@
 package Controller;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -138,8 +140,8 @@ public class CSpecimenMove extends AbsMetaController {
     }
 
     @FXML
-    void exitSpecimenMove(ActionEvent event) {
-
+    void exitSpecimenMove(ActionEvent event) throws IOException {
+    	changeWindow(this.btnSpecimenMoveExit.getScene().getWindow(), "VMain");
     }
 
     @FXML
@@ -251,5 +253,4 @@ public class CSpecimenMove extends AbsMetaController {
     void zoologicalSpecimenMove(ActionEvent event) {
 
     }
-
 }

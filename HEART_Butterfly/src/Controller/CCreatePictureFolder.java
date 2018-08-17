@@ -1,5 +1,7 @@
 package Controller;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -63,6 +65,9 @@ public class CCreatePictureFolder extends AbsMetaController {
     private TextField txtInsertPictureLoc11;
 
     @FXML
+    private Button btnExit;
+    
+    @FXML
     void BlocInsertPicture(ActionEvent event) {
 
     }
@@ -97,6 +102,11 @@ public class CCreatePictureFolder extends AbsMetaController {
 
     }
 
+    @FXML
+    void OnExit(ActionEvent event) throws IOException {
+    	changeWindow(this.btnExit.getScene().getWindow(), "VMain");
+    }
+    
     @FXML
     void locInsertPicture(ActionEvent event) {
 

@@ -39,36 +39,27 @@ public class CMain extends AbsMetaController{
     private Button btnMainSpecimenMove;
 
     @FXML
-    void mainAnalysis(ActionEvent event) {
-
+    void mainAnalysis(ActionEvent event) throws IOException {
+    	changeWindow(this.btnMainExit.getScene().getWindow(), "VAnalysisMain");
     }
 
     @FXML
     void mainExit(ActionEvent event) {
-
+    	System.exit(0);
     }
 
     @FXML
     void mainInsert(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader();
-    	Parent root = loader.load(getClass().getResource("/View/VInsert.fxml").openStream());
-        CInsert controller = (CInsert)loader.getController();
-        controller.setParentController(this);
-    	controller.setSharedModel(null);
-    	Scene scene = new Scene(root);
-    	Stage thisStage = (Stage)(this.btnMainExit.getScene().getWindow());
-    	thisStage.setScene(scene);
-    	thisStage.show();
+    	changeWindow(this.btnMainExit.getScene().getWindow(), "VInsert");
     }
 
     @FXML
-    void mainPicture(ActionEvent event) {
-
+    void mainPicture(ActionEvent event) throws IOException {
+    	changeWindow(this.btnMainExit.getScene().getWindow(), "VCreatePictureFolder");
     }
 
     @FXML
-    void specimenmoveMainSpecimen(ActionEvent event) {
-
+    void specimenmoveMainSpecimen(ActionEvent event) throws IOException {
+    	changeWindow(this.btnMainExit.getScene().getWindow(), "VSpecimenMove");
     }
-
 }

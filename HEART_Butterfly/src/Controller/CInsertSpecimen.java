@@ -1,5 +1,7 @@
 package Controller;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -171,8 +173,8 @@ public class CInsertSpecimen extends AbsMetaController {
     }
 
     @FXML
-    void exitInsertSpecimen(ActionEvent event) {
-
+    void exitInsertSpecimen(ActionEvent event) throws IOException {
+    	changeWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VInsert");
     }
 
     @FXML

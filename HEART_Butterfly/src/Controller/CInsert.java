@@ -1,5 +1,7 @@
 package Controller;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,22 +25,22 @@ public class CInsert extends AbsMetaController {
     private Button btnInsertExit;
 
     @FXML
-    void insertExit(ActionEvent event) {
-    	System.exit(0);
+    void insertExit(ActionEvent event) throws IOException {
+    	changeWindow(this.btnInsertExit.getScene().getWindow(), "VMain");
     }
 
     @FXML
-    void insertPicture(ActionEvent event) {
-    	
+    void insertPicture(ActionEvent event) throws IOException {
+    	changeWindow(this.btnInsertExit.getScene().getWindow(), "VInsertPicture");
     }
 
     @FXML
-    void insertSpecimen(ActionEvent event) {
-
+    void insertSpecimen(ActionEvent event) throws IOException {
+    	changeWindow(this.btnInsertExit.getScene().getWindow(), "VInsertSpecimen");
     }
 
     @FXML
-    void insertWatch(ActionEvent event) {
-
+    void insertWatch(ActionEvent event) throws IOException {
+    	changeWindow(this.btnInsertExit.getScene().getWindow(), "VInsertWatch");
     }
 }

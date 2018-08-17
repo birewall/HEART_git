@@ -13,7 +13,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		logger.info("Hi");
 	    try {
-	        Parent root = FXMLLoader.load(getClass().getResource("/View/VMain.fxml"));
+	        Parent root = FXMLLoader.load(getClass().getResource("/View/VLogin.fxml"));
 	        Scene scene = new Scene(root);
 	        primaryStage.setScene(scene);
 	        primaryStage.setTitle("HEARTLab Butterfly Manager v0.0");

@@ -9,7 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class CCAnalysisDataplot extends AbsMetaController {
+public class CAnalysisDataplot extends AbsMetaController {
 
     @FXML
     private ComboBox<?> comboAnalysisBasicDate;
