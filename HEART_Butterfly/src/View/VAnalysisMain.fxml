@@ -75,6 +75,7 @@
                     </columns>
                   </TableView>
                   <Button fx:id="btnAnalysisBasicSearch" layoutX="1009.0" layoutY="280.0" mnemonicParsing="false" onAction="#searchAnalysisBasic" prefHeight="65.0" prefWidth="155.0" text="검색" />
+                  <Button fx:id="btnExit" layoutX="1009.0" layoutY="33.0" mnemonicParsing="false" onAction="#OnExit" prefHeight="65.0" prefWidth="155.0" text="뒤로가기" />
                </children></AnchorPane>
       </content>
     </Tab>

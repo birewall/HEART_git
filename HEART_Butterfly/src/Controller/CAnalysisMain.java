@@ -1,5 +1,7 @@
 package Controller;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -28,6 +30,9 @@ public class CAnalysisMain extends AbsMetaController {
 
     @FXML
     private ComboBox<?> comboAnalysisBasicTime;
+    
+    @FXML
+    private Button btnExit;
 
     @FXML
     private TextField txtAnalysisBasicLoc;
@@ -245,4 +250,8 @@ public class CAnalysisMain extends AbsMetaController {
 
     }
 
+    @FXML
+    void OnExit(ActionEvent event) throws IOException {
+    	changeWindow(this.btnExit.getScene().getWindow(), "VMain");
+    }
 }
