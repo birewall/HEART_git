@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <tabs>
+    <Tab fx:id="tabSummaryAnalysis" text="요약 통계 보기">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="27.0" layoutY="32.0" text="검색 조건 설정" />
+                  <RadioButton fx:id="radioSummaryAnalysisDate" layoutX="28.0" layoutY="60.0" mnemonicParsing="false" onAction="#dateSummaryAnalysis" text="날짜 선택">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="SummaryAnalysis" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="radioSummaryAnalysisNation" layoutX="364.0" layoutY="59.0" mnemonicParsing="false" onAction="#nationradioSummaryAnalysis" text="국가" toggleGroup="$SummaryAnalysis" />
+                  <RadioButton fx:id="radioSummaryAnalysisBname" layoutX="906.0" layoutY="59.0" mnemonicParsing="false" onAction="#bnameradioSummaryAnalysis" text="나비 명" toggleGroup="$SummaryAnalysis" />
+                  <RadioButton fx:id="radioSummaryAnalysisFamily" layoutX="623.0" layoutY="60.0" mnemonicParsing="false" onAction="#familyradioSummaryAnalysis" text="나비 과" toggleGroup="$SummaryAnalysis" />
+                  <Button fx:id="btnSummaryAnalysisClear" layoutX="800.0" layoutY="300.0" mnemonicParsing="false" onAction="#clearSummaryAnalysis" prefHeight="65.0" prefWidth="155.0" text="입력 초기화" />
+                  <Button fx:id="vtnSummaryAnalysisSearch" layoutX="966.0" layoutY="300.0" mnemonicParsing="false" onAction="#searchSummaryAnalysis" prefHeight="65.0" prefWidth="155.0" text="검색" />
+                  <Label layoutX="28.0" layoutY="150.0" text="선택된 검색 조건 :" />
+                  <TextField fx:id="txtSummaryAnalysisDateselect" layoutX="160.0" layoutY="145.0" onAction="#dateselectSummaryAnalysis" prefHeight="29.0" prefWidth="80.0" promptText="기간" />
+                  <DatePicker fx:id="calenSummaryAnalysisCalender" layoutX="128.0" layoutY="56.0" onAction="#calenderSummaryAnalysis" prefHeight="29.0" prefWidth="215.0" />
+                  <ComboBox fx:id="comboSummaryAnalysisNation" layoutX="435.0" layoutY="55.0" onAction="#nationSummaryAnalysis" prefWidth="150.0" />
+                  <ComboBox fx:id="comboSummaryAnalysisFamily" layoutX="717.0" layoutY="56.0" onAction="#familySummaryAnalysis" prefWidth="150.0" />
+                  <ComboBox fx:id="comboSummaryAnalysisBname" layoutX="994.0" layoutY="56.0" onAction="#bnameSummaryAnalysis" prefWidth="150.0" />
+                  <TextField fx:id="txtSummaryAnalysisStartdate" layoutX="254.0" layoutY="145.0" onAction="#startdateSummaryAnalysis" prefHeight="29.0" prefWidth="135.0" promptText="2016-5-10" />
+                  <TextField fx:id="txtSummaryAnalysisNation" layoutX="254.0" layoutY="184.0" onAction="#txtnationSummaryAnalysis" prefHeight="29.0" prefWidth="869.0" promptText="대한민국, 카자흐스탄" />
+                  <TextField fx:id="txtSummaryAnalysisNationselect" layoutX="160.0" layoutY="184.0" onAction="#nationselectSummaryAnalysis" prefHeight="29.0" prefWidth="80.0" promptText="국가" />
+                  <TextField fx:id="txtSummaryAnalysisFamily" layoutX="254.0" layoutY="222.0" onAction="#familytxtSummaryAnalysis" prefHeight="29.0" prefWidth="869.0" promptText="a나비과, b나비과" />
+                  <TextField fx:id="txtSummaryAnalysisFamilyselect" layoutX="160.0" layoutY="222.0" onAction="#familyselecttSummaryAnalysis" prefHeight="29.0" prefWidth="80.0" promptText="나비 과" />
+                  <TextField fx:id="txtSummaryAnalysisBname" layoutX="254.0" layoutY="261.0" onAction="#bnametxtSummaryAnalysis" prefHeight="29.0" prefWidth="869.0" promptText="배추흰나비, 팔랑나비, a나비, b나비" />
+                  <TextField fx:id="txtSummaryAnalysisBnameselect" layoutX="160.0" layoutY="261.0" onAction="#bnameselectSummaryAnalysis" prefHeight="29.0" prefWidth="80.0" promptText="나비 명" />
+                  <ComboBox fx:id="comboSummaryAnalysisYear" layoutX="128.0" layoutY="97.0" onAction="#yearSummaryAnalysis" prefHeight="29.0" prefWidth="121.0" promptText="연도" />
+                  <ComboBox fx:id="comboSummaryAnalysisMonth" layoutX="257.0" layoutY="97.0" onAction="#monthSummaryAnalysis" prefHeight="29.0" prefWidth="109.0" promptText="월" />
+                  <Label layoutX="399.0" layoutY="150.0" text="~" />
+                  <TextField fx:id="txtSummaryAnalysisEnddate" layoutX="421.0" layoutY="145.0" onAction="#enddateSummaryAnalysis" prefHeight="29.0" prefWidth="135.0" promptText="2016-5-20" />
+                  <RadioButton fx:id="radioSummaryAnalysisYearm" layoutX="28.0" layoutY="101.0" mnemonicParsing="false" onAction="#yearmradioSummaryAnalysis" text="연/월 선택" toggleGroup="$SummaryAnalysis" />
+                  <TextField fx:id="txtSummaryAnalysisYear" layoutX="656.0" layoutY="145.0" onAction="#yearSummaryAnalysis" prefHeight="29.0" prefWidth="190.0" promptText="2016,2017,2018" />
+                  <TextField fx:id="txtSummaryAnalysisMonth" layoutX="852.0" layoutY="145.0" onAction="#monthSummaryAnalysis" prefHeight="29.0" prefWidth="128.0" promptText="5월" />
+                  <TextField fx:id="txtSummaryAnalysisYearmselect" layoutX="570.0" layoutY="145.0" onAction="#yearmselectSummaryAnalysis" prefHeight="29.0" prefWidth="80.0" promptText="연/월" />
+                  <BarChart fx:id="plotSummaryAnalysis" layoutX="33.0" layoutY="407.0" prefHeight="468.0" prefWidth="621.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+                  <Label layoutX="730.0" layoutY="449.0" text="통계 요약" />
+                  <Label layoutX="730.0" layoutY="481.0" text="전체 :" />
+                  <Label layoutX="730.0" layoutY="519.0" text="관찰 :" />
+                  <Label layoutX="731.0" layoutY="598.0" text="사진 :" />
+                  <Label layoutX="731.0" layoutY="560.0" text="표본 :" />
+                  <TextField fx:id="txtSummaryAnalysisAll" layoutX="782.0" layoutY="476.0" onAction="#allSummaryAnalysis" prefHeight="29.0" prefWidth="95.0" promptText="230" />
+                  <TextField fx:id="txtSummaryAnalysisWatch" layoutX="782.0" layoutY="514.0" onAction="#watchSummaryAnalysis" prefHeight="29.0" prefWidth="95.0" promptText="100" />
+                  <TextField fx:id="txtSummaryAnalysisPicture" layoutX="782.0" layoutY="593.0" onAction="#pictureSummaryAnalysis" prefHeight="29.0" prefWidth="95.0" promptText="310" />
+                  <TextField fx:id="txtSummaryAnalysisSpecimen" layoutX="782.0" layoutY="555.0" onAction="#specimenSummaryAnalysis" prefHeight="29.0" prefWidth="95.0" promptText="20" />
+                  <Label layoutX="894.0" layoutY="481.0" text="개" />
+                  <Label layoutX="886.0" layoutY="519.0" text="마리" />
+                  <Label layoutX="894.0" layoutY="598.0" text="장" />
+                  <Label layoutX="894.0" layoutY="560.0" text="개" />
+                  <Button fx:id="btnSummaryAnalysisExport" layoutX="800.0" layoutY="866.0" mnemonicParsing="false" onAction="#exportSummaryAnalysis" prefHeight="65.0" prefWidth="155.0" text="결과 내보내기" />
+                  <Button fx:id="btnSummaryAnalysisExit" layoutX="966.0" layoutY="866.0" mnemonicParsing="false" onAction="#exitSummaryAnalysis" prefHeight="65.0" prefWidth="155.0" text="종료" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab fx:id="tabDataAnalysis" text="통계 분석 - 데이터 플롯">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <RadioButton fx:id="radioDataAnalysisPicture" layoutX="173.0" layoutY="71.0" mnemonicParsing="false" onAction="#pictureDataAnalysis" text="사진">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="DataAnalysis" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="radioDataAnalysisSpecimen" layoutX="251.0" layoutY="71.0" mnemonicParsing="false" onAction="#specimenDataAnalysis" text="표본" toggleGroup="$DataAnalysis" />
+                  <RadioButton fx:id="radioDataAnalysisWatch" layoutX="102.0" layoutY="71.0" mnemonicParsing="false" onAction="#watchDataAnalysis" text="관찰" toggleGroup="$DataAnalysis" />
+                  <RadioButton fx:id="radioDataAnalysisAll" layoutX="30.0" layoutY="71.0" mnemonicParsing="false" onAction="#allDataAnalysis" text="전체" toggleGroup="$DataAnalysis" />
+                  <Label layoutX="30.0" layoutY="37.0" text="검색 조건 설정" />
+                  <TextField fx:id="txtDataAnalysisFamily" layoutX="124.0" layoutY="387.0" onAction="#familyDataAnalysis" />
+                  <TextField fx:id="txtDataAnalysisBname" layoutX="124.0" layoutY="424.0" onAction="#bnameDataAnalysis" />
+                  <ComboBox fx:id="comboDataAnalysisStatus" layoutX="124.0" layoutY="472.0" onAction="#statusDataAnalysis" prefWidth="150.0" promptText="상" />
+                  <ComboBox fx:id="comboDataAnalysisSex" layoutX="124.0" layoutY="508.0" onAction="#sexDataAnalysis" prefWidth="150.0" promptText="암" />
+                  <ComboBox fx:id="comboDataAnalysisDate" layoutX="27.0" layoutY="108.0" onAction="#dateDataAnalysis" prefWidth="150.0" promptText="기간" />
+                  <Slider fx:id="scrollDataAnalysisDate" layoutX="29.0" layoutY="147.0" prefHeight="10.0" prefWidth="278.0" />
+                  <Label layoutX="280.0" layoutY="172.0" text="10년" />
+                  <Label layoutX="25.0" layoutY="172.0" text="한 달" />
+                  <Label layoutX="106.0" layoutY="172.0" text="1년" />
+                  <Label layoutX="202.0" layoutY="172.0" text="5년" />
+                  <LineChart fx:id="graphDataAnalysis" layoutX="382.0" layoutY="81.0" prefHeight="477.0" prefWidth="774.0">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </LineChart>
+                  <Label layoutX="188.0" layoutY="113.0" text="or" />
+                  <Button fx:id="btnDataAnalysisLocname" layoutX="103.0" layoutY="202.0" mnemonicParsing="false" onAction="#locnameDataAnalysis" text="이름으로 검색" />
+                  <Label layoutX="391.0" layoutY="566.0" text="[통계 정보 요약]" />
+                  <CheckBox fx:id="checkDataAnalysisFamily" layoutX="27.0" layoutY="391.0" mnemonicParsing="false" onAction="#familycheckDataAnalysis" text="나비 과" />
+                  <CheckBox fx:id="checkDataAnalysisBname" layoutX="28.0" layoutY="428.0" mnemonicParsing="false" onAction="#bnamecheckDataAnalysis" text="나비 명" />
+                  <CheckBox fx:id="checkDataAnalysisStatus" layoutX="28.0" layoutY="476.0" mnemonicParsing="false" onAction="#statuscheckDataAnalysis" text="상태" />
+                  <CheckBox fx:id="checkDataAnalysisSex" layoutX="28.0" layoutY="512.0" mnemonicParsing="false" onAction="#sexcheckDataAnalysis" text="성별" />
+                  <CheckBox fx:id="checkDataAnalysisPicture" layoutX="28.0" layoutY="564.0" mnemonicParsing="false" onAction="#pictureDataAnalysis" text="사진 보유 여부" />
+                  <Label layoutX="29.0" layoutY="298.0" text="포함 지역" />
+                  <TextField fx:id="txtDataAnalysisSelectedloc1" layoutX="30.0" layoutY="320.0" onAction="#selectedloc1DataAnalysis" prefHeight="29.0" prefWidth="290.0" />
+                  <Button fx:id="btnDataAnalysisLocmap" layoutX="103.0" layoutY="245.0" mnemonicParsing="false" onAction="#locmpDataAnalysis" text="지도에서 검색" />
+                  <CheckBox fx:id="checkDataAnalysisLoc" layoutX="31.0" layoutY="206.0" mnemonicParsing="false" onAction="#locDataAnalysis" text="지역" />
+                  <TextField fx:id="txtDataAnalysisBiggest" layoutX="761.0" layoutY="606.0" onAction="#biggestDataAnalysis" prefHeight="29.0" prefWidth="269.0" />
+                  <Label layoutX="650.0" layoutY="611.0" text="최대 나비 명" />
+                  <Button fx:id="btnDataAnalysisData" layoutX="29.0" layoutY="630.0" mnemonicParsing="false" onAction="#dataDataAnalysis" prefHeight="91.0" prefWidth="305.0" text="데이터 플롯" />
+                  <Button fx:id="btnDataAnalysisExport" layoutX="29.0" layoutY="737.0" mnemonicParsing="false" onAction="#exportDataAnalysis" prefHeight="55.0" prefWidth="305.0" text="출력 결과 내보내기 (.txt)" />
+                  <Button fx:id="btnDataAnalysisExit" layoutX="25.0" layoutY="839.0" mnemonicParsing="false" onAction="#exitDataAnalysis" prefHeight="63.0" prefWidth="305.0" text="종료" />
+                  <Label layoutX="650.0" layoutY="662.0" text="관찰 마릿수" />
+                  <TextField fx:id="txtDataAnalysisWatchnumber" layoutX="761.0" layoutY="657.0" onAction="#watchnumberDataAnalysis" prefHeight="29.0" prefWidth="269.0" />
+                  <TextField fx:id="txtDataAnalysisCollectnumber" layoutX="761.0" layoutY="700.0" onAction="#collectnumberDataAnalysis" prefHeight="29.0" prefWidth="269.0" />
+                  <Label layoutX="650.0" layoutY="705.0" text="채집 마릿수" />
+                  <Label layoutX="391.0" layoutY="602.0" text="선택된 검색 조건" />
+                  <Label layoutX="389.0" layoutY="661.0" text="기간 :" />
+                  <Label layoutX="389.0" layoutY="700.0" text="포함 지역 :" />
+                  <Label layoutX="389.0" layoutY="729.0" text="나비 과 :" />
+                  <Label layoutX="389.0" layoutY="764.0" text="나비 명 :" />
+                  <Label layoutX="389.0" layoutY="799.0" text="상태 :" />
+                  <Label layoutX="389.0" layoutY="830.0" text="성별 :" />
+                  <Label layoutX="389.0" layoutY="861.0" text="사진 보유 :" />
+                  <TextField fx:id="txtDataAnalysisSelecteddate" layoutX="458.0" layoutY="656.0" onAction="#selecteddateDataAnalysis" />
+                  <TextField fx:id="txtDataAnalysisSelectedloc2" layoutX="482.0" layoutY="691.0" onAction="#selectedloc2DataAnalysis" prefHeight="29.0" prefWidth="148.0" />
+                  <TextField fx:id="txtDataAnalysisSelectedfamily" layoutX="477.0" layoutY="723.0" onAction="#selectedfamilyDataAnalysis" prefHeight="29.0" prefWidth="153.0" />
+                  <TextField fx:id="txtDataAnalysisSelectedbname" layoutX="477.0" layoutY="759.0" onAction="#selectedbnameDataAnalysis" prefHeight="29.0" prefWidth="153.0" />
+                  <TextField fx:id="txtDataAnalysisSelectedstatus" layoutX="477.0" layoutY="794.0" onAction="#selectedstatusDataAnalysis" prefHeight="29.0" prefWidth="153.0" />
+                  <TextField fx:id="txtDataAnalysisSelectedsex" layoutX="476.0" layoutY="825.0" onAction="#selectedsexDataAnalysis" prefHeight="29.0" prefWidth="153.0" />
+                  <TextField fx:id="txtDataAnalysisSelectedpicture" layoutX="477.0" layoutY="856.0" onAction="#selectedpictureDataAnalysis" prefHeight="29.0" prefWidth="153.0" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab fx:id="tabSpecHistory" text="표본 이동 이력">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ComboBox fx:id="comboSpecHistoryDate" layoutX="94.0" layoutY="70.0" onAction="#dateSpecHistory" prefWidth="150.0" promptText="수집 날짜" />
+                  <ComboBox fx:id="comboSpecHistoryTime" layoutX="351.0" layoutY="70.0" onAction="#timeSpecHistory" prefWidth="150.0" promptText="오전" />
+                  <Label layoutX="722.0" layoutY="75.0" text="수집 장소" />
+                  <TextField fx:id="txtSpecHistoryLoc" layoutX="802.0" layoutY="70.0" onAction="#locSpecHistory" />
+                  <Button fx:id="btnSpecHistoryLocname" layoutX="985.0" layoutY="70.0" mnemonicParsing="false" onAction="#locnameSpecHistory" text="지명" />
+                  <TextField fx:id="txtSpecHistoryNation" layoutX="591.0" layoutY="70.0" onAction="#nationSpecHistory" prefHeight="29.0" prefWidth="108.0" />
+                  <Label layoutX="549.0" layoutY="75.0" text="국가" />
+                  <Label layoutX="218.0" layoutY="121.0" text="나비 명" />
+                  <TextField fx:id="txtSpecHistoryBname" layoutX="282.0" layoutY="116.0" onAction="#bnameSpecHistory" prefHeight="29.0" prefWidth="156.0" />
+                  <Label layoutX="730.0" layoutY="121.0" text="상태" />
+                  <ComboBox fx:id="comboSpecHistoryStatus" layoutX="776.0" layoutY="116.0" onAction="#statusSpecHistory" prefHeight="29.0" prefWidth="79.0" promptText="상" />
+                  <ComboBox fx:id="comboSpecHistorySex" layoutX="918.0" layoutY="116.0" onAction="#sexSpecHistory" prefHeight="29.0" prefWidth="79.0" promptText="암" />
+                  <Label layoutX="872.0" layoutY="121.0" text="성별" />
+                  <TableView fx:id="tblSpecHistory" layoutX="20.0" layoutY="336.0" prefHeight="534.0" prefWidth="1143.0">
+                     <columns>
+                        <TableColumn fx:id="tblcSpecHistoryLabelid" prefWidth="94.0" text="레이블 ID" />
+                        <TableColumn fx:id="tblcSpecHistoryDate" prefWidth="108.0" text="수집 날짜" />
+                        <TableColumn fx:id="tblcSpecHistoryTime" prefWidth="81.0" text="시간대" />
+                        <TableColumn fx:id="tblcSpecHistoryNation" prefWidth="72.0" text="국가" />
+                        <TableColumn fx:id="tblcSpecHistoryLoc" minWidth="4.0" prefWidth="101.0" text="수집 장소" />
+                        <TableColumn fx:id="tblcSpecHistoryFamily" prefWidth="89.0" text="나비 과" />
+                        <TableColumn fx:id="tblcSpecHistoryBname" minWidth="0.0" prefWidth="81.0" text="나비 명" />
+                        <TableColumn fx:id="tblcSpecHistoryZoo" minWidth="0.0" prefWidth="88.0" text="학명" />
+                        <TableColumn fx:id="tblcSpecHistoryStatus" minWidth="0.0" prefWidth="73.0" text="상태" />
+                        <TableColumn fx:id="tblcSpecHistorySex" minWidth="0.0" prefWidth="73.0" text="성별" />
+                        <TableColumn fx:id="tblcSpecHistoryBLoc" minWidth="0.0" prefWidth="73.0" text="보관 장소" />
+                        <TableColumn fx:id="tblcSpecHistoryLoc2" minWidth="0.0" prefWidth="94.0" text="캐비닛 번호" />
+                        <TableColumn fx:id="tblcSpecHistoryLoc3" minWidth="0.0" prefWidth="94.0" text="상자 번호" />
+                        <TableColumn fx:id="tblcSpecHistoryContent" minWidth="0.0" prefWidth="94.0" text="표본 이동 내용" />
+                        <TableColumn fx:id="tblcSpecHistoryWorkdate" minWidth="0.0" prefWidth="94.0" text="이동 날짜" />
+                     </columns>
+                  </TableView>
+                  <Button fx:id="btnSpecHistorySearch" layoutX="837.0" layoutY="247.0" mnemonicParsing="false" onAction="#searchSpecHistory" prefHeight="65.0" prefWidth="155.0" text="검색" />
+                  <Button fx:id="btnSpecHistoryExport" layoutX="1003.0" layoutY="247.0" mnemonicParsing="false" onAction="#exportSpecHistory" prefHeight="65.0" prefWidth="155.0" text="테이블 내보내기" />
+                  <TextField fx:id="txtSpecHistoryFamily" layoutX="92.0" layoutY="116.0" onAction="#familySpecHistory" prefHeight="29.0" prefWidth="113.0" />
+                  <Label layoutX="28.0" layoutY="121.0" text="나비 과" />
+                  <TextField fx:id="txtSpecHistoryZoo" layoutX="514.0" layoutY="116.0" onAction="#zooSpecHistory" prefHeight="29.0" prefWidth="181.0" />
+                  <Label layoutX="467.0" layoutY="121.0" text="학명" />
+                  <Label layoutX="28.0" layoutY="28.0" text="검색 조건 설정" />
+                  <Label layoutX="28.0" layoutY="165.0" text="레이블 ID" />
+                  <TextField fx:id="txtSpecHistoryLabelid" layoutX="103.0" layoutY="160.0" onAction="#labelidSpecHistory" prefHeight="29.0" prefWidth="158.0" />
+                  <Label layoutX="28.0" layoutY="208.0" text="표본 보관 위치" />
+                  <ComboBox fx:id="comboSpecHistoryBloc1" layoutX="141.0" layoutY="203.0" onAction="#bloc1SpecHistory" prefHeight="29.0" prefWidth="191.0" promptText="임시 보관 - 집" />
+                  <ComboBox fx:id="comboSpecHistoryLoc2type" layoutX="452.0" layoutY="203.0" onAction="#loc2typeSpecHistory" prefHeight="29.0" prefWidth="94.0" promptText="제작" />
+                  <Label layoutX="351.0" layoutY="208.0" text="캐비닛 번호" />
+                  <TextField fx:id="txtSpecHistoryLoc2" layoutX="558.0" layoutY="203.0" onAction="#loc2SpecHistory" prefHeight="29.0" prefWidth="85.0" />
+                  <TextField fx:id="txtSpecHistoryLoc3" layoutX="877.0" layoutY="203.0" onAction="#loc3SpecHistory" prefHeight="29.0" prefWidth="85.0" />
+                  <Label layoutX="670.0" layoutY="208.0" text="상자 번호" />
+                  <ComboBox fx:id="comboSpecHistoryLoc3type" layoutX="771.0" layoutY="203.0" onAction="#loc3typeSpecHistory" prefHeight="29.0" prefWidth="94.0" promptText="제작" />
+                  <ComboBox fx:id="comboAnalysisBasicTime112" layoutX="140.0" layoutY="242.0" onAction="#timeAnalysisBasic" prefHeight="29.0" prefWidth="191.0" promptText="전시" />
+                  <Label layoutX="27.0" layoutY="247.0" text="표본 이동 내용" />
+                  <Button fx:id="btnSpecHistoryExit" layoutX="1011.0" layoutY="876.0" mnemonicParsing="false" onAction="#exitSpecHistory" prefHeight="65.0" prefWidth="155.0" text="종료" />
+                  <Button fx:id="btnSpecHistoryCorrect" layoutX="837.0" layoutY="876.0" mnemonicParsing="false" onAction="#correctSpecHistory" prefHeight="65.0" prefWidth="155.0" text="수정" />
+                  <Label layoutX="282.0" layoutY="75.0" text="시간대" />
+                  <Label layoutX="31.0" layoutY="75.0" text="기간" />
+                  <Button fx:id="btnSpecHistoryLocmap" layoutX="1048.0" layoutY="70.0" mnemonicParsing="false" onAction="#locmapSpecHistory" text="지도" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>
