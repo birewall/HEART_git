@@ -1,13 +1,10 @@
 package Controller;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,7 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class CMain extends AbsMetaController implements Initializable {
+public class CMain extends AbsMetaController{
 
     @FXML
     private Pane paneMain;
@@ -33,13 +30,22 @@ public class CMain extends AbsMetaController implements Initializable {
     private Text txtMain;
 
     @FXML
+    private Button btnMainPicture;
+
+    @FXML
+    private Text txtMain1;
+
+    @FXML
+    private Button btnMainSpecimenMove;
+
+    @FXML
     void mainAnalysis(ActionEvent event) {
 
     }
 
     @FXML
     void mainExit(ActionEvent event) {
-    	System.exit(0);
+
     }
 
     @FXML
@@ -50,13 +56,19 @@ public class CMain extends AbsMetaController implements Initializable {
         controller.setParentController(this);
     	controller.setSharedModel(null);
     	Scene scene = new Scene(root);
-		Stage thisStage = (Stage)(this.btnMainExit.getScene().getWindow());
-		thisStage.setScene(scene);
-		thisStage.show();
+    	Stage thisStage = (Stage)(this.btnMainExit.getScene().getWindow());
+    	thisStage.setScene(scene);
+    	thisStage.show();
     }
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-	}
+    @FXML
+    void mainPicture(ActionEvent event) {
+
+    }
+
+    @FXML
+    void specimenmoveMainSpecimen(ActionEvent event) {
+
+    }
+
 }
