@@ -7,17 +7,21 @@ import javafx.scene.Scene;
 import org.apache.log4j.*;
 import org.apache.log4j.spi.LoggerFactory;
 
+import Controller.AbsMetaController;
+import Controller.CLogin;
+
 public class Main extends Application {
-	protected static Logger logger = Logger.getLogger(Main.class);
 	@Override
 	public void start(Stage primaryStage) {
-		logger.info("Hi");
 	    try {
-	        Parent root = FXMLLoader.load(getClass().getResource("/View/VLogin.fxml"));
-	        Scene scene = new Scene(root);
-	        primaryStage.setScene(scene);
+	        FXMLLoader loader = new FXMLLoader();
+	    	Parent root = loader.load(getClass().getResource("/View/VLogin.fxml").openStream());
+	        CLogin controller = (CLogin)loader.getController();
+	        controller.setForDebug();
+	    	Scene scene = new Scene(root);
+	    	primaryStage.setScene(scene);
 	        primaryStage.setTitle("HEARTLab Butterfly Manager v0.0");
-	        primaryStage.show();	    	
+	        primaryStage.show();
 	    } catch(Exception e) {
 	        e.printStackTrace();
 	    }
