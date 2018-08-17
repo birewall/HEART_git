@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CAnalysisLocation">
   <tabs>
     <Tab text="기본 검색">
       <content>
@@ -50,7 +57,7 @@
                   <Text layoutX="16.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="렌즈 유형" />
                   <ComboBox fx:id="comboInsertPictureLtype" layoutX="92.0" layoutY="315.0" onAction="#ltypeInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="망원" />
                   <Text layoutX="28.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="사진 정보" />
-                  <TableView layoutX="28.0" layoutY="368.0" prefHeight="557.0" prefWidth="1143.0">
+                  <TableView layoutX="16.0" layoutY="360.0" prefHeight="557.0" prefWidth="1143.0">
                     <columns>
                       <TableColumn prefWidth="91.0" text="날짜" />
                         <TableColumn prefWidth="78.0" text="시간대" />
