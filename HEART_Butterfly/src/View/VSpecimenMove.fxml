@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="33.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="레이블 ID" />
+      <Text layoutX="34.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="수집 날짜" />
+      <TextField fx:id="txtSpecimenMovePrenation" layoutX="116.0" layoutY="254.0" onAction="#prenationSpecimenMove" promptText="대한민국" />
+      <Text layoutX="35.0" layoutY="726.0" strokeType="OUTSIDE" strokeWidth="0.0" text="작업자" />
+      <ComboBox fx:id="comboSpecimenMoveWorker" layoutX="113.0" layoutY="706.0" onAction="#workerSpecimenMove" prefHeight="29.0" prefWidth="203.0" promptText="조윤호" />
+      <Button fx:id="btnSpecimenMoveChooseworker" layoutX="327.0" layoutY="706.0" mnemonicParsing="false" onAction="#chooseworkerSpecimenMove" text="직접 입력" />
+      <Text layoutX="35.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="나비 명" />
+      <TextField fx:id="txtSpecimenMoveBname" layoutX="113.0" layoutY="100.0" onAction="#bnameSpecimenMove" promptText="배추흰나비" />
+      <Text layoutX="303.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="과" />
+      <TextField fx:id="txtSpecimenMoveFamily" layoutX="351.0" layoutY="100.0" onAction="#familySpecimenMove" prefHeight="29.0" prefWidth="187.0" promptText="흰나비과" />
+      <TextField fx:id="txtSpecimenMoveZoological" layoutX="344.0" layoutY="137.0" onAction="#zoologicalSpecimenMove" prefHeight="29.0" prefWidth="187.0" promptText="Pieris(Artogeia) rapae" />
+      <Text layoutX="302.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="학명" />
+      <Text layoutX="27.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="최초 작업 날짜" />
+      <Button fx:id="btnSpecimenMoveAdd" layoutX="297.0" layoutY="806.0" mnemonicParsing="false" onAction="#addSpecimenMove" text="추가" />
+      <Button fx:id="btnSpecimenMoveExit" layoutX="426.0" layoutY="806.0" mnemonicParsing="false" onAction="#exitSpecimenMove" text="종료" />
+      <ComboBox fx:id="comboSpecimenMoveStatus" layoutX="113.0" layoutY="745.0" onAction="#statusSpecimenMove" prefHeight="29.0" prefWidth="124.0" promptText="상" />
+      <Text layoutX="41.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="상태" />
+      <ComboBox fx:id="comboSpecimenMoveLoc1" layoutX="161.0" layoutY="596.0" onAction="#loc1SpecimenMove" prefHeight="29.0" prefWidth="124.0" promptText="사무실" />
+      <Text layoutX="39.0" layoutY="616.0" strokeType="OUTSIDE" strokeWidth="0.0" text="보관 장소" />
+      <Text layoutX="36.0" layoutY="651.0" strokeType="OUTSIDE" strokeWidth="0.0" text="캐비닛 번호" />
+      <ComboBox fx:id="comboSpecimenMoveLoc2" layoutX="288.0" layoutY="631.0" onAction="#loc2SpecimenMove" prefHeight="29.0" prefWidth="124.0" promptText="12" />
+      <Text layoutX="277.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="성별" />
+      <Text layoutX="42.0" layoutY="578.0" strokeType="OUTSIDE" strokeWidth="0.0" text="비고" />
+      <TextField fx:id="txtSpecimenMoveContentremark" layoutX="117.0" layoutY="558.0" onAction="#contentremarkSpecimenMove" prefHeight="29.0" prefWidth="381.0" />
+      <Text layoutX="33.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="제공자" />
+      <TextField fx:id="txtSpecimenMovePrecollectdate" layoutX="115.0" layoutY="217.0" onAction="#precollectdateSpecimenMove" promptText="2009-07-25" />
+      <Text layoutX="35.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="수집 장소" />
+      <DatePicker fx:id="dateSpecimenMoveWorkdate" layoutX="116.0" layoutY="481.0" onAction="#workdateSpecimenMove" promptText="(defalut=today)" />
+      <ComboBox fx:id="comboSpecimenMoveLoc3type" layoutX="161.0" layoutY="667.0" onAction="#loc3SpecimenMove" prefHeight="29.0" prefWidth="124.0" promptText="구입" />
+      <Text layoutX="37.0" layoutY="687.0" strokeType="OUTSIDE" strokeWidth="0.0" text="상자 번호" />
+      <Text layoutX="31.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="기존 정보" />
+      <Text layoutX="55.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="통상명" />
+      <TextField fx:id="txtSpecimenMovePreloc" layoutX="117.0" layoutY="290.0" onAction="#prelocSpecimenMove" prefHeight="29.0" prefWidth="124.0" promptText="주금산" />
+      <Button fx:id="btnSpecimenMoveLabel" layoutX="98.0" layoutY="806.0" mnemonicParsing="false" onAction="#labelSpecimenMove" prefHeight="29.0" prefWidth="179.0" text="레이블 내보내기 (.csv)" />
+      <ComboBox fx:id="comboSpecimenMoveLoc2type" layoutX="161.0" layoutY="631.0" onAction="#loc2typeSpecimenMove" prefHeight="29.0" prefWidth="124.0" promptText="제작" />
+      <ComboBox fx:id="comboSpecimenMoveLoc3" layoutX="288.0" layoutY="667.0" onAction="#loc3SpecimenMove" prefHeight="29.0" prefWidth="124.0" promptText="30" />
+      <Button fx:id="btnSpecimenMoveCorrect" layoutX="364.0" layoutY="806.0" mnemonicParsing="false" onAction="#correctSpecimenMove" text="수정" />
+      <TextField fx:id="txtSpecimenMoveLabelID" layoutX="114.0" layoutY="62.0" onAction="#labelIDSpecimenMove" promptText="H08112008" />
+      <TextField fx:id="txtSpecimenMovePrecollectloc" layoutX="302.0" layoutY="254.0" onAction="#precollectlocSpecimenMove" promptText="음현리" />
+      <TextField fx:id="txtSpecimenMoveCollectwho" layoutX="117.0" layoutY="324.0" onAction="#collectwhoSpecimenMove" prefHeight="29.0" prefWidth="124.0" promptText="조윤호" />
+      <TextField fx:id="txtSpecimenMovePreworkdate" layoutX="146.0" layoutY="363.0" onAction="#preworkdateSpecimenMove" prefHeight="29.0" prefWidth="124.0" promptText="2010-01-20" />
+      <TextField fx:id="txtSpecimenMovePresex" layoutX="340.0" layoutY="172.0" onAction="#presexSpecimenMove" prefHeight="29.0" prefWidth="124.0" promptText="암" />
+      <Text layoutX="31.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="보관 장소" />
+      <TextField fx:id="txtSpecimenMovePrestatus" layoutX="107.0" layoutY="172.0" onAction="#prestatusSpecimenMove" prefHeight="29.0" prefWidth="124.0" promptText="상" />
+      <TextField fx:id="txtSpecimenMovePreloc1" layoutX="118.0" layoutY="403.0" onAction="#preloc1SpecimenMove" prefHeight="29.0" prefWidth="172.0" promptText="임시 보관 - 사무실" />
+      <Text layoutX="33.0" layoutY="501.0" strokeType="OUTSIDE" strokeWidth="0.0" text="작업 날짜" />
+      <Text layoutX="41.0" layoutY="539.0" strokeType="OUTSIDE" strokeWidth="0.0" text="내용" />
+      <ComboBox fx:id="comboSpecimenMoveContent" layoutX="117.0" layoutY="519.0" onAction="#contentSpecimenMove" prefHeight="29.0" prefWidth="187.0" promptText="보관 장소 이동" />
+      <Text layoutX="323.0" layoutY="539.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(보관 장소 이동, 폐기, 기증, 대여)" />
+      <Text layoutX="312.0" layoutY="616.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(보관 장소 이동)일 경우에만" />
+      <Text layoutX="35.0" layoutY="765.0" strokeType="OUTSIDE" strokeWidth="0.0" text="상태" wrappingWidth="45.0" />
+      <TextField fx:id="txtSpecimenMovePreloc2" layoutX="303.0" layoutY="403.0" onAction="#preloc2SpecimenMove" prefHeight="29.0" prefWidth="80.0" promptText="12" />
+      <TextField fx:id="txtSpecimenMovePreloc3" layoutX="397.0" layoutY="403.0" onAction="#preloc3SpecimenMove" prefHeight="29.0" prefWidth="80.0" promptText="15" />
+      <TextField fx:id="txtSpecimenMovepreworker" layoutX="403.0" layoutY="363.0" onAction="#preworkerSpecimenMove" prefHeight="29.0" prefWidth="124.0" promptText="조윤호" />
+      <Text layoutX="316.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="작업자" />
+   </children>
+</Pane>

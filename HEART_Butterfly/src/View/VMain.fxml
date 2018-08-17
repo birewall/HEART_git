@@ -8,13 +8,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="paneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CMain">
+<Pane fx:id="paneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CMain">
    <children>
       <Button fx:id="btnMainInsert" layoutX="50.0" layoutY="136.0" mnemonicParsing="false" onAction="#mainInsert" prefHeight="50.0" prefWidth="300.0" text="정보 입력" />
-      <Button fx:id="btnMainAnalysis" layoutX="50.0" layoutY="206.0" mnemonicParsing="false" onAction="#mainAnalysis" prefHeight="50.0" prefWidth="300.0" text="통계 분석" />
-      <Button fx:id="btnMainExit" layoutX="175.0" layoutY="365.0" mnemonicParsing="false" onAction="#mainExit" text="종료" />
+      <Button fx:id="btnMainAnalysis" layoutX="50.0" layoutY="267.0" mnemonicParsing="false" onAction="#mainAnalysis" prefHeight="50.0" prefWidth="300.0" text="통계 분석" />
+      <Button fx:id="btnMainExit" layoutX="175.0" layoutY="426.0" mnemonicParsing="false" onAction="#mainExit" text="종료" />
       <Text fx:id="txtMain" layoutX="135.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="나비 관리 프로그램" />
-      <Button fx:id="btnMainAnalysis1" layoutX="50.0" layoutY="278.0" mnemonicParsing="false" onAction="#mainAnalysis" prefHeight="50.0" prefWidth="300.0" text="사진 불러오기" />
+      <Button fx:id="btnMainPicture" layoutX="50.0" layoutY="339.0" mnemonicParsing="false" onAction="#mainPicture" prefHeight="50.0" prefWidth="300.0" text="사진 불러오기" />
       <Text fx:id="txtMain1" layoutX="84.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="어떤 기능을 사용하시겠습니까?" />
+      <Button fx:id="btnMainSpecimenMove" layoutX="50.0" layoutY="200.0" mnemonicParsing="false" onAction="#specimenmoveMainSpecimen" prefHeight="50.0" prefWidth="300.0" text="표본 위치 이동 정보" />
    </children>
 </Pane>
