@@ -2,6 +2,7 @@ package Controller;
 
 import java.io.IOException;
 
+import Model.MSharedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,5 +62,12 @@ public class CMain extends AbsMetaController{
     @FXML
     void specimenmoveMainSpecimen(ActionEvent event) throws IOException {
     	changeWindow(this.btnMainExit.getScene().getWindow(), "VSpecimenMove");
+    }
+    
+    @Override
+    public void init_procedure() {
+    	MSharedData data = new MSharedData();
+    	// data.getDB().connect("");
+    	data.getLogger().info("[CMain - init_procedure] Initialized");
     }
 }
