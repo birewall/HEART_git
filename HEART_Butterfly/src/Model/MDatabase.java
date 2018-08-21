@@ -34,7 +34,7 @@ public class MDatabase extends AbsMetaModel {
 	public boolean connect(String db_name) throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
 		this.connection = DriverManager.getConnection(
-							db_id + db_name + db_option, 
+							db_address + db_name + db_option, 
 							db_id, db_pw);
 		if(this.connection == null) return false;
 		else return true;

@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import Model.MSharedData;
 import javafx.event.ActionEvent;
@@ -67,7 +68,17 @@ public class CMain extends AbsMetaController{
     @Override
     public void init_procedure() {
     	MSharedData data = new MSharedData();
-    	// data.getDB().connect("");
+    	try {
+			if(data.getDB().connect("Butterfly")) {
+				data.getLogger().info("[CMain - init_procedure] DB is connected");
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	data.getLogger().info("[CMain - init_procedure] Initialized");
     }
 }
