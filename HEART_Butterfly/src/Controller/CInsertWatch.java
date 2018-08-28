@@ -1,9 +1,14 @@
 package Controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -11,13 +16,15 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
-public class CInsertWatch extends AbsMetaController {
+public class CInsertWatch extends AbsMetaController implements Initializable {
 
+	ObservableList<String> people = FXCollections.observableArrayList("조윤호"); 
+	
     @FXML
     private DatePicker dateInsertWatchDate;
 
     @FXML
-    private ComboBox<?> comboInsertWatchTime;
+    private ComboBox<String> comboInsertWatchTime;
 
     @FXML
     private TextField txtInsertWatchLoc;
@@ -35,7 +42,7 @@ public class CInsertWatch extends AbsMetaController {
     private TextField txtInsertWatchDong;
 
     @FXML
-    private ComboBox<?> comboInsertWatchWho;
+    private ComboBox<String> comboInsertWatchWho;
 
     @FXML
     private Button btnInsertWatchChoosewho;
@@ -53,10 +60,10 @@ public class CInsertWatch extends AbsMetaController {
     private TextField txtInsertWatchZoological;
 
     @FXML
-    private ComboBox<?> comboInsertWatchStatus;
+    private ComboBox<String> comboInsertWatchStatus;
 
     @FXML
-    private ComboBox<?> comboInsertWatchSex;
+    private ComboBox<String> comboInsertWatchSex;
 
     @FXML
     private Button btnInsertWatchAdd;
@@ -296,4 +303,13 @@ public class CInsertWatch extends AbsMetaController {
 
     }
 
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		this.comboInsertWatchTime.getItems().addAll("오전", "오후", "저녁", "새벽");
+		this.comboInsertWatchWho.setItems(this.people);
+		this.comboInsertWatchSex.getItems().addAll("암", "수");
+		this.comboInsertWatchStatus.getItems().addAll("상", "중", "하");
+		
+	}
 }

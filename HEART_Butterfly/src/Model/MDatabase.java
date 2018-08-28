@@ -42,6 +42,7 @@ public class MDatabase extends AbsMetaModel {
 	public void disconnect() throws SQLException {
 		if(this.connection != null) this.connection.close();
 	}
+	
 	/* Fill the parameter */
 	public boolean insert() throws SQLException {
 		Statement st = this.connection.createStatement();
