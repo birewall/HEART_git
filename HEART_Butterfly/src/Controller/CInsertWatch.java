@@ -18,7 +18,7 @@ import javafx.scene.control.ToggleGroup;
 
 public class CInsertWatch extends AbsMetaController implements Initializable {
 
-	ObservableList<String> people = FXCollections.observableArrayList("조윤호"); 
+	ObservableList<String> people = FXCollections.observableArrayList("조윤호");
 	
     @FXML
     private DatePicker dateInsertWatchDate;
