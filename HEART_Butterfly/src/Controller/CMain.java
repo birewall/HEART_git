@@ -42,8 +42,8 @@ public class CMain extends AbsMetaController{
 
     @FXML
     void mainAnalysis(ActionEvent event) throws IOException {
-    	//changeWindow(this.btnMainExit.getScene().getWindow(), "VAnalysisMain");
-    	changeWindow(this.btnMainExit.getScene().getWindow(), "VAnalysisDataPlot");
+    	changeWindow(this.btnMainExit.getScene().getWindow(), "VAnalysisAll");
+    	//changeWindow(this.btnMainExit.getScene().getWindow(), "VAnalysisDataPlot");
     }
 
     @FXML
