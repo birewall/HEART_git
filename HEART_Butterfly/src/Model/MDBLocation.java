@@ -14,6 +14,7 @@ public class MDBLocation extends MDatabase {
 
     public MDBLocation(Connection connection) {
         this.connection = connection;
+        this.table_name = "Location";
     }
 
     public int getIdLocation() {
@@ -78,5 +79,17 @@ public class MDBLocation extends MDatabase {
 
     public void setSectionDetail(String sectionDetail) {
         this.sectionDetail = sectionDetail;
+    }
+
+    public void printContents() {
+        logger.info("[" + this.table_name + "]");
+        logger.info("[idLocation] " + idLocation);
+        logger.info("[country] " + country);
+        logger.info("[location] " + location);
+        logger.info("[locationDetail] " + locationDetail);
+        logger.info("[gps] " + gps);
+        logger.info("[alias] " + alias);
+        logger.info("[section] " + section);
+        logger.info("[sectionDetail] " + sectionDetail);
     }
 }

@@ -19,7 +19,5 @@ public class MLogger extends AbsMetaModel{
 		this.logger.debug(message);
 	}
 	
-	public void fatal(Object message) {
-		this.logger.fatal(message);
-	}
+	public void fatal(Object message) { this.logger.fatal(message); }
 }

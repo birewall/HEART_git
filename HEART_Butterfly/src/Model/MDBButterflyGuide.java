@@ -1,23 +1,24 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class MDBButterflyGuide extends MDatabase {
-    int idButterflyGuid;
+    int idButterflyGuide;
     int idImage;
     String name;        //varchar(45)
     String family;      //varchar(45)
 
     public MDBButterflyGuide(Connection connection) {
+        this.table_name = "ButterflyGuide";
         this.connection = connection;
     }
 
-    public int getIdButterflyGuid() {
-        return idButterflyGuid;
-    }
+    public int getIdButterflyGuide() { return idButterflyGuide; }
 
-    public void setIdButterflyGuid(int idButterflyGuid) {
-        this.idButterflyGuid = idButterflyGuid;
+    public void setIdButterflyGuide(int idButterflyGuide) {
+        this.idButterflyGuide = idButterflyGuide;
     }
 
     public int getIdImage() {
@@ -42,5 +43,13 @@ public class MDBButterflyGuide extends MDatabase {
 
     public void setFamily(String family) {
         this.family = family;
+    }
+
+    public void printContents() {
+        logger.info("[" + this.table_name + "]");
+        logger.info("[idButterflyGuide] " + idButterflyGuide);
+        logger.info("[idImage] " + idImage);
+        logger.info("[name] " + name);
+        logger.info("[family] " + family);
     }
 }

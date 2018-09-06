@@ -3,6 +3,7 @@ package Controller;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import Model.MDBCameraInfo;
 import Model.MSharedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,6 +54,8 @@ public class CMain extends AbsMetaController{
 
     @FXML
     void mainInsert(ActionEvent event) throws IOException {
+        MDBCameraInfo cam = new MDBCameraInfo(((MSharedData)this.shared_model).getDB().getConnection());
+        cam.printContents();
     	changeWindow(this.btnMainExit.getScene().getWindow(), "VInsert");
     }
 
@@ -80,6 +83,7 @@ public class CMain extends AbsMetaController{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		this.shared_model = data;
     	data.getLogger().info("[CMain - init_procedure] Initialized");
     }
 }

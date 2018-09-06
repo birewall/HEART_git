@@ -12,6 +12,7 @@ public class MDBCollectionInfo extends MDatabase {
 
     public MDBCollectionInfo(Connection connection) {
         this.connection = connection;
+        this.table_name = "CollectionInfo";
     }
 
     public int getIdCollectionInfo() {
@@ -60,5 +61,15 @@ public class MDBCollectionInfo extends MDatabase {
 
     public void setMethod(String method) {
         this.method = method;
+    }
+
+    public void printContents() {
+        logger.info("[" + this.table_name + "]");
+        logger.info("[idCollectionInfo] " + idCollectionInfo);
+        logger.info("[idLoction] " + idLoction);
+        logger.info("[idButterflyGuide] " + idButterflyGuide);
+        logger.info("[idPerson] " + idPerson);
+        logger.info("[date] " + date);
+        logger.info("[method] " + method);
     }
 }

@@ -10,6 +10,7 @@ public class MDBCameraInfo extends MDatabase {
 
     public MDBCameraInfo(Connection connection) {
         this.connection = connection;
+        this.table_name = "CameraInfo";
     }
 
     public int getIdCameraInfo() {
@@ -42,5 +43,13 @@ public class MDBCameraInfo extends MDatabase {
 
     public void setFormat(String format) {
         this.format = format;
+    }
+
+    public void printContents() {
+        logger.info("[" + this.table_name + "]");
+        logger.info("[idCameraInfo] " + idCameraInfo);
+        logger.info("[lens] " + lens);
+        logger.info("[calibration] " + calibration);
+        logger.info("[format] " + format);
     }
 }
