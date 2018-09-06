@@ -54,7 +54,8 @@ public class CMain extends AbsMetaController{
 
     @FXML
     void mainInsert(ActionEvent event) throws IOException {
-        MDBCameraInfo cam = new MDBCameraInfo(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBCameraInfo cam = new MDBCameraInfo(((MSharedData)this.shared_model)
+        		.getDB().getConnection());
         cam.printContents();
     	changeWindow(this.btnMainExit.getScene().getWindow(), "VInsert");
     }
@@ -85,5 +86,6 @@ public class CMain extends AbsMetaController{
 		}
 		this.shared_model = data;
     	data.getLogger().info("[CMain - init_procedure] Initialized");
+    	((MSharedData)this.shared_model).getLogger().info("[CMain - init_procedure] Example");
     }
 }
