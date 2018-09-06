@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
@@ -19,7 +23,7 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CAnalysisMain">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CAnalysisMain">
   <tabs>
     <Tab fx:id="tabSummaryAnalysis" text="요약 통계 보기">
       <content>
@@ -211,6 +215,35 @@
                   <Label layoutX="282.0" layoutY="75.0" text="시간대" />
                   <Label layoutX="31.0" layoutY="75.0" text="기간" />
                   <Button fx:id="btnSpecHistoryLocmap" layoutX="1048.0" layoutY="70.0" mnemonicParsing="false" onAction="#locmapSpecHistory" text="지도" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab fx:id="tabSpecHistory1" text="표본 상태 관리">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="28.0" layoutY="28.0" text="검색 조건 설정" />
+                  <Button fx:id="btnSpecHistoryExit1" layoutX="1011.0" layoutY="876.0" mnemonicParsing="false" onAction="#exitSpecHistory" prefHeight="65.0" prefWidth="155.0" text="종료" />
+                  <Button fx:id="btnSpecHistoryCorrect1" layoutX="837.0" layoutY="876.0" mnemonicParsing="false" onAction="#correctSpecHistory" prefHeight="65.0" prefWidth="155.0" text="수정" />
+                  <RadioButton layoutX="104.0" layoutY="72.0" mnemonicParsing="false" text="방부제 교체주기로 검색" />
+                  <RadioButton layoutX="461.0" layoutY="74.0" mnemonicParsing="false" text="나비 상태로 검색" />
+                  <RadioButton layoutX="921.0" layoutY="72.0" mnemonicParsing="false" text="나비 명으로 검색" />
+                  <CheckBox layoutX="489.0" layoutY="111.0" mnemonicParsing="false" text="상 [훼손부위없이 매우 양호한 상태]" />
+                  <CheckBox layoutX="489.0" layoutY="142.0" mnemonicParsing="false" text="중 [날개, 더듬이  부분 30% 이하 훼손]" />
+                  <CheckBox layoutX="489.0" layoutY="173.0" mnemonicParsing="false" text="하 [훼손정도가 심각하여 표본 가치가 없음]" />
+                  <CheckBox layoutX="128.0" layoutY="171.0" mnemonicParsing="false" text="하 [1년 이상]" />
+                  <CheckBox layoutX="128.0" layoutY="140.0" mnemonicParsing="false" text="중 [6개월 이상 1년 미만]" />
+                  <CheckBox layoutX="128.0" layoutY="109.0" mnemonicParsing="false" text="상 [6개월 미만]" />
+                  <TextField layoutX="944.0" layoutY="105.0" promptText="나비 명 입력" />
+                  <TableView layoutX="42.0" layoutY="322.0" prefHeight="540.0" prefWidth="1107.0">
+                    <columns>
+                      <TableColumn prefWidth="113.0" text="C1" />
+                      <TableColumn minWidth="3.0" prefWidth="120.0" text="C2" />
+                    </columns>
+                  </TableView>
+                  <Button layoutX="828.0" layoutY="219.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="155.0" text="검색" />
+                  <Button layoutX="1002.0" layoutY="219.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="155.0" text="결과 내보내기" />
                </children>
             </AnchorPane>
          </content>

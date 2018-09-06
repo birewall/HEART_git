@@ -1,15 +1,18 @@
 package Controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
-public class CInsertSpecimen extends AbsMetaController {
+public class CInsertSpecimen extends AbsMetaController implements Initializable {
 
     @FXML
     private DatePicker dateInsertSpecimenCollectdate;
@@ -21,7 +24,7 @@ public class CInsertSpecimen extends AbsMetaController {
     private Button btnInsertSpecimenSearchcollectloc;
 
     @FXML
-    private ComboBox<?> comboInsertSpecimenWho;
+    private ComboBox<String> comboInsertSpecimenWho;
 
     @FXML
     private Button btnInsertSpecimenChoosewho;
@@ -45,16 +48,16 @@ public class CInsertSpecimen extends AbsMetaController {
     private Button btnInsertSpecimenExit;
 
     @FXML
-    private ComboBox<?> comboInsertSpecimenStatus;
+    private ComboBox<String> comboInsertSpecimenStatus;
 
     @FXML
-    private ComboBox<?> comboInsertSpecimenLoc1;
+    private ComboBox<String> comboInsertSpecimenLoc1;
 
     @FXML
-    private ComboBox<?> comboInsertSpecimenLoc2;
+    private ComboBox<String> comboInsertSpecimenLoc2;
 
     @FXML
-    private ComboBox<?> comboInsertSpecimenSex;
+    private ComboBox<String> comboInsertSpecimenSex;
 
     @FXML
     private TextField txtInsertSpecimenRemark;
@@ -75,7 +78,7 @@ public class CInsertSpecimen extends AbsMetaController {
     private ComboBox<?> comboInsertSpecimenLoc3type;
 
     @FXML
-    private ComboBox<?> comboInsertSpecimenCollectway;
+    private ComboBox<String> comboInsertSpecimenCollectway;
 
     @FXML
     private TextField txtInsertSpecimenLocname;
@@ -266,5 +269,16 @@ public class CInsertSpecimen extends AbsMetaController {
     void zoologicalInsertSpecimen(ActionEvent event) {
 
     }
+    
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		this.comboInsertSpecimenCollectway.getItems().addAll("직접채집", "구매", "기증");
+		this.comboInsertSpecimenWho.getItems().addAll("조윤호");
+		this.comboInsertSpecimenStatus.getItems().addAll("상", "중", "하");
+		this.comboInsertSpecimenLoc1.getItems().addAll("집", "학교", "사무실");
+		this.comboInsertSpecimenSex.getItems().addAll("수", "암");
 
+	}
+	
 }
