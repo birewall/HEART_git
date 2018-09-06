@@ -13,6 +13,7 @@ public class MDBImage extends MDatabase {
 
     public MDBImage(Connection connection) {
         this.connection = connection;
+        this.table_name = "Image";
     }
 
     public int getIdImage() {
@@ -69,5 +70,16 @@ public class MDBImage extends MDatabase {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public void printContents() {
+        logger.info("[" + this.table_name + "]");
+        logger.info("[idImage] " + idImage);
+        logger.info("[idLocation] " + idLocation);
+        logger.info("[idImageObjectInfo] " + idImageObjectInfo);
+        logger.info("[idCameraInfo] " + idCameraInfo);
+        logger.info("[date] " + date);
+        logger.info("[time] " + time);
+        logger.info("[path] " + path);
     }
 }

@@ -13,6 +13,7 @@ public class MDBSpecimenize extends MDatabase {
 
     public MDBSpecimenize(Connection connection) {
         this.connection = connection;
+        this.table_name = "Specimenize";
     }
 
     public int getIdSpecimenize() {
@@ -69,5 +70,16 @@ public class MDBSpecimenize extends MDatabase {
 
     public void setEmbalmingDate(String embalmingDate) {
         this.embalmingDate = embalmingDate;
+    }
+
+    public void printContents() {
+        logger.info("[" + this.table_name + "]");
+        logger.info("[idSpecimenize] " + idSpecimenize);
+        logger.info("[idSpecimen] " + idSpecimen);
+        logger.info("[idObservation] " + idObservation);
+        logger.info("[idPerson] " + idPerson);
+        logger.info("[date] " + date);
+        logger.info("[anticepticName] " + anticepticName);
+        logger.info("[embalmingDate] " + embalmingDate);
     }
 }

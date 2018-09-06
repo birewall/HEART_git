@@ -12,6 +12,7 @@ public class MDBSpecimenIO extends MDatabase {
 
     public MDBSpecimenIO(Connection connection) {
         this.connection = connection;
+        this.table_name = "SpecimenIO";
     }
 
     public int getIdSpecimenIO() {
@@ -60,5 +61,15 @@ public class MDBSpecimenIO extends MDatabase {
 
     public void setCost(int cost) {
         this.cost = cost;
+    }
+
+    public void printContents() {
+        logger.info("[" + this.table_name + "]");
+        logger.info("[idSpecimenIO] " + idSpecimenIO);
+        logger.info("[idSpecimen] " + idSpecimen);
+        logger.info("[idGiver] " + idGiver);
+        logger.info("[idTaker] " + idTaker);
+        logger.info("[date] " + date);
+        logger.info("[cost] " + cost);
     }
 }

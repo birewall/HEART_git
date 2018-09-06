@@ -14,6 +14,7 @@ public class MDBSpecimen extends MDatabase {
 
     public MDBSpecimen(Connection connection) {
         this.connection = connection;
+        this.table_name = "Specimen";
     }
 
     public int getIdSpecimen() {
@@ -78,5 +79,17 @@ public class MDBSpecimen extends MDatabase {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public void printContents() {
+        logger.info("[" + this.table_name + "]");
+        logger.info("[idSpecimen] " + idSpecimen);
+        logger.info("[idCollectionInfo] " + idCollectionInfo);
+        logger.info("[idImage] " + idImage);
+        logger.info("[status] " + status);
+        logger.info("[sex] " + sex);
+        logger.info("[storageRoom] " + storageRoom);
+        logger.info("[storageCabinet] " + storageCabinet);
+        logger.info("[comment] " + comment);
     }
 }

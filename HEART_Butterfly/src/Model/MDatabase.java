@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import Common.Main;
 
 public class MDatabase extends AbsMetaModel {
-	protected static Logger logger = Logger.getLogger(Main.class.getName());
+	protected static Logger logger;
 	String table_name;
 	Connection connection;
 	Statement statement;
@@ -19,6 +19,7 @@ public class MDatabase extends AbsMetaModel {
 	
 	public MDatabase() {
 		super();
+		this.logger = Logger.getLogger(Main.class.getName());
 		this.connection = null;
 		this.statement = null;
 	}
@@ -40,33 +41,39 @@ public class MDatabase extends AbsMetaModel {
 		else return true;
 	}
 	public void disconnect() throws SQLException {
-		if(this.connection != null) this.connection.close();
+		if (this.connection != null) this.connection.close();
 	}
-	
-	/* Fill the parameter */
-	public boolean insert() throws SQLException {
+
+	public boolean insert(String query) throws SQLException {
 		Statement st = this.connection.createStatement();
-		/* Fill the query */
-		String query = "";
 		boolean error = st.execute(query);
 		if(error) {
-	        System.out.println("Insert failed.");
-	 		return false;
+			logger.error("Insert failed.");
+			return false;
 		}else {
 			return true;
 		}
 	}
-	/* Fill the parameter */
-	public boolean delete() throws SQLException {
+
+	public boolean delete(String query) throws SQLException {
 		Statement st = this.connection.createStatement();
-		/* Fill the query */
-		String query = "";
 		boolean error = st.execute(query);
 		if(error) {
-	         System.out.println("Delete failed.");
-	         return false;
-		}else {
+			logger.error("Delete failed.");
 			return false;
+		}else {
+			return true;
+		}
+	}
+
+	public boolean alter(String query) throws SQLException {
+		Statement st = this.connection.createStatement();
+		boolean error = st.execute(query);
+		if(error) {
+			logger.error("Alter failed.");
+			return false;
+		}else {
+			return true;
 		}
 	}
 }

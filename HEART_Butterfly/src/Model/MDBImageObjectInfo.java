@@ -15,6 +15,7 @@ public class MDBImageObjectInfo extends MDatabase {
 
     public MDBImageObjectInfo(Connection connection) {
         this.connection = connection;
+        this.table_name = "ImageObjectInfo";
     }
 
     public int getIdImageObjectInfo() {
@@ -87,5 +88,18 @@ public class MDBImageObjectInfo extends MDatabase {
 
     public void setMarriage(String marriage) {
         this.marriage = marriage;
+    }
+
+    public void printContents() {
+        logger.info("[" + this.table_name + "]");
+        logger.info("[idImageObjectInfo] " + idImageObjectInfo);
+        logger.info("[idGuide] " + idGuide);
+        logger.info("[size] " + size);
+        logger.info("[wing] " + wing);
+        logger.info("[background] " + background);
+        logger.info("[status] " + status);
+        logger.info("[sex] " + sex);
+        logger.info("[number] " + number);
+        logger.info("[marriage] " + marriage);
     }
 }

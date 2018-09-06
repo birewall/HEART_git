@@ -14,6 +14,7 @@ public class MDBObservation extends MDatabase {
 
     public MDBObservation(Connection connection) {
         this.connection = connection;
+        this.table_name = "Observation";
     }
 
     public int getIdObservation() {
@@ -78,5 +79,17 @@ public class MDBObservation extends MDatabase {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public void printContents() {
+        logger.info("[" + this.table_name + "]");
+        logger.info("[idObservation] " + idObservation);
+        logger.info("[idImage] " + idImage);
+        logger.info("[idCollectionInfo] " + idCollectionInfo);
+        logger.info("[date] " + date);
+        logger.info("[time] " + time);
+        logger.info("[sex] " + sex);
+        logger.info("[status] " + status);
+        logger.info("[number] " + number);
     }
 }
