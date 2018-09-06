@@ -14,11 +14,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleGroup;
 
 public class CInsertWatch extends AbsMetaController implements Initializable {
 
-	ObservableList<String> people = FXCollections.observableArrayList("ì¡°ìœ¤í˜¸");
+	ObservableList<String> people = FXCollections.observableArrayList("Á¶À±È£");
 	
     @FXML
     private DatePicker dateInsertWatchDate;
@@ -130,7 +131,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
     @FXML
     void NationInsertWatch(ActionEvent event) {
-
+    	
     }
 
     @FXML
@@ -185,22 +186,22 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
     @FXML
     void latInsertWatch(ActionEvent event) {
-
+    	
     }
 
     @FXML
     void locInsertWatch(ActionEvent event) {
-
+    	
     }
 
     @FXML
     void locnameInsertWatch(ActionEvent event) {
-
+    	
     }
 
     @FXML
     void longInsertWatch(ActionEvent event) {
-
+    	
     }
 
     @FXML
@@ -295,7 +296,13 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
     @FXML
     void whoInsertWatch(ActionEvent event) {
-
+    	System.out.println("dfdfd");
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("°üÂûÀÚ¸¦ ÀÔ·ÂÇÏ½Ã¿À");
+		dialog.setHeaderText(null);
+		dialog.setContentText(null);
+		dialog.showAndWait();
+		String new_name = dialog.getEditor().getText();
     }
 
     @FXML
@@ -306,10 +313,10 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		this.comboInsertWatchTime.getItems().addAll("ì˜¤ì „", "ì˜¤í›„", "ì €ë…", "ìƒˆë²½");
+		this.comboInsertWatchTime.getItems().addAll("»õº®", "¿ÀÀü", "¿ÀÈÄ", "Àú³á");
 		this.comboInsertWatchWho.setItems(this.people);
-		this.comboInsertWatchSex.getItems().addAll("ì•”", "ìˆ˜");
-		this.comboInsertWatchStatus.getItems().addAll("ìƒ", "ì¤‘", "í•˜");
+		this.comboInsertWatchSex.getItems().addAll("¼öÄÆ", "¾ÏÄÆ");
+		this.comboInsertWatchStatus.getItems().addAll("»ó", "Áß", "ÇÏ");
 		
 	}
 }

@@ -1,6 +1,8 @@
 package Controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import Model.AbsMetaModel;
 import javafx.fxml.FXMLLoader;
@@ -44,4 +46,5 @@ public abstract class AbsMetaController {
 	public void init_procedure() {
 		/* For Overridding */
 	}
+
 }
