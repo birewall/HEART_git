@@ -145,8 +145,14 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     }
 
     @FXML
-    void choosewhoInsertWatch(ActionEvent event) {
-
+    void choosewhoInsertWatch(ActionEvent event) {	
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("관찰자를 입력하시오");
+		dialog.setHeaderText(null);
+		dialog.setContentText(null);
+		dialog.showAndWait();
+		String new_name = dialog.getEditor().getText();
+		this.comboInsertWatchWho.getItems().add(new_name);
     }
 
     @FXML
@@ -296,13 +302,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
     @FXML
     void whoInsertWatch(ActionEvent event) {
-    	System.out.println("dfdfd");
-		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("관찰자를 입력하시오");
-		dialog.setHeaderText(null);
-		dialog.setContentText(null);
-		dialog.showAndWait();
-		String new_name = dialog.getEditor().getText();
+
     }
 
     @FXML
@@ -315,7 +315,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 		// TODO Auto-generated method stub
 		this.comboInsertWatchTime.getItems().addAll("새벽", "오전", "오후", "저녁");
 		this.comboInsertWatchWho.setItems(this.people);
-		this.comboInsertWatchSex.getItems().addAll("수컷", "암컷");
+		this.comboInsertWatchSex.getItems().addAll("수", "암");
 		this.comboInsertWatchStatus.getItems().addAll("상", "중", "하");
 		
 	}
