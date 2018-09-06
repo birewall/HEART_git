@@ -1,92 +1,82 @@
 package Model;
 
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public class MDBSpecimen extends MDatabase {
-	String code;
-	int quality;
-	int gender;
-	String specimen_worker;
-	String detail;
-	String storage;
-	
-	public MDBSpecimen(Connection connection) {
-		this.connection = connection;
-	}
+    int idSpecimen;
+    int idCollectionInfo;
+    int idImage;
+    String status;          //varchar(10)
+    char sex;
+    String storageRoom;     //varchar(10)
+    String storageCabinet;  //varchar(10)
+    String comment;         //varchar(10)
 
-	public String getCode() {
-		return code;
-	}
+    public MDBSpecimen(Connection connection) {
+        this.connection = connection;
+    }
 
-	public int getQuality() {
-		return quality;
-	}
+    public int getIdSpecimen() {
+        return idSpecimen;
+    }
 
-	public int getGender() {
-		return gender;
-	}
+    public void setIdSpecimen(int idSpecimen) {
+        this.idSpecimen = idSpecimen;
+    }
 
-	public String getSpecimen_worker() {
-		return specimen_worker;
-	}
+    public int getIdCollectionInfo() {
+        return idCollectionInfo;
+    }
 
-	public String getDetail() {
-		return detail;
-	}
+    public void setIdCollectionInfo(int idCollectionInfo) {
+        this.idCollectionInfo = idCollectionInfo;
+    }
 
-	public String getStorage() {
-		return storage;
-	}
+    public int getIdImage() {
+        return idImage;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public void setIdImage(int idImage) {
+        this.idImage = idImage;
+    }
 
-	public void setQuality(int quality) {
-		this.quality = quality;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public void setGender(int gender) {
-		this.gender = gender;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public void setSpecimen_worker(String specimen_worker) {
-		this.specimen_worker = specimen_worker;
-	}
+    public char getSex() {
+        return sex;
+    }
 
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
+    public void setSex(char sex) {
+        this.sex = sex;
+    }
 
-	public void setStorage(String storage) {
-		this.storage = storage;
-	} 
-	/* Fill the parameter */
-	public boolean insert() throws SQLException {
-		Statement st = this.connection.createStatement();
-		/* Fill the query */
-		String query = "";
-		boolean error = st.execute(query);
-		if(error) {
-	        System.out.println("Insert failed.");
-	 		return false;
-		}else {
-			return true;
-		}
-	}
-	/* Fill the parameter */
-	public boolean delete() throws SQLException {
-		Statement st = this.connection.createStatement();
-		/* Fill the query */
-		String query = "";
-		boolean error = st.execute(query);
-		if(error) {
-	         System.out.println("Delete failed.");
-	         return false;
-		}else {
-			return false;
-		}
-	}
+    public String getStorageRoom() {
+        return storageRoom;
+    }
+
+    public void setStorageRoom(String storageRoom) {
+        this.storageRoom = storageRoom;
+    }
+
+    public String getStorageCabinet() {
+        return storageCabinet;
+    }
+
+    public void setStorageCabinet(String storageCabinet) {
+        this.storageCabinet = storageCabinet;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 }
