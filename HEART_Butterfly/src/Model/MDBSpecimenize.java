@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public class MDBSpecimenize extends MDatabase {
     int idSpecimenize;
@@ -81,5 +82,46 @@ public class MDBSpecimenize extends MDatabase {
         logger.info("[date] " + date);
         logger.info("[anticepticName] " + anticepticName);
         logger.info("[embalmingDate] " + embalmingDate);
+    }
+
+    public void insert() {
+        try {
+            String query = "insert into Specimenize (idSpecimen, idObservation, idPerson, date, anticepticName, embalmingDate) values ("
+                    + getIdSpecimen() + ","
+                    + getIdObservation() + ","
+                    + getIdPerson() + ","
+                    + "'" + getDate() + "',"
+                    + "'" + getAnticepticName() + "',"
+                    + "'" + getEmbalmingDate() + "'"
+                    + ");";
+            modifyingQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(int idSpecimenize) {
+        try {
+            String query = "delete from Specimenize where idSpecimenize = " + idSpecimenize;
+            modifyingQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(int idSpecimenize) {
+        try {
+            String query = "update Specimenize set "
+                    + "idSpecimen=" + getIdSpecimen()
+                    + ",idObservation=" + getIdObservation()
+                    + ",idPerson=" + getIdPerson()
+                    + ",date='" + getDate() + "'"
+                    + ",anticepticName='" + getAnticepticName() + "'"
+                    + ",embalmingDate='" + getEmbalmingDate() + "'"
+                    + " where idSpecimenize = " + idSpecimenize;
+            modifyingQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

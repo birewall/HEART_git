@@ -12,6 +12,7 @@ public class MDatabase extends AbsMetaModel {
 	String table_name;
 	Connection connection;
 	Statement statement;
+
 	static final String db_address = "jdbc:mysql://35.234.16.88/";
 	static final String db_option = "?useSSL=false";
 	static final String db_id = "shroh";
@@ -44,33 +45,13 @@ public class MDatabase extends AbsMetaModel {
 		if (this.connection != null) this.connection.close();
 	}
 
-	public boolean insert(String query) throws SQLException {
+	public boolean modifyingQuery(String query) throws SQLException {
 		Statement st = this.connection.createStatement();
+		logger.info(query);
+		System.out.println(query);
 		boolean error = st.execute(query);
 		if(error) {
-			logger.error("Insert failed.");
-			return false;
-		}else {
-			return true;
-		}
-	}
-
-	public boolean delete(String query) throws SQLException {
-		Statement st = this.connection.createStatement();
-		boolean error = st.execute(query);
-		if(error) {
-			logger.error("Delete failed.");
-			return false;
-		}else {
-			return true;
-		}
-	}
-
-	public boolean alter(String query) throws SQLException {
-		Statement st = this.connection.createStatement();
-		boolean error = st.execute(query);
-		if(error) {
-			logger.error("Alter failed.");
+			logger.error("Query failed.");
 			return false;
 		}else {
 			return true;

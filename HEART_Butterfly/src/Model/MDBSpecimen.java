@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public class MDBSpecimen extends MDatabase {
     int idSpecimen;
@@ -10,6 +11,7 @@ public class MDBSpecimen extends MDatabase {
     char sex;
     String storageRoom;     //varchar(10)
     String storageCabinet;  //varchar(10)
+    String storageChest;    //varchar(10)
     String comment;         //varchar(10)
 
     public MDBSpecimen(Connection connection) {
@@ -81,6 +83,14 @@ public class MDBSpecimen extends MDatabase {
         this.comment = comment;
     }
 
+    public String getStorageChest() {
+        return storageChest;
+    }
+
+    public void setStorageChest(String storageChest) {
+        this.storageChest = storageChest;
+    }
+
     public void printContents() {
         logger.info("[" + this.table_name + "]");
         logger.info("[idSpecimen] " + idSpecimen);
@@ -90,6 +100,52 @@ public class MDBSpecimen extends MDatabase {
         logger.info("[sex] " + sex);
         logger.info("[storageRoom] " + storageRoom);
         logger.info("[storageCabinet] " + storageCabinet);
+        logger.info("[storageChest] " + storageChest);
         logger.info("[comment] " + comment);
+    }
+
+    public void insert() {
+        try {
+            String query = "insert into Specimen (idCollectionInfo, idImage, status, sex, storageRoom, storageCabinet, storageChest, comment) values ("
+                    + getIdCollectionInfo() + ","
+                    + getIdImage() + ","
+                    + "'" + getStatus() + "',"
+                    + "'" + getSex() + "',"
+                    + "'" + getStorageRoom() + "',"
+                    + "'" + getStorageCabinet() + "',"
+                    + "'" + getStorageChest() + "',"
+                    + "'" + getComment() + "'"
+                    + ");";
+            modifyingQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(int idSpecimen) {
+        try {
+            String query = "delete from Specimen where idSpecimen = " + idSpecimen;
+            modifyingQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(int idSpecimen) {
+        try {
+            String query = "update Specimen set "
+                    + "idCollectionInfo=" + getIdCollectionInfo()
+                    + ",idImage=" + getIdImage()
+                    + ",status='" + getStatus() + "'"
+                    + ",sex='" + getSex() + "'"
+                    + ",storageRoom='" + getStorageRoom() + "'"
+                    + ",storageCabinet='" + getStorageCabinet() + "'"
+                    + ",storageChest='" + getStorageChest() + "'"
+                    + ",comment='" + getComment() + "'"
+                    + " where idSpecimen = " + idSpecimen;
+            modifyingQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

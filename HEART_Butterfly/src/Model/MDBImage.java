@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public class MDBImage extends MDatabase {
     int idImage;
@@ -81,5 +82,46 @@ public class MDBImage extends MDatabase {
         logger.info("[date] " + date);
         logger.info("[time] " + time);
         logger.info("[path] " + path);
+    }
+
+    public void insert() {
+        try {
+            String query = "insert into Image (idLocation, idImageObjectInfo, idCameraInfo, date, time, path) values ("
+                    + getIdLocation() + ","
+                    + getIdImageObjectInfo() + ","
+                    + getIdCameraInfo() + ","
+                    + "'" + getDate() + "',"
+                    + "'" + getTime() + "',"
+                    + "'" + getPath() + "'"
+                    + ");";
+            modifyingQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(int idImage) {
+        try {
+            String query = "delete from Image where idImage = " + idImage;
+            modifyingQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(int idImage) {
+        try {
+            String query = "update Image set "
+                    + "idLocation=" + getIdLocation()
+                    + ",idImageObjectInfo=" + getIdImageObjectInfo()
+                    + ",idCameraInfo=" + getIdCameraInfo()
+                    + ",date='" + getDate() + "'"
+                    + ",time='" + getTime() + "'"
+                    + ",path='" + getPath() + "'"
+                    + " where idImage = " + idImage;
+            modifyingQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
