@@ -141,7 +141,41 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
     @FXML
     void addInsertWatch(ActionEvent event) {
-
+    	String Data = dateInsertWatchDate.getEditor().getText();
+    	String Time = comboInsertWatchTime.getSelectionModel().getSelectedItem();
+    	String Country = txtInsertWatchNation.getText();
+    	String Location = txtInsertWatchLoc.getText();
+    	String Location_Detail = txtInsertWatchDo.getText() + " " + txtInsertWatchSi.getText() + " " + txtInsertWatchDong.getText();
+    	String GPS = txtInsertWatchLat.getText() + "," + txtInsertWatchLong.getText();
+    	String Alias = txtInsertWatchLocname.getText();
+    	String Section = sectionToggle.getSelectedToggle().toString();
+    	String Section_Detail = txtInsertWatchSecremark.getText();
+    	String Person_Name = comboInsertWatchWho.getSelectionModel().getSelectedItem();
+    	String Butterfly_Name = txtInsertWatchBname.getText();
+    	String Butterfly_Family = txtInsertWatchFamily.getText();
+    	String Butterfly_Scien = txtInsertWatchZoological.getText();
+    	String Sex = (String)comboInsertWatchSex.getSelectionModel().getSelectedItem();
+    	String Status = comboInsertWatchStatus.getSelectionModel().getSelectedItem();
+    	String Quantity = txtInsertWatchQuan.getText();
+    	String Note = txtInsertWatchRemark.getText();
+    	System.out.println(Data);
+    	System.out.println(Time);
+    	System.out.println(Country);
+    	System.out.println(Location);
+    	System.out.println(Location_Detail);
+    	System.out.println(GPS);
+    	System.out.println(Alias);
+    	System.out.println(Section);
+    	System.out.println(Section_Detail);
+    	System.out.println(Person_Name);
+    	System.out.println(Butterfly_Name);
+    	System.out.println(Butterfly_Family);
+    	System.out.println(Butterfly_Scien);
+    	System.out.println(Sex);
+    	System.out.println(Status);
+    	System.out.println(Quantity);
+    	System.out.println(Note);    	
+    	
     }
 
     @FXML
