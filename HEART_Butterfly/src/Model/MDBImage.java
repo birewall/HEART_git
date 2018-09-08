@@ -84,44 +84,32 @@ public class MDBImage extends MDatabase {
         logger.info("[path] " + path);
     }
 
-    public void insert() {
-        try {
-            String query = "insert into Image (idLocation, idImageObjectInfo, idCameraInfo, date, time, path) values ("
-                    + getIdLocation() + ","
-                    + getIdImageObjectInfo() + ","
-                    + getIdCameraInfo() + ","
-                    + "'" + getDate() + "',"
-                    + "'" + getTime() + "',"
-                    + "'" + getPath() + "'"
-                    + ");";
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean insert() {
+        String query = "insert into Image (idLocation, idImageObjectInfo, idCameraInfo, date, time, path) values ("
+                + getIdLocation() + ","
+                + getIdImageObjectInfo() + ","
+                + getIdCameraInfo() + ","
+                + "'" + getDate() + "',"
+                + "'" + getTime() + "',"
+                + "'" + getPath() + "'"
+                + ");";
+        return modifyingQuery(query);
     }
 
-    public void delete(int idImage) {
-        try {
-            String query = "delete from Image where idImage = " + idImage;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean delete(int idImage) {
+        String query = "delete from Image where idImage = " + idImage;
+        return modifyingQuery(query);
     }
 
-    public void update(int idImage) {
-        try {
-            String query = "update Image set "
-                    + "idLocation=" + getIdLocation()
-                    + ",idImageObjectInfo=" + getIdImageObjectInfo()
-                    + ",idCameraInfo=" + getIdCameraInfo()
-                    + ",date='" + getDate() + "'"
-                    + ",time='" + getTime() + "'"
-                    + ",path='" + getPath() + "'"
-                    + " where idImage = " + idImage;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean update(int idImage) {
+        String query = "update Image set "
+                + "idLocation=" + getIdLocation()
+                + ",idImageObjectInfo=" + getIdImageObjectInfo()
+                + ",idCameraInfo=" + getIdCameraInfo()
+                + ",date='" + getDate() + "'"
+                + ",time='" + getTime() + "'"
+                + ",path='" + getPath() + "'"
+                + " where idImage = " + idImage;
+        return modifyingQuery(query);
     }
 }

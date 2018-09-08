@@ -2,8 +2,13 @@ package Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import Model.MDBPerson;
+import Model.MDatabase;
+import Model.MSharedData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,8 +23,8 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleGroup;
 
 public class CInsertWatch extends AbsMetaController implements Initializable {
-
-	ObservableList<String> people = FXCollections.observableArrayList("Á¶À±È£");
+	
+	MDBPerson PersonDB;
 	
     @FXML
     private DatePicker dateInsertWatchDate;
@@ -181,11 +186,14 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     @FXML
     void choosewhoInsertWatch(ActionEvent event) {	
 		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("°üÂûÀÚ¸¦ ÀÔ·ÂÇÏ½Ã¿À");
+		dialog.setTitle("ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·ï¿½ï¿½Ï½Ã¿ï¿½");
 		dialog.setHeaderText(null);
 		dialog.setContentText(null);
 		dialog.showAndWait();
 		String new_name = dialog.getEditor().getText();
+		PersonDB.setName(new_name);
+		PersonDB.setSort("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		PersonDB.insert();
 		this.comboInsertWatchWho.getItems().add(new_name);
     }
 
@@ -216,7 +224,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
     @FXML
     void exitInsertWatch(ActionEvent event) throws IOException {
-    	changeWindow(this.btnInsertWatchExit.getScene().getWindow(), "VInsert");
+        changeWindow(this.btnInsertWatchExit.getScene().getWindow(), "VInsert");
     }
 
     @FXML
@@ -347,10 +355,26 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		this.comboInsertWatchTime.getItems().addAll("»õº®", "¿ÀÀü", "¿ÀÈÄ", "Àú³á");
-		this.comboInsertWatchWho.setItems(this.people);
-		this.comboInsertWatchSex.getItems().addAll("¼ö", "¾Ï");
-		this.comboInsertWatchStatus.getItems().addAll("»ó", "Áß", "ÇÏ");
-		
+		this.comboInsertWatchTime.getItems().addAll("ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½");
+		this.comboInsertWatchSex.getItems().addAll("ï¿½ï¿½", "ï¿½ï¿½");
+		this.comboInsertWatchStatus.getItems().addAll("ï¿½ï¿½", "ï¿½ï¿½", "ï¿½ï¿½");
+	}
+	
+	@Override
+	public void init_procedure() {
+		// Set Watcher
+		String query = "select name from Person where sort = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'";
+		System.out.println(this.shared_model);
+		PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+		ResultSet rs = PersonDB.selectQuery(query);
+		System.out.println("I'm In!");
+		try {
+			while(rs.next()) {
+				this.comboInsertWatchWho.getItems().add(rs.getString(0));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

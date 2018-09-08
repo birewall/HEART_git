@@ -1,11 +1,11 @@
 package Model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+
 import org.apache.log4j.Logger;
 import Common.Main;
+
+import javax.xml.transform.Result;
 
 public class MDatabase extends AbsMetaModel {
 	protected static Logger logger;
@@ -45,16 +45,52 @@ public class MDatabase extends AbsMetaModel {
 		if (this.connection != null) this.connection.close();
 	}
 
-	public boolean modifyingQuery(String query) throws SQLException {
-		Statement st = this.connection.createStatement();
+	public boolean modifyingQuery(String query) {
+		Statement st = null;
+		try {
+			st = this.connection.createStatement();
+		} catch (SQLException e) {
+			logger.error("[MDBButterflyGuide] CreateStatement is failed");
+			return false;
+		}
+
 		logger.info(query);
-		System.out.println(query);
-		boolean error = st.execute(query);
+
+		boolean error = false;
+		try {
+			error = st.execute(query);
+		} catch (SQLException e) {
+			logger.error("[MDBButterflyGuide] Query execution is failed");
+			return false;
+		}
+
 		if(error) {
 			logger.error("Query failed.");
 			return false;
 		}else {
 			return true;
 		}
+	}
+
+	public ResultSet selectQuery(String query) {
+		Statement st = null;
+		try {
+			st = this.connection.createStatement();
+		} catch (SQLException e) {
+			logger.error("[MDBButterflyGuide] CreateStatement is failed");
+			return null;
+		}
+
+		logger.info(query);
+
+		ResultSet result = null;
+		try {
+			result = st.executeQuery(query);
+		} catch (SQLException e) {
+			logger.error("[MDBButterflyGuide] Query execution is failed");
+			return null;
+		}
+
+		return result;
 	}
 }

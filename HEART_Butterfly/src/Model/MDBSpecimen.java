@@ -104,48 +104,36 @@ public class MDBSpecimen extends MDatabase {
         logger.info("[comment] " + comment);
     }
 
-    public void insert() {
-        try {
-            String query = "insert into Specimen (idCollectionInfo, idImage, status, sex, storageRoom, storageCabinet, storageChest, comment) values ("
-                    + getIdCollectionInfo() + ","
-                    + getIdImage() + ","
-                    + "'" + getStatus() + "',"
-                    + "'" + getSex() + "',"
-                    + "'" + getStorageRoom() + "',"
-                    + "'" + getStorageCabinet() + "',"
-                    + "'" + getStorageChest() + "',"
-                    + "'" + getComment() + "'"
-                    + ");";
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean insert() {
+        String query = "insert into Specimen (idCollectionInfo, idImage, status, sex, storageRoom, storageCabinet, storageChest, comment) values ("
+                + getIdCollectionInfo() + ","
+                + getIdImage() + ","
+                + "'" + getStatus() + "',"
+                + "'" + getSex() + "',"
+                + "'" + getStorageRoom() + "',"
+                + "'" + getStorageCabinet() + "',"
+                + "'" + getStorageChest() + "',"
+                + "'" + getComment() + "'"
+                + ");";
+        return modifyingQuery(query);
     }
 
-    public void delete(int idSpecimen) {
-        try {
-            String query = "delete from Specimen where idSpecimen = " + idSpecimen;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean delete(int idSpecimen) {
+        String query = "delete from Specimen where idSpecimen = " + idSpecimen;
+        return modifyingQuery(query);
     }
 
-    public void update(int idSpecimen) {
-        try {
-            String query = "update Specimen set "
-                    + "idCollectionInfo=" + getIdCollectionInfo()
-                    + ",idImage=" + getIdImage()
-                    + ",status='" + getStatus() + "'"
-                    + ",sex='" + getSex() + "'"
-                    + ",storageRoom='" + getStorageRoom() + "'"
-                    + ",storageCabinet='" + getStorageCabinet() + "'"
-                    + ",storageChest='" + getStorageChest() + "'"
-                    + ",comment='" + getComment() + "'"
-                    + " where idSpecimen = " + idSpecimen;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean update(int idSpecimen) {
+        String query = "update Specimen set "
+                + "idCollectionInfo=" + getIdCollectionInfo()
+                + ",idImage=" + getIdImage()
+                + ",status='" + getStatus() + "'"
+                + ",sex='" + getSex() + "'"
+                + ",storageRoom='" + getStorageRoom() + "'"
+                + ",storageCabinet='" + getStorageCabinet() + "'"
+                + ",storageChest='" + getStorageChest() + "'"
+                + ",comment='" + getComment() + "'"
+                + " where idSpecimen = " + idSpecimen;
+        return modifyingQuery(query);
     }
 }

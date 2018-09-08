@@ -104,48 +104,36 @@ public class MDBImageObjectInfo extends MDatabase {
         logger.info("[marriage] " + marriage);
     }
 
-    public void insert() {
-        try {
-            String query = "insert into ImageObjectInfo (idGuide, size, wing, background, status, sex, number, marriage) values ("
-                    + getIdGuide() + ","
-                    + "'" + getSize() + "',"
-                    + "'" + getWing() + "',"
-                    + "'" + getBackground() + "',"
-                    + "'" + getStatus() + "',"
-                    + "'" + getSex() + "',"
-                    + getNumber() + ","
-                    + "'" + getMarriage() + "'"
-                    + ");";
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean insert() {
+        String query = "insert into ImageObjectInfo (idGuide, size, wing, background, status, sex, number, marriage) values ("
+                + getIdGuide() + ","
+                + "'" + getSize() + "',"
+                + "'" + getWing() + "',"
+                + "'" + getBackground() + "',"
+                + "'" + getStatus() + "',"
+                + "'" + getSex() + "',"
+                + getNumber() + ","
+                + "'" + getMarriage() + "'"
+                + ");";
+        return modifyingQuery(query);
     }
 
-    public void delete(int idImageObjectInfo) {
-        try {
-            String query = "delete from ImageObjectInfo where idImageObjectInfo = " + idImageObjectInfo;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean delete(int idImageObjectInfo) {
+        String query = "delete from ImageObjectInfo where idImageObjectInfo = " + idImageObjectInfo;
+        return modifyingQuery(query);
     }
 
-    public void update(int idImageObjectInfo) {
-        try {
-            String query = "update ImageObjectInfo set "
-                    + "idGuide=" + getIdGuide()
-                    + ",size='" + getSize() + "'"
-                    + ",wing='" + getWing() + "'"
-                    + ",background='" + getBackground() + "'"
-                    + ",status='" + getStatus() + "'"
-                    + ",sex='" + getSex() + "'"
-                    + ",number=" + getNumber()
-                    + ",marriage='" + getMarriage() + "'"
-                    + " where idImageObjectInfo = " + idImageObjectInfo;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean update(int idImageObjectInfo) {
+        String query = "update ImageObjectInfo set "
+                + "idGuide=" + getIdGuide()
+                + ",size='" + getSize() + "'"
+                + ",wing='" + getWing() + "'"
+                + ",background='" + getBackground() + "'"
+                + ",status='" + getStatus() + "'"
+                + ",sex='" + getSex() + "'"
+                + ",number=" + getNumber()
+                + ",marriage='" + getMarriage() + "'"
+                + " where idImageObjectInfo = " + idImageObjectInfo;
+        return modifyingQuery(query);
     }
 }
