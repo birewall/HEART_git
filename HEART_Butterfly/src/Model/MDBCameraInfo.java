@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public class MDBCameraInfo extends MDatabase {
     int idCameraInfo;
@@ -51,5 +52,40 @@ public class MDBCameraInfo extends MDatabase {
         logger.info("[lens] " + lens);
         logger.info("[calibration] " + calibration);
         logger.info("[format] " + format);
+    }
+
+    public void insert() {
+        try {
+            String query = "insert into CameraInfo (lens, format, calibration) values ("
+                    + "'" + getLens() + "',"
+                    + "'" + getFormat() + "',"
+                    + "'" + getCalibration() + "'"
+                    + ");";
+            modifyingQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(int idCameraInfo) {
+        try {
+            String query = "delete from CameraInfo where idCameraInfo = " + idCameraInfo;
+            modifyingQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(int idCameraInfo) {
+        try {
+            String query = "update CameraInfo set "
+                    + "lens='" + getLens() + "'"
+                    + ",format='" + getFormat() + "'"
+                    + ",calibration='" + getCalibration() + "'"
+                    + " where idCameraInfo = " + idCameraInfo;
+            modifyingQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

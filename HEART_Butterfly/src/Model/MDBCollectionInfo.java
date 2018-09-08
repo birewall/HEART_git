@@ -1,10 +1,11 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public class MDBCollectionInfo extends MDatabase {
     int idCollectionInfo;
-    int idLoction;
+    int idLocation;
     int idButterflyGuide;
     int idPerson;
     String date;    //varchar(11)
@@ -23,12 +24,12 @@ public class MDBCollectionInfo extends MDatabase {
         this.idCollectionInfo = idCollectionInfo;
     }
 
-    public int getIdLoction() {
-        return idLoction;
+    public int getIdLocation() {
+        return idLocation;
     }
 
-    public void setIdLoction(int idLoction) {
-        this.idLoction = idLoction;
+    public void setIdLocation(int idLocation) {
+        this.idLocation = idLocation;
     }
 
     public int getIdButterflyGuide() {
@@ -66,10 +67,49 @@ public class MDBCollectionInfo extends MDatabase {
     public void printContents() {
         logger.info("[" + this.table_name + "]");
         logger.info("[idCollectionInfo] " + idCollectionInfo);
-        logger.info("[idLoction] " + idLoction);
+        logger.info("[idLocation] " + idLocation);
         logger.info("[idButterflyGuide] " + idButterflyGuide);
         logger.info("[idPerson] " + idPerson);
         logger.info("[date] " + date);
         logger.info("[method] " + method);
+    }
+
+    public void insert() {
+        try {
+            String query = "insert into CollectionInfo (idLocation, idButterflyGuide, idPerson, date, method) values ("
+                    + getIdLocation() + ","
+                    + getIdButterflyGuide() + ","
+                    + getIdPerson() + ","
+                    + "'" + getDate() + "',"
+                    + "'" + getMethod() + "'"
+                    + ");";
+            modifyingQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(int idCollectionInfo) {
+        try {
+            String query = "delete from CollectionInfo where idCollectionInfo = " + idCollectionInfo;
+            modifyingQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(int idCollectionInfo) {
+        try {
+            String query = "update CollectionInfo set "
+                    + "idLocation=" + getIdLocation()
+                    + "idButterflyGuide=" + getIdButterflyGuide()
+                    + "idPerson=" + getIdPerson()
+                    + ",date='" + getDate() + "'"
+                    + ",method='" + getMethod() + "'"
+                    + " where idCollectionInfo = " + idCollectionInfo;
+            modifyingQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
