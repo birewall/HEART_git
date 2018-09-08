@@ -15,9 +15,9 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 	    try {
 	        FXMLLoader loader = new FXMLLoader();
-	    	Parent root = loader.load(getClass().getResource("/View/VMain.fxml").openStream());
-//	        CInitial controller = (CInitial)loader.getController();
-//	        controller.setForDebug();
+	    	Parent root = loader.load(getClass().getResource("/View/VInitialLogin.fxml").openStream());
+	        CInitial controller = (CInitial)loader.getController();
+	        controller.setForDebug();
 	    	Scene scene = new Scene(root);
 	    	primaryStage.setScene(scene);
 	        primaryStage.setTitle("HEARTLab Butterfly Manager v0.0");
