@@ -74,42 +74,30 @@ public class MDBSpecimenIO extends MDatabase {
         logger.info("[cost] " + cost);
     }
 
-    public void insert() {
-        try {
-            String query = "insert into SpecimenIO (idSpecimen, idGiver, idTaker, date, cost) values ("
-                    + getIdSpecimen() + ","
-                    + getIdGiver() + ","
-                    + getIdTaker() + ","
-                    + "'" + getDate() + "',"
-                    + getCost()
-                    + ");";
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean insert() {
+        String query = "insert into SpecimenIO (idSpecimen, idGiver, idTaker, date, cost) values ("
+                + getIdSpecimen() + ","
+                + getIdGiver() + ","
+                + getIdTaker() + ","
+                + "'" + getDate() + "',"
+                + getCost()
+                + ");";
+        return modifyingQuery(query);
     }
 
-    public void delete(int idSpecimenIO) {
-        try {
-            String query = "delete from SpecimenIO where idSpecimenIO = " + idSpecimenIO;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean delete(int idSpecimenIO) {
+        String query = "delete from SpecimenIO where idSpecimenIO = " + idSpecimenIO;
+        return modifyingQuery(query);
     }
 
-    public void update(int idSpecimenIO) {
-        try {
-            String query = "update SpecimenIO set "
-                    + "idSpecimen=" + getIdSpecimen()
-                    + ",idGiver=" + getIdGiver()
-                    + ",idTaker=" + getIdTaker()
-                    + ",date='" + getDate() + "'"
-                    + ",cost='" + getCost()
-                    + " where idSpecimenIO = " + idSpecimenIO;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean update(int idSpecimenIO) {
+        String query = "update SpecimenIO set "
+                + "idSpecimen=" + getIdSpecimen()
+                + ",idGiver=" + getIdGiver()
+                + ",idTaker=" + getIdTaker()
+                + ",date='" + getDate() + "'"
+                + ",cost='" + getCost()
+                + " where idSpecimenIO = " + idSpecimenIO;
+        return modifyingQuery(query);
     }
 }

@@ -44,36 +44,24 @@ public class MDBPerson extends MDatabase {
         logger.info("[sort] " + sort);
     }
 
-    public void insert() {
-        try {
-            String query = "insert into Person (name, sort) values ("
-                    + "'" + getName() + "',"
-                    + "'" + getSort() + "'"
-                    + ");";
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean insert() {
+        String query = "insert into Person (name, sort) values ("
+                + "'" + getName() + "',"
+                + "'" + getSort() + "'"
+                + ");";
+        return modifyingQuery(query);
     }
 
-    public void delete(int idPerson) {
-        try {
-            String query = "delete from Person where idPerson = " + idPerson;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean delete(int idPerson) {
+        String query = "delete from Person where idPerson = " + idPerson;
+        return modifyingQuery(query);
     }
 
-    public void update(int idPerson) {
-        try {
-            String query = "update Person set "
-                    + "name='" + getName() + "'"
-                    + ",sort='" + getSort() + "'"
-                    + " where idPerson = " + idPerson;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean update(int idPerson) {
+        String query = "update Person set "
+                + "name='" + getName() + "'"
+                + ",sort='" + getSort() + "'"
+                + " where idPerson = " + idPerson;
+        return modifyingQuery(query);
     }
 }
