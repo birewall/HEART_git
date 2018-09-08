@@ -158,7 +158,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 		dialog.showAndWait();
 		String new_name = dialog.getEditor().getText();
 		PersonDB.setName(new_name);
-		PersonDB.setSort("°üÂûÀÚ");
+		PersonDB.setSort("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		PersonDB.insert();
 		this.comboInsertWatchWho.getItems().add(new_name);
     }
@@ -190,7 +190,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
     @FXML
     void exitInsertWatch(ActionEvent event) throws IOException {
-    	changeWindow(this.btnInsertWatchExit.getScene().getWindow(), "VInsert");
+        changeWindow(this.btnInsertWatchExit.getScene().getWindow(), "VInsert");
     }
 
     @FXML
@@ -329,7 +329,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 	@Override
 	public void init_procedure() {
 		// Set Watcher
-		String query = "select name from Person where sort = '°üÂûÀÚ'";
+		String query = "select name from Person where sort = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'";
 		PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
 		ResultSet rs = PersonDB.selectQuery(query);
 		System.out.println("I'm In!");
