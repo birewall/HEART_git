@@ -2,6 +2,8 @@ package Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import Model.MDBPerson;
@@ -322,9 +324,22 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 		this.comboInsertWatchTime.getItems().addAll("����", "����", "����", "����");
 		this.comboInsertWatchSex.getItems().addAll("��", "��");
 		this.comboInsertWatchStatus.getItems().addAll("��", "��", "��");
-		
+	}
+	
+	@Override
+	public void init_procedure() {
 		// Set Watcher
 		String query = "select name from Person where sort = '������'";
 		PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+		ResultSet rs = PersonDB.selectQuery(query);
+		System.out.println("I'm In!");
+		try {
+			while(rs.next()) {
+				this.comboInsertWatchWho.getItems().add(rs.getString(0));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
