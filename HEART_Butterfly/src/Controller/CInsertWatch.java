@@ -158,8 +158,9 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 		dialog.showAndWait();
 		String new_name = dialog.getEditor().getText();
 		PersonDB.setName(new_name);
-		PersonDB.setSort("������");
-		PersonDB.insert();
+		PersonDB.setSort("관찰자");
+		if(!PersonDB.insert()) System.out.println("Failed.");
+		
 		this.comboInsertWatchWho.getItems().add(new_name);
     }
 
@@ -329,14 +330,14 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 	@Override
 	public void init_procedure() {
 		// Set Watcher
-		String query = "select name from Person where sort = '������'";
+		String query = "select name from Person where sort = '관찰자'";
 		System.out.println(this.shared_model);
 		PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
 		ResultSet rs = PersonDB.selectQuery(query);
 		System.out.println("I'm In!");
 		try {
 			while(rs.next()) {
-				this.comboInsertWatchWho.getItems().add(rs.getString(0));
+				this.comboInsertWatchWho.getItems().add(rs.getString(1));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
