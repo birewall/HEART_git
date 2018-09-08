@@ -330,6 +330,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 	public void init_procedure() {
 		// Set Watcher
 		String query = "select name from Person where sort = '������'";
+		System.out.println(this.shared_model);
 		PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
 		ResultSet rs = PersonDB.selectQuery(query);
 		System.out.println("I'm In!");
