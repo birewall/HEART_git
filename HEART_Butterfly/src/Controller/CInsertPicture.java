@@ -17,7 +17,7 @@ public class CInsertPicture extends AbsMetaController {
     private DatePicker dateInsertPictureDate;
 
     @FXML
-    private ComboBox<?> comboInsertPictureTime;
+    private ComboBox<String> comboInsertPictureTime;
 
     @FXML
     private TextField txtInsertPictureLoc;
@@ -44,7 +44,7 @@ public class CInsertPicture extends AbsMetaController {
     private TextField txtInsertPictureZoological;
 
     @FXML
-    private ComboBox<?> comboInsertPictureSex;
+    private ComboBox<String> comboInsertPictureSex;
 
     @FXML
     private Button btnInsertPictureAdd;
@@ -53,25 +53,25 @@ public class CInsertPicture extends AbsMetaController {
     private Button btnInsertPictureExit;
 
     @FXML
-    private ComboBox<?> comboInsertPictureLtype;
+    private ComboBox<String> comboInsertPictureLtype;
 
     @FXML
-    private ComboBox<?> comboInsertPictureBmove;
+    private ComboBox<String> comboInsertPictureBmove;
 
     @FXML
-    private ComboBox<?> comboInsertPictureBground;
+    private ComboBox<String> comboInsertPictureBground;
 
     @FXML
-    private ComboBox<?> comboInsertPictureWing;
+    private ComboBox<String> comboInsertPictureWing;
 
     @FXML
-    private ComboBox<?> comboInsertPictureSize;
+    private ComboBox<String> comboInsertPictureSize;
 
     @FXML
-    private ComboBox<?> comboInsertPictureIscorrected;
+    private ComboBox<String> comboInsertPictureIscorrected;
 
     @FXML
-    private ComboBox<?> comboInsertPictureFtype;
+    private ComboBox<String> comboInsertPictureFtype;
 
     @FXML
     private TextField txtInsertPictureSpath;
@@ -101,10 +101,10 @@ public class CInsertPicture extends AbsMetaController {
     private TextField txtInsertPictureLocname;
 
     @FXML
-    private ComboBox<?> comboInsertPictureBloc;
+    private ComboBox<String> comboInsertPictureBloc;
 
     @FXML
-    private ComboBox<?> comboInsertPictureQuan;
+    private ComboBox<String> comboInsertPictureQuan;
 
     @FXML
     private RadioButton radioInsertPictureMating;
