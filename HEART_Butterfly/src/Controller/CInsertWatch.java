@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Model.MDBPerson;
+import Model.MDatabase;
+import Model.MSharedData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,8 +21,10 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleGroup;
 
 public class CInsertWatch extends AbsMetaController implements Initializable {
+	
+	MDBPerson PersonDB;
 
-	ObservableList<String> people = FXCollections.observableArrayList("Á¶À±È£");
+	ObservableList<String> people = FXCollections.observableArrayList();
 	
     @FXML
     private DatePicker dateInsertWatchDate;
@@ -152,6 +157,9 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 		dialog.setContentText(null);
 		dialog.showAndWait();
 		String new_name = dialog.getEditor().getText();
+		PersonDB.setName(new_name);
+		PersonDB.setSort("°üÂûÀÚ");
+		PersonDB.insert();
 		this.comboInsertWatchWho.getItems().add(new_name);
     }
 
@@ -318,5 +326,9 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 		this.comboInsertWatchSex.getItems().addAll("¼ö", "¾Ï");
 		this.comboInsertWatchStatus.getItems().addAll("»ó", "Áß", "ÇÏ");
 		
+		// Set Watcher
+		String query = "select name from Person where sort = '°üÂûÀÚ'";
+		PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+		PersonDB.
 	}
 }
