@@ -56,38 +56,26 @@ public class MDBButterflyGuide extends MDatabase {
         logger.info("[family] " + family);
     }
 
-    public void insert() {
-        try {
-            String query = "insert into ButterflyGuide (idImage, name, family) values ("
-                    + getIdImage() + ","
-                    + "'" + getName() + "',"
-                    + "'" + getFamily() + "'"
-                    + ");";
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean insert() {
+        String query = "insert into ButterflyGuide (idImage, name, family) values ("
+                + getIdImage() + ","
+                + "'" + getName() + "',"
+                + "'" + getFamily() + "'"
+                + ");";
+        return modifyingQuery(query);
     }
 
-    public void delete(int idButterflyGuide) {
-        try {
-            String query = "delete from ButterflyGuide where idButterflyGuide = " + idButterflyGuide;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean delete(int idButterflyGuide) {
+        String query = "delete from ButterflyGuide where idButterflyGuide = " + idButterflyGuide;
+        return modifyingQuery(query);
     }
 
-    public void update(int idButterflyGuide) {
-        try {
-            String query = "update ButterflyGuide set "
-                    + "idImage=" + getIdImage()
-                    + ",name='" + getName() + "'"
-                    + ",family='" + getFamily() + "'"
-                    + " where idButterflyGuide = " + idButterflyGuide;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean update(int idButterflyGuide) {
+        String query = "update ButterflyGuide set "
+                + "idImage=" + getIdImage()
+                + ",name='" + getName() + "'"
+                + ",family='" + getFamily() + "'"
+                + " where idButterflyGuide = " + idButterflyGuide;
+        return modifyingQuery(query);
     }
 }

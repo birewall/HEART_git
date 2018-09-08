@@ -23,8 +23,6 @@ import javafx.scene.control.ToggleGroup;
 public class CInsertWatch extends AbsMetaController implements Initializable {
 	
 	MDBPerson PersonDB;
-
-	ObservableList<String> people = FXCollections.observableArrayList();
 	
     @FXML
     private DatePicker dateInsertWatchDate;
@@ -152,7 +150,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     @FXML
     void choosewhoInsertWatch(ActionEvent event) {	
 		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("°üÂûÀÚ¸¦ ÀÔ·ÂÇÏ½Ã¿À");
+		dialog.setTitle("ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·ï¿½ï¿½Ï½Ã¿ï¿½");
 		dialog.setHeaderText(null);
 		dialog.setContentText(null);
 		dialog.showAndWait();
@@ -321,14 +319,13 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		this.comboInsertWatchTime.getItems().addAll("»õº®", "¿ÀÀü", "¿ÀÈÄ", "Àú³á");
+		this.comboInsertWatchTime.getItems().addAll("ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½");
 		this.comboInsertWatchWho.setItems(this.people);
-		this.comboInsertWatchSex.getItems().addAll("¼ö", "¾Ï");
-		this.comboInsertWatchStatus.getItems().addAll("»ó", "Áß", "ÇÏ");
+		this.comboInsertWatchSex.getItems().addAll("ï¿½ï¿½", "ï¿½ï¿½");
+		this.comboInsertWatchStatus.getItems().addAll("ï¿½ï¿½", "ï¿½ï¿½", "ï¿½ï¿½");
 		
 		// Set Watcher
 		String query = "select name from Person where sort = '°üÂûÀÚ'";
 		PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-		PersonDB.
 	}
 }

@@ -94,46 +94,34 @@ public class MDBLocation extends MDatabase {
         logger.info("[sectionDetail] " + sectionDetail);
     }
 
-    public void insert() {
-        try {
-            String query = "insert into Location (country, location, locationDetail, gps, alias, section, sectionDetail) values ("
-                    + "'" + getCountry() + "',"
-                    + "'" + getLocation() + "',"
-                    + "'" + getLocationDetail() + "',"
-                    + "'" + getGps() + "',"
-                    + "'" + getAlias() + "',"
-                    + "'" + getSection() + "',"
-                    + "'" + getSectionDetail() + "'"
-                    + ");";
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean insert() {
+        String query = "insert into Location (country, location, locationDetail, gps, alias, section, sectionDetail) values ("
+                + "'" + getCountry() + "',"
+                + "'" + getLocation() + "',"
+                + "'" + getLocationDetail() + "',"
+                + "'" + getGps() + "',"
+                + "'" + getAlias() + "',"
+                + "'" + getSection() + "',"
+                + "'" + getSectionDetail() + "'"
+                + ");";
+        return modifyingQuery(query);
     }
 
-    public void delete(int idLocation) {
-        try {
-            String query = "delete from Location where idLocation = " + idLocation;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean delete(int idLocation) {
+        String query = "delete from Location where idLocation = " + idLocation;
+        return modifyingQuery(query);
     }
 
-    public void update(int idLocation) {
-        try {
-            String query = "update Location set "
-                    + "country='" + getCountry() + "'"
-                    + ",location='" + getLocation() + "'"
-                    + ",locationDetail='" + getLocationDetail() + "'"
-                    + ",gps='" + getGps() + "'"
-                    + ",alias='" + getAlias() + "'"
-                    + ",section='" + getSection() + "'"
-                    + ",sectionDetail='" + getSectionDetail() + "'"
-                    + " where idLocation = " + idLocation;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean update(int idLocation) {
+        String query = "update Location set "
+                + "country='" + getCountry() + "'"
+                + ",location='" + getLocation() + "'"
+                + ",locationDetail='" + getLocationDetail() + "'"
+                + ",gps='" + getGps() + "'"
+                + ",alias='" + getAlias() + "'"
+                + ",section='" + getSection() + "'"
+                + ",sectionDetail='" + getSectionDetail() + "'"
+                + " where idLocation = " + idLocation;
+        return modifyingQuery(query);
     }
 }

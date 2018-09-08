@@ -84,44 +84,32 @@ public class MDBSpecimenize extends MDatabase {
         logger.info("[embalmingDate] " + embalmingDate);
     }
 
-    public void insert() {
-        try {
-            String query = "insert into Specimenize (idSpecimen, idObservation, idPerson, date, anticepticName, embalmingDate) values ("
-                    + getIdSpecimen() + ","
-                    + getIdObservation() + ","
-                    + getIdPerson() + ","
-                    + "'" + getDate() + "',"
-                    + "'" + getAnticepticName() + "',"
-                    + "'" + getEmbalmingDate() + "'"
-                    + ");";
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean insert() {
+        String query = "insert into Specimenize (idSpecimen, idObservation, idPerson, date, anticepticName, embalmingDate) values ("
+                + getIdSpecimen() + ","
+                + getIdObservation() + ","
+                + getIdPerson() + ","
+                + "'" + getDate() + "',"
+                + "'" + getAnticepticName() + "',"
+                + "'" + getEmbalmingDate() + "'"
+                + ");";
+        return modifyingQuery(query);
     }
 
-    public void delete(int idSpecimenize) {
-        try {
-            String query = "delete from Specimenize where idSpecimenize = " + idSpecimenize;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean delete(int idSpecimenize) {
+        String query = "delete from Specimenize where idSpecimenize = " + idSpecimenize;
+        return modifyingQuery(query);
     }
 
-    public void update(int idSpecimenize) {
-        try {
-            String query = "update Specimenize set "
-                    + "idSpecimen=" + getIdSpecimen()
-                    + ",idObservation=" + getIdObservation()
-                    + ",idPerson=" + getIdPerson()
-                    + ",date='" + getDate() + "'"
-                    + ",anticepticName='" + getAnticepticName() + "'"
-                    + ",embalmingDate='" + getEmbalmingDate() + "'"
-                    + " where idSpecimenize = " + idSpecimenize;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean update(int idSpecimenize) {
+        String query = "update Specimenize set "
+                + "idSpecimen=" + getIdSpecimen()
+                + ",idObservation=" + getIdObservation()
+                + ",idPerson=" + getIdPerson()
+                + ",date='" + getDate() + "'"
+                + ",anticepticName='" + getAnticepticName() + "'"
+                + ",embalmingDate='" + getEmbalmingDate() + "'"
+                + " where idSpecimenize = " + idSpecimenize;
+        return modifyingQuery(query);
     }
 }

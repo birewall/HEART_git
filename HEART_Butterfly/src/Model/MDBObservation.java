@@ -94,46 +94,34 @@ public class MDBObservation extends MDatabase {
         logger.info("[number] " + number);
     }
 
-    public void insert() {
-        try {
-            String query = "insert into Observation (idImage, idCollectionInfo, date, time, sex, status, number) values ("
-                    + getIdImage() + ","
-                    + getIdCollectionInfo() + ","
-                    + "'" + getDate() + "',"
-                    + "'" + getTime() + "',"
-                    + "'" + getSex() + "',"
-                    + "'" + getStatus() + "',"
-                    + getNumber()
-                    + ");";
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean insert() {
+        String query = "insert into Observation (idImage, idCollectionInfo, date, time, sex, status, number) values ("
+                + getIdImage() + ","
+                + getIdCollectionInfo() + ","
+                + "'" + getDate() + "',"
+                + "'" + getTime() + "',"
+                + "'" + getSex() + "',"
+                + "'" + getStatus() + "',"
+                + getNumber()
+                + ");";
+        return modifyingQuery(query);
     }
 
-    public void delete(int idObservation) {
-        try {
-            String query = "delete from Observation where idObservation = " + idObservation;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean delete(int idObservation) {
+        String query = "delete from Observation where idObservation = " + idObservation;
+        return modifyingQuery(query);
     }
 
-    public void update(int idObservation) {
-        try {
-            String query = "update Observation set "
-                    + "idImage=" + getIdImage()
-                    + ",idCollectionInfo=" + getIdCollectionInfo()
-                    + ",date='" + getDate() + "'"
-                    + ",time='" + getTime() + "'"
-                    + ",sex='" + getSex() + "'"
-                    + ",status='" + getStatus() + "'"
-                    + ",number=" + getNumber()
-                    + " where idObservation = " + idObservation;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean update(int idObservation) {
+        String query = "update Observation set "
+                + "idImage=" + getIdImage()
+                + ",idCollectionInfo=" + getIdCollectionInfo()
+                + ",date='" + getDate() + "'"
+                + ",time='" + getTime() + "'"
+                + ",sex='" + getSex() + "'"
+                + ",status='" + getStatus() + "'"
+                + ",number=" + getNumber()
+                + " where idObservation = " + idObservation;
+        return modifyingQuery(query);
     }
 }

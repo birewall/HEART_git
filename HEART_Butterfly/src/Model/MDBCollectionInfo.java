@@ -74,42 +74,30 @@ public class MDBCollectionInfo extends MDatabase {
         logger.info("[method] " + method);
     }
 
-    public void insert() {
-        try {
-            String query = "insert into CollectionInfo (idLocation, idButterflyGuide, idPerson, date, method) values ("
-                    + getIdLocation() + ","
-                    + getIdButterflyGuide() + ","
-                    + getIdPerson() + ","
-                    + "'" + getDate() + "',"
-                    + "'" + getMethod() + "'"
-                    + ");";
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean insert() {
+        String query = "insert into CollectionInfo (idLocation, idButterflyGuide, idPerson, date, method) values ("
+                + getIdLocation() + ","
+                + getIdButterflyGuide() + ","
+                + getIdPerson() + ","
+                + "'" + getDate() + "',"
+                + "'" + getMethod() + "'"
+                + ");";
+        return modifyingQuery(query);
     }
 
-    public void delete(int idCollectionInfo) {
-        try {
-            String query = "delete from CollectionInfo where idCollectionInfo = " + idCollectionInfo;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean delete(int idCollectionInfo) {
+        String query = "delete from CollectionInfo where idCollectionInfo = " + idCollectionInfo;
+        return modifyingQuery(query);
     }
 
-    public void update(int idCollectionInfo) {
-        try {
-            String query = "update CollectionInfo set "
-                    + "idLocation=" + getIdLocation()
-                    + "idButterflyGuide=" + getIdButterflyGuide()
-                    + "idPerson=" + getIdPerson()
-                    + ",date='" + getDate() + "'"
-                    + ",method='" + getMethod() + "'"
-                    + " where idCollectionInfo = " + idCollectionInfo;
-            modifyingQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public boolean update(int idCollectionInfo) {
+        String query = "update CollectionInfo set "
+                + "idLocation=" + getIdLocation()
+                + "idButterflyGuide=" + getIdButterflyGuide()
+                + "idPerson=" + getIdPerson()
+                + ",date='" + getDate() + "'"
+                + ",method='" + getMethod() + "'"
+                + " where idCollectionInfo = " + idCollectionInfo;
+        return modifyingQuery(query);
     }
 }
