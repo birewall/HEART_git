@@ -182,7 +182,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
     @FXML
     void exitInsertWatch(ActionEvent event) throws IOException {
-    	changeWindow(this.btnInsertWatchExit.getScene().getWindow(), "VInsert");
+        changeWindow(this.btnInsertWatchExit.getScene().getWindow(), "VInsert");
     }
 
     @FXML
