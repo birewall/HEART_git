@@ -156,7 +156,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 		dialog.showAndWait();
 		String new_name = dialog.getEditor().getText();
 		PersonDB.setName(new_name);
-		PersonDB.setSort("°üÂûÀÚ");
+		PersonDB.setSort("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		PersonDB.insert();
 		this.comboInsertWatchWho.getItems().add(new_name);
     }
@@ -320,12 +320,11 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		this.comboInsertWatchTime.getItems().addAll("ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½");
-		this.comboInsertWatchWho.setItems(this.people);
 		this.comboInsertWatchSex.getItems().addAll("ï¿½ï¿½", "ï¿½ï¿½");
 		this.comboInsertWatchStatus.getItems().addAll("ï¿½ï¿½", "ï¿½ï¿½", "ï¿½ï¿½");
 		
 		// Set Watcher
-		String query = "select name from Person where sort = '°üÂûÀÚ'";
+		String query = "select name from Person where sort = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'";
 		PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
 	}
 }
