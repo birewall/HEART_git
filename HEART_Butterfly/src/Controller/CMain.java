@@ -57,6 +57,14 @@ public class CMain extends AbsMetaController{
         MDBCameraInfo cam = new MDBCameraInfo(((MSharedData)this.shared_model)
         		.getDB().getConnection());
         cam.printContents();
+
+        cam.setLens("55mm");
+        cam.setFormat("jpg");
+        cam.insert();
+        cam.delete(3);
+        cam.update(3);
+
+
     	changeWindow(this.btnMainExit.getScene().getWindow(), "VInsert");
     }
 
