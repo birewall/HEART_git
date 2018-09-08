@@ -8,16 +8,16 @@ import org.apache.log4j.*;
 import org.apache.log4j.spi.LoggerFactory;
 
 import Controller.AbsMetaController;
-import Controller.CLogin;
+import Controller.CInitial;
 
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 	    try {
 	        FXMLLoader loader = new FXMLLoader();
-	    	Parent root = loader.load(getClass().getResource("/View/VLogin.fxml").openStream());
-	        CLogin controller = (CLogin)loader.getController();
-	        controller.setForDebug();
+	    	Parent root = loader.load(getClass().getResource("/View/VMain.fxml").openStream());
+//	        CInitial controller = (CInitial)loader.getController();
+//	        controller.setForDebug();
 	    	Scene scene = new Scene(root);
 	    	primaryStage.setScene(scene);
 	        primaryStage.setTitle("HEARTLab Butterfly Manager v0.0");

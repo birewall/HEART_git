@@ -13,7 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class CLogin extends AbsMetaController {
+public class CInitial extends AbsMetaController {
 
     @FXML
     private TextField textLoginID;
@@ -37,18 +37,18 @@ public class CLogin extends AbsMetaController {
     void login(ActionEvent event) throws IOException {
     	// Exception Handling
     	if(this.textLoginID.getText().length() == 0) {
-    		this.lblLoginFail.setText("ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
+    		this.lblLoginFail.setText("?•„?´?””ë¥? ?…? ¥?•˜?„¸?š”.");
     	}
     	
     	if(this.txtLoginPW.getText().length() == 0) {
-    		this.lblLoginFail.setText("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
+    		this.lblLoginFail.setText("ë¹„ë?ë²ˆí˜¸ë¥? ?…? ¥?•˜?„¸?š”.");
     	}
     	
     	// Login Sequence
     	if(this.textLoginID.getText().equals(id) && this.txtLoginPW.getText().equals(password)) {
         	changeWindow(this.btnLogin.getScene().getWindow(), "VMain");
     	} else {
-    		this.lblLoginFail.setText("ì •ë³´ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+    		this.lblLoginFail.setText("? •ë³´ê? ?¼ì¹˜í•˜ì§? ?•Š?Šµ?‹ˆ?‹¤.");
     	}
     }
 
