@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MDBPerson extends MDatabase {
@@ -69,5 +70,22 @@ public class MDBPerson extends MDatabase {
     public boolean delete_by_type(String type) {
         String query = "delete from Person where sort = '" + type + "'";
         return modifyingQuery(query);
+    }
+
+    public int getIdPersonFromDB() {
+        String query = "select idPerson from Person where "
+                + "name='" + getName() + "'"
+                + " and sort='" + getSort() + "'";
+        ResultSet rs = selectQuery(query);
+        try {
+            rs.last();
+            if(rs.getRow() > 0) {
+                rs.first();
+                return Integer.parseInt(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

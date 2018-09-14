@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MDBSpecimenize extends MDatabase {
@@ -111,5 +112,26 @@ public class MDBSpecimenize extends MDatabase {
                 + ",embalmingDate='" + getEmbalmingDate() + "'"
                 + " where idSpecimenize = " + idSpecimenize;
         return modifyingQuery(query);
+    }
+
+    public int getIdSpecimenizeFromDB() {
+        String query = "select idSpecimenize from Specimenize where "
+                + "idSpecimen=" + getIdSpecimen()
+                + " and idObservation=" + getIdObservation()
+                + " and idPerson=" + getIdPerson()
+                + " and date='" + getDate() + "'"
+                + " and anticepticName='" + getAnticepticName() + "'"
+                + " and embalmingDate='" + getEmbalmingDate() + "'";
+        ResultSet rs = selectQuery(query);
+        try {
+            rs.last();
+            if(rs.getRow() > 0) {
+                rs.first();
+                return Integer.parseInt(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

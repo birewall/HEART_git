@@ -50,7 +50,7 @@ public class MDatabase extends AbsMetaModel {
 		try {
 			st = this.connection.createStatement();
 		} catch (SQLException e) {
-			logger.error("[MDBButterflyGuide] CreateStatement is failed");
+			logger.error("[MDatabase] CreateStatement is failed");
 			return false;
 		}
 
@@ -60,11 +60,14 @@ public class MDatabase extends AbsMetaModel {
 		try {
 			error = st.execute(query);
 		} catch (SQLException e) {
-			logger.error("[MDBButterflyGuide] Query execution is failed");
+			e.printStackTrace();
+			System.out.println(query);
+			logger.error("[MDatabase] Query execution is failed");
 			return false;
 		}
 
 		if(error) {
+			System.out.println(query);
 			logger.error("Query failed.");
 			return false;
 		}else {
@@ -77,7 +80,7 @@ public class MDatabase extends AbsMetaModel {
 		try {
 			st = this.connection.createStatement();
 		} catch (SQLException e) {
-			logger.error("[MDBButterflyGuide] CreateStatement is failed");
+			logger.error("[MDatabase] CreateStatement is failed");
 			return null;
 		}
 
@@ -87,10 +90,74 @@ public class MDatabase extends AbsMetaModel {
 		try {
 			result = st.executeQuery(query);
 		} catch (SQLException e) {
-			logger.error("[MDBButterflyGuide] Query execution is failed");
+			logger.error("[MDatabase] Query execution is failed");
 			return null;
 		}
 
 		return result;
+	}
+
+	/* Not Implemented Yet */
+	public boolean initDB() {
+		if(!cleanAllTable()) return false;
+
+		Statement st = null;
+		try {
+			st = this.connection.createStatement();
+		} catch (SQLException e) {
+			logger.error("[MDatabase] CreateStatement is failed");
+			return false;
+		}
+
+		try {
+			MDBButterflyGuide db_butterflyguide = new MDBButterflyGuide(this.connection);
+
+			st.execute("delete from ButterflyGuide where not idButterflyGuide=0");
+			st.execute("delete from CameraInfo where not idCameraInfo=0");
+			st.execute("delete from CollectionInfo where not idCollectionInfo=0");
+			st.execute("delete from Image where not idImage=0");
+			st.execute("delete from ImageObjectInfo where not idImageObjectInfo=0");
+			st.execute("delete from Location where not idLocation=0");
+			st.execute("delete from Observation where not idObservation=0");
+			st.execute("delete from Person where not idPerson=0");
+			st.execute("delete from Specimen where not idSpecimen=0");
+			st.execute("delete from SpecimenIO where not idSpecimenIO=0");
+			st.execute("delete from Specimenize where not idSpecimenize=0");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.error("[MDatabase] Delete all items is failed");
+			return false;
+		}
+		return true;
+	}
+
+	public boolean cleanAllTable() {
+		Statement st = null;
+		try {
+			st = this.connection.createStatement();
+		} catch (SQLException e) {
+			logger.error("[MDatabase] CreateStatement is failed");
+			return false;
+		}
+
+		try {
+			st.execute("delete from ButterflyGuide where not idButterflyGuide=0");
+			st.execute("delete from CameraInfo where not idCameraInfo=0");
+			st.execute("delete from CollectionInfo where not idCollectionInfo=0");
+			st.execute("delete from Image where not idImage=0");
+			st.execute("delete from ImageObjectInfo where not idImageObjectInfo=0");
+			st.execute("delete from Location where not idLocation=0");
+			st.execute("delete from Observation where not idObservation=0");
+			st.execute("delete from Person where not idPerson=0");
+			st.execute("delete from Specimen where not idSpecimen=0");
+			st.execute("delete from SpecimenIO where not idSpecimenIO=0");
+			st.execute("delete from Specimenize where not idSpecimenize=0");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.error("[MDatabase] Delete all items is failed");
+			return false;
+		}
+
+		return true;
 	}
 }

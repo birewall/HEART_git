@@ -1,11 +1,11 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MDBImageObjectInfo extends MDatabase {
     int idImageObjectInfo;
-    int idGuide;
     String size;            //varchar(5)
     String wing;            //varchar(10)
     String background;      //varchar(20)
@@ -25,14 +25,6 @@ public class MDBImageObjectInfo extends MDatabase {
 
     public void setIdImageObjectInfo(int idImageObjectInfo) {
         this.idImageObjectInfo = idImageObjectInfo;
-    }
-
-    public int getIdGuide() {
-        return idGuide;
-    }
-
-    public void setIdGuide(int idGuide) {
-        this.idGuide = idGuide;
     }
 
     public String getSize() {
@@ -94,7 +86,6 @@ public class MDBImageObjectInfo extends MDatabase {
     public void printContents() {
         logger.info("[" + this.table_name + "]");
         logger.info("[idImageObjectInfo] " + idImageObjectInfo);
-        logger.info("[idGuide] " + idGuide);
         logger.info("[size] " + size);
         logger.info("[wing] " + wing);
         logger.info("[background] " + background);
@@ -105,8 +96,7 @@ public class MDBImageObjectInfo extends MDatabase {
     }
 
     public boolean insert() {
-        String query = "insert into ImageObjectInfo (idGuide, size, wing, background, status, sex, number, marriage) values ("
-                + getIdGuide() + ","
+        String query = "insert into ImageObjectInfo (size, wing, background, status, sex, number, marriage) values ("
                 + "'" + getSize() + "',"
                 + "'" + getWing() + "',"
                 + "'" + getBackground() + "',"
@@ -125,8 +115,7 @@ public class MDBImageObjectInfo extends MDatabase {
 
     public boolean update(int idImageObjectInfo) {
         String query = "update ImageObjectInfo set "
-                + "idGuide=" + getIdGuide()
-                + ",size='" + getSize() + "'"
+                + "size='" + getSize() + "'"
                 + ",wing='" + getWing() + "'"
                 + ",background='" + getBackground() + "'"
                 + ",status='" + getStatus() + "'"
@@ -135,5 +124,27 @@ public class MDBImageObjectInfo extends MDatabase {
                 + ",marriage='" + getMarriage() + "'"
                 + " where idImageObjectInfo = " + idImageObjectInfo;
         return modifyingQuery(query);
+    }
+
+    public int getIdImageObjectInfoFromDB() {
+        String query = "select idImageObjectInfo from ImageObjectInfo where "
+                + "size='" + getSize() + "'"
+                + " and wing='" + getWing() + "'"
+                + " and background='" + getBackground() + "'"
+                + " and status='" + getStatus() + "'"
+                + " and sex='" + getSex() + "'"
+                + " and number=" + getNumber()
+                + " and marriage='" + getMarriage() + "'";
+        ResultSet rs = selectQuery(query);
+        try {
+            rs.last();
+            if(rs.getRow() > 0) {
+                rs.first();
+                return Integer.parseInt(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

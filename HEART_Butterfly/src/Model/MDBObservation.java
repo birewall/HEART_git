@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MDBObservation extends MDatabase {
@@ -123,5 +124,27 @@ public class MDBObservation extends MDatabase {
                 + ",number=" + getNumber()
                 + " where idObservation = " + idObservation;
         return modifyingQuery(query);
+    }
+
+    public int getIdObservationFromDB() {
+        String query = "select idObservation from Observation where "
+                + "idImage=" + getIdImage()
+                + " and idCollectionInfo=" + getIdCollectionInfo()
+                + " and date='" + getDate() + "'"
+                + " and time='" + getTime() + "'"
+                + " and sex='" + getSex() + "'"
+                + " and status='" + getStatus() + "'"
+                + " and number=" + getNumber();
+        ResultSet rs = selectQuery(query);
+        try {
+            rs.last();
+            if(rs.getRow() > 0) {
+                rs.first();
+                return Integer.parseInt(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

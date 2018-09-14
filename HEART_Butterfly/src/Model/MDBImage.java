@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MDBImage extends MDatabase {
@@ -111,5 +112,26 @@ public class MDBImage extends MDatabase {
                 + ",path='" + getPath() + "'"
                 + " where idImage = " + idImage;
         return modifyingQuery(query);
+    }
+
+    public int getIdImageFromDB() {
+        String query = "select idImage from Image where "
+                + "idLocation=" + getIdLocation()
+                + " and idImageObjectInfo=" + getIdImageObjectInfo()
+                + " and idCameraInfo=" + getIdCameraInfo()
+                + " and date='" + getDate() + "'"
+                + " and time='" + getTime() + "'"
+                + " and path='" + getPath() + "'";
+        ResultSet rs = selectQuery(query);
+        try {
+            rs.last();
+            if(rs.getRow() > 0) {
+                rs.first();
+                return Integer.parseInt(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

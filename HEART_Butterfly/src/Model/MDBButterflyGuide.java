@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -90,5 +91,24 @@ public class MDBButterflyGuide extends MDatabase {
                 + ",scientific_name='" + getScientific_name() + "'"
                 + " where idButterflyGuide = " + idButterflyGuide;
         return modifyingQuery(query);
+    }
+
+    public int getIdButterflyGuideFromDB() {
+        String query = "select idButterflyGuide from ButterflyGuide where "
+                + "idImage=" + getIdImage()
+                + " and name='" + getName() + "'"
+                + " and family='" + getFamily() + "'"
+                + " and scientific_name='" + getScientific_name() + "'";
+        ResultSet rs = selectQuery(query);
+        try {
+            rs.last();
+            if(rs.getRow() > 0) {
+                rs.first();
+                return Integer.parseInt(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

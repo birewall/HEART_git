@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MDBSpecimen extends MDatabase {
@@ -135,5 +136,28 @@ public class MDBSpecimen extends MDatabase {
                 + ",comment='" + getComment() + "'"
                 + " where idSpecimen = " + idSpecimen;
         return modifyingQuery(query);
+    }
+
+    public int getIdSpecimenFromDB() {
+        String query = "select idSpecimen from Specimen where "
+                + "idCollectionInfo=" + getIdCollectionInfo()
+                + " and idImage=" + getIdImage()
+                + " and status='" + getStatus() + "'"
+                + " and sex='" + getSex() + "'"
+                + " and storageRoom='" + getStorageRoom() + "'"
+                + " and storageCabinet='" + getStorageCabinet() + "'"
+                + " and storageChest='" + getStorageChest() + "'"
+                + " and comment='" + getComment() + "'";
+        ResultSet rs = selectQuery(query);
+        try {
+            rs.last();
+            if(rs.getRow() > 0) {
+                rs.first();
+                return Integer.parseInt(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

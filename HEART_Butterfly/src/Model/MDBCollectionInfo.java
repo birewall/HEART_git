@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MDBCollectionInfo extends MDatabase {
@@ -93,11 +94,31 @@ public class MDBCollectionInfo extends MDatabase {
     public boolean update(int idCollectionInfo) {
         String query = "update CollectionInfo set "
                 + "idLocation=" + getIdLocation()
-                + "idButterflyGuide=" + getIdButterflyGuide()
-                + "idPerson=" + getIdPerson()
+                + ",idButterflyGuide=" + getIdButterflyGuide()
+                + ",idPerson=" + getIdPerson()
                 + ",date='" + getDate() + "'"
                 + ",method='" + getMethod() + "'"
                 + " where idCollectionInfo = " + idCollectionInfo;
         return modifyingQuery(query);
+    }
+
+    public int getIdCollectionInfoFromDB() {
+        String query = "select idCollectionInfo from CollectionInfo where "
+                + "idLocation=" + getIdLocation()
+                + " and idButterflyGuide=" + getIdButterflyGuide()
+                + " and idPerson=" + getIdPerson()
+                + " and date='" + getDate() + "'"
+                + " and method='" + getMethod() + "'";
+        ResultSet rs = selectQuery(query);
+        try {
+            rs.last();
+            if(rs.getRow() > 0) {
+                rs.first();
+                return Integer.parseInt(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

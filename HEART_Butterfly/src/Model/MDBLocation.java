@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MDBLocation extends MDatabase {
@@ -123,5 +124,27 @@ public class MDBLocation extends MDatabase {
                 + ",sectionDetail='" + getSectionDetail() + "'"
                 + " where idLocation = " + idLocation;
         return modifyingQuery(query);
+    }
+
+    public int getIdLocationFromDB() {
+        String query = "select idLocation from Location where "
+                + "country='" + getCountry() + "'"
+                + " and location='" + getLocation() + "'"
+                + " and locationDetail='" + getLocationDetail() + "'"
+                + " and gps='" + getGps() + "'"
+                + " and alias='" + getAlias() + "'"
+                + " and section='" + getSection() + "'"
+                + " and sectionDetail='" + getSectionDetail() + "'";
+        ResultSet rs = selectQuery(query);
+        try {
+            rs.last();
+            if(rs.getRow() > 0) {
+                rs.first();
+                return Integer.parseInt(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

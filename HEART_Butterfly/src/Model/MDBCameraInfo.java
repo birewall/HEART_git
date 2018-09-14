@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MDBCameraInfo extends MDatabase {
@@ -75,5 +76,23 @@ public class MDBCameraInfo extends MDatabase {
                 + ",calibration='" + getCalibration() + "'"
                 + " where idCameraInfo = " + idCameraInfo;
         return modifyingQuery(query);
+    }
+
+    public int getIdCameraInfoFromDB() {
+        String query = "select idCameraInfo from CameraInfo where "
+                + "lens='" + getLens() + "'"
+                + " and format='" + getFormat() + "'"
+                + " and calibration='" + getCalibration() + "'";
+        ResultSet rs = selectQuery(query);
+        try {
+            rs.last();
+            if(rs.getRow() > 0) {
+                rs.first();
+                return Integer.parseInt(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

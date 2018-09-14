@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MDBSpecimenIO extends MDatabase {
@@ -99,5 +100,25 @@ public class MDBSpecimenIO extends MDatabase {
                 + ",cost='" + getCost()
                 + " where idSpecimenIO = " + idSpecimenIO;
         return modifyingQuery(query);
+    }
+
+    public int getIdSpecimenIOFromDB() {
+        String query = "select idSpecimenIO from SpecimenIO where "
+                + "idSpecimen=" + getIdSpecimen()
+                + " and idGiver=" + getIdGiver()
+                + " and idTaker=" + getIdTaker()
+                + " and date='" + getDate() + "'"
+                + " and cost='" + getCost();
+        ResultSet rs = selectQuery(query);
+        try {
+            rs.last();
+            if(rs.getRow() > 0) {
+                rs.first();
+                return Integer.parseInt(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }
