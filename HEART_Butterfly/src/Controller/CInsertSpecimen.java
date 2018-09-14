@@ -4,6 +4,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Model.MDBButterflyGuide;
+import Model.MDBCollectionInfo;
+import Model.MDBImageObjectInfo;
+import Model.MDBLocation;
+import Model.MDBObservation;
+import Model.MDBPerson;
+import Model.MDBSpecimen;
+import Model.MDBSpecimenize;
+import Model.MSharedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -105,13 +114,46 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     private ComboBox<?> comboInsertSpecimenLoc2type;
 
     @FXML
-    private ComboBox<?> comboInsertSpecimenLoc31;
+    private ComboBox<?> comboInsertSpecimenLoc3;
 
     @FXML
     private Button btnInsertSpecimenCorrect;
 
     @FXML
     void addInsertSpecimen(ActionEvent event) {
+    	String Collectway = comboInsertSpecimenCollectway.getSelectionModel().getSelectedItem();
+    	String Collect_date = dateInsertSpecimenCollectdate.getEditor().getText();
+    	String country = txtInsertSpecimenNation.getText();
+    	String location = txtInsertSpecimenCollectoc.getText();
+    	String location_detail = txtInsertSpecimenDo.getText() + " " + txtInsertSpecimenSi.getText() + " " + txtInsertSpecimenDong.getText();
+    	String gps = txtInsertSpecimenLat.getText() + "," + txtInsertSpecimenLong.getText();
+    	String alias = txtInsertSpecimenLocname.getText();
+    	String collectwho = (String) comboInsertSpecimenCollectwho.getSelectionModel().getSelectedItem();
+    	String butterfly_name = txtInsertSpecimenBname.getText();
+    	String butterfly_family = txtInsertSpecimenFamily.getText();
+    	String scientific_name = txtInsertSpecimenZoological.getText();
+    	String Specimen_date = dateInsertSpecimenDate.getEditor().getText();
+    	String status = comboInsertSpecimenStatus.getSelectionModel().getSelectedItem();
+    	String sex = (String)comboInsertSpecimenSex.getSelectionModel().getSelectedItem();
+    	String note = txtInsertSpecimenRemark.getText();
+    	String Loc1 = comboInsertSpecimenLoc1.getSelectionModel().getSelectedItem();
+    	String Loc2type = (String) comboInsertSpecimenLoc2type.getSelectionModel().getSelectedItem();
+    	String Loc2 = comboInsertSpecimenLoc2.getSelectionModel().getSelectedItem();
+    	String Loc3type = (String) comboInsertSpecimenLoc3type.getSelectionModel().getSelectedItem();
+    	String Loc3 = (String) comboInsertSpecimenLoc3.getSelectionModel().getSelectedItem();
+    	String SpecimenWho = comboInsertSpecimenWho.getSelectionModel().getSelectedItem();
+    	
+    	/* DB Instance initialization */
+    	MDBCollectionInfo db_collection_info = new MDBCollectionInfo(((MSharedData)this.shared_model).getDB().getConnection());
+    	MDBLocation db_location = new MDBLocation(((MSharedData)this.shared_model).getDB().getConnection());
+    	MDBPerson db_person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+    	MDBButterflyGuide db_butterfly_guide = new MDBButterflyGuide(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBSpecimenize db_specimenize = new MDBSpecimenize(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBSpecimen db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBImageObjectInfo db_imageObjectInfo = new MDBImageObjectInfo(((MSharedData)this.shared_model).getDB().getConnection());
+
+    	
+    	
 
     }
 
@@ -273,11 +315,11 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		this.comboInsertSpecimenCollectway.getItems().addAll("Á÷Á¢Ã¤Áý", "±¸¸Å", "±âÁõ");
-		this.comboInsertSpecimenWho.getItems().addAll("Á¶À±È£");
-		this.comboInsertSpecimenStatus.getItems().addAll("»ó", "Áß", "ÇÏ");
-		this.comboInsertSpecimenLoc1.getItems().addAll("Áý", "ÇÐ±³", "»ç¹«½Ç");
-		this.comboInsertSpecimenSex.getItems().addAll("¼ö", "¾Ï");
+		this.comboInsertSpecimenCollectway.getItems().addAll("ï¿½ï¿½ï¿½ï¿½Ã¤ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½");
+		this.comboInsertSpecimenWho.getItems().addAll("ï¿½ï¿½ï¿½ï¿½È£");
+		this.comboInsertSpecimenStatus.getItems().addAll("ï¿½ï¿½", "ï¿½ï¿½", "ï¿½ï¿½");
+		this.comboInsertSpecimenLoc1.getItems().addAll("ï¿½ï¿½", "ï¿½Ð±ï¿½", "ï¿½ç¹«ï¿½ï¿½");
+		this.comboInsertSpecimenSex.getItems().addAll("ï¿½ï¿½", "ï¿½ï¿½");
 
 	}
 	

@@ -275,7 +275,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     @FXML
     void choosewhoInsertWatch(ActionEvent event) {	
 		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("관찰자를 등록하세요");
+		dialog.setTitle("Insert New Name");
 		dialog.setHeaderText(null);
 		dialog.setContentText(null);
 		dialog.showAndWait();
@@ -460,8 +460,8 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		this.comboInsertWatchTime.getItems().addAll("오전", "오후", "저녁", "새벽");
-		this.comboInsertWatchSex.getItems().addAll("암컷", "수컷");
+		this.comboInsertWatchTime.getItems().addAll("새벽", "오전", "오후", "저녁");
+		this.comboInsertWatchSex.getItems().addAll("암", "수");
 		this.comboInsertWatchStatus.getItems().addAll("상", "중", "하");
 
 		this.comboInsertWatchWho.getSelectionModel().select(0); // 조윤호 교수님은 무조건 DB에 있어야함

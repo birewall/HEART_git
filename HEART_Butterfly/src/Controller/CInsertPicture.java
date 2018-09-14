@@ -1,17 +1,43 @@
 package Controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
+import Model.MDBButterflyGuide;
+import Model.MDBCollectionInfo;
+import Model.MDBImage;
+import Model.MDBLocation;
+import Model.MDBObservation;
+import Model.MDBPerson;
+import Model.MSharedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
-public class CInsertPicture extends AbsMetaController {
+public class CInsertPicture extends AbsMetaController implements Initializable {
+
+	MDBPerson PersonDB;
+	MDBImage ImageDB;
 
     @FXML
     private DatePicker dateInsertPictureDate;
@@ -26,7 +52,7 @@ public class CInsertPicture extends AbsMetaController {
     private Button btnInsertPictureSearchLoc;
 
     @FXML
-    private ComboBox<?> comboInsertPictureWho;
+    private ComboBox<String> comboInsertPictureWho;
 
     @FXML
     private Button btnInsertPictureChoosewho;
@@ -45,6 +71,9 @@ public class CInsertPicture extends AbsMetaController {
 
     @FXML
     private ComboBox<String> comboInsertPictureSex;
+    
+    @FXML
+    private ImageView ImvImage;
 
     @FXML
     private Button btnInsertPictureAdd;
@@ -101,13 +130,16 @@ public class CInsertPicture extends AbsMetaController {
     private TextField txtInsertPictureLocname;
 
     @FXML
-    private ComboBox<String> comboInsertPictureBloc;
+    private Label lblLoadPictureStatus;
+    
+    @FXML
+    private ComboBox<String> comboInsertPictureAng;
 
     @FXML
     private ComboBox<String> comboInsertPictureQuan;
 
     @FXML
-    private RadioButton radioInsertPictureMating;
+    private CheckBox cboxInsertPictureMatching;
 
     @FXML
     private ToggleGroup matingToggle;
@@ -119,7 +151,7 @@ public class CInsertPicture extends AbsMetaController {
     private Button btnInsertPicturepicture;
 
     @FXML
-    private TextField txtInsertWatchSecremark;
+    private TextField txtInsertPictureSecremark;
 
     @FXML
     private RadioButton radioInsertPicturesec6;
@@ -171,6 +203,54 @@ public class CInsertPicture extends AbsMetaController {
 
     @FXML
     void addInsertPicture(ActionEvent event) {
+        /* Data Acquisition */
+   
+    	String date = dateInsertPictureDate.getEditor().getText();
+    	String time = comboInsertPictureTime.getSelectionModel().getSelectedItem();
+    	String country = txtInsertPictureNation.getText();
+    	String location = txtInsertPictureLoc.getText();
+    	String location_detail = txtInsertPictureDo.getText() + " " + txtInsertPictureSi.getText() + " " + txtInsertPictureDong.getText();
+    	String gps = txtInsertPictureLat.getText() + "," + txtInsertPictureLong.getText();
+    	String alias = txtInsertPictureLocname.getText();
+    	String section = matingToggle.getSelectedToggle().toString();
+    	String section_detail = txtInsertPictureSecremark.getText();
+    	String person_name = comboInsertPictureWho.getSelectionModel().getSelectedItem();
+    	String butterfly_name = txtInsertPictureBname.getText();
+    	String butterfly_family = txtInsertPictureFamily.getText();
+    	String scientific_name = txtInsertPictureZoological.getText();
+    	String sex = (String)comboInsertPictureSex.getSelectionModel().getSelectedItem();
+    	String moving = comboInsertPictureAng.getSelectionModel().getSelectedItem();
+    	String wing_status = comboInsertPictureWing.getSelectionModel().getSelectedItem();
+    	String b_move = comboInsertPictureBmove.getSelectionModel().getSelectedItem();
+    	String type_lens = comboInsertPictureLtype.getSelectionModel().getSelectedItem();
+    	String pic_correction = comboInsertPictureIscorrected.getSelectionModel().getSelectedItem();
+    	String pic_quantity = comboInsertPictureQuan.getSelectionModel().getSelectedItem();
+    	String background = comboInsertPictureBground.getSelectionModel().getSelectedItem();
+    	String pic_size = comboInsertPictureSize.getSelectionModel().getSelectedItem();
+    	String file_type = comboInsertPictureFtype.getSelectionModel().getSelectedItem();
+    	String matching = cboxInsertPictureMatching.getText();
+    	String note = txtInsertPictureRemark.getText();
+
+    	/* DB Instance initialization */
+        MDBButterflyGuide db_butterfly_guide = new MDBButterflyGuide(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBPerson db_person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBCollectionInfo db_collection_info = new MDBCollectionInfo(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBLocation db_location = new MDBLocation(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBObservation db_observation = new MDBObservation(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBImage db_image = new MDBImage(((MSharedData)this.shared_model).getDB().getConnection());
+
+        /* Value Mapping */ //여기부터!!!!!!!!! 
+        db_location.setCountry(country);
+        db_location.setLocation(location);
+        db_location.setLocationDetail(location_detail);
+        db_location.setGps(gps);
+        db_location.setAlias(alias);
+        db_location.setSection(section);
+        db_location.setSectionDetail(section_detail);
+        if(!db_location.insert()){
+            ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] Location Insert Failed.");
+            return;
+        }
 
     }
 
@@ -186,12 +266,25 @@ public class CInsertPicture extends AbsMetaController {
 
     @FXML
     void choosewhoInsertPicture(ActionEvent event) {
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("Insert New Name");
+		dialog.setHeaderText(null);
+		dialog.setContentText(null);
+		dialog.showAndWait();
+		String new_name = dialog.getEditor().getText();
 
+		PersonDB.setName(new_name);
+		PersonDB.setSort("촬영자");
+		if(!PersonDB.insert()) System.out.println("Failed.");
+		
+		this.comboInsertPictureWho.getItems().add(new_name);
     }
 
     @FXML
     void clearInsertPicture(ActionEvent event) {
-
+        MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+        person.delete_by_type("촬영자");
+        this.comboInsertPictureWho.getItems().clear();
     }
 
     @FXML
@@ -263,10 +356,39 @@ public class CInsertPicture extends AbsMetaController {
     void matingInsertPicture(ActionEvent event) {
 
     }
+    
+    File ImageSelectedFile;
 
     @FXML
-    void pictureInsertPicture(ActionEvent event) {
+    void pictureInsertPicture(ActionEvent event) throws IOException {
+        FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new File ("C:/Temp"));
+        fc.getExtensionFilters().addAll(new ExtensionFilter("jpg files","*.jpg"));
+        fc.getExtensionFilters().addAll(new ExtensionFilter("png files", "*.png"));
+        fc.getExtensionFilters().addAll(new ExtensionFilter("bmp files", "*.bmp"));
+        ImageSelectedFile = fc.showOpenDialog(null);
+        if(ImageSelectedFile == null){
+            this.lblLoadPictureStatus.setText("File is not valid");
+            return;
+        }
+        else{
+        	this.lblLoadPictureStatus.setText("File is loaded");
+        	
+        	BufferedReader reader = new BufferedReader(
+	    			new FileReader(ImageSelectedFile));
+        	
+    		if(ImageSelectedFile.getAbsolutePath() == null) return;
+    		String filename = ImageSelectedFile.getName();
+    		
+    		//Send file path to DB
+    		String filepath = ImageSelectedFile.getAbsolutePath();
 
+    		
+    		//Set image at view
+    		File file = new File(filepath);
+    		Image image = new Image(file.toURI().toString());
+    		this.ImvImage.setImage(image);
+        }
     }
 
     @FXML
@@ -378,5 +500,37 @@ public class CInsertPicture extends AbsMetaController {
     void zoologicalInsertPicture(ActionEvent event) {
 
     }
+    
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		this.comboInsertPictureTime.getItems().addAll("새벽", "오전", "오후", "저녁");
+		this.comboInsertPictureSex.getItems().addAll("암", "수");
+		this.comboInsertPictureQuan.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+		this.comboInsertPictureLtype.getItems().addAll("핸드폰", "망원", "광각");
+		this.comboInsertPictureBmove.getItems().addAll("비행", "정지");
+		this.comboInsertPictureAng.getItems().addAll("정면도", "측면도", "사시도");
+		this.comboInsertPictureWing.getItems().addAll("펼침", "닫힘");		
+		this.comboInsertPictureIscorrected.getItems().addAll("유", "무");
+		this.comboInsertPictureBground.getItems().addAll("꽃", "암석", "나무");
+		this.comboInsertPictureSize.getItems().addAll("대", "중", "소");
+		this.comboInsertPictureFtype.getItems().addAll("jpg", "png", "bmp");
+	}
 
+	@Override
+	public void init_procedure() {
+		// Set Watcher
+		String query = "select name from Person where sort = '촬영자'";
+		System.out.println(this.shared_model);
+		PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+		ResultSet rs = PersonDB.selectQuery(query);
+		try {
+			while(rs.next()) {
+				this.comboInsertPictureWho.getItems().add(rs.getString(1));   // get name
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

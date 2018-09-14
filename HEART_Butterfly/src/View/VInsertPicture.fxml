@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -9,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CInsertPicture">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CInsertPicture">
    <children>
       <Text layoutX="36.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="촬영 날짜" />
       <Text layoutX="36.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="시간대" />
@@ -35,10 +40,10 @@
       <ComboBox fx:id="comboInsertPictureLtype" layoutX="104.0" layoutY="676.0" onAction="#ltypeInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="망원" />
       <Text layoutX="28.0" layoutY="696.0" strokeType="OUTSIDE" strokeWidth="0.0" text="렌즈 유형" />
       <ComboBox fx:id="comboInsertPictureBmove" layoutX="109.0" layoutY="534.0" onAction="#BmoveInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="비행" />
-      <Text layoutX="33.0" layoutY="554.0" strokeType="OUTSIDE" strokeWidth="0.0" text="상태" />
+      <Text layoutX="33.0" layoutY="554.0" strokeType="OUTSIDE" strokeWidth="0.0" text="나비동작" />
       <Text layoutX="283.0" layoutY="586.0" strokeType="OUTSIDE" strokeWidth="0.0" text="배경" />
       <ComboBox fx:id="comboInsertPictureBground" layoutX="359.0" layoutY="566.0" onAction="#bgroundInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="꽃" />
-      <Text layoutX="33.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="날개" />
+      <Text layoutX="33.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="날개상태" />
       <ComboBox fx:id="comboInsertPictureWing" layoutX="109.0" layoutY="601.0" onAction="#wingInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="펼침" />
       <ComboBox fx:id="comboInsertPictureSize" layoutX="359.0" layoutY="601.0" onAction="#sizeInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="소" />
       <Text layoutX="283.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="크기" />
@@ -61,18 +66,13 @@
       <TextField fx:id="txtInsertPictureLong" layoutX="288.0" layoutY="246.0" onAction="#longInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="127.227921" />
       <TextField fx:id="txtInsertPictureLocname" layoutX="159.0" layoutY="281.0" onAction="#locnameInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="주금산" />
       <Text layoutX="73.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="통상명" />
-      <ComboBox fx:id="comboInsertPictureBloc" layoutX="109.0" layoutY="567.0" onAction="#BlocInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="정면" />
-      <Text layoutX="33.0" layoutY="587.0" strokeType="OUTSIDE" strokeWidth="0.0" text="위치" />
+      <ComboBox fx:id="comboInsertPictureAng" layoutX="109.0" layoutY="567.0" onAction="#BlocInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="정면" />
+      <Text layoutX="33.0" layoutY="587.0" strokeType="OUTSIDE" strokeWidth="0.0" text="사진각도" />
       <ComboBox fx:id="comboInsertPictureQuan" layoutX="109.0" layoutY="635.0" onAction="#quanInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="1" />
       <Text layoutX="33.0" layoutY="655.0" strokeType="OUTSIDE" strokeWidth="0.0" text="마릿수" />
-      <RadioButton fx:id="radioInsertPictureMating" layoutX="246.0" layoutY="640.0" mnemonicParsing="false" onAction="#matingInsertPicture" text="짝짓기">
-         <toggleGroup>
-            <ToggleGroup fx:id="matingToggle" />
-         </toggleGroup>
-      </RadioButton>
       <Button fx:id="btnInsertPictureCorrect" layoutX="354.0" layoutY="847.0" mnemonicParsing="false" onAction="#correctInsertPicture" text="수정" />
       <Button fx:id="btnInsertPicturepicture" layoutX="36.0" layoutY="19.0" mnemonicParsing="false" onAction="#pictureInsertPicture" prefHeight="29.0" prefWidth="227.0" text="사진 불러오기" />
-      <TextField fx:id="txtInsertWatchSecremark" layoutX="110.0" layoutY="345.0" onAction="#secremarkInsertWatch" prefHeight="29.0" prefWidth="379.0" promptText="관찰 구간 기준을 입력해주세요." />
+      <TextField fx:id="txtInsertPictureSecremark" layoutX="110.0" layoutY="345.0" onAction="#secremarkInsertWatch" prefHeight="29.0" prefWidth="379.0" promptText="관찰 구간 기준을 입력해주세요." />
       <Text layoutX="34.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="구간 비고" />
       <RadioButton fx:id="radioInsertPicturesec6" layoutX="283.0" layoutY="315.0" mnemonicParsing="false" onAction="#sec6InsertPicture" text="6">
          <toggleGroup>
@@ -89,5 +89,12 @@
       <RadioButton fx:id="radioInsertPicturesec2" layoutX="121.0" layoutY="316.0" mnemonicParsing="false" onAction="#sec2InsertPicture" text="2" toggleGroup="$sectionToggle1" />
       <Text layoutX="34.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="구간" />
       <RadioButton fx:id="radioInsertPicturesec1" layoutX="76.0" layoutY="315.0" mnemonicParsing="false" onAction="#sec1InsertPicture" text="1" toggleGroup="$sectionToggle1" />
+      <Label fx:id="lblLoadPictureStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="292.0" layoutY="23.0" prefHeight="19.0" prefWidth="162.0" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="ImvImage" fitHeight="150.0" fitWidth="200.0" layoutX="370.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+      <CheckBox fx:id="cboxInsertPictureMatching" layoutX="247.0" layoutY="639.0" mnemonicParsing="false" onAction="#matingInsertPicture" text="짝짓기" />
    </children>
 </Pane>
