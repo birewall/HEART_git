@@ -144,19 +144,45 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     	String time = comboInsertWatchTime.getSelectionModel().getSelectedItem();
     	String country = txtInsertWatchNation.getText();
     	String location = txtInsertWatchLoc.getText();
-    	String location_detail = txtInsertWatchDo.getText() + " " + txtInsertWatchSi.getText() + " " + txtInsertWatchDong.getText();
-    	String gps = txtInsertWatchLat.getText() + "," + txtInsertWatchLong.getText();
-    	String alias = txtInsertWatchLocname.getText();
-    	String section = sectionToggle.getSelectedToggle().toString();
+    	String location_detail = txtInsertWatchDo.getText() + "/" + txtInsertWatchSi.getText() + "/" + txtInsertWatchDong.getText();
+
+    	String gps_x = "0";
+        String gps_y = "0";
+        if(txtInsertWatchLat.getText().length() > 0) gps_x = txtInsertWatchLat.getText();
+        if(txtInsertWatchLat.getText().length() > 0) gps_y = txtInsertWatchLong.getText();
+        String gps =  gps_x + "," + gps_y;
+
+        String alias = txtInsertWatchLocname.getText();
+    	String section = "";
+    	if(sectionToggle.getSelectedToggle() != null) section = sectionToggle.getSelectedToggle().toString();
     	String section_detail = txtInsertWatchSecremark.getText();
-    	String person_name = comboInsertWatchWho.getSelectionModel().getSelectedItem();
+    	String person_name = comboInsertWatchWho.getSelectionModel().getSelectedItem(); // 조윤호 교수님은 반드시 DB에 있어야 함
     	String butterfly_name = txtInsertWatchBname.getText();
     	String butterfly_family = txtInsertWatchFamily.getText();
     	String scientific_name = txtInsertWatchZoological.getText();
-    	String sex = (String)comboInsertWatchSex.getSelectionModel().getSelectedItem();
+    	String sex = comboInsertWatchSex.getSelectionModel().getSelectedItem();
     	String status = comboInsertWatchStatus.getSelectionModel().getSelectedItem();
     	String quantity = txtInsertWatchQuan.getText();
     	String note = txtInsertWatchRemark.getText();
+
+    	/* Debug */
+        System.out.println(date);
+        System.out.println(time);
+        System.out.println(country);
+        System.out.println(location);
+        System.out.println(location_detail);
+        System.out.println(gps);
+        System.out.println(alias);
+        System.out.println(section);
+        System.out.println(section_detail);
+        System.out.println(person_name);
+        System.out.println(butterfly_name);
+        System.out.println(butterfly_family);
+        System.out.println(scientific_name);
+        System.out.println(sex);
+        System.out.println(status);
+        System.out.println(quantity);
+        System.out.println(note);
 
     	/* DB Instance initialization */
         MDBButterflyGuide db_butterfly_guide = new MDBButterflyGuide(((MSharedData)this.shared_model).getDB().getConnection());
@@ -173,14 +199,72 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
         db_location.setAlias(alias);
         db_location.setSection(section);
         db_location.setSectionDetail(section_detail);
-        if(!db_location.insert()){
-            ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] Location Insert Failed.");
-            return;
+        // db_location.printContents();
+        int id_location = db_location.getIdLocation();
+        if(id_location == 0) {
+            if(!db_location.insert()){
+                ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] Location Insert Failed.");
+                return;
+            }
+            id_location = db_location.getIdLocationFromDB();
         }
 
+        db_person.setName("조윤호");
+        db_person.setSort("관찰자");
+        int id_person = db_person.getIdPersonFromDB();
+        if(id_person == 0) {
+            db_person.insert();
+            if(!db_person.insert()){
+                ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] Person Insert Failed.");
+                return;
+            }
+            id_person = db_person.getIdPersonFromDB();
+        }
 
-        /* Query */
+        db_butterfly_guide.setName(butterfly_name);
+        db_butterfly_guide.setFamily(butterfly_family);
+        db_butterfly_guide.setScientific_name(scientific_name);
+        int id_butterflyGuide = db_butterfly_guide.getIdButterflyGuideFromDB();
+        if(id_butterflyGuide == 0) {
+            db_butterfly_guide.insert();
+            if(!db_butterfly_guide.insert()){
+                ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] ButterflyGuide Insert Failed.");
+                return;
+            }
+            id_butterflyGuide = db_butterfly_guide.getIdButterflyGuideFromDB();
+        }
 
+        db_collection_info.setIdLocation(id_location);
+        db_collection_info.setIdButterflyGuide(id_butterflyGuide);
+        db_collection_info.setIdPerson(id_person);
+        db_collection_info.setDate(date);
+        // db_collection_info.setMethod(method);
+        // db_collection_info.printContents();
+        int id_collection_info = db_collection_info.getIdCollectionInfo();
+        if(id_collection_info == 0) {
+            db_collection_info.insert();
+            if(!db_collection_info.insert()){
+                ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] CollectionInfo Insert Failed.");
+                return;
+            }
+            id_collection_info = db_collection_info.getIdCollectionInfo();
+        }
+
+        db_observation.setDate(date);
+        db_observation.setIdCollectionInfo(id_collection_info);
+        db_observation.setNumber(Integer.parseInt(quantity));
+        db_observation.setSex((sex.equals("남"))?'m':'f');
+        db_observation.setStatus(status);
+        db_observation.setTime(time);
+        int id_observation = db_observation.getIdCollectionInfo();
+        if(id_observation == 0) {
+            db_observation.insert();
+            if (!db_observation.insert()) {
+                ((MSharedData) this.shared_model).getLogger().error("[CInsertWatch] Observation Insert Failed.");
+                return;
+            }
+            id_observation = db_observation.getIdCollectionInfo();
+        }
     }
 
     @FXML
@@ -199,7 +283,10 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
 		PersonDB.setName(new_name);
 		PersonDB.setSort("관찰자");
-		if(!PersonDB.insert()) System.out.println("Failed.");
+		if(!PersonDB.insert()){
+		    System.out.println("Failed.");
+		    return;
+        }
 		
 		this.comboInsertWatchWho.getItems().add(new_name);
     }
@@ -209,6 +296,15 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
         MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
         person.delete_by_type("관찰자");
         this.comboInsertWatchWho.getItems().clear();
+
+        person.setName("조윤호");
+        person.setSort("관찰자");
+        if(!person.insert()){
+            System.out.println("Failed.");
+            return;
+        }
+        this.comboInsertWatchWho.getItems().add("조윤호");
+        this.comboInsertWatchWho.getSelectionModel().select(0);
     }
 
     @FXML
@@ -367,6 +463,11 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 		this.comboInsertWatchTime.getItems().addAll("오전", "오후", "저녁", "새벽");
 		this.comboInsertWatchSex.getItems().addAll("암컷", "수컷");
 		this.comboInsertWatchStatus.getItems().addAll("상", "중", "하");
+
+		this.comboInsertWatchWho.getSelectionModel().select(0); // 조윤호 교수님은 무조건 DB에 있어야함
+        this.comboInsertWatchSex.getSelectionModel().select(0);
+        this.comboInsertWatchStatus.getSelectionModel().select(0);
+        this.comboInsertWatchTime.getSelectionModel().select(0);
 	}
 	
 	@Override
