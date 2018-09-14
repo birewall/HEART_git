@@ -239,7 +239,7 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
         MDBObservation db_observation = new MDBObservation(((MSharedData)this.shared_model).getDB().getConnection());
         MDBImage db_image = new MDBImage(((MSharedData)this.shared_model).getDB().getConnection());
 
-        /* Value Mapping */
+        /* Value Mapping */ //여기부터!!!!!!!!! 
         db_location.setCountry(country);
         db_location.setLocation(location);
         db_location.setLocationDetail(location_detail);
