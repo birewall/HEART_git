@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import Model.MDBPerson;
-import Model.MDatabase;
-import Model.MSharedData;
+import Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -141,41 +139,48 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
     @FXML
     void addInsertWatch(ActionEvent event) {
-    	String Data = dateInsertWatchDate.getEditor().getText();
-    	String Time = comboInsertWatchTime.getSelectionModel().getSelectedItem();
-    	String Country = txtInsertWatchNation.getText();
-    	String Location = txtInsertWatchLoc.getText();
-    	String Location_Detail = txtInsertWatchDo.getText() + " " + txtInsertWatchSi.getText() + " " + txtInsertWatchDong.getText();
-    	String GPS = txtInsertWatchLat.getText() + "," + txtInsertWatchLong.getText();
-    	String Alias = txtInsertWatchLocname.getText();
-    	String Section = sectionToggle.getSelectedToggle().toString();
-    	String Section_Detail = txtInsertWatchSecremark.getText();
-    	String Person_Name = comboInsertWatchWho.getSelectionModel().getSelectedItem();
-    	String Butterfly_Name = txtInsertWatchBname.getText();
-    	String Butterfly_Family = txtInsertWatchFamily.getText();
-    	String Butterfly_Scien = txtInsertWatchZoological.getText();
-    	String Sex = (String)comboInsertWatchSex.getSelectionModel().getSelectedItem();
-    	String Status = comboInsertWatchStatus.getSelectionModel().getSelectedItem();
-    	String Quantity = txtInsertWatchQuan.getText();
-    	String Note = txtInsertWatchRemark.getText();
-    	System.out.println(Data);
-    	System.out.println(Time);
-    	System.out.println(Country);
-    	System.out.println(Location);
-    	System.out.println(Location_Detail);
-    	System.out.println(GPS);
-    	System.out.println(Alias);
-    	System.out.println(Section);
-    	System.out.println(Section_Detail);
-    	System.out.println(Person_Name);
-    	System.out.println(Butterfly_Name);
-    	System.out.println(Butterfly_Family);
-    	System.out.println(Butterfly_Scien);
-    	System.out.println(Sex);
-    	System.out.println(Status);
-    	System.out.println(Quantity);
-    	System.out.println(Note);    	
-    	
+        /* Data Acquisition */
+    	String date = dateInsertWatchDate.getEditor().getText();
+    	String time = comboInsertWatchTime.getSelectionModel().getSelectedItem();
+    	String country = txtInsertWatchNation.getText();
+    	String location = txtInsertWatchLoc.getText();
+    	String location_detail = txtInsertWatchDo.getText() + " " + txtInsertWatchSi.getText() + " " + txtInsertWatchDong.getText();
+    	String gps = txtInsertWatchLat.getText() + "," + txtInsertWatchLong.getText();
+    	String alias = txtInsertWatchLocname.getText();
+    	String section = sectionToggle.getSelectedToggle().toString();
+    	String section_detail = txtInsertWatchSecremark.getText();
+    	String person_name = comboInsertWatchWho.getSelectionModel().getSelectedItem();
+    	String butterfly_name = txtInsertWatchBname.getText();
+    	String butterfly_family = txtInsertWatchFamily.getText();
+    	String scientific_name = txtInsertWatchZoological.getText();
+    	String sex = (String)comboInsertWatchSex.getSelectionModel().getSelectedItem();
+    	String status = comboInsertWatchStatus.getSelectionModel().getSelectedItem();
+    	String quantity = txtInsertWatchQuan.getText();
+    	String note = txtInsertWatchRemark.getText();
+
+    	/* DB Instance initialization */
+        MDBButterflyGuide db_butterfly_guide = new MDBButterflyGuide(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBPerson db_person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBCollectionInfo db_collection_info = new MDBCollectionInfo(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBLocation db_location = new MDBLocation(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBObservation db_observation = new MDBObservation(((MSharedData)this.shared_model).getDB().getConnection());
+
+        /* Value Mapping */
+        db_location.setCountry(country);
+        db_location.setLocation(location);
+        db_location.setLocationDetail(location_detail);
+        db_location.setGps(gps);
+        db_location.setAlias(alias);
+        db_location.setSection(section);
+        db_location.setSectionDetail(section_detail);
+        if(!db_location.insert()){
+            ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] Location Insert Failed.");
+            return;
+        }
+
+
+        /* Query */
+
     }
 
     @FXML
@@ -186,11 +191,12 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     @FXML
     void choosewhoInsertWatch(ActionEvent event) {	
 		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("�����ڸ� �Է��Ͻÿ�");
+		dialog.setTitle("관찰자를 등록하세요");
 		dialog.setHeaderText(null);
 		dialog.setContentText(null);
 		dialog.showAndWait();
 		String new_name = dialog.getEditor().getText();
+
 		PersonDB.setName(new_name);
 		PersonDB.setSort("관찰자");
 		if(!PersonDB.insert()) System.out.println("Failed.");
@@ -200,7 +206,9 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
     @FXML
     void clearInsertWatch(ActionEvent event) {
-
+        MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+        person.delete_by_type("관찰자");
+        this.comboInsertWatchWho.getItems().clear();
     }
 
     @FXML
@@ -356,9 +364,9 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		this.comboInsertWatchTime.getItems().addAll("����", "����", "����", "����");
-		this.comboInsertWatchSex.getItems().addAll("��", "��");
-		this.comboInsertWatchStatus.getItems().addAll("��", "��", "��");
+		this.comboInsertWatchTime.getItems().addAll("오전", "오후", "저녁", "새벽");
+		this.comboInsertWatchSex.getItems().addAll("암컷", "수컷");
+		this.comboInsertWatchStatus.getItems().addAll("상", "중", "하");
 	}
 	
 	@Override
@@ -368,10 +376,9 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 		System.out.println(this.shared_model);
 		PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
 		ResultSet rs = PersonDB.selectQuery(query);
-		System.out.println("I'm In!");
 		try {
 			while(rs.next()) {
-				this.comboInsertWatchWho.getItems().add(rs.getString(1));
+				this.comboInsertWatchWho.getItems().add(rs.getString(1));   // get name
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

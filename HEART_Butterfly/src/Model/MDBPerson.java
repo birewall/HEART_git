@@ -64,4 +64,10 @@ public class MDBPerson extends MDatabase {
                 + " where idPerson = " + idPerson;
         return modifyingQuery(query);
     }
+
+    /* Modified Function */
+    public boolean delete_by_type(String type) {
+        String query = "delete from Person where sort = '" + type + "'";
+        return modifyingQuery(query);
+    }
 }
