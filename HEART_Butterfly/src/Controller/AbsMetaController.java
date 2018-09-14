@@ -46,5 +46,4 @@ public abstract class AbsMetaController {
 	public void init_procedure() {
 		/* For Overridding */
 	}
-
 }
