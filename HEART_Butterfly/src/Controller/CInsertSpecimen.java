@@ -4,6 +4,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Model.MDBButterflyGuide;
+import Model.MDBCollectionInfo;
+import Model.MDBImageObjectInfo;
+import Model.MDBLocation;
+import Model.MDBObservation;
+import Model.MDBPerson;
+import Model.MDBSpecimen;
+import Model.MDBSpecimenize;
+import Model.MSharedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -134,6 +143,15 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     	String Loc3 = (String) comboInsertSpecimenLoc3.getSelectionModel().getSelectedItem();
     	String SpecimenWho = comboInsertSpecimenWho.getSelectionModel().getSelectedItem();
     	
+    	/* DB Instance initialization */
+    	MDBCollectionInfo db_collection_info = new MDBCollectionInfo(((MSharedData)this.shared_model).getDB().getConnection());
+    	MDBLocation db_location = new MDBLocation(((MSharedData)this.shared_model).getDB().getConnection());
+    	MDBPerson db_person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+    	MDBButterflyGuide db_butterfly_guide = new MDBButterflyGuide(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBSpecimenize db_specimenize = new MDBSpecimenize(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBSpecimen db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBImageObjectInfo db_imageObjectInfo = new MDBImageObjectInfo(((MSharedData)this.shared_model).getDB().getConnection());
+
     	
     	
 
