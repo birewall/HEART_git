@@ -10,9 +10,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import javax.imageio.plugins.bmp.BMPImageWriteParam;
+
 import Model.MDBButterflyGuide;
+import Model.MDBCameraInfo;
 import Model.MDBCollectionInfo;
 import Model.MDBImage;
+import Model.MDBImageObjectInfo;
 import Model.MDBLocation;
 import Model.MDBObservation;
 import Model.MDBPerson;
@@ -234,12 +238,12 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     	/* DB Instance initialization */
         MDBButterflyGuide db_butterfly_guide = new MDBButterflyGuide(((MSharedData)this.shared_model).getDB().getConnection());
         MDBPerson db_person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-        MDBCollectionInfo db_collection_info = new MDBCollectionInfo(((MSharedData)this.shared_model).getDB().getConnection());
         MDBLocation db_location = new MDBLocation(((MSharedData)this.shared_model).getDB().getConnection());
-        MDBObservation db_observation = new MDBObservation(((MSharedData)this.shared_model).getDB().getConnection());
         MDBImage db_image = new MDBImage(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBImageObjectInfo db_image_object = new MDBImageObjectInfo(((MSharedData)this.shared_model).getDB().getConnection());
+        MDBCameraInfo db_camera = new MDBCameraInfo(((MSharedData)this.shared_model).getDB().getConnection());
 
-        /* Value Mapping */ //여기부터!!!!!!!!! 
+        /* Value Mapping */
         db_location.setCountry(country);
         db_location.setLocation(location);
         db_location.setLocationDetail(location_detail);
@@ -247,11 +251,88 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
         db_location.setAlias(alias);
         db_location.setSection(section);
         db_location.setSectionDetail(section_detail);
-        if(!db_location.insert()){
-            ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] Location Insert Failed.");
-            return;
+        // db_location.printContents();
+        int id_location = db_location.getIdLocation();
+        if(id_location == 0) {
+            if(!db_location.insert()){
+                ((MSharedData)this.shared_model).getLogger().error("[CInsertPicture] Location Insert Failed.");
+                return;
+            }
+            id_location = db_location.getIdLocationFromDB();
         }
 
+        db_person.setName(person_name);
+        db_person.setSort("촬영자");
+        int id_person = db_person.getIdPersonFromDB();
+        if(id_person == 0) {
+            db_person.insert();
+            if(!db_person.insert()){
+                ((MSharedData)this.shared_model).getLogger().error("[CInsertPicture] Person Insert Failed.");
+                return;
+            }
+            id_person = db_person.getIdPersonFromDB();
+        }
+
+        db_butterfly_guide.setName(butterfly_name);
+        db_butterfly_guide.setFamily(butterfly_family);
+        db_butterfly_guide.setScientific_name(scientific_name);
+        int id_butterflyGuide = db_butterfly_guide.getIdButterflyGuideFromDB();
+        if(id_butterflyGuide == 0) {
+            db_butterfly_guide.insert();
+            if(!db_butterfly_guide.insert()){
+                ((MSharedData)this.shared_model).getLogger().error("[CInsertPicture] ButterflyGuide Insert Failed.");
+                return;
+            }
+            id_butterflyGuide = db_butterfly_guide.getIdButterflyGuideFromDB();
+        }
+
+        db_camera.setLens(type_lens);
+        db_camera.setFormat(file_type);
+        db_camera.setCalibration(pic_correction);
+        int id_camera = db_camera.getIdCameraInfoFromDB();
+        if(id_camera == 0) {
+            db_camera.insert();
+            if(!db_camera.insert()){
+                ((MSharedData)this.shared_model).getLogger().error("[CInsertPicture] CameraInfo Insert Failed.");
+                return;
+            }
+            id_camera = db_camera.getIdCameraInfoFromDB();
+        }
+        
+        db_image_object.setSize(pic_size);
+        db_image_object.setWing(wing_status);
+        db_image_object.setBackground(background);
+        db_image_object.setStatus(b_move);
+        db_image_object.setSex(sex);
+        db_image_object.setNumber(Integer.parseInt(pic_quantity));
+        db_image_object.setMarriage(matching);
+        int id_image_object = db_image_object.getIdImageObjectInfoFromDB();
+        if(id_image_object == 0) {
+            db_image_object.insert();
+            if(!db_image_object.insert()){
+                ((MSharedData)this.shared_model).getLogger().error("[CInsertPicture] ImageObjectInfo Insert Failed.");
+                return;
+            }
+            id_image_object = db_image_object.getIdImageObjectInfoFromDB();
+        }
+        
+        db_image.setIdLocation(id_location);
+        db_image.setIdImageObjectInfo(id_image_object);
+        db_image.setIdCameraInfo(id_camera);
+        db_image.setDate(date);
+        db_image.setTime(time);
+        db_image.setPath(filepath);
+        int id_image = db_image.getIdImageFromDB();
+        if(id_image == 0) {
+            db_image.insert();
+            if(!db_image.insert()){
+                ((MSharedData)this.shared_model).getLogger().error("[CInsertPicture] Image Insert Failed.");
+                return;
+            }
+            id_butterflyGuide = db_butterfly_guide.getIdButterflyGuideFromDB();
+        }
+        
+        this.txtInsertPictureSpath.setText(filepath);
     }
 
     @FXML
@@ -358,7 +439,8 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     }
     
     File ImageSelectedFile;
-
+    String filepath;
+    
     @FXML
     void pictureInsertPicture(ActionEvent event) throws IOException {
         FileChooser fc = new FileChooser();
@@ -380,8 +462,8 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     		if(ImageSelectedFile.getAbsolutePath() == null) return;
     		String filename = ImageSelectedFile.getName();
     		
-    		//Send file path to DB
-    		String filepath = ImageSelectedFile.getAbsolutePath();
+    		//Determine path
+    		filepath = ImageSelectedFile.getAbsolutePath();
 
     		
     		//Set image at view
