@@ -87,7 +87,7 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     private DatePicker dateInsertSpecimenDate;
 
     @FXML
-    private ComboBox<?> comboInsertSpecimenLoc3type;
+    private ComboBox<String> comboInsertSpecimenLoc3type;
 
     @FXML
     private ComboBox<String> comboInsertSpecimenCollectway;
@@ -114,10 +114,10 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     private Button btnInsertSpecimenLabel;
 
     @FXML
-    private ComboBox<?> comboInsertSpecimenLoc2type;
+    private ComboBox<String> comboInsertSpecimenLoc2type;
 
     @FXML
-    private ComboBox<?> comboInsertSpecimenLoc3;
+    private ComboBox<String> comboInsertSpecimenLoc3;
 
     @FXML
     private Button btnInsertSpecimenCorrect;
@@ -153,7 +153,6 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     	MDBButterflyGuide db_butterfly_guide = new MDBButterflyGuide(((MSharedData)this.shared_model).getDB().getConnection());
         MDBSpecimenize db_specimenize = new MDBSpecimenize(((MSharedData)this.shared_model).getDB().getConnection());
         MDBSpecimen db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
-        MDBImageObjectInfo db_imageObjectInfo = new MDBImageObjectInfo(((MSharedData)this.shared_model).getDB().getConnection());
 
         /* Value Mapping */
         db_location.setCountry(country);
@@ -210,11 +209,55 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
             id_butterflyGuide = db_butterfly_guide.getIdButterflyGuideFromDB();
         }
 
-        //
+        //db_collection_info
+        db_collection_info.setDate(Collect_date);
+        db_collection_info.setMethod(Collectway);
+        int id_collectionInfo = db_collection_info.getIdCollectionInfoFromDB();
+        if(id_collectionInfo == 0) {
+            db_butterfly_guide.insert();
+            if(!db_collection_info.insert()){
+                ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] ButterflyGuide Insert Failed.");
+                return;
+            }
+            id_collectionInfo = db_collection_info.getIdCollectionInfoFromDB();
+        }
         
-        
-    	
+        //db_specimenize
+        db_specimenize.setDate(Specimen_date);
+        db_specimenize.setAnticepticName("null");//추후 추가해야함.
+        db_specimenize.setEmbalmingDate("null");//추후 추가해야함.
+        int id_specimenize = db_specimenize.getIdSpecimenizeFromDB();
+        if(id_specimenize == 0) {
+        	db_specimenize.insert();
+            if(!db_collection_info.insert()){
+                ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] ButterflyGuide Insert Failed.");
+                return;
+            }
+            id_specimenize = db_specimenize.getIdSpecimenizeFromDB();
+        }
 
+        //db_specimen
+        db_specimen.setStatus(status);
+        db_specimen.setSex(sex);
+        db_specimen.setStorageRoom(Loc1);
+        db_specimen.setStorageCabinet(Loc2 + "_" + Loc2type);
+        db_specimen.setStorageChest(Loc3 + "_" + Loc3type);
+        db_specimen.setComment(note);
+        int id_specimen = db_specimen.getIdSpecimenFromDB();
+        if(id_specimen == 0) {
+        	db_specimenize.insert();
+            if(!db_specimen.insert()){
+                ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] ButterflyGuide Insert Failed.");
+                return;
+            }
+            id_specimen = db_specimen.getIdSpecimenFromDB();
+        }
+        
+        //db_imageObjectInfo
+        
+        
+        
+        
     }
 
     @FXML
@@ -244,6 +287,14 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 
     @FXML
     void choosewhoInsertSpecimen(ActionEvent event) {
+    	TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("Insert New Name");
+		dialog.setHeaderText(null);
+		dialog.setContentText(null);
+		dialog.showAndWait();
+		String new_name = dialog.getEditor().getText();
+		
+		this.comboInsertSpecimenWho.getItems().add(new_name);
 
     }
 
@@ -404,9 +455,14 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 		// TODO Auto-generated method stub
 		this.comboInsertSpecimenCollectway.getItems().addAll("직접채집", "구매", "선물");
 		this.comboInsertSpecimenWho.getItems().addAll("조윤호");
+		this.comboInsertSpecimenCollectwho.getItems().addAll("조윤호");
 		this.comboInsertSpecimenStatus.getItems().addAll("상", "중", "하");
 		this.comboInsertSpecimenLoc1.getItems().addAll("집", "사무실", "학교");
 		this.comboInsertSpecimenSex.getItems().addAll("암", "수");
+		this.comboInsertSpecimenLoc2type.getItems().addAll("구형", "신형", "기타");
+		this.comboInsertSpecimenLoc3type.getItems().addAll("구형", "신형", "기타");
+		this.comboInsertSpecimenLoc2.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+		this.comboInsertSpecimenLoc3.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 
 	}
 	
