@@ -20,8 +20,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 
 public class CInsertSpecimen extends AbsMetaController implements Initializable {
+	
+	MDBPerson PersonDB;
 
     @FXML
     private DatePicker dateInsertSpecimenCollectdate;
@@ -75,7 +78,7 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     private Button btnInsertSpecimenChoosecollectwho;
 
     @FXML
-    private ComboBox<?> comboInsertSpecimenCollectwho;
+    private ComboBox<String> comboInsertSpecimenCollectwho;
 
     @FXML
     private TextField txtInsertSpecimenNation;
@@ -152,7 +155,64 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
         MDBSpecimen db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
         MDBImageObjectInfo db_imageObjectInfo = new MDBImageObjectInfo(((MSharedData)this.shared_model).getDB().getConnection());
 
-    	
+        /* Value Mapping */
+        db_location.setCountry(country);
+        db_location.setLocation(location);
+        db_location.setLocationDetail(location_detail);
+        db_location.setGps(gps);
+        db_location.setAlias(alias);
+        
+        // db_location.printContents();
+        int id_location = db_location.getIdLocationFromDB();
+        if(id_location == 0) {
+            if(!db_location.insert()){
+                ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] Location Insert Failed.");
+                return;
+            }
+            id_location = db_location.getIdLocationFromDB();
+        }
+        
+        // db_person_제공자 & 작업자
+        db_person.setName(collectwho);
+        db_person.setSort("제공자");
+        int id_person_col = db_person.getIdPersonFromDB();
+        if(id_person_col == 0) {
+            db_person.insert();
+            if(!db_person.insert()){
+                ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] Person Insert Failed.");
+                return;
+            }
+            id_person_col = db_person.getIdPersonFromDB();
+        }
+        db_person.setName(SpecimenWho);
+        db_person.setSort("작업자");
+        int id_person_speci = db_person.getIdPersonFromDB();
+        if(id_person_speci == 0) {
+            db_person.insert();
+            if(!db_person.insert()){
+                ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] Person Insert Failed.");
+                return;
+            }
+            id_person_speci = db_person.getIdPersonFromDB();
+        }
+        
+        // db_butterfly_guide
+        db_butterfly_guide.setName(butterfly_name);
+        db_butterfly_guide.setFamily(butterfly_family);
+        db_butterfly_guide.setScientific_name(scientific_name);
+        int id_butterflyGuide = db_butterfly_guide.getIdButterflyGuideFromDB();
+        if(id_butterflyGuide == 0) {
+            db_butterfly_guide.insert();
+            if(!db_butterfly_guide.insert()){
+                ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] ButterflyGuide Insert Failed.");
+                return;
+            }
+            id_butterflyGuide = db_butterfly_guide.getIdButterflyGuideFromDB();
+        }
+
+        //
+        
+        
     	
 
     }
@@ -164,7 +224,22 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 
     @FXML
     void choosecollectwhoInsertSpecimen(ActionEvent event) {
+    	TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("Insert New Name");
+		dialog.setHeaderText(null);
+		dialog.setContentText(null);
+		dialog.showAndWait();
+		String new_name = dialog.getEditor().getText();
 
+//		PersonDB.setName(new_name);
+//		PersonDB.setSort("제공자");
+//		if(!PersonDB.insert()){
+//		    System.out.println("Failed.");
+//		    return;
+//        }
+		
+		this.comboInsertSpecimenCollectwho.getItems().add(new_name);
+		
     }
 
     @FXML
@@ -174,6 +249,18 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 
     @FXML
     void clearInsertSpecimen(ActionEvent event) {
+    	MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+        person.delete_by_type("제공자");
+        this.comboInsertSpecimenCollectwho.getItems().clear();
+
+        person.setName("조윤호");
+        person.setSort("제공자");
+        if(!person.insert()){
+            System.out.println("Failed.");
+            return;
+        }
+        this.comboInsertSpecimenCollectwho.getItems().add("조윤호");
+        this.comboInsertSpecimenCollectwho.getSelectionModel().select(0);
 
     }
 
@@ -315,11 +402,11 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		this.comboInsertSpecimenCollectway.getItems().addAll("����ä��", "����", "����");
-		this.comboInsertSpecimenWho.getItems().addAll("����ȣ");
-		this.comboInsertSpecimenStatus.getItems().addAll("��", "��", "��");
-		this.comboInsertSpecimenLoc1.getItems().addAll("��", "�б�", "�繫��");
-		this.comboInsertSpecimenSex.getItems().addAll("��", "��");
+		this.comboInsertSpecimenCollectway.getItems().addAll("직접채집", "구매", "선물");
+		this.comboInsertSpecimenWho.getItems().addAll("조윤호");
+		this.comboInsertSpecimenStatus.getItems().addAll("상", "중", "하");
+		this.comboInsertSpecimenLoc1.getItems().addAll("집", "사무실", "학교");
+		this.comboInsertSpecimenSex.getItems().addAll("암", "수");
 
 	}
 	
