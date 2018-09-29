@@ -1,3 +1,4 @@
+/*
 package Controller;
 
 import java.net.URL;
@@ -1024,3 +1025,4 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
     ;
     }
 }
+*/
