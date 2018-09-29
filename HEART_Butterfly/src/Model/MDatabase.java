@@ -54,6 +54,7 @@ public class MDatabase extends AbsMetaModel {
 			return false;
 		}
 
+		System.out.println(query);
 		logger.info(query);
 
 		boolean error = false;
@@ -97,7 +98,6 @@ public class MDatabase extends AbsMetaModel {
 		return result;
 	}
 
-	/* Not Implemented Yet */
 	public boolean initDB() {
 		if(!cleanAllTable()) return false;
 
@@ -109,25 +109,29 @@ public class MDatabase extends AbsMetaModel {
 			return false;
 		}
 
-		try {
-			MDBButterflyGuide db_butterflyguide = new MDBButterflyGuide(this.connection);
+		MDBButterflyGuide db_butterflyguide = new MDBButterflyGuide(this.connection);
+		MDBCameraInfo db_camerainfo = new MDBCameraInfo(this.connection);
+		MDBCollectionInfo db_collectioninfo = new MDBCollectionInfo(this.connection);
+		MDBImage db_image = new MDBImage(this.connection);
+		MDBImageObjectInfo db_imageobjinfo = new MDBImageObjectInfo(this.connection);
+		MDBLocation db_location = new MDBLocation(this.connection);
+		MDBObservation db_observation = new MDBObservation(this.connection);
+		MDBPerson db_person = new MDBPerson(this.connection);
+		MDBSpecimen db_specimen = new MDBSpecimen(this.connection);
+		MDBSpecimenIO db_specimenIO = new MDBSpecimenIO(this.connection);
+		MDBSpecimenize db_specimenize = new MDBSpecimenize(this.connection);
 
-			st.execute("delete from ButterflyGuide where not idButterflyGuide=0");
-			st.execute("delete from CameraInfo where not idCameraInfo=0");
-			st.execute("delete from CollectionInfo where not idCollectionInfo=0");
-			st.execute("delete from Image where not idImage=0");
-			st.execute("delete from ImageObjectInfo where not idImageObjectInfo=0");
-			st.execute("delete from Location where not idLocation=0");
-			st.execute("delete from Observation where not idObservation=0");
-			st.execute("delete from Person where not idPerson=0");
-			st.execute("delete from Specimen where not idSpecimen=0");
-			st.execute("delete from SpecimenIO where not idSpecimenIO=0");
-			st.execute("delete from Specimenize where not idSpecimenize=0");
-		} catch (SQLException e) {
-			e.printStackTrace();
-			logger.error("[MDatabase] Delete all items is failed");
-			return false;
-		}
+		if(!db_butterflyguide.insert_zero_id()) return false;
+		if(!db_camerainfo.insert_zero_id()) return false;
+		if(!db_collectioninfo.insert_zero_id()) return false;
+		if(!db_image.insert_zero_id()) return false;
+		if(!db_imageobjinfo.insert_zero_id()) return false;
+		if(!db_location.insert_zero_id()) return false;
+		if(!db_observation.insert_zero_id()) return false;
+		if(!db_person.insert_zero_id()) return false;
+		if(!db_specimen.insert_zero_id()) return false;
+		if(!db_specimenIO.insert_zero_id()) return false;
+		if(!db_specimenize.insert_zero_id()) return false;
 		return true;
 	}
 
@@ -140,24 +144,102 @@ public class MDatabase extends AbsMetaModel {
 			return false;
 		}
 
-		try {
-			st.execute("delete from ButterflyGuide where not idButterflyGuide=0");
-			st.execute("delete from CameraInfo where not idCameraInfo=0");
-			st.execute("delete from CollectionInfo where not idCollectionInfo=0");
-			st.execute("delete from Image where not idImage=0");
-			st.execute("delete from ImageObjectInfo where not idImageObjectInfo=0");
-			st.execute("delete from Location where not idLocation=0");
-			st.execute("delete from Observation where not idObservation=0");
-			st.execute("delete from Person where not idPerson=0");
-			st.execute("delete from Specimen where not idSpecimen=0");
-			st.execute("delete from SpecimenIO where not idSpecimenIO=0");
-			st.execute("delete from Specimenize where not idSpecimenize=0");
-		} catch (SQLException e) {
-			e.printStackTrace();
-			logger.error("[MDatabase] Delete all items is failed");
-			return false;
-		}
+		MDBButterflyGuide db_butterflyguide = new MDBButterflyGuide(this.connection);
+		MDBCameraInfo db_camerainfo = new MDBCameraInfo(this.connection);
+		MDBCollectionInfo db_collectioninfo = new MDBCollectionInfo(this.connection);
+		MDBImage db_image = new MDBImage(this.connection);
+		MDBImageObjectInfo db_imageobjinfo = new MDBImageObjectInfo(this.connection);
+		MDBLocation db_location = new MDBLocation(this.connection);
+		MDBObservation db_observation = new MDBObservation(this.connection);
+		MDBPerson db_person = new MDBPerson(this.connection);
+		MDBSpecimen db_specimen = new MDBSpecimen(this.connection);
+		MDBSpecimenIO db_specimenIO = new MDBSpecimenIO(this.connection);
+		MDBSpecimenize db_specimenize = new MDBSpecimenize(this.connection);
+
+		if(!db_butterflyguide.clear_table()) return false;
+		if(!db_camerainfo.clear_table()) return false;
+		if(!db_collectioninfo.clear_table()) return false;
+		if(!db_image.clear_table()) return false;
+		if(!db_imageobjinfo.clear_table()) return false;
+		if(!db_location.clear_table()) return false;
+		if(!db_observation.clear_table()) return false;
+		if(!db_person.clear_table()) return false;
+		if(!db_specimen.clear_table()) return false;
+		if(!db_specimenIO.clear_table()) return false;
+		if(!db_specimenize.clear_table()) return false;
 
 		return true;
+	}
+
+	public boolean changeID(int id_before, int id_after) {
+		String query = "update " + this.table_name + " set id" + this.table_name + "=" + id_after
+				+ " where id"+ this.table_name + "="
+				+ id_before;
+		return modifyingQuery(query);
+	}
+
+	public boolean clear_table() {
+		String query = "delete from " + this.table_name + " where not id" + this.table_name + "=0";
+		return modifyingQuery(query);
+	}
+
+	public boolean insert_zero_id() {
+		if(!delete(0)) return false;
+		initialize();
+		if(!insert()) return false;
+		int zero_id = getIDFromDB();
+		if(zero_id > 0) {
+			return changeID(zero_id, 0);
+		}
+		return true;
+	}
+
+	public String db_string_formatting(String origin, String type) {
+		if(origin == null)
+			return null;
+		else if(type.equals("string") || type.equals("String"))
+			return "'" + origin + "'";
+		else if(type.equals("int") || type.equals("Int"))
+			return origin;
+		else
+			return null;
+	}
+
+	/* 	Input: 	'abcd'
+	* 	Output:	column='abcd',
+	* */
+	public String db_update_formatting(String origin, String column_name) {
+		String query;
+		if(origin == null) return "";
+		query = column_name + "=" + origin + ",";
+		return query;
+	}
+
+	/* 	Input: 	'abcd'
+	 * 	Output:	column='abcd',
+	 * */
+	public String db_where_formatting(String origin, String column_name) {
+		String query;
+		if(origin == null) return column_name + " is null";
+		query = column_name + "=" + origin;
+		return query;
+	}
+
+	/* For Override */
+	public int getIDFromDB() {
+		return 0;
+	}
+
+	/* For Override */
+	public void initialize() { }
+
+	/* For Override */
+	public boolean delete(int id) {
+		return false;
+	}
+
+	/* For Override */
+	public boolean insert() {
+		return false;
 	}
 }

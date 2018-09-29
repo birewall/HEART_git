@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class MDBSpecimen extends MDatabase {
     int idSpecimen;
-    int idCollectionInfo;
+    int idCollectionInfo;   // not null
     int idImage;
     String status;          //varchar(10)
     String sex;
@@ -15,12 +15,31 @@ public class MDBSpecimen extends MDatabase {
     String storageChest;    //varchar(10)
     String comment;         //varchar(10)
 
+    public void initialize() {
+        this.idCollectionInfo = 0;
+        this.idImage = 0;
+        this.status = null;
+        this.sex = null;
+        this.storageChest = null;
+        this.storageCabinet = null;
+        this.storageRoom = null;
+        this.comment = null;
+    }
+
     public MDBSpecimen(Connection connection) {
         this.connection = connection;
         this.table_name = "Specimen";
+        initialize();
     }
 
-    public int getIdSpecimen() {
+    public String getIdSpecimen() {
+        if(idSpecimen == 0)
+            return null;
+        else
+            return String.valueOf(idSpecimen);
+    }
+
+    public int getIdSpecimen_integer() {
         return idSpecimen;
     }
 
@@ -28,16 +47,22 @@ public class MDBSpecimen extends MDatabase {
         this.idSpecimen = idSpecimen;
     }
 
-    public int getIdCollectionInfo() {
-        return idCollectionInfo;
+    public String getIdCollectionInfo() {
+        if(idCollectionInfo == 0)
+            return null;
+        else
+            return String.valueOf(idCollectionInfo);
     }
 
     public void setIdCollectionInfo(int idCollectionInfo) {
         this.idCollectionInfo = idCollectionInfo;
     }
 
-    public int getIdImage() {
-        return idImage;
+    public String getIdImage() {
+        if(idImage == 0)
+            return null;
+        else
+            return String.valueOf(idImage);
     }
 
     public void setIdImage(int idImage) {
@@ -45,6 +70,7 @@ public class MDBSpecimen extends MDatabase {
     }
 
     public String getStatus() {
+        if(status == null || status.length() == 0) return null;
         return status;
     }
 
@@ -53,6 +79,7 @@ public class MDBSpecimen extends MDatabase {
     }
 
     public String getSex() {
+        if(sex == null || sex.length() == 0) return null;
         return sex;
     }
 
@@ -61,6 +88,7 @@ public class MDBSpecimen extends MDatabase {
     }
 
     public String getStorageRoom() {
+        if(storageRoom == null || storageRoom.length() == 0) return null;
         return storageRoom;
     }
 
@@ -69,6 +97,7 @@ public class MDBSpecimen extends MDatabase {
     }
 
     public String getStorageCabinet() {
+        if(storageCabinet == null || storageCabinet.length() == 0) return null;
         return storageCabinet;
     }
 
@@ -77,6 +106,7 @@ public class MDBSpecimen extends MDatabase {
     }
 
     public String getComment() {
+        if(comment == null || comment.length() == 0) return null;
         return comment;
     }
 
@@ -85,6 +115,7 @@ public class MDBSpecimen extends MDatabase {
     }
 
     public String getStorageChest() {
+        if(storageChest == null || storageChest.length() == 0) return null;
         return storageChest;
     }
 
@@ -107,14 +138,14 @@ public class MDBSpecimen extends MDatabase {
 
     public boolean insert() {
         String query = "insert into Specimen (idCollectionInfo, idImage, status, sex, storageRoom, storageCabinet, storageChest, comment) values ("
-                + getIdCollectionInfo() + ","
-                + getIdImage() + ","
-                + "'" + getStatus() + "',"
-                + "'" + getSex() + "',"
-                + "'" + getStorageRoom() + "',"
-                + "'" + getStorageCabinet() + "',"
-                + "'" + getStorageChest() + "',"
-                + "'" + getComment() + "'"
+                + db_string_formatting(getIdCollectionInfo(), "int") + ","
+                + db_string_formatting(getIdImage(), "int") + ","
+                + db_string_formatting(getStatus(), "string") + ","
+                + db_string_formatting(getSex(), "string") + ","
+                + db_string_formatting(getStorageRoom(), "string") + ","
+                + db_string_formatting(getStorageCabinet(), "string") + ","
+                + db_string_formatting(getStorageChest(), "string") + ","
+                + db_string_formatting(getComment(), "string")
                 + ");";
         return modifyingQuery(query);
     }
@@ -125,30 +156,34 @@ public class MDBSpecimen extends MDatabase {
     }
 
     public boolean update(int idSpecimen) {
-        String query = "update Specimen set "
-                + "idCollectionInfo=" + getIdCollectionInfo()
-                + ",idImage=" + getIdImage()
-                + ",status='" + getStatus() + "'"
-                + ",sex='" + getSex() + "'"
-                + ",storageRoom='" + getStorageRoom() + "'"
-                + ",storageCabinet='" + getStorageCabinet() + "'"
-                + ",storageChest='" + getStorageChest() + "'"
-                + ",comment='" + getComment() + "'"
-                + " where idSpecimen = " + idSpecimen;
+        String query = "update Specimen set ";
+        int initial_length = query.length();
+        query += db_update_formatting(db_string_formatting(getIdCollectionInfo(), "int"), "idCollectionInfo");
+        query += db_update_formatting(db_string_formatting(getIdImage(), "int"), "idImage");
+        query += db_update_formatting(db_string_formatting(getStatus(), "string"), "status");
+        query += db_update_formatting(db_string_formatting(getSex(), "string"), "sex");
+        query += db_update_formatting(db_string_formatting(getStorageRoom(), "string"), "storageRoom");
+        query += db_update_formatting(db_string_formatting(getStorageCabinet(), "string"), "storageCabinet");
+        query += db_update_formatting(db_string_formatting(getStorageChest(), "string"), "storageChest");
+        query += db_update_formatting(db_string_formatting(getComment(), "string"), "comment");
+        if(query.length() == initial_length) return false;
+        query = query.substring(0, query.length()-1);   // Delete last comma
+        query += " where idSpecimen = " + idSpecimen;
         return modifyingQuery(query);
     }
 
     public int getIdSpecimenFromDB() {
         String query = "select idSpecimen from Specimen where "
-                + "idCollectionInfo=" + getIdCollectionInfo()
-                + " and idImage=" + getIdImage()
-                + " and status='" + getStatus() + "'"
-                + " and sex='" + getSex() + "'"
-                + " and storageRoom='" + getStorageRoom() + "'"
-                + " and storageCabinet='" + getStorageCabinet() + "'"
-                + " and storageChest='" + getStorageChest() + "'"
-                + " and comment='" + getComment() + "'";
+                + db_where_formatting(db_string_formatting(getIdCollectionInfo(), "int"), "idCollectionInfo") + " and "
+                + db_where_formatting(db_string_formatting(getIdImage(), "int"), "idImage") + " and "
+                + db_where_formatting(db_string_formatting(getStatus(), "String"), "status") + " and "
+                + db_where_formatting(db_string_formatting(getSex(), "String"), "sex") + " and "
+                + db_where_formatting(db_string_formatting(getStorageRoom(), "String"), "storageRoom") + " and "
+                + db_where_formatting(db_string_formatting(getStorageCabinet(), "String"), "storageCabinet") + " and "
+                + db_where_formatting(db_string_formatting(getStorageChest(), "String"), "storageChest") + " and "
+                + db_where_formatting(db_string_formatting(getComment(), "String"), "comment");
         ResultSet rs = selectQuery(query);
+        if(rs == null) return 0;
         try {
             rs.last();
             if(rs.getRow() > 0) {
@@ -159,5 +194,10 @@ public class MDBSpecimen extends MDatabase {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public int getIDFromDB() {
+        return getIdSpecimenFromDB();
     }
 }

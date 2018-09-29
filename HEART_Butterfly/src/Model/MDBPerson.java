@@ -6,15 +6,28 @@ import java.sql.SQLException;
 
 public class MDBPerson extends MDatabase {
     int idPerson;
-    String name;    //varchar(45)
-    String sort;    //varchar(5)
+    String name;    //varchar(45) not null
+    String sort;    //varchar(5) not null
 
     public MDBPerson(Connection connection) {
         this.connection = connection;
         this.table_name = "Person";
+        initialize();
     }
 
-    public int getIdPerson() {
+    public void initialize() {
+        this.name = null;
+        this.sort = null;
+    }
+
+    public String getIdPerson() {
+        if(idPerson == 0)
+            return null;
+        else
+            return String.valueOf(idPerson);
+    }
+
+    public int getIdPerson_integer() {
         return idPerson;
     }
 
@@ -23,6 +36,7 @@ public class MDBPerson extends MDatabase {
     }
 
     public String getName() {
+        if(name == null || name.length() == 0) return null;
         return name;
     }
 
@@ -31,6 +45,7 @@ public class MDBPerson extends MDatabase {
     }
 
     public String getSort() {
+        if(sort == null || sort.length() == 0) return null;
         return sort;
     }
 
@@ -47,8 +62,8 @@ public class MDBPerson extends MDatabase {
 
     public boolean insert() {
         String query = "insert into Person (name, sort) values ("
-                + "'" + getName() + "',"
-                + "'" + getSort() + "'"
+                + db_string_formatting(getName(), "string") + ","
+                + db_string_formatting(getSort(), "string")
                 + ");";
         return modifyingQuery(query);
     }
@@ -59,10 +74,13 @@ public class MDBPerson extends MDatabase {
     }
 
     public boolean update(int idPerson) {
-        String query = "update Person set "
-                + "name='" + getName() + "'"
-                + ",sort='" + getSort() + "'"
-                + " where idPerson = " + idPerson;
+        String query = "update Person set ";
+        int initial_length = query.length();
+        query += db_update_formatting(db_string_formatting(getName(), "string"), "name");
+        query += db_update_formatting(db_string_formatting(getSort(), "string"), "sort");
+        if(query.length() == initial_length) return false;
+        query = query.substring(0, query.length()-1);   // Delete last comma
+        query += " where idPerson = " + idPerson;
         return modifyingQuery(query);
     }
 
@@ -74,9 +92,10 @@ public class MDBPerson extends MDatabase {
 
     public int getIdPersonFromDB() {
         String query = "select idPerson from Person where "
-                + "name='" + getName() + "'"
-                + " and sort='" + getSort() + "'";
+                + db_where_formatting(db_string_formatting(getName(), "String"), "name") + " and "
+                + db_where_formatting(db_string_formatting(getSort(), "String"), "sort");
         ResultSet rs = selectQuery(query);
+        if(rs == null) return 0;
         try {
             rs.last();
             if(rs.getRow() > 0) {
@@ -87,5 +106,10 @@ public class MDBPerson extends MDatabase {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public int getIDFromDB() {
+        return getIdPersonFromDB();
     }
 }

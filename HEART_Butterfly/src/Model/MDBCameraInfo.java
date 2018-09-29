@@ -13,9 +13,23 @@ public class MDBCameraInfo extends MDatabase {
     public MDBCameraInfo(Connection connection) {
         this.connection = connection;
         this.table_name = "CameraInfo";
+        initialize();
     }
 
-    public int getIdCameraInfo() {
+    public void initialize() {
+        this.lens = null;
+        this.calibration = null;
+        this.format = null;
+    }
+
+    public String getIdCameraInfo() {
+        if(idCameraInfo == 0)
+            return "null";
+        else
+            return String.valueOf(idCameraInfo);
+    }
+
+    public int getIdCameraInfo_integer() {
         return idCameraInfo;
     }
 
@@ -24,6 +38,7 @@ public class MDBCameraInfo extends MDatabase {
     }
 
     public String getLens() {
+        if(lens == null || lens.length() == 0) return null;
         return lens;
     }
 
@@ -32,6 +47,7 @@ public class MDBCameraInfo extends MDatabase {
     }
 
     public String getCalibration() {
+        if(calibration == null || calibration.length() == 0) return null;
         return calibration;
     }
 
@@ -40,6 +56,7 @@ public class MDBCameraInfo extends MDatabase {
     }
 
     public String getFormat() {
+        if(format == null || format.length() == 0) return null;
         return format;
     }
 
@@ -57,9 +74,9 @@ public class MDBCameraInfo extends MDatabase {
 
     public boolean insert() {
         String query = "insert into CameraInfo (lens, format, calibration) values ("
-                + "'" + getLens() + "',"
-                + "'" + getFormat() + "',"
-                + "'" + getCalibration() + "'"
+                + db_string_formatting(getLens(), "string") + ","
+                + db_string_formatting(getFormat(), "string") + ","
+                + db_string_formatting(getCalibration(), "string")
                 + ");";
         return modifyingQuery(query);
     }
@@ -70,20 +87,24 @@ public class MDBCameraInfo extends MDatabase {
     }
 
     public boolean update(int idCameraInfo) {
-        String query = "update CameraInfo set "
-                + "lens='" + getLens() + "'"
-                + ",format='" + getFormat() + "'"
-                + ",calibration='" + getCalibration() + "'"
-                + " where idCameraInfo = " + idCameraInfo;
+        String query = "update CameraInfo set ";
+        int initial_length = query.length();
+        query += db_update_formatting(db_string_formatting(getLens(), "string"), "lens");
+        query += db_update_formatting(db_string_formatting(getFormat(), "string"), "format");
+        query += db_update_formatting(db_string_formatting(getCalibration(), "string"), "calibration");
+        if(query.length() == initial_length) return false;
+        query = query.substring(0, query.length()-1);   // Delete last comma
+        query += " where idCameraInfo = " + idCameraInfo;
         return modifyingQuery(query);
     }
 
     public int getIdCameraInfoFromDB() {
         String query = "select idCameraInfo from CameraInfo where "
-                + "lens='" + getLens() + "'"
-                + " and format='" + getFormat() + "'"
-                + " and calibration='" + getCalibration() + "'";
+                + db_where_formatting(db_string_formatting(getLens(), "String"), "lens") + " and "
+                + db_where_formatting(db_string_formatting(getFormat(), "String"), "format") + " and "
+                + db_where_formatting(db_string_formatting(getCalibration(), "String"), "calibration");
         ResultSet rs = selectQuery(query);
+        if(rs == null) return 0;
         try {
             rs.last();
             if(rs.getRow() > 0) {
@@ -93,6 +114,10 @@ public class MDBCameraInfo extends MDatabase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;
+        return 0;    }
+
+    @Override
+    public int getIDFromDB() {
+        return getIdCameraInfoFromDB();
     }
 }

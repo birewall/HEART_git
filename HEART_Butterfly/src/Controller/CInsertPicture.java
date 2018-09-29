@@ -252,7 +252,7 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
         db_location.setSection(section);
         db_location.setSectionDetail(section_detail);
         // db_location.printContents();
-        int id_location = db_location.getIdLocation();
+        int id_location = Integer.parseInt(db_location.getIdLocation());
         if(id_location == 0) {
             if(!db_location.insert()){
                 ((MSharedData)this.shared_model).getLogger().error("[CInsertPicture] Location Insert Failed.");

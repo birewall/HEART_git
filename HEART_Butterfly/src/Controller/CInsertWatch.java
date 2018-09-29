@@ -154,7 +154,10 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
         String alias = txtInsertWatchLocname.getText();
     	String section = "";
-    	if(sectionToggle.getSelectedToggle() != null) section = sectionToggle.getSelectedToggle().toString();
+    	if(sectionToggle.getSelectedToggle() != null) {
+    	    section = (String)sectionToggle.getSelectedToggle().getUserData();
+    	    System.out.println(section);
+        }
     	String section_detail = txtInsertWatchSecremark.getText();
     	String person_name = comboInsertWatchWho.getSelectionModel().getSelectedItem(); // 조윤호 교수님은 반드시 DB에 있어야 함
     	String butterfly_name = txtInsertWatchBname.getText();
@@ -163,6 +166,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     	String sex = comboInsertWatchSex.getSelectionModel().getSelectedItem();
     	String status = comboInsertWatchStatus.getSelectionModel().getSelectedItem();
     	String quantity = txtInsertWatchQuan.getText();
+    	if(quantity.length() == 0) quantity = "0";
     	String note = txtInsertWatchRemark.getText();
 
     	/* Debug */
@@ -238,32 +242,34 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
         db_collection_info.setIdButterflyGuide(id_butterflyGuide);
         db_collection_info.setIdPerson(id_person);
         db_collection_info.setDate(date);
+        db_collection_info.setMethod("watch");  // 출집해서 직접 채집
         // db_collection_info.setMethod(method);
         // db_collection_info.printContents();
-        int id_collection_info = db_collection_info.getIdCollectionInfo();
+
+        int id_collection_info = db_collection_info.getIdCollectionInfoFromDB();
         if(id_collection_info == 0) {
             db_collection_info.insert();
             if(!db_collection_info.insert()){
                 ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] CollectionInfo Insert Failed.");
                 return;
             }
-            id_collection_info = db_collection_info.getIdCollectionInfo();
+            id_collection_info = db_collection_info.getIdCollectionInfoFromDB();
         }
 
         db_observation.setDate(date);
         db_observation.setIdCollectionInfo(id_collection_info);
         db_observation.setNumber(Integer.parseInt(quantity));
-        db_observation.setSex((sex.equals("남"))?'m':'f');
+        db_observation.setSex((sex.equals("남"))?"m":"f");
         db_observation.setStatus(status);
         db_observation.setTime(time);
-        int id_observation = db_observation.getIdCollectionInfo();
+        int id_observation = db_observation.getIdObservationFromDB();
         if(id_observation == 0) {
             db_observation.insert();
             if (!db_observation.insert()) {
                 ((MSharedData) this.shared_model).getLogger().error("[CInsertWatch] Observation Insert Failed.");
                 return;
             }
-            id_observation = db_observation.getIdCollectionInfo();
+            id_observation = db_observation.getIdObservationFromDB();
         }
     }
 
@@ -275,7 +281,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     @FXML
     void choosewhoInsertWatch(ActionEvent event) {	
 		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("Insert New Name");
+		dialog.setTitle("관찰자를 등록하세요");
 		dialog.setHeaderText(null);
 		dialog.setContentText(null);
 		dialog.showAndWait();
@@ -460,8 +466,8 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		this.comboInsertWatchTime.getItems().addAll("새벽", "오전", "오후", "저녁");
-		this.comboInsertWatchSex.getItems().addAll("암", "수");
+		this.comboInsertWatchTime.getItems().addAll("오전", "오후", "저녁", "새벽");
+		this.comboInsertWatchSex.getItems().addAll("암컷", "수컷");
 		this.comboInsertWatchStatus.getItems().addAll("상", "중", "하");
 
 		this.comboInsertWatchWho.getSelectionModel().select(0); // 조윤호 교수님은 무조건 DB에 있어야함

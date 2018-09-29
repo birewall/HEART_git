@@ -3,6 +3,7 @@ package Controller;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import Model.MDBButterflyGuide;
 import Model.MDBCameraInfo;
 import Model.MSharedData;
 import javafx.event.ActionEvent;
@@ -55,8 +56,11 @@ public class CMain extends AbsMetaController{
     @FXML
     void mainInsert(ActionEvent event) throws IOException {
         //Example
-        //MDBCameraInfo cam = new MDBCameraInfo(((MSharedData)this.shared_model)
-        //        .getDB().getConnection());
+        MDBButterflyGuide guide = new MDBButterflyGuide(((MSharedData)this.shared_model)
+                .getDB().getConnection());
+        guide.setName("아무개");
+        guide.insert();
+        guide.update(1);
         changeWindow(this.btnMainExit.getScene().getWindow(), "VInsert");
     }
 

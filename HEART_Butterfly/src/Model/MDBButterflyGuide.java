@@ -1,5 +1,7 @@
 package Model;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,27 +10,44 @@ import java.sql.Statement;
 public class MDBButterflyGuide extends MDatabase {
     int idButterflyGuide;
     int idImage;
-    String name;                 //varchar(45)
+    String name;                 //varchar(45) not null
     String family;               //varchar(45)
     String scientific_name;      //varchar(45)
 
     public MDBButterflyGuide(Connection connection) {
         this.table_name = "ButterflyGuide";
         this.connection = connection;
+        initialize();
+    }
+
+    @Override
+    public void initialize() {
         this.idImage = 0;
         this.name = null;
         this.family = null;
         this.scientific_name = null;
     }
 
-    public int getIdButterflyGuide() { return idButterflyGuide; }
+    public String getIdButterflyGuide() {
+        if(idButterflyGuide == 0)
+            return null;
+        else
+            return String.valueOf(idButterflyGuide);
+    }
+
+    public int getIdButterflyGuide_integer() {
+        return idButterflyGuide;
+    }
 
     public void setIdButterflyGuide(int idButterflyGuide) {
         this.idButterflyGuide = idButterflyGuide;
     }
 
-    public int getIdImage() {
-        return idImage;
+    public String getIdImage() {
+        if(idImage == 0)
+            return null;
+        else
+            return String.valueOf(idImage);
     }
 
     public void setIdImage(int idImage) {
@@ -36,6 +55,7 @@ public class MDBButterflyGuide extends MDatabase {
     }
 
     public String getName() {
+        if(name.length() == 0) return null;
         return name;
     }
 
@@ -44,6 +64,7 @@ public class MDBButterflyGuide extends MDatabase {
     }
 
     public String getFamily() {
+        if(family == null || family.length() == 0) return null;
         return family;
     }
 
@@ -52,6 +73,7 @@ public class MDBButterflyGuide extends MDatabase {
     }
 
     public String getScientific_name() {
+        if(scientific_name == null || scientific_name.length() == 0) return null;
         return scientific_name;
     }
 
@@ -68,38 +90,44 @@ public class MDBButterflyGuide extends MDatabase {
         logger.info("[scientific_name] " + scientific_name);
     }
 
+    @Override
     public boolean insert() {
         String query = "insert into ButterflyGuide (idImage, name, family, scientific_name) values ("
-                + getIdImage() + ","
-                + "'" + getName() + "',"
-                + "'" + getFamily() + "',"
-                + "'" + getScientific_name() + "'"
+                + db_string_formatting(getIdImage(), "int") + ","
+                + db_string_formatting(getName(), "string") + ","
+                + db_string_formatting(getFamily(), "string") + ","
+                + db_string_formatting(getScientific_name(), "string")
                 + ");";
         return modifyingQuery(query);
     }
 
+    @Override
     public boolean delete(int idButterflyGuide) {
         String query = "delete from ButterflyGuide where idButterflyGuide = " + idButterflyGuide;
         return modifyingQuery(query);
     }
 
     public boolean update(int idButterflyGuide) {
-        String query = "update ButterflyGuide set "
-                + "idImage=" + getIdImage()
-                + ",name='" + getName() + "'"
-                + ",family='" + getFamily() + "'"
-                + ",scientific_name='" + getScientific_name() + "'"
-                + " where idButterflyGuide = " + idButterflyGuide;
+        String query = "update ButterflyGuide set ";
+        int initial_length = query.length();
+        query += db_update_formatting(db_string_formatting(getIdImage(), "int"), "idImage");
+        query += db_update_formatting(db_string_formatting(getName(), "string"), "name");
+        query += db_update_formatting(db_string_formatting(getFamily(), "string"), "family");
+        query += db_update_formatting(db_string_formatting(getScientific_name(), "string"), "scientific_name");
+        if(query.length() == initial_length) return false;
+        query = query.substring(0, query.length()-1);   // Delete last comma
+        query += " where idButterflyGuide = " + idButterflyGuide;
         return modifyingQuery(query);
     }
 
     public int getIdButterflyGuideFromDB() {
         String query = "select idButterflyGuide from ButterflyGuide where "
-                + "idImage=" + getIdImage()
-                + " and name='" + getName() + "'"
-                + " and family='" + getFamily() + "'"
-                + " and scientific_name='" + getScientific_name() + "'";
+                + db_where_formatting(db_string_formatting(getIdImage(), "int"), "idImage") + " and "
+                + db_where_formatting(db_string_formatting(getName(), "String"), "name") + " and "
+                + db_where_formatting(db_string_formatting(getFamily(), "String"), "family") + " and "
+                + db_where_formatting(db_string_formatting(getScientific_name(), "String"), "scientific_name");
         ResultSet rs = selectQuery(query);
+        if(rs == null) return 0;
         try {
             rs.last();
             if(rs.getRow() > 0) {
@@ -107,8 +135,13 @@ public class MDBButterflyGuide extends MDatabase {
                 return Integer.parseInt(rs.getString(1));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            return 0;
         }
         return 0;
+    }
+
+    @Override
+    public int getIDFromDB() {
+        return getIdButterflyGuideFromDB();
     }
 }

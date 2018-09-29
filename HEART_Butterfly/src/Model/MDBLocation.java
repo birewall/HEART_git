@@ -7,19 +7,37 @@ import java.sql.SQLException;
 public class MDBLocation extends MDatabase {
     int idLocation;
     String country;         //varchar(20)
-    String location;        //varchar(20)
+    String location;        //varchar(20) not null
     String locationDetail;  //varchar(20)
     String gps;             //varchar(20)
     String alias;           //varchar(45)
     String section;         //varchar(45)
     String sectionDetail;   //varchar(45)
 
+    public void initialize() {
+        this.country = null;
+        this.location = null;
+        this.locationDetail = null;
+        this.gps = null;
+        this.alias = null;
+        this.section = null;
+        this.sectionDetail = null;
+    }
+
     public MDBLocation(Connection connection) {
         this.connection = connection;
         this.table_name = "Location";
+        initialize();
     }
 
-    public int getIdLocation() {
+    public String getIdLocation() {
+        if(idLocation == 0)
+            return null;
+        else
+            return String.valueOf(idLocation);
+    }
+
+    public int getIdLocation_integer() {
         return idLocation;
     }
 
@@ -28,6 +46,7 @@ public class MDBLocation extends MDatabase {
     }
 
     public String getCountry() {
+        if(country == null || country.length() == 0) return null;
         return country;
     }
 
@@ -36,6 +55,7 @@ public class MDBLocation extends MDatabase {
     }
 
     public String getLocation() {
+        if(location == null || location.length() == 0) return null;
         return location;
     }
 
@@ -44,6 +64,7 @@ public class MDBLocation extends MDatabase {
     }
 
     public String getLocationDetail() {
+        if(locationDetail == null || locationDetail.length() == 0) return null;
         return locationDetail;
     }
 
@@ -52,6 +73,7 @@ public class MDBLocation extends MDatabase {
     }
 
     public String getGps() {
+        if(gps == null || gps.length() == 0) return null;
         return gps;
     }
 
@@ -60,6 +82,7 @@ public class MDBLocation extends MDatabase {
     }
 
     public String getAlias() {
+        if(alias == null || alias.length() == 0) return null;
         return alias;
     }
 
@@ -68,6 +91,7 @@ public class MDBLocation extends MDatabase {
     }
 
     public String getSection() {
+        if(section == null || section.length() == 0) return null;
         return section;
     }
 
@@ -76,6 +100,7 @@ public class MDBLocation extends MDatabase {
     }
 
     public String getSectionDetail() {
+        if(sectionDetail == null || sectionDetail.length() == 0) return null;
         return sectionDetail;
     }
 
@@ -97,13 +122,13 @@ public class MDBLocation extends MDatabase {
 
     public boolean insert() {
         String query = "insert into Location (country, location, locationDetail, gps, alias, section, sectionDetail) values ("
-                + "'" + getCountry() + "',"
-                + "'" + getLocation() + "',"
-                + "'" + getLocationDetail() + "',"
-                + "'" + getGps() + "',"
-                + "'" + getAlias() + "',"
-                + "'" + getSection() + "',"
-                + "'" + getSectionDetail() + "'"
+                + db_string_formatting(getCountry(), "string") + ","
+                + db_string_formatting(getLocation(), "string") + ","
+                + db_string_formatting(getLocationDetail(), "string") + ","
+                + db_string_formatting(getGps(), "string") + ","
+                + db_string_formatting(getAlias(), "string") + ","
+                + db_string_formatting(getSection(), "string") + ","
+                + db_string_formatting(getSectionDetail(), "string")
                 + ");";
         return modifyingQuery(query);
     }
@@ -114,28 +139,32 @@ public class MDBLocation extends MDatabase {
     }
 
     public boolean update(int idLocation) {
-        String query = "update Location set "
-                + "country='" + getCountry() + "'"
-                + ",location='" + getLocation() + "'"
-                + ",locationDetail='" + getLocationDetail() + "'"
-                + ",gps='" + getGps() + "'"
-                + ",alias='" + getAlias() + "'"
-                + ",section='" + getSection() + "'"
-                + ",sectionDetail='" + getSectionDetail() + "'"
-                + " where idLocation = " + idLocation;
+        String query = "update Location set ";
+        int initial_length = query.length();
+        query += db_update_formatting(db_string_formatting(getCountry(), "string"), "country");
+        query += db_update_formatting(db_string_formatting(getLocation(), "string"), "location");
+        query += db_update_formatting(db_string_formatting(getLocationDetail(), "string"), "locationDetail");
+        query += db_update_formatting(db_string_formatting(getGps(), "string"), "gps");
+        query += db_update_formatting(db_string_formatting(getAlias(), "string"), "alias");
+        query += db_update_formatting(db_string_formatting(getSection(), "string"), "section");
+        query += db_update_formatting(db_string_formatting(getSectionDetail(), "string"), "sectionDetail");
+        if(query.length() == initial_length) return false;
+        query = query.substring(0, query.length()-1);   // Delete last comma
+        query += " where idLocation = " + idLocation;
         return modifyingQuery(query);
     }
 
     public int getIdLocationFromDB() {
         String query = "select idLocation from Location where "
-                + "country='" + getCountry() + "'"
-                + " and location='" + getLocation() + "'"
-                + " and locationDetail='" + getLocationDetail() + "'"
-                + " and gps='" + getGps() + "'"
-                + " and alias='" + getAlias() + "'"
-                + " and section='" + getSection() + "'"
-                + " and sectionDetail='" + getSectionDetail() + "'";
+                + db_where_formatting(db_string_formatting(getCountry(), "String"), "country") + " and "
+                + db_where_formatting(db_string_formatting(getLocation(), "String"), "location") + " and "
+                + db_where_formatting(db_string_formatting(getLocationDetail(), "String"), "locationDetail") + " and "
+                + db_where_formatting(db_string_formatting(getGps(), "String"), "gps") + " and "
+                + db_where_formatting(db_string_formatting(getAlias(), "String"), "alias") + " and "
+                + db_where_formatting(db_string_formatting(getSection(), "String"), "section") + " and "
+                + db_where_formatting(db_string_formatting(getSectionDetail(), "String"), "sectionDetail");
         ResultSet rs = selectQuery(query);
+        if(rs == null) return 0;
         try {
             rs.last();
             if(rs.getRow() > 0) {
@@ -146,5 +175,10 @@ public class MDBLocation extends MDatabase {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public int getIDFromDB() {
+        return getIdLocationFromDB();
     }
 }
