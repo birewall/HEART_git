@@ -2,246 +2,271 @@ package Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 
-public class CAnalysisDataplot extends AbsMetaController {
-
-    @FXML
-    private ComboBox<?> comboAnalysisBasicDate;
+public class CAnalysisDataplot {
 
     @FXML
-    private RadioButton radioAnalysisBasicWhole;
+    private TextField txtDataAnalysisSelectedsex;
 
     @FXML
-    private RadioButton radioAnalysisBasicWatch;
+    private RadioButton radioDataAnalysisAll;
 
     @FXML
-    private RadioButton radioAnalysisBasicSpecimen;
+    private ComboBox<?> comboDataAnalysisSex;
 
     @FXML
-    private RadioButton radioAnalysisBasicPicture;
+    private Button btnDataAnalysisExit;
 
     @FXML
-    private ComboBox<?> comboAnalysisBasicTime;
+    private TextField txtDataAnalysisWatchnumber;
 
     @FXML
-    private TextField txtAnalysisBasicLoc;
+    private Button btnDataAnalysisData;
 
     @FXML
-    private Button btnAnalysisBasicSearchbloc;
+    private CheckBox checkDataAnalysisLoc;
 
     @FXML
-    private TextField txtAnalysisBasicNation;
+    private TextField txtDataAnalysisSelecteddate;
 
     @FXML
-    private TextField txtAnalysisBasicBname;
+    private Button btnDataAnalysisLocmap;
 
     @FXML
-    private ComboBox<?> comboAnalysisBasicStatus;
+    private ToggleGroup DataAnalysis;
 
     @FXML
-    private ComboBox<?> comboAnalysisBasicSex;
+    private Button btnDataAnalysisExport;
 
     @FXML
-    private ComboBox<?> comboAnalysisBasicSloc;
+    private TextField txtDataAnalysisSelectedfamily;
 
     @FXML
-    private ComboBox<?> comboAnalysisBasicFtype;
+    private ComboBox<?> comboDataAnalysisDate;
 
     @FXML
-    private ComboBox<?> comboAnalysisBasicIscorrected;
+    private CheckBox checkDataAnalysisBname;
 
     @FXML
-    private ComboBox<?> comboAnalysisBasicSize;
+    private CheckBox checkDataAnalysisPicture;
 
     @FXML
-    private ComboBox<?> comboAnalysisBasicWing;
+    private Slider scrollDataAnalysisDate;
 
     @FXML
-    private ComboBox<?> comboAnalysisBasicBground;
+    private RadioButton radioDataAnalysisWatch;
 
     @FXML
-    private ComboBox<?> comboAnalysisBasicBloc;
+    private TextField txtDataAnalysisSelectedbname;
 
     @FXML
-    private ComboBox<?> comboAnalysisBasicLtype;
+    private TextField txtDataAnalysisBiggest;
 
     @FXML
-    private TableView<?> tblAnalysisBasicWholetbl;
+    private LineChart<?, ?> graphDataAnalysis;
 
     @FXML
-    private TableColumn<?, ?> tblcAnalysisBasicDate;
+    private TextField txtDataAnalysisSelectedstatus;
 
     @FXML
-    private TableColumn<?, ?> tblcAnalysisBasicTime;
+    private TextField txtDataAnalysisFamily;
 
     @FXML
-    private TableColumn<?, ?> tblcAnalysisBasicNation;
+    private TextField txtDataAnalysisSelectedpicture;
 
     @FXML
-    private TableColumn<?, ?> tblcAnalysisBasicLoc;
+    private CheckBox checkDataAnalysisSex;
 
     @FXML
-    private TableColumn<?, ?> tblcAnalysisBasicDo;
+    private RadioButton radioDataAnalysisPicture;
 
     @FXML
-    private TableColumn<?, ?> tblcAnalysisBasicSi;
+    private TextField txtDataAnalysisCollectnumber;
 
     @FXML
-    private TableColumn<?, ?> tblcAnalysisBasicDong;
+    private ComboBox<?> comboDataAnalysisStatus;
 
     @FXML
-    private TableColumn<?, ?> tblcAnalysisBasicZoological;
+    private Button btnDataAnalysisLocname;
 
     @FXML
-    private TableColumn<?, ?> tblcAnalysisBasicFamily;
+    private CheckBox checkDataAnalysisFamily;
 
     @FXML
-    private TableColumn<?, ?> tblcAnalysisBasicBname;
+    private TextField txtDataAnalysisBname;
 
     @FXML
-    private TableColumn<?, ?> tblcAnalysisBasicStatus;
+    private TextField txtDataAnalysisSelectedloc2;
 
     @FXML
-    private TableColumn<?, ?> tblcAnalysisBasicSex;
+    private TextField txtDataAnalysisSelectedloc1;
 
     @FXML
-    private TableColumn<?, ?> tblcAnalysisBasicInsert;
+    private CheckBox checkDataAnalysisStatus;
 
     @FXML
-    private Button btnAnalysisBasicSearch;
+    private RadioButton radioDataAnalysisSpecimen;
 
     @FXML
-    private Button btnAnalysisBasicSearch1;
-
-    @FXML
-    private TextField txtAnalysisBasicBname1;
-
-    @FXML
-    private TextField txtAnalysisBasicBname2;
-
-    @FXML
-    private Button btnAnalysisBasicSearchbloc1;
-
-    @FXML
-    private RadioButton radioAnalysisBasicPicture1;
-
-    @FXML
-    private RadioButton radioAnalysisBasicSpecimen1;
-
-    @FXML
-    private RadioButton radioAnalysisBasicWatch1;
-
-    @FXML
-    private RadioButton radioAnalysisBasicWhole1;
-
-    @FXML
-    void BlocAnalysisBasic(ActionEvent event) {
+    void pictureDataAnalysisradio(ActionEvent event) {
 
     }
 
     @FXML
-    void LocAnalysisBasic(ActionEvent event) {
+    void specimenDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void bgroundAnalysisBasic(ActionEvent event) {
+    void watchDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void bnameAnalysisBasic(ActionEvent event) {
+    void allDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void dateAnalysisBasic(ActionEvent event) {
+    void familyDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void ftypeAnalysisBasic(ActionEvent event) {
+    void bnameDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void iscorrectedAnalysisBasic(ActionEvent event) {
+    void statusDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void ltypeAnalysisBasic(ActionEvent event) {
+    void sexDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void nationAnalysisBasic(ActionEvent event) {
+    void dateDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void pictureAnalysisBasic(ActionEvent event) {
+    void locnameDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void searchAnalysisBasic(ActionEvent event) {
+    void familycheckDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void searchblocAnalysisBasic(ActionEvent event) {
+    void bnamecheckDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void sexAnalysisBasic(ActionEvent event) {
+    void statuscheckDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void sizeAnalysisBasic(ActionEvent event) {
+    void sexcheckDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void slocAnalysisBasic(ActionEvent event) {
+    void pictureDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void specimenAnalysisBasic(ActionEvent event) {
+    void selectedloc1DataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void statusAnalysisBasic(ActionEvent event) {
+    void locmpDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void timeAnalysisBasic(ActionEvent event) {
+    void locDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void watchAnalysisBasic(ActionEvent event) {
+    void biggestDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void wholeAnalysisBasic(ActionEvent event) {
+    void dataDataAnalysis(ActionEvent event) {
 
     }
 
     @FXML
-    void wingAnalysisBasic(ActionEvent event) {
+    void exportDataAnalysis(ActionEvent event) {
+
+    }
+
+    @FXML
+    void exitDataAnalysis(ActionEvent event) {
+
+    }
+
+    @FXML
+    void watchnumberDataAnalysis(ActionEvent event) {
+
+    }
+
+    @FXML
+    void collectnumberDataAnalysis(ActionEvent event) {
+
+    }
+
+    @FXML
+    void selecteddateDataAnalysis(ActionEvent event) {
+
+    }
+
+    @FXML
+    void selectedloc2DataAnalysis(ActionEvent event) {
+
+    }
+
+    @FXML
+    void selectedfamilyDataAnalysis(ActionEvent event) {
+
+    }
+
+    @FXML
+    void selectedbnameDataAnalysis(ActionEvent event) {
+
+    }
+
+    @FXML
+    void selectedstatusDataAnalysis(ActionEvent event) {
+
+    }
+
+    @FXML
+    void selectedsexDataAnalysis(ActionEvent event) {
+
+    }
+
+    @FXML
+    void selectedpictureDataAnalysis(ActionEvent event) {
 
     }
 

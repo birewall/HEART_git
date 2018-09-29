@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 
-public class CAnalysisLocation extends AbsMetaController {
+public class CAnalysisLocation_previous extends AbsMetaController {
 
     @FXML
     private RadioButton radioAnalysisBasicWhole;

@@ -219,31 +219,37 @@
             </AnchorPane>
          </content>
       </Tab>
-      <Tab fx:id="tabSpecHistory1" text="표본 상태 관리">
+      <Tab fx:id="tabSpecStatus" text="표본 상태 관리">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Label layoutX="28.0" layoutY="28.0" text="검색 조건 설정" />
-                  <Button fx:id="btnSpecHistoryExit1" layoutX="1011.0" layoutY="876.0" mnemonicParsing="false" onAction="#exitSpecHistory" prefHeight="65.0" prefWidth="155.0" text="종료" />
-                  <Button fx:id="btnSpecHistoryCorrect1" layoutX="837.0" layoutY="876.0" mnemonicParsing="false" onAction="#correctSpecHistory" prefHeight="65.0" prefWidth="155.0" text="수정" />
-                  <RadioButton layoutX="104.0" layoutY="72.0" mnemonicParsing="false" text="방부제 교체주기로 검색" />
-                  <RadioButton layoutX="461.0" layoutY="74.0" mnemonicParsing="false" text="나비 상태로 검색" />
-                  <RadioButton layoutX="921.0" layoutY="72.0" mnemonicParsing="false" text="나비 명으로 검색" />
-                  <CheckBox layoutX="489.0" layoutY="111.0" mnemonicParsing="false" text="상 [훼손부위없이 매우 양호한 상태]" />
-                  <CheckBox layoutX="489.0" layoutY="142.0" mnemonicParsing="false" text="중 [날개, 더듬이  부분 30% 이하 훼손]" />
-                  <CheckBox layoutX="489.0" layoutY="173.0" mnemonicParsing="false" text="하 [훼손정도가 심각하여 표본 가치가 없음]" />
-                  <CheckBox layoutX="128.0" layoutY="171.0" mnemonicParsing="false" text="하 [1년 이상]" />
-                  <CheckBox layoutX="128.0" layoutY="140.0" mnemonicParsing="false" text="중 [6개월 이상 1년 미만]" />
-                  <CheckBox layoutX="128.0" layoutY="109.0" mnemonicParsing="false" text="상 [6개월 미만]" />
-                  <TextField layoutX="944.0" layoutY="105.0" promptText="나비 명 입력" />
-                  <TableView layoutX="42.0" layoutY="322.0" prefHeight="540.0" prefWidth="1107.0">
+                  <Button fx:id="btnSpecStatusExit" layoutX="1011.0" layoutY="876.0" mnemonicParsing="false" onAction="#exitSpecStatus" prefHeight="65.0" prefWidth="155.0" text="종료" />
+                  <Button fx:id="btnSpecStatusCorrect" layoutX="828.0" layoutY="876.0" mnemonicParsing="false" onAction="#correctSpecStatus" prefHeight="65.0" prefWidth="155.0" text="수정" />
+                  <RadioButton fx:id="radioGoodPreservativeStatus" layoutX="129.0" layoutY="110.0" mnemonicParsing="false" onAction="#checkGoodPreservativeStatus" text="상 [6개월 미만]">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="PreservativeChange" />
+                     </toggleGroup></RadioButton>
+                  <TextField fx:id="txtBNameSpecStatus" layoutX="891.0" layoutY="106.0" promptText="나비 명 입력" />
+                  <TableView fx:id="tblSpecStatus" layoutX="42.0" layoutY="322.0" prefHeight="540.0" prefWidth="1107.0">
                     <columns>
                       <TableColumn prefWidth="113.0" text="C1" />
                       <TableColumn minWidth="3.0" prefWidth="120.0" text="C2" />
                     </columns>
                   </TableView>
-                  <Button layoutX="828.0" layoutY="219.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="155.0" text="검색" />
-                  <Button layoutX="1002.0" layoutY="219.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="155.0" text="결과 내보내기" />
+                  <Button fx:id="btnSpecStatusSearch" layoutX="828.0" layoutY="219.0" mnemonicParsing="false" onAction="#searchSpecStatus" prefHeight="65.0" prefWidth="155.0" text="검색" />
+                  <Button fx:id="btnSpecStatusExport" layoutX="1002.0" layoutY="219.0" mnemonicParsing="false" onAction="#exportSpecStatusDataAnalysis" prefHeight="65.0" prefWidth="155.0" text="결과 내보내기" />
+                  <CheckBox fx:id="CheckPreservativeStatus" layoutX="100.0" layoutY="72.0" mnemonicParsing="false" onAction="#SearchPreservativeStatus" text="방부제 교체주기로 검색" />
+                  <RadioButton fx:id="radioFairPreservativeStatus" layoutX="128.0" layoutY="143.0" mnemonicParsing="false" onAction="#checkFairPreservativeStatus" text="중 [6개월 이상 1년 미만]" toggleGroup="$PreservativeChange" />
+                  <RadioButton fx:id="radioPoorPreservativeStatus" layoutX="128.0" layoutY="174.0" mnemonicParsing="false" onAction="#checkPoorPreservativeStatus" text="하 [1년 이상]" toggleGroup="$PreservativeChange" />
+                  <RadioButton fx:id="radioPoorBStatus" layoutX="456.0" layoutY="175.0" mnemonicParsing="false" onAction="#checkPoorButterflyStatus" text="하 [훼손정도가 심각하여 표본 가치가 없음]">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="ButterflyStatus" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="radioFairBStatus" layoutX="456.0" layoutY="144.0" mnemonicParsing="false" onAction="#checkFairButterflyStatus" text="중 [날개, 더듬이 부분 30% 이하 훼손]" toggleGroup="$ButterflyStatus" />
+                  <CheckBox fx:id="CheckBSpecStatus" layoutX="428.0" layoutY="73.0" mnemonicParsing="false" onAction="#SearchButterflyStatus" text="나비 표본 상태로 검색" />
+                  <RadioButton fx:id="radioGoodBStatus" layoutX="457.0" layoutY="111.0" mnemonicParsing="false" onAction="#checkGoodButterflyStatus" text="상 [훼손부위 없이 매우 양호한 상태]" toggleGroup="$ButterflyStatus" />
+                  <CheckBox fx:id="CheckBNameSearch" layoutX="873.0" layoutY="72.0" mnemonicParsing="false" onAction="#SearchButterflyName" text="나비명으로 검색" />
                </children>
             </AnchorPane>
          </content>
