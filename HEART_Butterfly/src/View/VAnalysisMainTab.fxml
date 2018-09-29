@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 
-
-<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="100.0" tabMaxWidth="200.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CAnalysisMainTab" />
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="100.0" tabMaxWidth="200.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CAnalysisMainTab">
+   <tabs>
+      <Tab fx:id="tabSummary" text="요약 통계" />
+      <Tab fx:id="tabGraph" text="데이터 그래프" />
+      <Tab fx:id="tabSpecimenIO" text="표본 출납기록" />
+      <Tab fx:id="tabSpecimenStatus" text="표본 상태 정보" />
+   </tabs>
+</TabPane>

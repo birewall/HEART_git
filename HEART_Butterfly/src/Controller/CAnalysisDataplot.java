@@ -11,7 +11,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
-public class CAnalysisDataplot {
+public class CAnalysisDataplot extends AbsMetaController {
 
     @FXML
     private TextField txtDataAnalysisSelectedsex;

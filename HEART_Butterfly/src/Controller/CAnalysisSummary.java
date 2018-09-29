@@ -10,7 +10,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
-public class CAnalysisSummary {
+public class CAnalysisSummary extends AbsMetaController {
 
     @FXML
     private RadioButton radioSummaryAnalysisNation;
