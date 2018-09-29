@@ -21,6 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
@@ -36,8 +37,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Window;
 
-public class CAnalysisMain extends AbsMetaController {
-<<<<<<< HEAD
+public class CAnalysisMain extends AbsMetaController implements Initializable {
 
     @FXML
     private Tab tabSummaryAnalysis;
@@ -177,12 +177,6 @@ public class CAnalysisMain extends AbsMetaController {
     private CheckBox CheckBSpecStatus;
 
     @FXML
-    private Button btnSummaryAnalysisExport;
-
-    @FXML
-    private TextField txtSummaryAnalysisYear;
-    
-    @FXML
     private TableView<ObservableList<String>> tblSpecStatus;
 
     @FXML
@@ -195,22 +189,13 @@ public class CAnalysisMain extends AbsMetaController {
     private TextField txtDataAnalysisSelecteddate;
 
     @FXML
-    private ToggleGroup DataAnalysis;
-
-    @FXML
     private TextField txtDataAnalysisSelectedfamily;
-
-    @FXML
-    private TextField txtSummaryAnalysisNationselect;
 
     @FXML
     private TextField txtSpecHistoryLoc;
 
     @FXML
     private CheckBox checkDataAnalysisBname;
-
-    @FXML
-    private RadioButton radioDataAnalysisWatch;
 
     @FXML
     private CheckBox CheckBNameSearch;
@@ -220,9 +205,6 @@ public class CAnalysisMain extends AbsMetaController {
 
     @FXML
     private CheckBox CheckPreservativeStatus;
-
-    @FXML
-    private ComboBox<?> comboSummaryAnalysisYear;
 
     @FXML
     private ComboBox<?> comboSpecHistoryLoc2type;
@@ -237,19 +219,7 @@ public class CAnalysisMain extends AbsMetaController {
     private ComboBox<?> comboSpecHistoryBloc1;
 
     @FXML
-    private ComboBox<?> comboDataAnalysisStatus;
-
-    @FXML
-    private RadioButton radioSummaryAnalysisDate;
-
-    @FXML
     private ComboBox<?> comboSpecHistorySex;
-
-    @FXML
-    private Button btnSummaryAnalysisExit;
-
-    @FXML
-    private TextField txtDataAnalysisBname;
 
     @FXML
     private RadioButton radioGoodPreservativeStatus;
@@ -264,12 +234,6 @@ public class CAnalysisMain extends AbsMetaController {
     private TextField txtDataAnalysisWatchnumber;
 
     @FXML
-    private TextField txtSummaryAnalysisFamilyselect;
-
-    @FXML
-    private RadioButton radioSummaryAnalysisYearm;
-
-    @FXML
     private Button btnSpecHistoryLocmap;
 
     @FXML
@@ -279,22 +243,10 @@ public class CAnalysisMain extends AbsMetaController {
     private RadioButton radioPoorPreservativeStatus;
 
     @FXML
-    private TextField txtDataAnalysisFamily;
-
-    @FXML
     private Tab tabSpecStatus;
 
     @FXML
     private TextField txtDataAnalysisSelectedpicture;
-
-    @FXML
-    private TextField txtSummaryAnalysisStartdate;
-
-    @FXML
-    private TextField txtSummaryAnalysisMonth;
-
-    @FXML
-    private RadioButton radioDataAnalysisPicture;
 
     @FXML
     private TextField txtDataAnalysisCollectnumber;
@@ -321,16 +273,10 @@ public class CAnalysisMain extends AbsMetaController {
     private TextField txtDataAnalysisSelectedloc1;
 
     @FXML
-    private Button btnSummaryAnalysisClear;
-
-    @FXML
     private Button btnSpecHistoryExit;
 
     @FXML
     private Button btnSpecStatusExit;
-
-    @FXML
-    private TextField txtDataAnalysisSelectedpicture;
 
     @FXML
     private Tab tabSpecHistory;
@@ -340,9 +286,6 @@ public class CAnalysisMain extends AbsMetaController {
 
     @FXML
     private ComboBox<String> comboSpecHistoryTime;
-
-    @FXML
-    private TextField txtSpecHistoryLoc;
 
     @FXML
     private Button btnSpecHistoryLocname;
@@ -355,9 +298,6 @@ public class CAnalysisMain extends AbsMetaController {
 
     @FXML
     private ComboBox<String> comboSpecHistoryStatus;
-
-    @FXML
-    private ComboBox<String> comboSpecHistorySex;
 
     @FXML
     private TableView<?> tblSpecHistory;
@@ -377,28 +317,11 @@ public class CAnalysisMain extends AbsMetaController {
     @FXML
     private TableColumn<?, ?> tblcSpecHistoryLoc;
 
-    private TextField txtSummaryAnalysisFamily;
-
     @FXML
     private TableColumn<?, ?> tblcSpecHistoryFamily;
 
     @FXML
-    private TextField txtSummaryAnalysisDateselect;
-
-    @FXML
-    private Button btnSpecHistoryLocname;
-
-    @FXML
-    private Tab tabSpecHistory;
-
-    @FXML
     private RadioButton radioFairPreservativeStatus;
-
-    @FXML
-    private RadioButton radioSummaryAnalysisBname;
-
-    @FXML
-    private RadioButton radioDataAnalysisAll;
 
     @FXML
     private Button btnDataAnalysisExit;
@@ -410,22 +333,10 @@ public class CAnalysisMain extends AbsMetaController {
     private Button btnSpecHistorySearch;
 
     @FXML
-    private RadioButton radioSummaryAnalysisFamily;
-
-    @FXML
-    private TableColumn<?, ?> tblcSpecHistoryDate;
-
-    @FXML
-    private TableColumn<?, ?> tblcSpecHistoryLoc;
-
-    @FXML
     private TextField txtSpecHistoryFamily;
 
     @FXML
     private CheckBox checkDataAnalysisPicture;
-
-    @FXML
-    private ComboBox<?> comboSpecHistoryTime;
 
     @FXML
     private Slider scrollDataAnalysisDate;
@@ -446,9 +357,6 @@ public class CAnalysisMain extends AbsMetaController {
     private TextField txtDataAnalysisSelectedstatus;
 
     @FXML
-    private TextField txtSummaryAnalysisEnddate;
-
-    @FXML
     private TextField txtSpecHistoryLoc2;
 
     @FXML
@@ -458,34 +366,10 @@ public class CAnalysisMain extends AbsMetaController {
     private Button btnSpecStatusExport;
 
     @FXML
-    private TextField txtSummaryAnalysisYearmselect;
-
-    @FXML
-    private Tab tabDataAnalysis;
-
-    @FXML
-    private TableColumn<?, ?> tblcSpecHistoryLabelid;
-
-    @FXML
     private Button btnSpecStatusCorrect;
 
     @FXML
-    private ComboBox<?> comboSummaryAnalysisNation;
-
-    @FXML
-    private TextField txtSummaryAnalysisWatch;
-
-    @FXML
-    private Button vtnSummaryAnalysisSearch;
-
-    @FXML
-    private TableColumn<?, ?> tblcSpecHistoryTime;
-
-    @FXML
     private TableColumn<?, ?> tblcSpecHistoryContent;
-
-    @FXML
-    private TextField txtSummaryAnalysisBname;
 
     @FXML
     private CheckBox checkDataAnalysisStatus;
@@ -494,40 +378,13 @@ public class CAnalysisMain extends AbsMetaController {
     private TableColumn<?, ?> tblcSpecHistoryStatus;
 
     @FXML
-    private RadioButton radioSummaryAnalysisNation;
-
-    @FXML
-    private ComboBox<?> comboSummaryAnalysisMonth;
-
-    @FXML
-    private BarChart<?, ?> plotSummaryAnalysis;
-
-    @FXML
-    private ComboBox<?> comboSummaryAnalysisFamily;
-
-    @FXML
-    private ComboBox<?> comboSummaryAnalysisBname;
-
-    @FXML
     private ComboBox<?> comboAnalysisBasicTime112;
 
     @FXML
     private Button btnDataAnalysisLocmap;
 
     @FXML
-    private TextField txtSummaryAnalysisBnameselect;
-
-    @FXML
-    private TextField txtSummaryAnalysisPicture;
-
-    @FXML
     private Button btnDataAnalysisExport;
-
-    @FXML
-    private ComboBox<?> comboDataAnalysisDate;
-
-    @FXML
-    private TableView<?> tblSpecHistory;
 
     @FXML
     private TableColumn<?, ?> tblcSpecHistoryLoc2;
@@ -539,51 +396,10 @@ public class CAnalysisMain extends AbsMetaController {
     private TextField txtDataAnalysisSelectedbname;
 
     @FXML
-    private TableColumn<?, ?> tblcSpecHistoryWorkdate;
-
-    @FXML
-    private Button btnSpecHistorySearch;
-
-    @FXML
-    private Button btnSpecHistoryExport;
-
-    @FXML
-    private TextField txtSpecHistoryFamily;
-
-    @FXML
     private TextField txtSpecHistoryZoo;
 
     @FXML
-    private TextField txtSpecHistoryLabelid;
-
-    @FXML
-    private ComboBox<String> comboSpecHistoryBloc1;
-
-    @FXML
-    private ComboBox<String> comboSpecHistoryLoc2type;
-
-    @FXML
-    private TextField txtSpecHistoryLoc2;
-
-    @FXML
-    private TextField txtSpecHistoryLoc3;
-
-    @FXML
-    private ComboBox<String> comboSpecHistoryLoc3type;
-
-    @FXML
-    private ComboBox<String> comboAnalysisBasicTime112;
-
-    @FXML
-    private Button btnSpecHistoryExit;
-
-    private TextField txtSpecHistoryNation;
-
-    @FXML
     private Button btnSpecHistoryCorrect;
-
-    @FXML
-    private TextField txtSpecHistoryBname;
 
     @FXML
     private ToggleGroup ButterflyStatus;
@@ -598,40 +414,7 @@ public class CAnalysisMain extends AbsMetaController {
     private TableColumn<?, ?> tblcSpecHistoryZoo;
 
     @FXML
-    private TextField txtSummaryAnalysisAll;
-
-    @FXML
-    private DatePicker calenSummaryAnalysisCalender;
-
-    @FXML
-    private ComboBox<?> comboSpecHistoryStatus;
-
-    @FXML
-    private ToggleGroup SummaryAnalysis;
-
-    @FXML
-    private TextField txtSummaryAnalysisNation;
-
-    @FXML
-    private TextField txtSpecHistoryZoo;
-
-    @FXML
-    private TextField txtSummaryAnalysisSpecimen;
-
-    @FXML
     private RadioButton radioFairBStatus;
-
-    @FXML
-    private TableColumn<?, ?> tblcSpecHistoryNation;
-
-    @FXML
-    private Tab tabSummaryAnalysis;
-
-    @FXML
-    private RadioButton radioDataAnalysisSpecimen;
-
-    @FXML
-    private ComboBox<?> comboSpecHistoryDate;
     
     Double array[][];
 
@@ -1204,175 +987,40 @@ public class CAnalysisMain extends AbsMetaController {
 		this.radioPoorBStatus.setDisable(true);
     }
 
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        // TODO Auto-generated method stub
+        this.comboSummaryAnalysisNation.getItems().addAll("대한민국","말레이시아","중국");
+        this.comboSummaryAnalysisBname.getItems().addAll("");
+        this.comboSummaryAnalysisYear.getItems().addAll();
+        this.comboSummaryAnalysisMonth.getItems().addAll();
+        this.comboDataAnalysisStatus.getItems().addAll();
+        this.comboDataAnalysisSex.getItems().addAll();
+        this.comboDataAnalysisDate.getItems().addAll();
+        this.comboSpecHistoryDate.getItems().addAll();
+        this.comboSpecHistoryTime.getItems().addAll();
+        this.comboSpecHistoryStatus.getItems().addAll();
+        this.comboSpecHistorySex.getItems().addAll();
+        this.comboSpecHistoryBloc1.getItems().addAll();
+        this.comboSpecHistoryLoc2type.getItems().addAll();
+        this.comboSpecHistoryLoc3type.getItems().addAll();
+        this.comboAnalysisBasicTime112.getItems().addAll();
 
-    @FXML
-    void selectedbnameDataAnalysis(ActionEvent event) {
-
+        this.comboSummaryAnalysisNation.getSelectionModel().select(0);
+        this.comboSummaryAnalysisBname.getSelectionModel().select(0);
+        this.comboSummaryAnalysisYear.getSelectionModel().select(0);
+        this.comboSummaryAnalysisMonth.getSelectionModel().select(0);
+        this.comboDataAnalysisStatus.getSelectionModel().select(0);
+        this.comboDataAnalysisSex.getSelectionModel().select(0);
+        this.comboDataAnalysisDate.getSelectionModel().select(0);
+        this.comboSpecHistoryDate.getSelectionModel().select(0);
+        this.comboSpecHistoryTime.getSelectionModel().select(0);
+        this.comboSpecHistoryStatus.getSelectionModel().select(0);
+        this.comboSpecHistorySex.getSelectionModel().select(0);
+        this.comboSpecHistoryBloc1.getSelectionModel().select(0);
+        this.comboSpecHistoryLoc2type.getSelectionModel().select(0);
+        this.comboSpecHistoryLoc3type.getSelectionModel().select(0);
+        this.comboAnalysisBasicTime112.getSelectionModel().select(0);
+    ;
     }
-
-    @FXML
-    void selecteddateDataAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void selectedfamilyDataAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void selectedloc1DataAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void selectedloc2DataAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void selectedpictureDataAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void selectedsexDataAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void selectedstatusDataAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void sexDataAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void sexSpecHistory(ActionEvent event) {
-
-    }
-
-    @FXML
-    void sexcheckDataAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void specimenDataAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void specimenSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void startdateSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void statusDataAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void statusSpecHistory(ActionEvent event) {
-
-    }
-
-    @FXML
-    void statuscheckDataAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void timeAnalysisBasic(ActionEvent event) {
-
-    }
-
-    @FXML
-    void timeSpecHistory(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtnationSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void watchDataAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void watchSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void watchnumberDataAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void yearSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void yearmradioSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void yearmselectSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void zooSpecHistory(ActionEvent event) {
-
-
-@Override
-public void initialize(URL arg0, ResourceBundle arg1) {
-	// TODO Auto-generated method stub
-	this.comboSummaryAnalysisNation.getItems().addAll("대한민국","말레이시아","중국");
-	this.comboSummaryAnalysisBname.getItems().addAll("");
-	this.comboSummaryAnalysisYear.getItems().addAll();
-	this.comboSummaryAnalysisMonth.getItems().addAll();
-	this.comboDataAnalysisStatus.getItems().addAll();
-	this.comboDataAnalysisSex.getItems().addAll();
-	this.comboDataAnalysisDate.getItems().addAll();
-	this.comboSpecHistoryDate.getItems().addAll();
-	this.comboSpecHistoryTime.getItems().addAll();
-	this.comboSpecHistoryStatus.getItems().addAll();
-	this.comboSpecHistorySex.getItems().addAll();
-	this.comboSpecHistoryBloc1.getItems().addAll();
-	this.comboSpecHistoryLoc2type.getItems().addAll();		
-	this.comboSpecHistoryLoc3type.getItems().addAll();
-	this.comboAnalysisBasicTime112.getItems().addAll();
-	
-	this.comboSummaryAnalysisNation.getSelectionModel().select(0); 
-	this.comboSummaryAnalysisBname.getSelectionModel().select(0); 
-	this.comboSummaryAnalysisYear.getSelectionModel().select(0); 
-	this.comboSummaryAnalysisMonth.getSelectionModel().select(0); 
-	this.comboDataAnalysisStatus.getSelectionModel().select(0); 
-	this.comboDataAnalysisSex.getSelectionModel().select(0); 
-	this.comboDataAnalysisDate.getSelectionModel().select(0); 
-	this.comboSpecHistoryDate.getSelectionModel().select(0); 
-	this.comboSpecHistoryTime.getSelectionModel().select(0); 
-	this.comboSpecHistoryStatus.getSelectionModel().select(0); 
-	this.comboSpecHistorySex.getSelectionModel().select(0); 
-	this.comboSpecHistoryBloc1.getSelectionModel().select(0); 
-	this.comboSpecHistoryLoc2type.getSelectionModel().select(0); 
-	this.comboSpecHistoryLoc3type.getSelectionModel().select(0); 
-	this.comboAnalysisBasicTime112.getSelectionModel().select(0); 
-;
-}
 }
