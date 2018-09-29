@@ -9,7 +9,7 @@ public class MDBSpecimen extends MDatabase {
     int idCollectionInfo;
     int idImage;
     String status;          //varchar(10)
-    char sex;
+    String sex;
     String storageRoom;     //varchar(10)
     String storageCabinet;  //varchar(10)
     String storageChest;    //varchar(10)
@@ -52,11 +52,11 @@ public class MDBSpecimen extends MDatabase {
         this.status = status;
     }
 
-    public char getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(char sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
