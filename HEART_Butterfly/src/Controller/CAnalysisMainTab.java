@@ -26,7 +26,7 @@ public class CAnalysisMainTab extends AbsMetaController implements Initializable
             tabSummary.setContent((Node) FXMLLoader.load(this.getClass().getResource("/View/VAnalysisSummary.fxml")));
             tabGraph.setContent((Node) FXMLLoader.load(this.getClass().getResource("/View/VAnalysisDataplot.fxml")));
             tabSpecimenIO.setContent((Node) FXMLLoader.load(this.getClass().getResource("/View/VAnalysisSpecimenMove.fxml")));
-            tabSpecimenStatus.setContent((Node) FXMLLoader.load(this.getClass().getResource("/View/VSpecimenMove.fxml")));
+            tabSpecimenStatus.setContent((Node) FXMLLoader.load(this.getClass().getResource("/View/VAnalysisSpecimen.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
         }
