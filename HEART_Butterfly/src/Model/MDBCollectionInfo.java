@@ -6,18 +6,34 @@ import java.sql.SQLException;
 
 public class MDBCollectionInfo extends MDatabase {
     int idCollectionInfo;
-    int idLocation;
+    int idLocation; // not null
     int idButterflyGuide;
-    int idPerson;
+    int idPerson;   // not null
     String date;    //varchar(11)
-    String method;  //varchar(45)
+    String method;  //varchar(45)  not null
+
+    public void initialize() {
+        this.idLocation = 0;
+        this.idButterflyGuide = 0;
+        this.idPerson = 0;
+        this.date = null;
+        this.method = null;
+    }
 
     public MDBCollectionInfo(Connection connection) {
         this.connection = connection;
         this.table_name = "CollectionInfo";
+        initialize();
     }
 
-    public int getIdCollectionInfo() {
+    public String getIdCollectionInfo() {
+        if(idCollectionInfo == 0)
+            return null;
+        else
+            return String.valueOf(idCollectionInfo);
+    }
+
+    public int getIdCollectionInfo_integer() {
         return idCollectionInfo;
     }
 
@@ -25,24 +41,33 @@ public class MDBCollectionInfo extends MDatabase {
         this.idCollectionInfo = idCollectionInfo;
     }
 
-    public int getIdLocation() {
-        return idLocation;
+    public String getIdLocation() {
+        if(idLocation == 0)
+            return null;
+        else
+            return String.valueOf(idLocation);
     }
 
     public void setIdLocation(int idLocation) {
         this.idLocation = idLocation;
     }
 
-    public int getIdButterflyGuide() {
-        return idButterflyGuide;
+    public String getIdButterflyGuide() {
+        if(idButterflyGuide == 0)
+            return null;
+        else
+            return String.valueOf(idButterflyGuide);
     }
 
     public void setIdButterflyGuide(int idButterflyGuide) {
         this.idButterflyGuide = idButterflyGuide;
     }
 
-    public int getIdPerson() {
-        return idPerson;
+    public String getIdPerson() {
+        if(idPerson == 0)
+            return null;
+        else
+            return String.valueOf(idPerson);
     }
 
     public void setIdPerson(int idPerson) {
@@ -50,6 +75,7 @@ public class MDBCollectionInfo extends MDatabase {
     }
 
     public String getDate() {
+        if(date == null || date.length() == 0) return null;
         return date;
     }
 
@@ -58,6 +84,7 @@ public class MDBCollectionInfo extends MDatabase {
     }
 
     public String getMethod() {
+        if(method == null || method.length() == 0) return null;
         return method;
     }
 
@@ -77,11 +104,11 @@ public class MDBCollectionInfo extends MDatabase {
 
     public boolean insert() {
         String query = "insert into CollectionInfo (idLocation, idButterflyGuide, idPerson, date, method) values ("
-                + getIdLocation() + ","
-                + getIdButterflyGuide() + ","
-                + getIdPerson() + ","
-                + "'" + getDate() + "',"
-                + "'" + getMethod() + "'"
+                + db_string_formatting(getIdLocation(), "int") + ","
+                + db_string_formatting(getIdButterflyGuide(), "int") + ","
+                + db_string_formatting(getIdPerson(), "int") + ","
+                + db_string_formatting(getDate(), "string") + ","
+                + db_string_formatting(getMethod(), "string")
                 + ");";
         return modifyingQuery(query);
     }
@@ -92,24 +119,28 @@ public class MDBCollectionInfo extends MDatabase {
     }
 
     public boolean update(int idCollectionInfo) {
-        String query = "update CollectionInfo set "
-                + "idLocation=" + getIdLocation()
-                + ",idButterflyGuide=" + getIdButterflyGuide()
-                + ",idPerson=" + getIdPerson()
-                + ",date='" + getDate() + "'"
-                + ",method='" + getMethod() + "'"
-                + " where idCollectionInfo = " + idCollectionInfo;
+        String query = "update CollectionInfo set ";
+        int initial_length = query.length();
+        query += db_update_formatting(db_string_formatting(getIdLocation(), "int"), "idLocation");
+        query += db_update_formatting(db_string_formatting(getIdButterflyGuide(), "int"), "idButterflyGuide");
+        query += db_update_formatting(db_string_formatting(getIdPerson(), "int"), "idPerson");
+        query += db_update_formatting(db_string_formatting(getDate(), "string"), "date");
+        query += db_update_formatting(db_string_formatting(getMethod(), "string"), "method");
+        if(query.length() == initial_length) return false;
+        query = query.substring(0, query.length()-1);   // Delete last comma
+        query += " where idCollectionInfo = " + idCollectionInfo;
         return modifyingQuery(query);
     }
 
     public int getIdCollectionInfoFromDB() {
         String query = "select idCollectionInfo from CollectionInfo where "
-                + "idLocation=" + getIdLocation()
-                + " and idButterflyGuide=" + getIdButterflyGuide()
-                + " and idPerson=" + getIdPerson()
-                + " and date='" + getDate() + "'"
-                + " and method='" + getMethod() + "'";
+                + db_where_formatting(db_string_formatting(getIdLocation(), "int"), "idLocation") + " and "
+                + db_where_formatting(db_string_formatting(getIdButterflyGuide(), "int"), "idButterflyGuide") + " and "
+                + db_where_formatting(db_string_formatting(getIdPerson(), "int"), "idPerson") + " and "
+                + db_where_formatting(db_string_formatting(getDate(), "String"), "date") + " and "
+                + db_where_formatting(db_string_formatting(getMethod(), "String"), "method");
         ResultSet rs = selectQuery(query);
+        if(rs == null) return 0;
         try {
             rs.last();
             if(rs.getRow() > 0) {
@@ -120,5 +151,10 @@ public class MDBCollectionInfo extends MDatabase {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public int getIDFromDB() {
+        return getIdCollectionInfoFromDB();
     }
 }

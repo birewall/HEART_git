@@ -14,12 +14,30 @@ public class MDBImageObjectInfo extends MDatabase {
     int number;
     String marriage;        //char(1)
 
+    public void initialize() {
+        this.size = null;
+        this.wing = null;
+        this.background = null;
+        this.status = null;
+        this.sex = null;
+        this.number = 0;
+        this.marriage = null;
+    }
+
     public MDBImageObjectInfo(Connection connection) {
         this.connection = connection;
         this.table_name = "ImageObjectInfo";
+        initialize();
     }
 
-    public int getIdImageObjectInfo() {
+    public String getIdImageObjectInfo() {
+        if(idImageObjectInfo == 0)
+            return null;
+        else
+            return String.valueOf(idImageObjectInfo);
+    }
+
+    public int getIdImageObjectInfo_integer() {
         return idImageObjectInfo;
     }
 
@@ -28,6 +46,7 @@ public class MDBImageObjectInfo extends MDatabase {
     }
 
     public String getSize() {
+        if(size == null || size.length() == 0) return null;
         return size;
     }
 
@@ -36,6 +55,7 @@ public class MDBImageObjectInfo extends MDatabase {
     }
 
     public String getWing() {
+        if(wing == null || wing.length() == 0) return null;
         return wing;
     }
 
@@ -44,6 +64,7 @@ public class MDBImageObjectInfo extends MDatabase {
     }
 
     public String getBackground() {
+        if(background == null || background.length() == 0) return null;
         return background;
     }
 
@@ -52,6 +73,7 @@ public class MDBImageObjectInfo extends MDatabase {
     }
 
     public String getStatus() {
+        if(status == null || status.length() == 0) return null;
         return status;
     }
 
@@ -60,6 +82,7 @@ public class MDBImageObjectInfo extends MDatabase {
     }
 
     public String getSex() {
+        if(sex == null || sex.length() == 0) return null;
         return sex;
     }
 
@@ -67,8 +90,11 @@ public class MDBImageObjectInfo extends MDatabase {
         this.sex = sex;
     }
 
-    public int getNumber() {
-        return number;
+    public String getNumber() {
+        if(number == 0)
+            return null;
+        else
+            return String.valueOf(number);
     }
 
     public void setNumber(int number) {
@@ -76,6 +102,7 @@ public class MDBImageObjectInfo extends MDatabase {
     }
 
     public String getMarriage() {
+        if(marriage == null || marriage.length() == 0) return null;
         return marriage;
     }
 
@@ -97,13 +124,13 @@ public class MDBImageObjectInfo extends MDatabase {
 
     public boolean insert() {
         String query = "insert into ImageObjectInfo (size, wing, background, status, sex, number, marriage) values ("
-                + "'" + getSize() + "',"
-                + "'" + getWing() + "',"
-                + "'" + getBackground() + "',"
-                + "'" + getStatus() + "',"
-                + "'" + getSex() + "',"
-                + getNumber() + ","
-                + "'" + getMarriage() + "'"
+                + db_string_formatting(getSize(), "string") + ","
+                + db_string_formatting(getWing(), "string") + ","
+                + db_string_formatting(getBackground(), "string") + ","
+                + db_string_formatting(getStatus(), "string") + ","
+                + db_string_formatting(getSex(), "string") + ","
+                + db_string_formatting(getNumber(), "int") + ","
+                + db_string_formatting(getMarriage(), "string")
                 + ");";
         return modifyingQuery(query);
     }
@@ -114,28 +141,32 @@ public class MDBImageObjectInfo extends MDatabase {
     }
 
     public boolean update(int idImageObjectInfo) {
-        String query = "update ImageObjectInfo set "
-                + "size='" + getSize() + "'"
-                + ",wing='" + getWing() + "'"
-                + ",background='" + getBackground() + "'"
-                + ",status='" + getStatus() + "'"
-                + ",sex='" + getSex() + "'"
-                + ",number=" + getNumber()
-                + ",marriage='" + getMarriage() + "'"
-                + " where idImageObjectInfo = " + idImageObjectInfo;
+        String query = "update ImageObjectInfo set ";
+        int initial_length = query.length();
+        query += db_update_formatting(db_string_formatting(getSize(), "string"), "size");
+        query += db_update_formatting(db_string_formatting(getWing(), "string"), "wing");
+        query += db_update_formatting(db_string_formatting(getBackground(), "string"), "background");
+        query += db_update_formatting(db_string_formatting(getStatus(), "string"), "status");
+        query += db_update_formatting(db_string_formatting(getSex(), "string"), "sex");
+        query += db_update_formatting(db_string_formatting(getNumber(), "int"), "number");
+        query += db_update_formatting(db_string_formatting(getMarriage(), "string"), "marriage");
+        if(query.length() == initial_length) return false;
+        query = query.substring(0, query.length()-1);   // Delete last comma
+        query += " where idImageObjectInfo = " + idImageObjectInfo;
         return modifyingQuery(query);
     }
 
     public int getIdImageObjectInfoFromDB() {
         String query = "select idImageObjectInfo from ImageObjectInfo where "
-                + "size='" + getSize() + "'"
-                + " and wing='" + getWing() + "'"
-                + " and background='" + getBackground() + "'"
-                + " and status='" + getStatus() + "'"
-                + " and sex='" + getSex() + "'"
-                + " and number=" + getNumber()
-                + " and marriage='" + getMarriage() + "'";
+                + db_where_formatting(db_string_formatting(getSize(), "int"), "size") + " and "
+                + db_where_formatting(db_string_formatting(getWing(), "String"), "wing") + " and "
+                + db_where_formatting(db_string_formatting(getBackground(), "String"), "background") + " and "
+                + db_where_formatting(db_string_formatting(getStatus(), "String"), "status")
+                + db_where_formatting(db_string_formatting(getSex(), "String"), "sex") + " and "
+                + db_where_formatting(db_string_formatting(getNumber(), "String"), "number") + " and "
+                + db_where_formatting(db_string_formatting(getMarriage(), "String"), "marriage");
         ResultSet rs = selectQuery(query);
+        if(rs == null) return 0;
         try {
             rs.last();
             if(rs.getRow() > 0) {
@@ -146,5 +177,10 @@ public class MDBImageObjectInfo extends MDatabase {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public int getIDFromDB() {
+        return getIdImageObjectInfoFromDB();
     }
 }

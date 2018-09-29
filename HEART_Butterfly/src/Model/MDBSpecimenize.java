@@ -6,44 +6,70 @@ import java.sql.SQLException;
 
 public class MDBSpecimenize extends MDatabase {
     int idSpecimenize;
-    int idSpecimen;
+    int idSpecimen;         // not null
     int idObservation;
-    int idPerson;
+    int idPerson;           // not null
     String date;            //varchar(11)
     String anticepticName;  //varchar(45)
     String embalmingDate;   //varchar(11)
 
+    public void initialize() {
+        this.idSpecimen = 0;
+        this.idObservation = 0;
+        this.idPerson = 0;
+        this.date = null;
+        this.anticepticName = null;
+        this.embalmingDate = null;
+    }
+
     public MDBSpecimenize(Connection connection) {
         this.connection = connection;
         this.table_name = "Specimenize";
+        initialize();
     }
 
-    public int getIdSpecimenize() {
+    public int getIdSpecimenize_integer() {
         return idSpecimenize;
+    }
+
+    public String getIdSpecimenize() {
+        if(idSpecimenize == 0)
+            return null;
+        else
+            return String.valueOf(idSpecimenize);
     }
 
     public void setIdSpecimenize(int idSpecimenize) {
         this.idSpecimenize = idSpecimenize;
     }
 
-    public int getIdSpecimen() {
-        return idSpecimen;
+    public String getIdSpecimen() {
+        if(idSpecimen == 0)
+            return null;
+        else
+            return String.valueOf(idSpecimen);
     }
 
     public void setIdSpecimen(int idSpecimen) {
         this.idSpecimen = idSpecimen;
     }
 
-    public int getIdObservation() {
-        return idObservation;
+    public String getIdObservation() {
+        if(idObservation == 0)
+            return null;
+        else
+            return String.valueOf(idObservation);
     }
 
     public void setIdObservation(int idObservation) {
         this.idObservation = idObservation;
     }
 
-    public int getIdPerson() {
-        return idPerson;
+    public String getIdPerson() {
+        if(idPerson == 0)
+            return null;
+        else
+            return String.valueOf(idPerson);
     }
 
     public void setIdPerson(int idPerson) {
@@ -51,6 +77,7 @@ public class MDBSpecimenize extends MDatabase {
     }
 
     public String getDate() {
+        if(date == null || date.length() == 0) return null;
         return date;
     }
 
@@ -59,6 +86,7 @@ public class MDBSpecimenize extends MDatabase {
     }
 
     public String getAnticepticName() {
+        if(anticepticName == null || anticepticName.length() == 0) return null;
         return anticepticName;
     }
 
@@ -67,6 +95,7 @@ public class MDBSpecimenize extends MDatabase {
     }
 
     public String getEmbalmingDate() {
+        if(embalmingDate == null || embalmingDate.length() == 0) return null;
         return embalmingDate;
     }
 
@@ -87,12 +116,12 @@ public class MDBSpecimenize extends MDatabase {
 
     public boolean insert() {
         String query = "insert into Specimenize (idSpecimen, idObservation, idPerson, date, anticepticName, embalmingDate) values ("
-                + getIdSpecimen() + ","
-                + getIdObservation() + ","
-                + getIdPerson() + ","
-                + "'" + getDate() + "',"
-                + "'" + getAnticepticName() + "',"
-                + "'" + getEmbalmingDate() + "'"
+                + db_string_formatting(getIdSpecimen(), "int") + ","
+                + db_string_formatting(getIdObservation(), "int") + ","
+                + db_string_formatting(getIdPerson(), "int") + ","
+                + db_string_formatting(getDate(), "int") + ","
+                + db_string_formatting(getAnticepticName(), "int") + ","
+                + db_string_formatting(getEmbalmingDate(), "int")
                 + ");";
         return modifyingQuery(query);
     }
@@ -103,26 +132,30 @@ public class MDBSpecimenize extends MDatabase {
     }
 
     public boolean update(int idSpecimenize) {
-        String query = "update Specimenize set "
-                + "idSpecimen=" + getIdSpecimen()
-                + ",idObservation=" + getIdObservation()
-                + ",idPerson=" + getIdPerson()
-                + ",date='" + getDate() + "'"
-                + ",anticepticName='" + getAnticepticName() + "'"
-                + ",embalmingDate='" + getEmbalmingDate() + "'"
-                + " where idSpecimenize = " + idSpecimenize;
+        String query = "update Specimenize set ";
+        int initial_length = query.length();
+        query += db_update_formatting(db_string_formatting(getIdSpecimen(), "int"), "idSpecimen");
+        query += db_update_formatting(db_string_formatting(getIdObservation(), "string"), "idObservation");
+        query += db_update_formatting(db_string_formatting(getIdPerson(), "string"), "idPerson");
+        query += db_update_formatting(db_string_formatting(getDate(), "string"), "date");
+        query += db_update_formatting(db_string_formatting(getAnticepticName(), "string"), "anticepticName");
+        query += db_update_formatting(db_string_formatting(getEmbalmingDate(), "string"), "embalmingDate");
+        if(query.length() == initial_length) return false;
+        query = query.substring(0, query.length()-1);   // Delete last comma
+        query += " where idSpecimenize = " + idSpecimenize;
         return modifyingQuery(query);
     }
 
     public int getIdSpecimenizeFromDB() {
         String query = "select idSpecimenize from Specimenize where "
-                + "idSpecimen=" + getIdSpecimen()
-                + " and idObservation=" + getIdObservation()
-                + " and idPerson=" + getIdPerson()
-                + " and date='" + getDate() + "'"
-                + " and anticepticName='" + getAnticepticName() + "'"
-                + " and embalmingDate='" + getEmbalmingDate() + "'";
+                + db_where_formatting(db_string_formatting(getIdSpecimen(), "int"), "idSpecimen") + " and "
+                + db_where_formatting(db_string_formatting(getIdObservation(), "int"), "idObservation") + " and "
+                + db_where_formatting(db_string_formatting(getIdPerson(), "int"), "idPerson") + " and "
+                + db_where_formatting(db_string_formatting(getDate(), "String"), "date") + " and "
+                + db_where_formatting(db_string_formatting(getAnticepticName(), "String"), "anticepticName") + " and "
+                + db_where_formatting(db_string_formatting(getEmbalmingDate(), "String"), "embalmingDate");
         ResultSet rs = selectQuery(query);
+        if(rs == null) return 0;
         try {
             rs.last();
             if(rs.getRow() > 0) {
@@ -133,5 +166,17 @@ public class MDBSpecimenize extends MDatabase {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public boolean changeID(int id_before, int id_after) {
+        String query = "update ButterflyGuide set idButterflyGuide=" + id_after
+                + " where idButterflyGuide="
+                + id_before;
+        return modifyingQuery(query);
+    }
+
+    @Override
+    public int getIDFromDB() {
+        return getIdSpecimenizeFromDB();
     }
 }
