@@ -1,5 +1,8 @@
 package Controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -49,13 +52,13 @@ public class CAnalysisMain extends AbsMetaController {
     private DatePicker calenSummaryAnalysisCalender;
 
     @FXML
-    private ComboBox<?> comboSummaryAnalysisNation;
+    private ComboBox<String> comboSummaryAnalysisNation;
 
     @FXML
-    private ComboBox<?> comboSummaryAnalysisFamily;
+    private ComboBox<String> comboSummaryAnalysisFamily;
 
     @FXML
-    private ComboBox<?> comboSummaryAnalysisBname;
+    private ComboBox<String> comboSummaryAnalysisBname;
 
     @FXML
     private TextField txtSummaryAnalysisStartdate;
@@ -79,10 +82,10 @@ public class CAnalysisMain extends AbsMetaController {
     private TextField txtSummaryAnalysisBnameselect;
 
     @FXML
-    private ComboBox<?> comboSummaryAnalysisYear;
+    private ComboBox<String> comboSummaryAnalysisYear;
 
     @FXML
-    private ComboBox<?> comboSummaryAnalysisMonth;
+    private ComboBox<String> comboSummaryAnalysisMonth;
 
     @FXML
     private TextField txtSummaryAnalysisEnddate;
@@ -145,13 +148,13 @@ public class CAnalysisMain extends AbsMetaController {
     private TextField txtDataAnalysisBname;
 
     @FXML
-    private ComboBox<?> comboDataAnalysisStatus;
+    private ComboBox<String> comboDataAnalysisStatus;
 
     @FXML
-    private ComboBox<?> comboDataAnalysisSex;
+    private ComboBox<String> comboDataAnalysisSex;
 
     @FXML
-    private ComboBox<?> comboDataAnalysisDate;
+    private ComboBox<String> comboDataAnalysisDate;
 
     @FXML
     private Slider scrollDataAnalysisDate;
@@ -229,10 +232,10 @@ public class CAnalysisMain extends AbsMetaController {
     private Tab tabSpecHistory;
 
     @FXML
-    private ComboBox<?> comboSpecHistoryDate;
+    private ComboBox<String> comboSpecHistoryDate;
 
     @FXML
-    private ComboBox<?> comboSpecHistoryTime;
+    private ComboBox<String> comboSpecHistoryTime;
 
     @FXML
     private TextField txtSpecHistoryLoc;
@@ -247,10 +250,10 @@ public class CAnalysisMain extends AbsMetaController {
     private TextField txtSpecHistoryBname;
 
     @FXML
-    private ComboBox<?> comboSpecHistoryStatus;
+    private ComboBox<String> comboSpecHistoryStatus;
 
     @FXML
-    private ComboBox<?> comboSpecHistorySex;
+    private ComboBox<String> comboSpecHistorySex;
 
     @FXML
     private TableView<?> tblSpecHistory;
@@ -316,10 +319,10 @@ public class CAnalysisMain extends AbsMetaController {
     private TextField txtSpecHistoryLabelid;
 
     @FXML
-    private ComboBox<?> comboSpecHistoryBloc1;
+    private ComboBox<String> comboSpecHistoryBloc1;
 
     @FXML
-    private ComboBox<?> comboSpecHistoryLoc2type;
+    private ComboBox<String> comboSpecHistoryLoc2type;
 
     @FXML
     private TextField txtSpecHistoryLoc2;
@@ -328,10 +331,10 @@ public class CAnalysisMain extends AbsMetaController {
     private TextField txtSpecHistoryLoc3;
 
     @FXML
-    private ComboBox<?> comboSpecHistoryLoc3type;
+    private ComboBox<String> comboSpecHistoryLoc3type;
 
     @FXML
-    private ComboBox<?> comboAnalysisBasicTime112;
+    private ComboBox<String> comboAnalysisBasicTime112;
 
     @FXML
     private Button btnSpecHistoryExit;
@@ -745,6 +748,43 @@ public class CAnalysisMain extends AbsMetaController {
     @FXML
     void zooSpecHistory(ActionEvent event) {
 
-    }
 
+}
+
+@Override
+public void initialize(URL arg0, ResourceBundle arg1) {
+	// TODO Auto-generated method stub
+	this.comboSummaryAnalysisNation.getItems().addAll("대한민국","말레이시아","중국");
+	this.comboSummaryAnalysisBname.getItems().addAll("");
+	this.comboSummaryAnalysisYear.getItems().addAll();
+	this.comboSummaryAnalysisMonth.getItems().addAll();
+	this.comboDataAnalysisStatus.getItems().addAll();
+	this.comboDataAnalysisSex.getItems().addAll();
+	this.comboDataAnalysisDate.getItems().addAll();
+	this.comboSpecHistoryDate.getItems().addAll();
+	this.comboSpecHistoryTime.getItems().addAll();
+	this.comboSpecHistoryStatus.getItems().addAll();
+	this.comboSpecHistorySex.getItems().addAll();
+	this.comboSpecHistoryBloc1.getItems().addAll();
+	this.comboSpecHistoryLoc2type.getItems().addAll();		
+	this.comboSpecHistoryLoc3type.getItems().addAll();
+	this.comboAnalysisBasicTime112.getItems().addAll();
+	
+	this.comboSummaryAnalysisNation.getSelectionModel().select(0); 
+	this.comboSummaryAnalysisBname.getSelectionModel().select(0); 
+	this.comboSummaryAnalysisYear.getSelectionModel().select(0); 
+	this.comboSummaryAnalysisMonth.getSelectionModel().select(0); 
+	this.comboDataAnalysisStatus.getSelectionModel().select(0); 
+	this.comboDataAnalysisSex.getSelectionModel().select(0); 
+	this.comboDataAnalysisDate.getSelectionModel().select(0); 
+	this.comboSpecHistoryDate.getSelectionModel().select(0); 
+	this.comboSpecHistoryTime.getSelectionModel().select(0); 
+	this.comboSpecHistoryStatus.getSelectionModel().select(0); 
+	this.comboSpecHistorySex.getSelectionModel().select(0); 
+	this.comboSpecHistoryBloc1.getSelectionModel().select(0); 
+	this.comboSpecHistoryLoc2type.getSelectionModel().select(0); 
+	this.comboSpecHistoryLoc3type.getSelectionModel().select(0); 
+	this.comboAnalysisBasicTime112.getSelectionModel().select(0); 
+;
+}
 }

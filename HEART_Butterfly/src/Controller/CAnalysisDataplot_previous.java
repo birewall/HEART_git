@@ -9,7 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class CAnalysisPicture extends AbsMetaController {
+public class CAnalysisDataplot_previous extends AbsMetaController {
 
     @FXML
     private ComboBox<?> comboAnalysisBasicDate;
@@ -34,15 +34,6 @@ public class CAnalysisPicture extends AbsMetaController {
 
     @FXML
     private Button btnAnalysisBasicSearchbloc;
-
-    @FXML
-    private TextField txtAnalysisBasicdo;
-
-    @FXML
-    private TextField txtAnalysisBasicSi;
-
-    @FXML
-    private TextField txtAnalysisBasicDong;
 
     @FXML
     private TextField txtAnalysisBasicNation;
@@ -126,6 +117,30 @@ public class CAnalysisPicture extends AbsMetaController {
     private Button btnAnalysisBasicSearch;
 
     @FXML
+    private Button btnAnalysisBasicSearch1;
+
+    @FXML
+    private TextField txtAnalysisBasicBname1;
+
+    @FXML
+    private TextField txtAnalysisBasicBname2;
+
+    @FXML
+    private Button btnAnalysisBasicSearchbloc1;
+
+    @FXML
+    private RadioButton radioAnalysisBasicPicture1;
+
+    @FXML
+    private RadioButton radioAnalysisBasicSpecimen1;
+
+    @FXML
+    private RadioButton radioAnalysisBasicWatch1;
+
+    @FXML
+    private RadioButton radioAnalysisBasicWhole1;
+
+    @FXML
     void BlocAnalysisBasic(ActionEvent event) {
 
     }
@@ -147,16 +162,6 @@ public class CAnalysisPicture extends AbsMetaController {
 
     @FXML
     void dateAnalysisBasic(ActionEvent event) {
-
-    }
-
-    @FXML
-    void doAnalysisBasic(ActionEvent event) {
-
-    }
-
-    @FXML
-    void dongAnalysisBasic(ActionEvent event) {
 
     }
 
@@ -197,11 +202,6 @@ public class CAnalysisPicture extends AbsMetaController {
 
     @FXML
     void sexAnalysisBasic(ActionEvent event) {
-
-    }
-
-    @FXML
-    void siAnalysisBasic(ActionEvent event) {
 
     }
 
