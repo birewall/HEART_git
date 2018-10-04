@@ -20,6 +20,9 @@ public class CInsert extends AbsMetaController {
 
     @FXML
     private Button btnInsertSpecimen;
+    
+    @FXML
+    private Button btnInsertAnticeptic;
 
     @FXML
     private Button btnInsertExit;
@@ -37,6 +40,11 @@ public class CInsert extends AbsMetaController {
     @FXML
     void insertSpecimen(ActionEvent event) throws IOException {
     	changeWindow(this.btnInsertExit.getScene().getWindow(), "VInsertSpecimen");
+    }
+    
+    @FXML
+    void insertAnticeptic(ActionEvent event) throws IOException {
+    	changeWindow(this.btnInsertExit.getScene().getWindow(), "VInsertAnticeptic");
     }
 
     @FXML
