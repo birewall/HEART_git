@@ -1,5 +1,7 @@
 package Controller;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -61,6 +63,15 @@ public class CAnalysisSummary extends AbsMetaController {
 
     @FXML
     void OnCheckFamily(ActionEvent event) {
+    	if(this.checkFamaily.isSelected()) {
+    		this.PeriodStart.setDisable(false);
+    		this.PeriodEnd.setDisable(false);
+    	}
+    	else {
+    		
+    		this.PeriodStart.setDisable(true);
+    		this.PeriodEnd.setDisable(true);
+    	}
 
     }
 
@@ -71,6 +82,7 @@ public class CAnalysisSummary extends AbsMetaController {
 
     @FXML
     void OnClear(ActionEvent event) {
+    	
 
     }
 
@@ -85,9 +97,11 @@ public class CAnalysisSummary extends AbsMetaController {
     }
 
     @FXML
-    void OnExit(ActionEvent event) {
-
+    void OnExit(ActionEvent event) throws IOException {
+    	changeWindow(this.btnExit.getScene().getWindow(), "VMain");
     }
+
+    
 
     @FXML
     void OnPeriod(ActionEvent event) {
