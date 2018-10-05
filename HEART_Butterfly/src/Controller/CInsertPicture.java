@@ -616,6 +616,18 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 		this.comboInsertPictureBground.getItems().addAll("꽃", "암석", "나무");
 		this.comboInsertPictureSize.getItems().addAll("대", "중", "소");
 		this.comboInsertPictureFtype.getItems().addAll("jpg", "png", "bmp");
+
+        this.comboInsertPictureTime.getSelectionModel().select(0);
+        this.comboInsertPictureSex.getSelectionModel().select(0);
+        this.comboInsertPictureQuan.getSelectionModel().select(0);
+        this.comboInsertPictureLtype.getSelectionModel().select(0);
+        this.comboInsertPictureBmove.getSelectionModel().select(0);
+        this.comboInsertPictureAng.getSelectionModel().select(0);
+        this.comboInsertPictureWing.getSelectionModel().select(0);
+        this.comboInsertPictureIscorrected.getSelectionModel().select(0);
+        this.comboInsertPictureBground.getSelectionModel().select(0);
+        this.comboInsertPictureSize.getSelectionModel().select(0);
+        this.comboInsertPictureFtype.getSelectionModel().select(0);
     }
 
 	@Override
@@ -629,6 +641,7 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 			while(rs.next()) {
 				this.comboInsertPictureWho.getItems().add(rs.getString(1));   // get name
 			}
+			if(this.comboInsertPictureWho.getItems().size() > 0) this.comboInsertPictureWho.getSelectionModel().select(0);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
