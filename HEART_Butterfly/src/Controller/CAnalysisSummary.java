@@ -1,258 +1,77 @@
 package Controller;
 
-import javafx.event.ActionEvent;
+import java.awt.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 
 public class CAnalysisSummary extends AbsMetaController {
 
     @FXML
-    private RadioButton radioSummaryAnalysisNation;
+    private ComboBox<?> CombFamily;
 
     @FXML
-    private ComboBox<?> comboSummaryAnalysisMonth;
+    private TextField txtWatch;
 
     @FXML
-    private BarChart<?, ?> plotSummaryAnalysis;
+    private TextField txtPicture;
 
     @FXML
-    private Button btnSummaryAnalysisExport;
+    private CheckBox CheckBPeriod;
 
     @FXML
-    private ComboBox<?> comboSummaryAnalysisFamily;
+    private Button btnSearch;
 
     @FXML
-    private ComboBox<?> comboSummaryAnalysisBname;
+    private BarChart<?, ?> BarChartSumary;
 
     @FXML
-    private TextField txtSummaryAnalysisYear;
+    private DatePicker PeriodStart;
 
     @FXML
-    private TextField txtSummaryAnalysisFamilyselect;
+    private Button btnClear;
 
     @FXML
-    private RadioButton radioSummaryAnalysisFamily;
+    private DatePicker PeriodEnd;
 
     @FXML
-    private RadioButton radioSummaryAnalysisYearm;
+    private CheckBox checkFamaily;
 
     @FXML
-    private TextField txtSummaryAnalysisBnameselect;
+    private ComboBox<?> comboNation;
 
     @FXML
-    private TextField txtSummaryAnalysisPicture;
+    private TextField txtSpecimen;
 
     @FXML
-    private TextField txtSummaryAnalysisNationselect;
+    private CheckBox checkNation;
 
     @FXML
-    private ComboBox<?> comboSummaryAnalysisYear;
+    private TextField txtAll;
 
     @FXML
-    private TextField txtSummaryAnalysisEnddate;
+    private Button btnExportResult;
 
     @FXML
-    private TextField txtSummaryAnalysisStartdate;
+    private Button btnExit;
 
     @FXML
-    private TextField txtSummaryAnalysisMonth;
-
-    @FXML
-    private TextField txtSummaryAnalysisAll;
-
-    @FXML
-    private DatePicker calenSummaryAnalysisCalender;
-
-    @FXML
-    private TextField txtSummaryAnalysisYearmselect;
-
-    @FXML
-    private RadioButton radioSummaryAnalysisDate;
-
-    @FXML
-    private Button btnSummaryAnalysisExit;
-
-    @FXML
-    private ToggleGroup SummaryAnalysis;
-
-    @FXML
-    private TextField txtSummaryAnalysisNation;
-
-    @FXML
-    private ComboBox<?> comboSummaryAnalysisNation;
-
-    @FXML
-    private TextField txtSummaryAnalysisWatch;
-
-    @FXML
-    private Button vtnSummaryAnalysisSearch;
-
-    @FXML
-    private TextField txtSummaryAnalysisSpecimen;
-
-    @FXML
-    private Button btnSummaryAnalysisClear;
-
-    @FXML
-    private TextField txtSummaryAnalysisBname;
-
-    @FXML
-    private TextField txtSummaryAnalysisFamily;
-
-    @FXML
-    private TextField txtSummaryAnalysisDateselect;
-
-    @FXML
-    private RadioButton radioSummaryAnalysisBname;
-
-    @FXML
-    void dateSummaryAnalysis(ActionEvent event) {
+    void calenderPeriodStart(ActionEvent event) {
 
     }
 
     @FXML
-    void nationradioSummaryAnalysis(ActionEvent event) {
+    void OnCombNation(ActionEvent event) {
 
     }
 
     @FXML
-    void bnameradioSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void familyradioSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void clearSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void searchSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void dateselectSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void calenderSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void nationSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void familySummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void bnameSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void startdateSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtnationSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void nationselectSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void familytxtSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void familyselecttSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void bnametxtSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void bnameselectSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void yearSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void monthSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void enddateSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void yearmradioSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void yearSummaryAnalysistxt(ActionEvent event) {
-
-    }
-
-    @FXML
-    void monthSummaryAnalysistxt(ActionEvent event) {
-
-    }
-
-    @FXML
-    void yearmselectSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void allSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void watchSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void pictureSummaryAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void specimenSummaryAnalysis(ActionEvent event) {
+    void OnCombFamily(ActionEvent event) {
 
     }
 
@@ -262,7 +81,38 @@ public class CAnalysisSummary extends AbsMetaController {
     }
 
     @FXML
-    void exitSummaryAnalysis(ActionEvent event) {
+    void OnExit(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnPeriod(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnCheckNation(ActionEvent event) {
+
+    }
+
+    
+    @FXML
+    void calenderPeriodEnd(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnCheckFamily(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnClear(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnSearch(ActionEvent event) {
 
     }
 

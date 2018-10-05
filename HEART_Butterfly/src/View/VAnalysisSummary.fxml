@@ -25,60 +25,115 @@
 
 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1000.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CAnalysisSummary">
    <children>
-      <Label layoutX="27.0" layoutY="32.0" text="검색 조건 설정" />
-      <RadioButton fx:id="radioSummaryAnalysisDate" layoutX="28.0" layoutY="60.0" mnemonicParsing="false" onAction="#dateSummaryAnalysis" text="날짜 선택">
-         <toggleGroup>
-            <ToggleGroup fx:id="SummaryAnalysis" />
-         </toggleGroup>
-      </RadioButton>
-      <RadioButton fx:id="radioSummaryAnalysisNation" layoutX="364.0" layoutY="59.0" mnemonicParsing="false" onAction="#nationradioSummaryAnalysis" text="국가" toggleGroup="$SummaryAnalysis" />
-      <RadioButton fx:id="radioSummaryAnalysisBname" layoutX="906.0" layoutY="59.0" mnemonicParsing="false" onAction="#bnameradioSummaryAnalysis" text="나비 명" toggleGroup="$SummaryAnalysis" />
-      <RadioButton fx:id="radioSummaryAnalysisFamily" layoutX="623.0" layoutY="60.0" mnemonicParsing="false" onAction="#familyradioSummaryAnalysis" text="나비 과" toggleGroup="$SummaryAnalysis" />
-      <Button fx:id="btnSummaryAnalysisClear" layoutX="800.0" layoutY="300.0" mnemonicParsing="false" onAction="#clearSummaryAnalysis" prefHeight="65.0" prefWidth="155.0" text="입력 초기화" />
-      <Button fx:id="vtnSummaryAnalysisSearch" layoutX="966.0" layoutY="300.0" mnemonicParsing="false" onAction="#searchSummaryAnalysis" prefHeight="65.0" prefWidth="155.0" text="검색" />
-      <Label layoutX="28.0" layoutY="150.0" text="선택된 검색 조건 :" />
-      <TextField fx:id="txtSummaryAnalysisDateselect" layoutX="160.0" layoutY="145.0" onAction="#dateselectSummaryAnalysis" prefHeight="29.0" prefWidth="80.0" promptText="기간" />
-      <DatePicker fx:id="calenSummaryAnalysisCalender" layoutX="128.0" layoutY="56.0" onAction="#calenderSummaryAnalysis" prefHeight="29.0" prefWidth="215.0" />
-      <ComboBox fx:id="comboSummaryAnalysisNation" layoutX="435.0" layoutY="55.0" onAction="#nationSummaryAnalysis" prefWidth="150.0" />
-      <ComboBox fx:id="comboSummaryAnalysisFamily" layoutX="717.0" layoutY="56.0" onAction="#familySummaryAnalysis" prefWidth="150.0" />
-      <ComboBox fx:id="comboSummaryAnalysisBname" layoutX="994.0" layoutY="56.0" onAction="#bnameSummaryAnalysis" prefWidth="150.0" />
-      <TextField fx:id="txtSummaryAnalysisStartdate" layoutX="254.0" layoutY="145.0" onAction="#startdateSummaryAnalysis" prefHeight="29.0" prefWidth="135.0" promptText="2016-5-10" />
-      <TextField fx:id="txtSummaryAnalysisNation" layoutX="254.0" layoutY="184.0" onAction="#txtnationSummaryAnalysis" prefHeight="29.0" prefWidth="869.0" promptText="대한민국, 카자흐스탄" />
-      <TextField fx:id="txtSummaryAnalysisNationselect" layoutX="160.0" layoutY="184.0" onAction="#nationselectSummaryAnalysis" prefHeight="29.0" prefWidth="80.0" promptText="국가" />
-      <TextField fx:id="txtSummaryAnalysisFamily" layoutX="254.0" layoutY="222.0" onAction="#familytxtSummaryAnalysis" prefHeight="29.0" prefWidth="869.0" promptText="a나비과, b나비과" />
-      <TextField fx:id="txtSummaryAnalysisFamilyselect" layoutX="160.0" layoutY="222.0" onAction="#familyselecttSummaryAnalysis" prefHeight="29.0" prefWidth="80.0" promptText="나비 과" />
-      <TextField fx:id="txtSummaryAnalysisBname" layoutX="254.0" layoutY="261.0" onAction="#bnametxtSummaryAnalysis" prefHeight="29.0" prefWidth="869.0" promptText="배추흰나비, 팔랑나비, a나비, b나비" />
-      <TextField fx:id="txtSummaryAnalysisBnameselect" layoutX="160.0" layoutY="261.0" onAction="#bnameselectSummaryAnalysis" prefHeight="29.0" prefWidth="80.0" promptText="나비 명" />
-      <ComboBox fx:id="comboSummaryAnalysisYear" layoutX="128.0" layoutY="97.0" onAction="#yearSummaryAnalysis" prefHeight="29.0" prefWidth="121.0" promptText="연도" />
-      <ComboBox fx:id="comboSummaryAnalysisMonth" layoutX="257.0" layoutY="97.0" onAction="#monthSummaryAnalysis" prefHeight="29.0" prefWidth="109.0" promptText="월" />
-      <Label layoutX="399.0" layoutY="150.0" text="~" />
-      <TextField fx:id="txtSummaryAnalysisEnddate" layoutX="421.0" layoutY="145.0" onAction="#enddateSummaryAnalysis" prefHeight="29.0" prefWidth="135.0" promptText="2016-5-20" />
-      <RadioButton fx:id="radioSummaryAnalysisYearm" layoutX="28.0" layoutY="101.0" mnemonicParsing="false" onAction="#yearmradioSummaryAnalysis" text="연/월 선택" toggleGroup="$SummaryAnalysis" />
-      <TextField fx:id="txtSummaryAnalysisYear" layoutX="656.0" layoutY="145.0" onAction="#yearSummaryAnalysistxt" prefHeight="29.0" prefWidth="190.0" promptText="2016,2017,2018" />
-      <TextField fx:id="txtSummaryAnalysisMonth" layoutX="852.0" layoutY="145.0" onAction="#monthSummaryAnalysistxt" prefHeight="29.0" prefWidth="128.0" promptText="5월" />
-      <TextField fx:id="txtSummaryAnalysisYearmselect" layoutX="570.0" layoutY="145.0" onAction="#yearmselectSummaryAnalysis" prefHeight="29.0" prefWidth="80.0" promptText="연/월" />
-      <BarChart fx:id="plotSummaryAnalysis" layoutX="33.0" layoutY="407.0" prefHeight="468.0" prefWidth="621.0">
+      <Label layoutX="26.0" layoutY="53.0" text="검색 조건 설정">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <DatePicker fx:id="PeriodStart" layoutX="144.0" layoutY="112.0" onAction="#calenderPeriodStart" prefHeight="29.0" prefWidth="200.0" />
+      <ComboBox fx:id="comboNation" layoutX="701.0" layoutY="115.0" onAction="#OnCombNation" prefWidth="150.0" />
+      <ComboBox fx:id="CombFamily" layoutX="1005.0" layoutY="115.0" onAction="#OnCombFamily" prefWidth="150.0" />
+      <BarChart fx:id="BarChartSumary" layoutX="34.0" layoutY="330.0" prefHeight="568.0" prefWidth="621.0">
          <xAxis>
             <CategoryAxis side="BOTTOM" />
          </xAxis>
          <yAxis>
-            <NumberAxis side="LEFT" />
+            <NumberAxis pickOnBounds="false" side="LEFT" tickLength="10.0">
+               <tickLabelFont>
+                  <Font size="18.0" />
+               </tickLabelFont></NumberAxis>
          </yAxis>
       </BarChart>
-      <Label layoutX="730.0" layoutY="449.0" text="통계 요약" />
-      <Label layoutX="730.0" layoutY="481.0" text="전체 :" />
-      <Label layoutX="730.0" layoutY="519.0" text="관찰 :" />
-      <Label layoutX="731.0" layoutY="598.0" text="사진 :" />
-      <Label layoutX="731.0" layoutY="560.0" text="표본 :" />
-      <TextField fx:id="txtSummaryAnalysisAll" layoutX="782.0" layoutY="476.0" onAction="#allSummaryAnalysis" prefHeight="29.0" prefWidth="95.0" promptText="230" />
-      <TextField fx:id="txtSummaryAnalysisWatch" layoutX="782.0" layoutY="514.0" onAction="#watchSummaryAnalysis" prefHeight="29.0" prefWidth="95.0" promptText="100" />
-      <TextField fx:id="txtSummaryAnalysisPicture" layoutX="782.0" layoutY="593.0" onAction="#pictureSummaryAnalysis" prefHeight="29.0" prefWidth="95.0" promptText="310" />
-      <TextField fx:id="txtSummaryAnalysisSpecimen" layoutX="782.0" layoutY="555.0" onAction="#specimenSummaryAnalysis" prefHeight="29.0" prefWidth="95.0" promptText="20" />
-      <Label layoutX="894.0" layoutY="481.0" text="개" />
-      <Label layoutX="886.0" layoutY="519.0" text="마리" />
-      <Label layoutX="894.0" layoutY="598.0" text="장" />
-      <Label layoutX="894.0" layoutY="560.0" text="개" />
-      <Button fx:id="btnSummaryAnalysisExport" layoutX="800.0" layoutY="866.0" mnemonicParsing="false" onAction="#exportSummaryAnalysis" prefHeight="65.0" prefWidth="155.0" text="결과 내보내기" />
-      <Button fx:id="btnSummaryAnalysisExit" layoutX="966.0" layoutY="866.0" mnemonicParsing="false" onAction="#exitSummaryAnalysis" prefHeight="65.0" prefWidth="155.0" text="종료" />
+      <Label layoutX="724.0" layoutY="371.0" text="통계 요약">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <Label layoutX="724.0" layoutY="441.0" text="전체 :">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="724.0" layoutY="492.0" text="관찰 :">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="724.0" layoutY="593.0" text="사진 :">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="724.0" layoutY="544.0" text="표본 :">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <TextField fx:id="txtAll" layoutX="776.0" layoutY="434.0" prefHeight="29.0" prefWidth="95.0" promptText="230">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="txtWatch" layoutX="776.0" layoutY="484.0" prefHeight="29.0" prefWidth="95.0" promptText="100">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="txtPicture" layoutX="775.0" layoutY="585.0" prefHeight="29.0" prefWidth="95.0" promptText="310">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="txtSpecimen" layoutX="775.0" layoutY="535.0" prefHeight="29.0" prefWidth="95.0" promptText="20">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Label layoutX="888.0" layoutY="441.0" text="개">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="880.0" layoutY="492.0" text="마리">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="887.0" layoutY="593.0" text="장">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="887.0" layoutY="544.0" text="개">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Button fx:id="btnExportResult" layoutX="724.0" layoutY="756.0" mnemonicParsing="false" onAction="#exportSummaryAnalysis" prefHeight="65.0" prefWidth="155.0" text="결과 내보내기">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="btnExit" layoutX="888.0" layoutY="756.0" mnemonicParsing="false" onAction="#OnExit" prefHeight="65.0" prefWidth="155.0" text="종료">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <CheckBox fx:id="CheckBPeriod" layoutX="33.0" layoutY="114.0" mnemonicParsing="false" onAction="#OnPeriod" text="기간설정">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </CheckBox>
+      <Label layoutX="357.0" layoutY="120.0" text="~" />
+      <CheckBox fx:id="checkNation" layoutX="620.0" layoutY="115.0" mnemonicParsing="false" onAction="#OnCheckNation" text="국가">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </CheckBox>
+      <DatePicker fx:id="PeriodEnd" layoutX="377.0" layoutY="112.0" onAction="#calenderPeriodEnd" prefHeight="29.0" prefWidth="200.0" />
+      <CheckBox fx:id="checkFamaily" layoutX="902.0" layoutY="115.0" mnemonicParsing="false" onAction="#OnCheckFamily" text="나비과">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </CheckBox>
+      <Button fx:id="btnClear" layoutX="485.0" layoutY="247.0" mnemonicParsing="false" onAction="#OnClear" text="초기화">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnSearch" layoutX="671.0" layoutY="247.0" mnemonicParsing="false" onAction="#OnSearch" text="검색">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="504.0" layoutY="184.0" text="시스템 알림">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
