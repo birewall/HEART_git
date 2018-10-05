@@ -9,6 +9,7 @@ public class MDBImage extends MDatabase {
     int idLocation;
     int idImageObjectInfo;
     int idCameraInfo;
+    int idButterflyGuide;
     String date;    //varchar(11)
     String time;    //varchar(9)
     String path;    //varchar(100)  not null
@@ -23,6 +24,7 @@ public class MDBImage extends MDatabase {
         this.idLocation = 0;
         this.idImageObjectInfo = 0;
         this.idCameraInfo = 0;
+        this.idButterflyGuide = 0;
         this.date = null;
         this.time = null;
         this.path = null;
@@ -37,6 +39,14 @@ public class MDBImage extends MDatabase {
 
     public int getIdImage_integer() {
         return idImage;
+    }
+
+    public String getIdButterflyGuide() {
+        return String.valueOf(idButterflyGuide);
+    }
+
+    public void setIdButterflyGuide(int idButterflyGuide) {
+        this.idButterflyGuide = idButterflyGuide;
     }
 
     public void setIdImage(int idImage) {
@@ -109,16 +119,18 @@ public class MDBImage extends MDatabase {
         logger.info("[idLocation] " + idLocation);
         logger.info("[idImageObjectInfo] " + idImageObjectInfo);
         logger.info("[idCameraInfo] " + idCameraInfo);
+        logger.info("[idButterflyGuide] " + idButterflyGuide);
         logger.info("[date] " + date);
         logger.info("[time] " + time);
         logger.info("[path] " + path);
     }
 
     public boolean insert() {
-        String query = "insert into Image (idLocation, idImageObjectInfo, idCameraInfo, date, time, path) values ("
+        String query = "insert into Image (idLocation, idImageObjectInfo, idCameraInfo, idButterflyGuide, date, time, path) values ("
                 + db_string_formatting(getIdLocation(), "int") + ","
                 + db_string_formatting(getIdImageObjectInfo(), "int") + ","
                 + db_string_formatting(getIdCameraInfo(), "int") + ","
+                + db_string_formatting(getIdButterflyGuide(), "int") + ","
                 + db_string_formatting(getDate(), "string") + ","
                 + db_string_formatting(getTime(), "string") + ","
                 + db_string_formatting(getPath(), "string")
@@ -137,6 +149,7 @@ public class MDBImage extends MDatabase {
         query += db_update_formatting(db_string_formatting(getIdLocation(), "int"), "idLocation");
         query += db_update_formatting(db_string_formatting(getIdImageObjectInfo(), "int"), "idImageObjectInfo");
         query += db_update_formatting(db_string_formatting(getIdCameraInfo(), "int"), "idCameraInfo");
+        query += db_update_formatting(db_string_formatting(getIdButterflyGuide(), "int"), "idButterflyGuide");
         query += db_update_formatting(db_string_formatting(getDate(), "string"), "date");
         query += db_update_formatting(db_string_formatting(getTime(), "string"), "time");
         query += db_update_formatting(db_string_formatting(getPath(), "string"), "path");
@@ -151,6 +164,7 @@ public class MDBImage extends MDatabase {
                 + db_where_formatting(db_string_formatting(getIdLocation(), "int"), "idLocation") + " and "
                 + db_where_formatting(db_string_formatting(getIdImageObjectInfo(), "int"), "idImageObjectInfo") + " and "
                 + db_where_formatting(db_string_formatting(getIdCameraInfo(), "int"), "idCameraInfo") + " and "
+                + db_where_formatting(db_string_formatting(getIdButterflyGuide(), "int"), "idButterflyGuide") + " and "
                 + db_where_formatting(db_string_formatting(getDate(), "String"), "date") + " and "
                 + db_where_formatting(db_string_formatting(getTime(), "String"), "time") + " and "
                 + db_where_formatting(db_string_formatting(getPath(), "String"), "path");
