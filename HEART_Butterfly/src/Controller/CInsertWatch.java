@@ -217,7 +217,6 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
         db_person.setSort("관찰자");
         int id_person = db_person.getIdPersonFromDB();
         if(id_person == 0) {
-            db_person.insert();
             if(!db_person.insert()){
                 ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] Person Insert Failed.");
                 return;
@@ -230,7 +229,6 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
         db_butterfly_guide.setScientific_name(scientific_name);
         int id_butterflyGuide = db_butterfly_guide.getIdButterflyGuideFromDB();
         if(id_butterflyGuide == 0) {
-            db_butterfly_guide.insert();
             if(!db_butterfly_guide.insert()){
                 ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] ButterflyGuide Insert Failed.");
                 return;
@@ -248,7 +246,6 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
         int id_collection_info = db_collection_info.getIdCollectionInfoFromDB();
         if(id_collection_info == 0) {
-            db_collection_info.insert();
             if(!db_collection_info.insert()){
                 ((MSharedData)this.shared_model).getLogger().error("[CInsertWatch] CollectionInfo Insert Failed.");
                 return;
@@ -264,7 +261,6 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
         db_observation.setTime(time);
         int id_observation = db_observation.getIdObservationFromDB();
         if(id_observation == 0) {
-            db_observation.insert();
             if (!db_observation.insert()) {
                 ((MSharedData) this.shared_model).getLogger().error("[CInsertWatch] Observation Insert Failed.");
                 return;

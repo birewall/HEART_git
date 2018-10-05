@@ -463,7 +463,5 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 		this.comboInsertSpecimenLoc3type.getItems().addAll("구형", "신형", "기타");
 		this.comboInsertSpecimenLoc2.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 		this.comboInsertSpecimenLoc3.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
-
 	}
-	
 }
