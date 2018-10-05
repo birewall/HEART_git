@@ -1,7 +1,6 @@
 package Controller;
 
-import java.awt.event.ActionEvent;
-
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
@@ -13,7 +12,19 @@ import javafx.scene.control.TextField;
 public class CAnalysisSummary extends AbsMetaController {
 
     @FXML
+    private DatePicker PeriodStart;
+
+    @FXML
+    private ComboBox<?> comboNation;
+
+    @FXML
     private ComboBox<?> CombFamily;
+
+    @FXML
+    private BarChart<?, ?> BarChartSumary;
+
+    @FXML
+    private TextField txtAll;
 
     @FXML
     private TextField txtWatch;
@@ -22,37 +33,7 @@ public class CAnalysisSummary extends AbsMetaController {
     private TextField txtPicture;
 
     @FXML
-    private CheckBox CheckBPeriod;
-
-    @FXML
-    private Button btnSearch;
-
-    @FXML
-    private BarChart<?, ?> BarChartSumary;
-
-    @FXML
-    private DatePicker PeriodStart;
-
-    @FXML
-    private Button btnClear;
-
-    @FXML
-    private DatePicker PeriodEnd;
-
-    @FXML
-    private CheckBox checkFamaily;
-
-    @FXML
-    private ComboBox<?> comboNation;
-
-    @FXML
     private TextField txtSpecimen;
-
-    @FXML
-    private CheckBox checkNation;
-
-    @FXML
-    private TextField txtAll;
 
     @FXML
     private Button btnExportResult;
@@ -61,12 +42,35 @@ public class CAnalysisSummary extends AbsMetaController {
     private Button btnExit;
 
     @FXML
-    void calenderPeriodStart(ActionEvent event) {
+    private CheckBox CheckBPeriod;
+
+    @FXML
+    private CheckBox checkNation;
+
+    @FXML
+    private DatePicker PeriodEnd;
+
+    @FXML
+    private CheckBox checkFamaily;
+
+    @FXML
+    private Button btnClear;
+
+    @FXML
+    private Button btnSearch;
+
+    @FXML
+    void OnCheckFamily(ActionEvent event) {
 
     }
 
     @FXML
-    void OnCombNation(ActionEvent event) {
+    void OnCheckNation(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnClear(ActionEvent event) {
 
     }
 
@@ -76,7 +80,7 @@ public class CAnalysisSummary extends AbsMetaController {
     }
 
     @FXML
-    void exportSummaryAnalysis(ActionEvent event) {
+    void OnCombNation(ActionEvent event) {
 
     }
 
@@ -91,28 +95,22 @@ public class CAnalysisSummary extends AbsMetaController {
     }
 
     @FXML
-    void OnCheckNation(ActionEvent event) {
+    void OnSearch(ActionEvent event) {
 
     }
 
-    
     @FXML
     void calenderPeriodEnd(ActionEvent event) {
 
     }
 
     @FXML
-    void OnCheckFamily(ActionEvent event) {
+    void calenderPeriodStart(ActionEvent event) {
 
     }
 
     @FXML
-    void OnClear(ActionEvent event) {
-
-    }
-
-    @FXML
-    void OnSearch(ActionEvent event) {
+    void exportSummaryAnalysis(ActionEvent event) {
 
     }
 
