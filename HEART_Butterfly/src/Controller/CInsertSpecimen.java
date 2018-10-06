@@ -2,6 +2,8 @@ package Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import Model.*;
@@ -173,7 +175,6 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
         
         // db_person_제공자 & 작업자
         db_person.setName(collectwho);
-        db_person.setSort("제공자");
         int id_person_col = db_person.getIdPersonFromDB();
         if(id_person_col == 0) {
             if(!db_person.insert()){
@@ -183,7 +184,6 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
             id_person_col = db_person.getIdPersonFromDB();
         }
         db_person.setName(SpecimenWho);
-        db_person.setSort("작업자");
         int id_person_speci = db_person.getIdPersonFromDB();
         if(id_person_speci == 0) {
             if(!db_person.insert()){
@@ -281,51 +281,56 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 
     @FXML
     void choosecollectwhoInsertSpecimen(ActionEvent event) {
-    	TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("Insert New Name");
-		dialog.setHeaderText(null);
-		dialog.setContentText(null);
-		dialog.showAndWait();
-		String new_name = dialog.getEditor().getText();
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("제공자를 등록하세요");
+        dialog.setHeaderText(null);
+        dialog.setContentText(null);
+        dialog.showAndWait();
+        String new_name = dialog.getEditor().getText();
 
-//		PersonDB.setName(new_name);
-//		PersonDB.setSort("제공자");
-//		if(!PersonDB.insert()){
-//		    System.out.println("Failed.");
-//		    return;
-//        }
-		
-		this.comboInsertSpecimenCollectwho.getItems().add(new_name);
-		
+        PersonDB.setName(new_name);
+        if(!PersonDB.insert()){
+            System.out.println("Failed.");
+            return;
+        }
+
+        this.comboInsertSpecimenCollectwho.getItems().add(new_name);
     }
 
     @FXML
     void choosewhoInsertSpecimen(ActionEvent event) {
-    	TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("Insert New Name");
-		dialog.setHeaderText(null);
-		dialog.setContentText(null);
-		dialog.showAndWait();
-		String new_name = dialog.getEditor().getText();
-		
-		this.comboInsertSpecimenWho.getItems().add(new_name);
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("표본 작업자를 등록하세요");
+        dialog.setHeaderText(null);
+        dialog.setContentText(null);
+        dialog.showAndWait();
+        String new_name = dialog.getEditor().getText();
 
-    }
-
-    @FXML
-    void clearInsertSpecimen(ActionEvent event) {
-    	MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-        person.delete_by_type("제공자");
-        this.comboInsertSpecimenCollectwho.getItems().clear();
-
-        person.setName("조윤호");
-        person.setSort("제공자");
-        if(!person.insert()){
+        PersonDB.setName(new_name);
+        if(!PersonDB.insert()){
             System.out.println("Failed.");
             return;
         }
-        this.comboInsertSpecimenCollectwho.getItems().add("조윤호");
-        this.comboInsertSpecimenCollectwho.getSelectionModel().select(0);
+
+		this.comboInsertSpecimenWho.getItems().add(new_name);
+    }
+
+    @FXML
+    /*
+    *  사람 관리 페이지가 있는게 좋을듯 - 성훈
+    * */
+    void clearInsertSpecimen(ActionEvent event) {
+//    	MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+//        person.delete_by_type("제공자");
+//        this.comboInsertSpecimenCollectwho.getItems().clear();
+//
+//        person.setName("조윤호");
+//        if(!person.insert()){
+//            System.out.println("Failed.");
+//            return;
+//        }
+//        this.comboInsertSpecimenCollectwho.getItems().add("조윤호");
+//        this.comboInsertSpecimenCollectwho.getSelectionModel().select(0);
 
     }
 
@@ -489,4 +494,23 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
         this.comboInsertSpecimenLoc2.getSelectionModel().select(0);
         this.comboInsertSpecimenLoc3.getSelectionModel().select(0);
 	}
+
+    @Override
+    public void init_procedure() {
+        // Set Person
+        String query = "select distinct name from Person";
+        PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+        ResultSet rs = PersonDB.selectQuery(query);
+        try {
+            while(rs.next()) {
+                this.comboInsertSpecimenWho.getItems().add(rs.getString(1));   // get name
+                this.comboInsertSpecimenCollectwho.getItems().add(rs.getString(1));   // get name
+            }
+            if(this.comboInsertSpecimenWho.getItems().size() > 0) this.comboInsertSpecimenWho.getSelectionModel().select(0);
+            if(this.comboInsertSpecimenCollectwho.getItems().size() > 0) this.comboInsertSpecimenCollectwho.getSelectionModel().select(0);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }

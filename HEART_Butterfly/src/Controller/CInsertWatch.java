@@ -140,7 +140,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     @FXML
     void addInsertWatch(ActionEvent event) {
         /* Data Acquisition */
-    	String date = dateInsertWatchDate.getEditor().getText();
+    	String date = dateInsertWatchDate.getEditor().getText().replaceAll(". ", "-");
     	String time = comboInsertWatchTime.getSelectionModel().getSelectedItem();
     	String country = txtInsertWatchNation.getText();
     	String location = txtInsertWatchLoc.getText();
@@ -214,7 +214,6 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
         }
 
         db_person.setName("조윤호");
-        db_person.setSort("관찰자");
         int id_person = db_person.getIdPersonFromDB();
         if(id_person == 0) {
             if(!db_person.insert()){
@@ -284,7 +283,6 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 		String new_name = dialog.getEditor().getText();
 
 		PersonDB.setName(new_name);
-		PersonDB.setSort("관찰자");
 		if(!PersonDB.insert()){
 		    System.out.println("Failed.");
 		    return;
@@ -294,19 +292,20 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     }
 
     @FXML
+    /*
+    * 유저 관리 페이지가 있는 게 좋을듯 - 성훈
+    * */
     void clearInsertWatch(ActionEvent event) {
-        MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-        person.delete_by_type("관찰자");
-        this.comboInsertWatchWho.getItems().clear();
-
-        person.setName("조윤호");
-        person.setSort("관찰자");
-        if(!person.insert()){
-            System.out.println("Failed.");
-            return;
-        }
-        this.comboInsertWatchWho.getItems().add("조윤호");
-        this.comboInsertWatchWho.getSelectionModel().select(0);
+//        MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+//        this.comboInsertWatchWho.getItems().clear();
+//
+//        person.setName("조윤호");
+//        if(!person.insert()){
+//            System.out.println("Failed.");
+//            return;
+//        }
+//        this.comboInsertWatchWho.getItems().add("조윤호");
+//        this.comboInsertWatchWho.getSelectionModel().select(0);
     }
 
     @FXML
@@ -475,7 +474,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 	@Override
 	public void init_procedure() {
 		// Set Watcher
-		String query = "select name from Person where sort = '관찰자'";
+		String query = "select distinct name from Person";
 		System.out.println(this.shared_model);
 		PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
 		ResultSet rs = PersonDB.selectQuery(query);

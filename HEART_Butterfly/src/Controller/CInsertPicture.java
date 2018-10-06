@@ -266,7 +266,6 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
         }
 
         db_person.setName(person_name);
-        db_person.setSort("촬영자");
         int id_person = db_person.getIdPersonFromDB();
         if(id_person == 0) {
             if(!db_person.insert()){
@@ -355,17 +354,19 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 		String new_name = dialog.getEditor().getText();
 
 		PersonDB.setName(new_name);
-		PersonDB.setSort("촬영자");
 		if(!PersonDB.insert()) System.out.println("Failed.");
 		
 		this.comboInsertPictureWho.getItems().add(new_name);
     }
 
     @FXML
+    /*
+     * 유저 관리 페이지가 있는 게 좋을듯 - 성훈
+     * */
     void clearInsertPicture(ActionEvent event) {
-        MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-        person.delete_by_type("촬영자");
-        this.comboInsertPictureWho.getItems().clear();
+//        MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+//        person.delete_by_type("촬영자");
+//        this.comboInsertPictureWho.getItems().clear();
     }
 
     @FXML
@@ -633,7 +634,7 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 	@Override
 	public void init_procedure() {
 		// Set Watcher
-		String query = "select name from Person where sort = '촬영자'";
+		String query = "select distinct name from Person";
 		System.out.println(this.shared_model);
 		PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
 		ResultSet rs = PersonDB.selectQuery(query);
