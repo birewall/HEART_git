@@ -1,7 +1,14 @@
 package Controller;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 
+import Model.MDBLocation;
+import Model.MDBPerson;
+import Model.MDBSpecimen;
+import Model.MSharedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -17,10 +24,10 @@ public class CAnalysisSummary extends AbsMetaController {
     private DatePicker PeriodStart;
 
     @FXML
-    private ComboBox<?> comboNation;
+    private ComboBox<String> comboNation;
 
     @FXML
-    private ComboBox<?> CombFamily;
+    private ComboBox<String> CombFamily;
 
     @FXML
     private BarChart<?, ?> BarChartSumary;
@@ -64,19 +71,49 @@ public class CAnalysisSummary extends AbsMetaController {
     @FXML
     void OnCheckFamily(ActionEvent event) {
     	if(this.checkFamaily.isSelected()) {
-    		this.PeriodStart.setDisable(false);
-    		this.PeriodEnd.setDisable(false);
+    		this.CombFamily.setDisable(false);
+    		
     	}
     	else {
     		
-    		this.PeriodStart.setDisable(true);
-    		this.PeriodEnd.setDisable(true);
+    		this.CombFamily.setDisable(true);
     	}
 
     }
 
     @FXML
-    void OnCheckNation(ActionEvent event) {
+    void OnCheckNation(ActionEvent event) throws SQLException {
+    	
+    	if(this.checkNation.isSelected()) {
+    		
+    		MDBLocation db_nation = new MDBLocation(((MSharedData)this.shared_model).getDB().getConnection());
+            ResultSet rs = db_nation.selectQuery("SELECT distinct country FROM Location");
+            ResultSetMetaData rsmd = rs.getMetaData();
+            
+    		
+    		try {
+    			while(rs.next()) {
+    				this.comboNation.getItems().add(rs.getString(1));   // get name
+    			}
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		
+    		
+    		
+    		this.comboNation.setDisable(false);
+    		
+            
+            
+
+
+
+    	}
+    	else {
+    		
+    		this.comboNation.setDisable(true);
+    	}
 
     }
 
@@ -88,6 +125,14 @@ public class CAnalysisSummary extends AbsMetaController {
 
     @FXML
     void OnCombFamily(ActionEvent event) {
+    	if(this.CheckBPeriod.isSelected()) {
+    		this.PeriodStart.setDisable(false);
+    		this.PeriodEnd.setDisable(false);
+    	}
+    	else {    		
+    		this.PeriodStart.setDisable(true);
+    		this.PeriodEnd.setDisable(true);
+    	}
 
     }
 
@@ -105,6 +150,15 @@ public class CAnalysisSummary extends AbsMetaController {
 
     @FXML
     void OnPeriod(ActionEvent event) {
+    	if(this.CheckBPeriod.isSelected()) {
+    		this.PeriodStart.setDisable(false);
+    		this.PeriodEnd.setDisable(false);
+    	}
+    	else {    		
+    		this.PeriodStart.setDisable(true);
+    		this.PeriodEnd.setDisable(true);
+    	}
+
 
     }
 
@@ -126,6 +180,15 @@ public class CAnalysisSummary extends AbsMetaController {
     @FXML
     void exportSummaryAnalysis(ActionEvent event) {
 
+    }
+    
+    public void init_procedure() {
+    	
+		this.PeriodStart.setDisable(true);
+    	this.PeriodEnd.setDisable(true);
+    	this.comboNation.setDisable(true);
+    	this.CombFamily.setDisable(true);
+		
     }
 
 }
