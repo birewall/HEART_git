@@ -83,7 +83,7 @@ public class MDatabase extends AbsMetaModel {
 		} catch (SQLException e) {
 			logger.error("[MDatabase] CreateStatement is failed");
 			return null;
-		}
+	}
 
 		//System.out.println(query);
 		logger.info(query);

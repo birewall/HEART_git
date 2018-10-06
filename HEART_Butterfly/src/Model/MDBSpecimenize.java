@@ -7,15 +7,13 @@ import java.sql.SQLException;
 public class MDBSpecimenize extends MDatabase {
     int idSpecimenize;
     int idSpecimen;         // not null
-    int idObservation;
-    int idPerson;           // not null
+    int idPerson;
     String date;            //varchar(11)
     String anticepticName;  //varchar(45)
     String embalmingDate;   //varchar(11)
 
     public void initialize() {
         this.idSpecimen = 0;
-        this.idObservation = 0;
         this.idPerson = 0;
         this.date = null;
         this.anticepticName = null;
@@ -52,17 +50,6 @@ public class MDBSpecimenize extends MDatabase {
 
     public void setIdSpecimen(int idSpecimen) {
         this.idSpecimen = idSpecimen;
-    }
-
-    public String getIdObservation() {
-        if(idObservation == 0)
-            return null;
-        else
-            return String.valueOf(idObservation);
-    }
-
-    public void setIdObservation(int idObservation) {
-        this.idObservation = idObservation;
     }
 
     public String getIdPerson() {
@@ -107,7 +94,6 @@ public class MDBSpecimenize extends MDatabase {
         logger.info("[" + this.table_name + "]");
         logger.info("[idSpecimenize] " + idSpecimenize);
         logger.info("[idSpecimen] " + idSpecimen);
-        logger.info("[idObservation] " + idObservation);
         logger.info("[idPerson] " + idPerson);
         logger.info("[date] " + date);
         logger.info("[anticepticName] " + anticepticName);
@@ -115,11 +101,10 @@ public class MDBSpecimenize extends MDatabase {
     }
 
     public boolean insert() {
-        String query = "insert into Specimenize (idSpecimen, idObservation, idPerson, date, anticepticName, embalmingDate) values ("
+        String query = "insert into Specimenize (idSpecimen, idPerson, date, anticepticName, embalmingDate) values ("
                 + db_string_formatting(getIdSpecimen(), "int") + ","
-                + db_string_formatting(getIdObservation(), "int") + ","
                 + db_string_formatting(getIdPerson(), "int") + ","
-                + db_string_formatting(getDate(), "int") + ","
+                + db_string_formatting(getDate(), "string") + ","
                 + db_string_formatting(getAnticepticName(), "int") + ","
                 + db_string_formatting(getEmbalmingDate(), "int")
                 + ");";
@@ -135,7 +120,6 @@ public class MDBSpecimenize extends MDatabase {
         String query = "update Specimenize set ";
         int initial_length = query.length();
         query += db_update_formatting(db_string_formatting(getIdSpecimen(), "int"), "idSpecimen");
-        query += db_update_formatting(db_string_formatting(getIdObservation(), "string"), "idObservation");
         query += db_update_formatting(db_string_formatting(getIdPerson(), "string"), "idPerson");
         query += db_update_formatting(db_string_formatting(getDate(), "string"), "date");
         query += db_update_formatting(db_string_formatting(getAnticepticName(), "string"), "anticepticName");
@@ -149,7 +133,6 @@ public class MDBSpecimenize extends MDatabase {
     public int getIdSpecimenizeFromDB() {
         String query = "select idSpecimenize from Specimenize where "
                 + db_where_formatting(db_string_formatting(getIdSpecimen(), "int"), "idSpecimen") + " and "
-                + db_where_formatting(db_string_formatting(getIdObservation(), "int"), "idObservation") + " and "
                 + db_where_formatting(db_string_formatting(getIdPerson(), "int"), "idPerson") + " and "
                 + db_where_formatting(db_string_formatting(getDate(), "String"), "date") + " and "
                 + db_where_formatting(db_string_formatting(getAnticepticName(), "String"), "anticepticName") + " and "
