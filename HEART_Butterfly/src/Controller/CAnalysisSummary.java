@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
+import Model.MDBButterflyGuide;
 import Model.MDBLocation;
 import Model.MDBPerson;
 import Model.MDBSpecimen;
@@ -69,8 +70,25 @@ public class CAnalysisSummary extends AbsMetaController {
     private Button btnSearch;
 
     @FXML
-    void OnCheckFamily(ActionEvent event) {
+    void OnCheckFamily(ActionEvent event) throws SQLException {
     	if(this.checkFamaily.isSelected()) {
+    		
+    		MDBButterflyGuide db_butterfly_guide = new MDBButterflyGuide(((MSharedData)this.shared_model).getDB().getConnection());
+            ResultSet rs = db_butterfly_guide.selectQuery("SELECT distinct family FROM ButterflyGuide");
+            ResultSetMetaData rsmd = rs.getMetaData();
+            
+    		
+    		try {
+    			while(rs.next()) {
+    				this.CombFamily.getItems().add(rs.getString(1));   // get name
+    			}
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		
+    		
+    		
     		this.CombFamily.setDisable(false);
     		
     	}
@@ -104,11 +122,6 @@ public class CAnalysisSummary extends AbsMetaController {
     		
     		this.comboNation.setDisable(false);
     		
-            
-            
-
-
-
     	}
     	else {
     		
