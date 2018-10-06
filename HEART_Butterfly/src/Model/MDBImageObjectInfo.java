@@ -158,12 +158,12 @@ public class MDBImageObjectInfo extends MDatabase {
 
     public int getIdImageObjectInfoFromDB() {
         String query = "select idImageObjectInfo from ImageObjectInfo where "
-                + db_where_formatting(db_string_formatting(getSize(), "int"), "size") + " and "
+                + db_where_formatting(db_string_formatting(getSize(), "String"), "size") + " and "
                 + db_where_formatting(db_string_formatting(getWing(), "String"), "wing") + " and "
                 + db_where_formatting(db_string_formatting(getBackground(), "String"), "background") + " and "
-                + db_where_formatting(db_string_formatting(getStatus(), "String"), "status")
+                + db_where_formatting(db_string_formatting(getStatus(), "String"), "status") + " and "
                 + db_where_formatting(db_string_formatting(getSex(), "String"), "sex") + " and "
-                + db_where_formatting(db_string_formatting(getNumber(), "String"), "number") + " and "
+                + db_where_formatting(db_string_formatting(getNumber(), "int"), "number") + " and "
                 + db_where_formatting(db_string_formatting(getMarriage(), "String"), "marriage");
         ResultSet rs = selectQuery(query);
         if(rs == null) return 0;

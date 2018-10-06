@@ -1,10 +1,6 @@
 package Controller;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,6 +33,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
 public class CInsertPicture extends AbsMetaController implements Initializable {
 
@@ -146,9 +143,6 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     private CheckBox cboxInsertPictureMatching;
 
     @FXML
-    private ToggleGroup matingToggle;
-
-    @FXML
     private Button btnInsertPictureCorrect;
 
     @FXML
@@ -208,15 +202,25 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     @FXML
     void addInsertPicture(ActionEvent event) {
         /* Data Acquisition */
-   
-    	String date = dateInsertPictureDate.getEditor().getText();
+    	String date = dateInsertPictureDate.getEditor().getText().replaceAll(". ","-");
     	String time = comboInsertPictureTime.getSelectionModel().getSelectedItem();
     	String country = txtInsertPictureNation.getText();
     	String location = txtInsertPictureLoc.getText();
     	String location_detail = txtInsertPictureDo.getText() + " " + txtInsertPictureSi.getText() + " " + txtInsertPictureDong.getText();
-    	String gps = txtInsertPictureLat.getText() + "," + txtInsertPictureLong.getText();
+
+    	String gps_x = "0";
+        String gps_y = "0";
+        if(txtInsertPictureLat.getText().length() > 0) gps_x = txtInsertPictureLat.getText();
+        if(txtInsertPictureLong.getText().length() > 0) gps_y = txtInsertPictureLong.getText();
+        String gps =  gps_x + "," + gps_y;
+
     	String alias = txtInsertPictureLocname.getText();
-    	String section = matingToggle.getSelectedToggle().toString();
+
+        String section = null;
+    	if(this.sectionToggle1.getSelectedToggle() != null) {
+            section = (String)sectionToggle1.getSelectedToggle().getUserData();
+        }
+
     	String section_detail = txtInsertPictureSecremark.getText();
     	String person_name = comboInsertPictureWho.getSelectionModel().getSelectedItem();
     	String butterfly_name = txtInsertPictureBname.getText();
@@ -232,7 +236,7 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     	String background = comboInsertPictureBground.getSelectionModel().getSelectedItem();
     	String pic_size = comboInsertPictureSize.getSelectionModel().getSelectedItem();
     	String file_type = comboInsertPictureFtype.getSelectionModel().getSelectedItem();
-    	String matching = cboxInsertPictureMatching.getText();
+    	String matching = cboxInsertPictureMatching.isSelected()?"y":"n";
     	String note = txtInsertPictureRemark.getText();
 
     	/* DB Instance initialization */
@@ -251,8 +255,8 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
         db_location.setAlias(alias);
         db_location.setSection(section);
         db_location.setSectionDetail(section_detail);
-        // db_location.printContents();
-        int id_location = Integer.parseInt(db_location.getIdLocation());
+        //db_location.printContents();
+        int id_location = db_location.getIdLocationFromDB();
         if(id_location == 0) {
             if(!db_location.insert()){
                 ((MSharedData)this.shared_model).getLogger().error("[CInsertPicture] Location Insert Failed.");
@@ -262,10 +266,8 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
         }
 
         db_person.setName(person_name);
-        db_person.setSort("촬영자");
         int id_person = db_person.getIdPersonFromDB();
         if(id_person == 0) {
-            db_person.insert();
             if(!db_person.insert()){
                 ((MSharedData)this.shared_model).getLogger().error("[CInsertPicture] Person Insert Failed.");
                 return;
@@ -278,7 +280,6 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
         db_butterfly_guide.setScientific_name(scientific_name);
         int id_butterflyGuide = db_butterfly_guide.getIdButterflyGuideFromDB();
         if(id_butterflyGuide == 0) {
-            db_butterfly_guide.insert();
             if(!db_butterfly_guide.insert()){
                 ((MSharedData)this.shared_model).getLogger().error("[CInsertPicture] ButterflyGuide Insert Failed.");
                 return;
@@ -291,7 +292,6 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
         db_camera.setCalibration(pic_correction);
         int id_camera = db_camera.getIdCameraInfoFromDB();
         if(id_camera == 0) {
-            db_camera.insert();
             if(!db_camera.insert()){
                 ((MSharedData)this.shared_model).getLogger().error("[CInsertPicture] CameraInfo Insert Failed.");
                 return;
@@ -304,11 +304,11 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
         db_image_object.setBackground(background);
         db_image_object.setStatus(b_move);
         db_image_object.setSex(sex);
-        db_image_object.setNumber(Integer.parseInt(pic_quantity));
+        if(pic_quantity == null) db_image_object.setNumber(0);
+        else db_image_object.setNumber(Integer.parseInt(pic_quantity));
         db_image_object.setMarriage(matching);
         int id_image_object = db_image_object.getIdImageObjectInfoFromDB();
         if(id_image_object == 0) {
-            db_image_object.insert();
             if(!db_image_object.insert()){
                 ((MSharedData)this.shared_model).getLogger().error("[CInsertPicture] ImageObjectInfo Insert Failed.");
                 return;
@@ -319,19 +319,18 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
         db_image.setIdLocation(id_location);
         db_image.setIdImageObjectInfo(id_image_object);
         db_image.setIdCameraInfo(id_camera);
+        db_image.setIdButterflyGuide(id_butterflyGuide);
         db_image.setDate(date);
         db_image.setTime(time);
         db_image.setPath(filepath);
         int id_image = db_image.getIdImageFromDB();
         if(id_image == 0) {
-            db_image.insert();
             if(!db_image.insert()){
                 ((MSharedData)this.shared_model).getLogger().error("[CInsertPicture] Image Insert Failed.");
                 return;
             }
-            id_butterflyGuide = db_butterfly_guide.getIdButterflyGuideFromDB();
         }
-        
+
         this.txtInsertPictureSpath.setText(filepath);
     }
 
@@ -355,17 +354,19 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 		String new_name = dialog.getEditor().getText();
 
 		PersonDB.setName(new_name);
-		PersonDB.setSort("촬영자");
 		if(!PersonDB.insert()) System.out.println("Failed.");
 		
 		this.comboInsertPictureWho.getItems().add(new_name);
     }
 
     @FXML
+    /*
+     * 유저 관리 페이지가 있는 게 좋을듯 - 성훈
+     * */
     void clearInsertPicture(ActionEvent event) {
-        MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-        person.delete_by_type("촬영자");
-        this.comboInsertPictureWho.getItems().clear();
+//        MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+//        person.delete_by_type("촬영자");
+//        this.comboInsertPictureWho.getItems().clear();
     }
 
     @FXML
@@ -454,22 +455,41 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
             return;
         }
         else{
-        	this.lblLoadPictureStatus.setText("File is loaded");
-        	
-        	BufferedReader reader = new BufferedReader(
-	    			new FileReader(ImageSelectedFile));
-        	
-    		if(ImageSelectedFile.getAbsolutePath() == null) return;
-    		String filename = ImageSelectedFile.getName();
-    		
-    		//Determine path
-    		filepath = ImageSelectedFile.getAbsolutePath();
+            if(ImageSelectedFile.getAbsolutePath() == null) return;
+            String dest_filename = null;
+            /* File Copy */
+            try {
+                FileInputStream fis = new FileInputStream(ImageSelectedFile.getAbsoluteFile());
+                dest_filename = "HEART_Butterfly/img/" + ImageSelectedFile.getName();
+                File f1 = new File(dest_filename);
 
-    		
-    		//Set image at view
-    		File file = new File(filepath);
-    		Image image = new Image(file.toURI().toString());
-    		this.ImvImage.setImage(image);
+                if(f1.exists()) {
+                    this.lblLoadPictureStatus.setText("Same name exists in image folder already");
+                    return;
+                }
+
+                FileOutputStream fos = new FileOutputStream(dest_filename);
+
+                int data = 0;
+                while((data=fis.read())!=-1) {
+                    fos.write(data);
+                }
+                fis.close();
+                fos.close();
+
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+    		//Determine path
+            ImageSelectedFile = new File(dest_filename);
+            filepath = ImageSelectedFile.getAbsolutePath();
+
+            //Set image at view
+            File file = new File(filepath);
+            Image image = new Image(file.toURI().toString());
+            this.ImvImage.setImage(image);
         }
     }
 
@@ -597,12 +617,24 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 		this.comboInsertPictureBground.getItems().addAll("꽃", "암석", "나무");
 		this.comboInsertPictureSize.getItems().addAll("대", "중", "소");
 		this.comboInsertPictureFtype.getItems().addAll("jpg", "png", "bmp");
-	}
+
+        this.comboInsertPictureTime.getSelectionModel().select(0);
+        this.comboInsertPictureSex.getSelectionModel().select(0);
+        this.comboInsertPictureQuan.getSelectionModel().select(0);
+        this.comboInsertPictureLtype.getSelectionModel().select(0);
+        this.comboInsertPictureBmove.getSelectionModel().select(0);
+        this.comboInsertPictureAng.getSelectionModel().select(0);
+        this.comboInsertPictureWing.getSelectionModel().select(0);
+        this.comboInsertPictureIscorrected.getSelectionModel().select(0);
+        this.comboInsertPictureBground.getSelectionModel().select(0);
+        this.comboInsertPictureSize.getSelectionModel().select(0);
+        this.comboInsertPictureFtype.getSelectionModel().select(0);
+    }
 
 	@Override
 	public void init_procedure() {
 		// Set Watcher
-		String query = "select name from Person where sort = '촬영자'";
+		String query = "select distinct name from Person";
 		System.out.println(this.shared_model);
 		PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
 		ResultSet rs = PersonDB.selectQuery(query);
@@ -610,9 +642,10 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 			while(rs.next()) {
 				this.comboInsertPictureWho.getItems().add(rs.getString(1));   // get name
 			}
+			if(this.comboInsertPictureWho.getItems().size() > 0) this.comboInsertPictureWho.getSelectionModel().select(0);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+    }
 }

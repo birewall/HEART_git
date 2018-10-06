@@ -7,7 +7,6 @@ import java.sql.SQLException;
 public class MDBPerson extends MDatabase {
     int idPerson;
     String name;    //varchar(45) not null
-    String sort;    //varchar(5) not null
 
     public MDBPerson(Connection connection) {
         this.connection = connection;
@@ -17,7 +16,6 @@ public class MDBPerson extends MDatabase {
 
     public void initialize() {
         this.name = null;
-        this.sort = null;
     }
 
     public String getIdPerson() {
@@ -44,26 +42,15 @@ public class MDBPerson extends MDatabase {
         this.name = name;
     }
 
-    public String getSort() {
-        if(sort == null || sort.length() == 0) return null;
-        return sort;
-    }
-
-    public void setSort(String sort) {
-        this.sort = sort;
-    }
-
     public void printContents() {
         logger.info("[" + this.table_name + "]");
         logger.info("[idPerson] " + idPerson);
         logger.info("[name] " + name);
-        logger.info("[sort] " + sort);
     }
 
     public boolean insert() {
-        String query = "insert into Person (name, sort) values ("
-                + db_string_formatting(getName(), "string") + ","
-                + db_string_formatting(getSort(), "string")
+        String query = "insert into Person (name) values ("
+                + db_string_formatting(getName(), "string")
                 + ");";
         return modifyingQuery(query);
     }
@@ -77,7 +64,6 @@ public class MDBPerson extends MDatabase {
         String query = "update Person set ";
         int initial_length = query.length();
         query += db_update_formatting(db_string_formatting(getName(), "string"), "name");
-        query += db_update_formatting(db_string_formatting(getSort(), "string"), "sort");
         if(query.length() == initial_length) return false;
         query = query.substring(0, query.length()-1);   // Delete last comma
         query += " where idPerson = " + idPerson;
@@ -85,15 +71,14 @@ public class MDBPerson extends MDatabase {
     }
 
     /* Modified Function */
-    public boolean delete_by_type(String type) {
-        String query = "delete from Person where sort = '" + type + "'";
+    public boolean delete_by_name(String name) {
+        String query = "delete from Person where names = '" + name + "'";
         return modifyingQuery(query);
     }
 
     public int getIdPersonFromDB() {
         String query = "select idPerson from Person where "
-                + db_where_formatting(db_string_formatting(getName(), "String"), "name") + " and "
-                + db_where_formatting(db_string_formatting(getSort(), "String"), "sort");
+                + db_where_formatting(db_string_formatting(getName(), "String"), "name");
         ResultSet rs = selectQuery(query);
         if(rs == null) return 0;
         try {

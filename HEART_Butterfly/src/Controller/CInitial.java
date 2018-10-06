@@ -35,20 +35,20 @@ public class CInitial extends AbsMetaController {
     
     @FXML
     void login(ActionEvent event) throws IOException {
-    	// Exception Handling
+        // Exception Handling
     	if(this.textLoginID.getText().length() == 0) {
-    		this.lblLoginFail.setText("?•„?´?””ë¥? ?…? ¥?•˜?„¸?š”.");
+    		this.lblLoginFail.setText("?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.");
     	}
     	
     	if(this.txtLoginPW.getText().length() == 0) {
-    		this.lblLoginFail.setText("ë¹„ë?ë²ˆí˜¸ë¥? ?…? ¥?•˜?„¸?š”.");
+    		this.lblLoginFail.setText("ë¹„ï¿½?ë²ˆí˜¸ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.");
     	}
     	
     	// Login Sequence
     	if(this.textLoginID.getText().equals(id) && this.txtLoginPW.getText().equals(password)) {
         	changeWindow(this.btnLogin.getScene().getWindow(), "VMain");
-    	} else {
-    		this.lblLoginFail.setText("? •ë³´ê? ?¼ì¹˜í•˜ì§? ?•Š?Šµ?‹ˆ?‹¤.");
+        } else {
+    		this.lblLoginFail.setText("?ï¿½ï¿½ë³´ï¿½? ?ï¿½ï¿½ì¹˜í•˜ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.");
     	}
     }
 
