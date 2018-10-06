@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import Model.MDBButterflyGuide;
 import Model.MDBPerson;
 import Model.MDBSpecimen;
+import Model.MDBSpecimenize;
 import Model.MSharedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.fxml.Initializable;
@@ -23,11 +25,17 @@ import javafx.fxml.Initializable;
 public class CInsertAnticeptic extends AbsMetaController implements Initializable {
 	
     MDBSpecimen db_specimen=null;
+    MDBSpecimenize db_specimenize=null;
+
     String PlaceName;
     String CabinetName;
+    String BoxName;
     
    @FXML
     private BorderPane AnticepticStage;
+   
+   @FXML
+   private TextField txtAnticepticName;
    
     @FXML
     private ComboBox<String> comboPlace;
@@ -52,12 +60,22 @@ public class CInsertAnticeptic extends AbsMetaController implements Initializabl
 
     @FXML
     void placeInsert(ActionEvent event) throws SQLException {
-    	PlaceName = this.comboPlace.getSelectionModel().getSelectedItem();
-    	
-    	System.out.println("Hi");
-        String queryCabinet = "select storageCabinet from Specimen where storageRoom=" + PlaceName;
-		ResultSet rsCabinet = db_specimen.selectQuery(queryCabinet);
 
+    	String queryCabinet = null;
+    	ResultSet rsCabinet = null;
+    	System.out.println("Hi");
+    	int PlaceTotalSelection = this.comboPlace.getSelectionModel().getSelectedIndex();
+    	if(PlaceTotalSelection==0) {
+            queryCabinet = "select distinct storageCabinet from Specimen";
+    		rsCabinet = db_specimen.selectQuery(queryCabinet);
+    	}else {
+            queryCabinet = "select distinct storageCabinet from Specimen where storageRoom='" + this.comboPlace.getSelectionModel().getSelectedItem() + "'";
+    		rsCabinet = db_specimen.selectQuery(queryCabinet);
+    	}
+    	
+		this.comboCabinet.getItems().clear();
+    	this.comboCabinet.getItems().add("전체선택");
+		
 		while(rsCabinet.next()) {
 			System.out.println(rsCabinet.getString(1));
 			this.comboCabinet.getItems().add(rsCabinet.getString(1));   // get storageCabinet
@@ -65,22 +83,43 @@ public class CInsertAnticeptic extends AbsMetaController implements Initializabl
 
     	CabinetName = this.comboCabinet.getSelectionModel().getSelectedItem();
     }
-
+    
     @FXML
     void cabinetInsert(ActionEvent event) throws SQLException {
-    	
+    	String queryBox = null;
+    	ResultSet rsBox =null;
+    	int CabinetTotalSelection = this.comboPlace.getSelectionModel().getSelectedIndex();
+    	if(CabinetTotalSelection==0) {
+            queryBox = "select distinct storageChest from Specimen";
+    		rsBox = db_specimen.selectQuery(queryBox);
+    	} else {
+            queryBox = "select distinct storageChest from Specimen where storageCabinet='" + this.comboCabinet.getSelectionModel().getSelectedItem() + "'";
+    		rsBox = db_specimen.selectQuery(queryBox);
+    	}
+		
+		this.comboBox.getItems().clear();
+    	this.comboBox.getItems().add("전체선택");
+		
+			while(rsBox.next()) {
+				System.out.println(rsBox.getString(1));
+				this.comboBox.getItems().add(rsBox.getString(1));
+			}
+		
+    	BoxName = this.comboBox.getSelectionModel().getSelectedItem();
     }
 
     @FXML
     void boxInsert(ActionEvent event) throws SQLException {
-        String queryBox = "select storageBox from Specimen where storageCabinet=" + this.comboPlace.getSelectionModel().getSelectedItem();
-		ResultSet rsBox = db_specimen.selectQuery(queryBox);
-		this.comboPlace.getItems().add(rsBox.getString(1));   // get storageBox
-    	this.comboBox.getSelectionModel().getSelectedIndex();
+    	int BoxTotalSelection = this.comboPlace.getSelectionModel().getSelectedIndex();
+    	if(BoxTotalSelection==0) {
+    		
+    	}
     }
 
     @FXML
     void saveAnticepticDate(ActionEvent event) {
+    	
+    	String queryAnticepticName = "insert into Specimenize(anticepticName) value(" + txtAnticepticName.getText() + ")";
     	
     }
 
@@ -91,20 +130,26 @@ public class CInsertAnticeptic extends AbsMetaController implements Initializabl
 
     @FXML
     void dateInsertAnticeptic(ActionEvent event) {
-
+    	String confrimedDate = datepickerInsertAnticeptic.getEditor().getText();
+    	lblDateInsert.setText(confrimedDate);
     }
         
     
 
     public void init_procedure() {
     	this.getStage().setResizable(false);
-    	
+
     	/* DB Instance initialization */
     	 db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
-        String queryRoom = "select storageRoom from Specimen";
+    	 db_specimenize = new MDBSpecimenize(((MSharedData)this.shared_model).getDB().getConnection());
 
+ 		this.comboPlace.getItems().clear();
+    	
+    	this.comboPlace.getItems().add("전체선택");
+
+    	String queryRoom = "select distinct storageRoom from Specimen";
 		ResultSet rsRoom = db_specimen.selectQuery(queryRoom);
-
+		
 		try {
 			while(rsRoom.next()) {
 				this.comboPlace.getItems().add(rsRoom.getString(1));   // get storageRoom
