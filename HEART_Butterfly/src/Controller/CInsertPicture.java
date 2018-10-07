@@ -56,10 +56,7 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     private ComboBox<String> comboInsertPictureWho;
 
     @FXML
-    private Button btnInsertPictureChoosewho;
-
-    @FXML
-    private Button btnInsertPictureClear;
+    private Button btnInsertPicturePersonManagement;
 
     @FXML
     private TextField txtInsertPictureBname;
@@ -345,28 +342,8 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     }
 
     @FXML
-    void choosewhoInsertPicture(ActionEvent event) {
-		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("Insert New Name");
-		dialog.setHeaderText(null);
-		dialog.setContentText(null);
-		dialog.showAndWait();
-		String new_name = dialog.getEditor().getText();
-
-		PersonDB.setName(new_name);
-		if(!PersonDB.insert()) System.out.println("Failed.");
-		
-		this.comboInsertPictureWho.getItems().add(new_name);
-    }
-
-    @FXML
-    /*
-     * 유저 관리 페이지가 있는 게 좋을듯 - 성훈
-     * */
-    void clearInsertPicture(ActionEvent event) {
-//        MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-//        person.delete_by_type("촬영자");
-//        this.comboInsertPictureWho.getItems().clear();
+    void OnPersonManagement(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertPictureExit.getScene().getWindow(), "VPersonManagement");
     }
 
     @FXML
@@ -444,53 +421,55 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     
     @FXML
     void pictureInsertPicture(ActionEvent event) throws IOException {
-        FileChooser fc = new FileChooser();
-        fc.setInitialDirectory(new File ("C:/Temp"));
-        fc.getExtensionFilters().addAll(new ExtensionFilter("jpg files","*.jpg"));
-        fc.getExtensionFilters().addAll(new ExtensionFilter("png files", "*.png"));
-        fc.getExtensionFilters().addAll(new ExtensionFilter("bmp files", "*.bmp"));
-        ImageSelectedFile = fc.showOpenDialog(null);
-        if(ImageSelectedFile == null){
-            this.lblLoadPictureStatus.setText("File is not valid");
-            return;
-        }
-        else{
-            if(ImageSelectedFile.getAbsolutePath() == null) return;
-            String dest_filename = null;
-            /* File Copy */
-            try {
-                FileInputStream fis = new FileInputStream(ImageSelectedFile.getAbsoluteFile());
-                dest_filename = "HEART_Butterfly/img/" + ImageSelectedFile.getName();
-                File f1 = new File(dest_filename);
-
-                if(f1.exists()) {
-                    this.lblLoadPictureStatus.setText("Same name exists in image folder already");
-                    return;
-                }
-
-                FileOutputStream fos = new FileOutputStream(dest_filename);
-
-                int data = 0;
-                while((data=fis.read())!=-1) {
-                    fos.write(data);
-                }
-                fis.close();
-                fos.close();
-
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-    		//Determine path
-            ImageSelectedFile = new File(dest_filename);
-            filepath = ImageSelectedFile.getAbsolutePath();
-
-            //Set image at view
-            File file = new File(filepath);
-            Image image = new Image(file.toURI().toString());
-            this.ImvImage.setImage(image);
-        }
+        spawnChildWindow(this.btnInsertPictureExit.getScene().getWindow(), "VImageImporter");
+//
+//        FileChooser fc = new FileChooser();
+//        fc.setInitialDirectory(new File ("C:/Temp"));
+//        fc.getExtensionFilters().addAll(new ExtensionFilter("jpg files","*.jpg"));
+//        fc.getExtensionFilters().addAll(new ExtensionFilter("png files", "*.png"));
+//        fc.getExtensionFilters().addAll(new ExtensionFilter("bmp files", "*.bmp"));
+//        ImageSelectedFile = fc.showOpenDialog(null);
+//        if(ImageSelectedFile == null){
+//            this.lblLoadPictureStatus.setText("File is not valid");
+//            return;
+//        }
+//        else{
+//            if(ImageSelectedFile.getAbsolutePath() == null) return;
+//            String dest_filename = null;
+//            /* File Copy */
+//            try {
+//                FileInputStream fis = new FileInputStream(ImageSelectedFile.getAbsoluteFile());
+//                dest_filename = "HEART_Butterfly/img/" + ImageSelectedFile.getName();
+//                File f1 = new File(dest_filename);
+//
+//                if(f1.exists()) {
+//                    this.lblLoadPictureStatus.setText("Same name exists in image folder already");
+//                    return;
+//                }
+//
+//                FileOutputStream fos = new FileOutputStream(dest_filename);
+//
+//                int data = 0;
+//                while((data=fis.read())!=-1) {
+//                    fos.write(data);
+//                }
+//                fis.close();
+//                fos.close();
+//
+//            } catch (IOException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+//
+//    		//Determine path
+//            ImageSelectedFile = new File(dest_filename);
+//            filepath = ImageSelectedFile.getAbsolutePath();
+//
+//            //Set image at view
+//            File file = new File(filepath);
+//            Image image = new Image(file.toURI().toString());
+//            this.ImvImage.setImage(image);
+//        }
     }
 
     @FXML

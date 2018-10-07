@@ -27,16 +27,19 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     private TextField txtInsertSpecimenCollectoc;
 
     @FXML
-    private Button btnInsertSpecimenSearchcollectloc;
+    private Button btnInsertSpecimenImportCollectionInfo;
+
+    @FXML
+    private Button btnInsertSpecimenImportSpecimen;
+
+    @FXML
+    private Button btnInsertSpecimenGiverManagement;
+
+    @FXML
+    private Button btnInsertSpecimenWorkerManagement;
 
     @FXML
     private ComboBox<String> comboInsertSpecimenWho;
-
-    @FXML
-    private Button btnInsertSpecimenChoosewho;
-
-    @FXML
-    private Button btnInsertSpecimenClear;
 
     @FXML
     private TextField txtInsertSpecimenBname;
@@ -46,9 +49,6 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 
     @FXML
     private TextField txtInsertSpecimenZoological;
-
-    @FXML
-    private Button btnInsertSpecimenAdd;
 
     @FXML
     private Button btnInsertSpecimenExit;
@@ -67,9 +67,6 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 
     @FXML
     private TextField txtInsertSpecimenRemark;
-
-    @FXML
-    private Button btnInsertSpecimenChoosecollectwho;
 
     @FXML
     private ComboBox<String> comboInsertSpecimenCollectwho;
@@ -105,16 +102,10 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     private TextField txtInsertSpecimenDo;
 
     @FXML
-    private Button btnInsertSpecimenLabel;
-
-    @FXML
     private ComboBox<String> comboInsertSpecimenLoc2type;
 
     @FXML
     private ComboBox<String> comboInsertSpecimenLoc3;
-
-    @FXML
-    private Button btnInsertSpecimenCorrect;
 
     @FXML
     void addInsertSpecimen(ActionEvent event) {
@@ -298,39 +289,27 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     }
 
     @FXML
-    void choosewhoInsertSpecimen(ActionEvent event) {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("표본 작업자를 등록하세요");
-        dialog.setHeaderText(null);
-        dialog.setContentText(null);
-        dialog.showAndWait();
-        String new_name = dialog.getEditor().getText();
-
-        PersonDB.setName(new_name);
-        if(!PersonDB.insert()){
-            System.out.println("Failed.");
-            return;
-        }
-
-		this.comboInsertSpecimenWho.getItems().add(new_name);
+    void OnImportCollectionInfo(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VCollectionInfoSelector");
     }
 
     @FXML
-    /*
-    *  사람 관리 페이지가 있는게 좋을듯 - 성훈
-    * */
-    void clearInsertSpecimen(ActionEvent event) {
-//    	MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-//        person.delete_by_type("제공자");
-//        this.comboInsertSpecimenCollectwho.getItems().clear();
-//
-//        person.setName("조윤호");
-//        if(!person.insert()){
-//            System.out.println("Failed.");
-//            return;
-//        }
-//        this.comboInsertSpecimenCollectwho.getItems().add("조윤호");
-//        this.comboInsertSpecimenCollectwho.getSelectionModel().select(0);
+    void OnImportSpecimen(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VSpecimenSelector");
+    }
+
+    @FXML
+    void OnGiverManagement(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VPersonManagement");
+    }
+
+    @FXML
+    void OnWorkerManagement(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VPersonManagement");
+    }
+
+    @FXML
+    void collectwhoInsertSpecimen(ActionEvent event) {
 
     }
 
@@ -346,11 +325,6 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 
     @FXML
     void collectwayInsertSpecimen(ActionEvent event) {
-
-    }
-
-    @FXML
-    void collectwhoInsertSpecimen(ActionEvent event) {
 
     }
 

@@ -44,6 +44,20 @@ public abstract class AbsMetaController {
     	Scene scene = new Scene(root);
     	nowStage.setScene(scene);
 	}
+
+    public void spawnChildWindow(Window nowWindow, String viewName) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        Parent root = loader.load(getClass().getResource("/View/" + viewName + ".fxml").openStream());
+        AbsMetaController controller = (AbsMetaController)loader.getController();
+        controller.setParentController(this);
+        controller.setSharedModel(shared_model);
+        Stage newStage = new Stage();
+        controller.setStage(nowStage);
+        controller.init_procedure();
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.show();
+    }
 	
 	public void init_procedure() {
 		/* For Overridding */

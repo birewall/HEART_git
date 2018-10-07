@@ -20,6 +20,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleGroup;
 
+import javax.swing.*;
+
 public class CInsertWatch extends AbsMetaController implements Initializable {
 	
 	MDBPerson PersonDB;
@@ -34,7 +36,10 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     private TextField txtInsertWatchLoc;
 
     @FXML
-    private Button btnInsertWatchSearchLoc;
+    private Button btnInsertWatchPersonManagement;
+
+    @FXML
+    private Button btnInsertWatchImportCollectionInfo;
 
     @FXML
     private TextField txtInsertWatchDo;
@@ -292,20 +297,13 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     }
 
     @FXML
-    /*
-    * 유저 관리 페이지가 있는 게 좋을듯 - 성훈
-    * */
-    void clearInsertWatch(ActionEvent event) {
-//        MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-//        this.comboInsertWatchWho.getItems().clear();
-//
-//        person.setName("조윤호");
-//        if(!person.insert()){
-//            System.out.println("Failed.");
-//            return;
-//        }
-//        this.comboInsertWatchWho.getItems().add("조윤호");
-//        this.comboInsertWatchWho.getSelectionModel().select(0);
+    void OnImportCollectionInfo(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertWatchExit.getScene().getWindow(), "VCollectionInfoSelector");
+    }
+
+    @FXML
+    void OnPersonManagement(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertWatchExit.getScene().getWindow(), "VPersonManagement");
     }
 
     @FXML
