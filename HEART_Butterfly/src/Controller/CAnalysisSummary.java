@@ -1,5 +1,8 @@
 package Controller;
 
+import Model.MDBLocation;
+import Model.MDBPerson;
+import Model.MSharedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -8,6 +11,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class CAnalysisSummary extends AbsMetaController {
 
@@ -114,4 +120,18 @@ public class CAnalysisSummary extends AbsMetaController {
 
     }
 
+    public void init_procedure() {
+        // Set Watcher
+        String query = "select distinct country from Location";
+        MDBLocation LocationDB = new MDBLocation(((MSharedData)this.shared_model).getDB().getConnection());
+        ResultSet rs = LocationDB.selectQuery(query);
+        try {
+            while(rs.next()) {
+                System.out.println(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }

@@ -37,7 +37,7 @@ public abstract class AbsMetaController {
     	Parent root = loader.load(getClass().getResource("/View/" + viewName + ".fxml").openStream());
         AbsMetaController controller = (AbsMetaController)loader.getController();
         controller.setParentController(this);
-    	controller.setSharedModel(shared_model);
+		controller.setSharedModel(shared_model);
 		nowStage = (Stage)nowWindow;
 		controller.setStage(nowStage);
     	controller.init_procedure();
