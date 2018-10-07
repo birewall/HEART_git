@@ -271,24 +271,6 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     }
 
     @FXML
-    void choosecollectwhoInsertSpecimen(ActionEvent event) {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("제공자를 등록하세요");
-        dialog.setHeaderText(null);
-        dialog.setContentText(null);
-        dialog.showAndWait();
-        String new_name = dialog.getEditor().getText();
-
-        PersonDB.setName(new_name);
-        if(!PersonDB.insert()){
-            System.out.println("Failed.");
-            return;
-        }
-
-        this.comboInsertSpecimenCollectwho.getItems().add(new_name);
-    }
-
-    @FXML
     void OnImportCollectionInfo(ActionEvent event) throws IOException {
         spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VCollectionInfoSelector");
     }
@@ -442,6 +424,36 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     void zoologicalInsertSpecimen(ActionEvent event) {
 
     }
+
+    public void update_person() {
+        /* Clear All Names from List */
+        this.comboInsertSpecimenCollectwho.getItems().clear();
+        this.comboInsertSpecimenWho.getItems().clear();
+
+        /* DB Querying */
+        String query = "select name from Person";
+        PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+        ResultSet rs = PersonDB.selectQuery(query);
+        try {
+            while(rs.next()) {
+                /* View Updating */
+                this.comboInsertSpecimenWho.getItems().add(rs.getString(1));   // get name
+                this.comboInsertSpecimenCollectwho.getItems().add(rs.getString(1));   // get name
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        /* Initializing */
+        if(this.comboInsertSpecimenWho.getItems().size() > 0) this.comboInsertSpecimenWho.getSelectionModel().select("조윤호"); // DB에 '조윤호'는 반드시 존재한다.
+        if(this.comboInsertSpecimenCollectwho.getItems().size() > 0) this.comboInsertSpecimenCollectwho.getSelectionModel().select("조윤호");
+    }
+
+    @Override
+    public void view_update() {
+        update_person();
+    }
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -471,20 +483,6 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 
     @Override
     public void init_procedure() {
-        // Set Person
-        String query = "select distinct name from Person";
-        PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-        ResultSet rs = PersonDB.selectQuery(query);
-        try {
-            while(rs.next()) {
-                this.comboInsertSpecimenWho.getItems().add(rs.getString(1));   // get name
-                this.comboInsertSpecimenCollectwho.getItems().add(rs.getString(1));   // get name
-            }
-            if(this.comboInsertSpecimenWho.getItems().size() > 0) this.comboInsertSpecimenWho.getSelectionModel().select(0);
-            if(this.comboInsertSpecimenCollectwho.getItems().size() > 0) this.comboInsertSpecimenCollectwho.getSelectionModel().select(0);
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        view_update();
     }
 }

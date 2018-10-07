@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class MDBPerson extends MDatabase {
     int idPerson;
-    String name;    //varchar(45) not null
+    String name;    //varchar(45) not null, unique
 
     public MDBPerson(Connection connection) {
         this.connection = connection;
@@ -72,7 +72,7 @@ public class MDBPerson extends MDatabase {
 
     /* Modified Function */
     public boolean delete_by_name(String name) {
-        String query = "delete from Person where names = '" + name + "'";
+        String query = "delete from Person where name = '" + name + "'";
         return modifyingQuery(query);
     }
 

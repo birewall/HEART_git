@@ -8,6 +8,7 @@ import Model.AbsMetaModel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -15,6 +16,14 @@ public abstract class AbsMetaController {
 	AbsMetaController parent_controller = null;
 	AbsMetaModel shared_model = null;
 	Stage nowStage;
+
+    public Stage getStage() {
+        return nowStage;
+    }
+
+    public void setStage(Stage stage) {
+        nowStage = stage;
+    }
 
 	public void setParentController(AbsMetaController  parent_controller) {
 		this.parent_controller = parent_controller;
@@ -31,7 +40,7 @@ public abstract class AbsMetaController {
 	public AbsMetaModel getSharedModel() {
 		return this.shared_model;
 	}
-	
+
 	public void changeWindow(Window nowWindow, String viewName) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
     	Parent root = loader.load(getClass().getResource("/View/" + viewName + ".fxml").openStream());
@@ -58,16 +67,12 @@ public abstract class AbsMetaController {
         newStage.setScene(scene);
         newStage.show();
     }
-	
-	public void init_procedure() {
-		/* For Overridding */
-	}
 
-	public Stage getStage() {
-		return nowStage;
-	}
+    public void init_procedure() {
+        /* For Overridding */
+    }
 
-	public void setStage(Stage stage) {
-		nowStage = stage;
-	}
+    public void view_update() {
+        /* For Overridding */
+    }
 }
