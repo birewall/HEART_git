@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class CImageImporter extends AbsMetaController {
 
@@ -24,12 +25,15 @@ public class CImageImporter extends AbsMetaController {
 
     @FXML
     void OnCancel(ActionEvent event) {
-
+        Stage thisStage = (Stage)this.btnCancel.getScene().getWindow();
+        thisStage.close();
     }
 
     @FXML
     void OnDone(ActionEvent event) {
-
+        /* Data Insert */
+        Stage thisStage = (Stage)this.btnDone.getScene().getWindow();
+        thisStage.close();
     }
 
     @FXML

@@ -8,6 +8,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -91,7 +92,8 @@ public class CCollectionInfoSelector extends AbsMetaController implements Initia
 
     @FXML
     void OnCancel(ActionEvent event) {
-
+        Stage thisStage = (Stage)this.btnCancel.getScene().getWindow();
+        thisStage.close();
     }
 
     @FXML
@@ -116,7 +118,9 @@ public class CCollectionInfoSelector extends AbsMetaController implements Initia
 
     @FXML
     void OnSelect(ActionEvent event) {
-
+        /* Data Insert */
+        Stage thisStage = (Stage)this.btnSelect.getScene().getWindow();
+        thisStage.close();
     }
 
     @FXML
