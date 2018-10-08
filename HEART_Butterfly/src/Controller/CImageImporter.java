@@ -2,11 +2,22 @@ package Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class CImageImporter extends AbsMetaController {
+
+    File selectedFile = null;
+    String filepath = null;
 
     @FXML
     private Button btnRegister;
@@ -33,6 +44,7 @@ public class CImageImporter extends AbsMetaController {
     void OnDone(ActionEvent event) {
         /* Data Insert */
         Stage thisStage = (Stage)this.btnDone.getScene().getWindow();
+        this.parent_controller.view_update();
         thisStage.close();
     }
 
@@ -46,6 +58,7 @@ public class CImageImporter extends AbsMetaController {
 
     }
 
+    @Override
     public void init_procedure() {
 
     }

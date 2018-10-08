@@ -94,5 +94,6 @@
       </Label>
       <ImageView fx:id="ImvImage" fitHeight="150.0" fitWidth="200.0" layoutX="370.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
       <CheckBox fx:id="cboxInsertPictureMatching" layoutX="247.0" layoutY="639.0" mnemonicParsing="false" onAction="#matingInsertPicture" text="짝짓기" />
+      <Label fx:id="txtResult" layoutX="45.0" layoutY="851.0" prefHeight="15.0" prefWidth="200.0" />
    </children>
 </Pane>
