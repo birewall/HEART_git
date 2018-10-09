@@ -480,6 +480,20 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 	
 	@Override
 	public void init_procedure() {
-        view_update();
+
+		// Set Watcher
+		String query = "select distinct name from Person where sort = '관찰자'";
+		System.out.println(this.shared_model);
+		PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+		ResultSet rs = PersonDB.selectQuery(query);
+		try {
+			while(rs.next()) {
+				this.comboInsertWatchWho.getItems().add(rs.getString(1));   // get name
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 }

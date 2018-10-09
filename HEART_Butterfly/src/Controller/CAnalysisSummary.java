@@ -1,7 +1,15 @@
 package Controller;
 
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+
+import Model.MDBButterflyGuide;
 import Model.MDBLocation;
 import Model.MDBPerson;
+import Model.MDBSpecimen;
+
 import Model.MSharedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,10 +29,10 @@ public class CAnalysisSummary extends AbsMetaController {
     private DatePicker PeriodStart;
 
     @FXML
-    private ComboBox<?> comboNation;
+    private ComboBox<String> comboNation;
 
     @FXML
-    private ComboBox<?> CombFamily;
+    private ComboBox<String> CombFamily;
 
     @FXML
     private BarChart<?, ?> BarChartSumary;
@@ -66,22 +74,82 @@ public class CAnalysisSummary extends AbsMetaController {
     private Button btnSearch;
 
     @FXML
-    void OnCheckFamily(ActionEvent event) {
+    void OnCheckFamily(ActionEvent event) throws SQLException {
+    	if(this.checkFamaily.isSelected()) {
+    		
+    		MDBButterflyGuide db_butterfly_guide = new MDBButterflyGuide(((MSharedData)this.shared_model).getDB().getConnection());
+            ResultSet rs = db_butterfly_guide.selectQuery("SELECT distinct family FROM ButterflyGuide");
+            ResultSetMetaData rsmd = rs.getMetaData();
+            
+    		
+    		try {
+    			while(rs.next()) {
+    				this.CombFamily.getItems().add(rs.getString(1));   // get name
+    			}
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		
+    		
+    		
+    		this.CombFamily.setDisable(false);
+    		
+    	}
+    	else {
+    		
+    		this.CombFamily.setDisable(true);
+    	}
 
     }
 
     @FXML
-    void OnCheckNation(ActionEvent event) {
+    void OnCheckNation(ActionEvent event) throws SQLException {
+    	
+    	if(this.checkNation.isSelected()) {
+    		
+    		MDBLocation db_nation = new MDBLocation(((MSharedData)this.shared_model).getDB().getConnection());
+            ResultSet rs = db_nation.selectQuery("SELECT distinct country FROM Location");
+            ResultSetMetaData rsmd = rs.getMetaData();
+            
+    		
+    		try {
+    			while(rs.next()) {
+    				this.comboNation.getItems().add(rs.getString(1));   // get name
+    			}
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		
+    		
+    		
+    		this.comboNation.setDisable(false);
+    		
+    	}
+    	else {
+    		
+    		this.comboNation.setDisable(true);
+    	}
 
     }
 
     @FXML
     void OnClear(ActionEvent event) {
+    	
 
     }
 
     @FXML
     void OnCombFamily(ActionEvent event) {
+    	if(this.CheckBPeriod.isSelected()) {
+    		this.PeriodStart.setDisable(false);
+    		this.PeriodEnd.setDisable(false);
+    	}
+    	else {    		
+    		this.PeriodStart.setDisable(true);
+    		this.PeriodEnd.setDisable(true);
+    	}
 
     }
 
@@ -91,12 +159,23 @@ public class CAnalysisSummary extends AbsMetaController {
     }
 
     @FXML
-    void OnExit(ActionEvent event) {
-
+    void OnExit(ActionEvent event) throws IOException {
+    	changeWindow(this.btnExit.getScene().getWindow(), "VMain");
     }
+
+    
 
     @FXML
     void OnPeriod(ActionEvent event) {
+    	if(this.CheckBPeriod.isSelected()) {
+    		this.PeriodStart.setDisable(false);
+    		this.PeriodEnd.setDisable(false);
+    	}
+    	else {    		
+    		this.PeriodStart.setDisable(true);
+    		this.PeriodEnd.setDisable(true);
+    	}
+
 
     }
 
@@ -119,19 +198,13 @@ public class CAnalysisSummary extends AbsMetaController {
     void exportSummaryAnalysis(ActionEvent event) {
 
     }
-
+    
     public void init_procedure() {
-        // Set Watcher
-        String query = "select distinct country from Location";
-        MDBLocation LocationDB = new MDBLocation(((MSharedData)this.shared_model).getDB().getConnection());
-        ResultSet rs = LocationDB.selectQuery(query);
-        try {
-            while(rs.next()) {
-                System.out.println(rs.getString(1));
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    	
+		this.PeriodStart.setDisable(true);
+    	this.PeriodEnd.setDisable(true);
+    	this.comboNation.setDisable(true);
+    	this.CombFamily.setDisable(true);
+		
     }
 }
