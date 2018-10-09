@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -12,7 +17,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1000.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CAnalysisSummary">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1000.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CAnalysisSummary">
    <children>
       <Label layoutX="26.0" layoutY="53.0" text="검색 조건 설정">
          <font>
@@ -21,7 +26,7 @@
       <DatePicker fx:id="PeriodStart" layoutX="144.0" layoutY="112.0" onAction="#calenderPeriodStart" prefHeight="29.0" prefWidth="200.0" />
       <ComboBox fx:id="comboNation" layoutX="701.0" layoutY="115.0" onAction="#OnCombNation" prefWidth="150.0" />
       <ComboBox fx:id="CombFamily" layoutX="1005.0" layoutY="115.0" onAction="#OnCombFamily" prefWidth="150.0" />
-      <BarChart fx:id="BarChartSumary" layoutX="34.0" layoutY="330.0" prefHeight="568.0" prefWidth="621.0">
+      <BarChart fx:id="BarChartSumary" layoutX="33.0" layoutY="374.0" prefHeight="568.0" prefWidth="621.0">
          <xAxis>
             <CategoryAxis side="BOTTOM" />
          </xAxis>
@@ -32,63 +37,63 @@
                </tickLabelFont></NumberAxis>
          </yAxis>
       </BarChart>
-      <Label layoutX="724.0" layoutY="371.0" text="통계 요약">
+      <Label layoutX="723.0" layoutY="415.0" text="통계 요약">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <Label layoutX="724.0" layoutY="441.0" text="전체 :">
+      <Label layoutX="723.0" layoutY="485.0" text="전체 :">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label layoutX="724.0" layoutY="492.0" text="관찰 :">
+      <Label layoutX="723.0" layoutY="536.0" text="관찰 :">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label layoutX="724.0" layoutY="593.0" text="사진 :">
+      <Label layoutX="723.0" layoutY="637.0" text="사진 :">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label layoutX="724.0" layoutY="544.0" text="표본 :">
+      <Label layoutX="723.0" layoutY="588.0" text="표본 :">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <TextField fx:id="txtAll" layoutX="776.0" layoutY="434.0" prefHeight="29.0" prefWidth="95.0" promptText="230">
+      <TextField fx:id="txtAll" layoutX="775.0" layoutY="478.0" prefHeight="29.0" prefWidth="95.0" promptText="230">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="txtWatch" layoutX="776.0" layoutY="484.0" prefHeight="29.0" prefWidth="95.0" promptText="100">
+      <TextField fx:id="txtWatch" layoutX="775.0" layoutY="528.0" prefHeight="29.0" prefWidth="95.0" promptText="100">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="txtPicture" layoutX="775.0" layoutY="585.0" prefHeight="29.0" prefWidth="95.0" promptText="310">
+      <TextField fx:id="txtPicture" layoutX="774.0" layoutY="629.0" prefHeight="29.0" prefWidth="95.0" promptText="310">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="txtSpecimen" layoutX="775.0" layoutY="535.0" prefHeight="29.0" prefWidth="95.0" promptText="20">
+      <TextField fx:id="txtSpecimen" layoutX="774.0" layoutY="579.0" prefHeight="29.0" prefWidth="95.0" promptText="20">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <Label layoutX="888.0" layoutY="441.0" text="개">
+      <Label layoutX="887.0" layoutY="485.0" text="개">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label layoutX="880.0" layoutY="492.0" text="마리">
+      <Label layoutX="879.0" layoutY="536.0" text="마리">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label layoutX="887.0" layoutY="593.0" text="장">
+      <Label layoutX="886.0" layoutY="637.0" text="장">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label layoutX="887.0" layoutY="544.0" text="개">
+      <Label layoutX="886.0" layoutY="588.0" text="개">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Button fx:id="btnExportResult" layoutX="724.0" layoutY="756.0" mnemonicParsing="false" onAction="#exportSummaryAnalysis" prefHeight="65.0" prefWidth="155.0" text="결과 내보내기">
+      <Button fx:id="btnExportResult" layoutX="723.0" layoutY="800.0" mnemonicParsing="false" onAction="#exportSummaryAnalysis" prefHeight="65.0" prefWidth="155.0" text="결과 내보내기">
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button fx:id="btnExit" layoutX="888.0" layoutY="756.0" mnemonicParsing="false" onAction="#OnExit" prefHeight="65.0" prefWidth="155.0" text="종료">
+      <Button fx:id="btnExit" layoutX="887.0" layoutY="800.0" mnemonicParsing="false" onAction="#OnExit" prefHeight="65.0" prefWidth="155.0" text="종료">
          <font>
             <Font size="18.0" />
          </font></Button>
@@ -109,17 +114,32 @@
             <Font size="18.0" />
          </font>
       </CheckBox>
-      <Button fx:id="btnClear" layoutX="485.0" layoutY="247.0" mnemonicParsing="false" onAction="#OnClear" text="초기화">
+      <Button fx:id="btnClear" layoutX="484.0" layoutY="297.0" mnemonicParsing="false" onAction="#OnClear" text="초기화">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnSearch" layoutX="671.0" layoutY="247.0" mnemonicParsing="false" onAction="#OnSearch" text="검색">
+      <Button fx:id="btnSearch" layoutX="670.0" layoutY="297.0" mnemonicParsing="false" onAction="#OnSearch" text="검색">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Label layoutX="504.0" layoutY="184.0" text="시스템 알림">
+      <Label layoutX="513.0" layoutY="167.0" text="시스템 알림">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="144.0" layoutY="202.0" text="검색기간">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="429.0" layoutY="202.0" text="검색국가">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="655.0" layoutY="202.0" text="시스템 알림">
          <font>
             <Font size="24.0" />
          </font>
