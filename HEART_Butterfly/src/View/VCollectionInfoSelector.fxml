@@ -13,10 +13,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CCollectionInfoSelector">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CCollectionInfoSelector">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="547.0" minWidth="10.0" prefWidth="547.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="150.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="850.0" minWidth="10.0" prefWidth="850.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="511.0" minWidth="0.0" prefWidth="0.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -29,7 +29,7 @@
             <Insets bottom="20.0" left="20.0" top="20.0" />
          </GridPane.margin>
       </TableView>
-      <VBox prefHeight="200.0" prefWidth="311.0" GridPane.columnIndex="1">
+      <VBox prefHeight="200.0" prefWidth="0.0" GridPane.columnIndex="1">
          <children>
             <HBox prefHeight="39.0" prefWidth="294.0" />
             <HBox prefHeight="39.0" prefWidth="294.0">
@@ -67,12 +67,12 @@
                <children>
                   <CheckBox fx:id="checkCountry" mnemonicParsing="false" onAction="#OnCountry" prefHeight="20.0" prefWidth="100.0" selected="true" text="국가">
                      <HBox.margin>
-                        <Insets bottom="10.0" left="30.0" right="20.0" top="10.0" />
+                        <Insets bottom="10.0" left="30.0" right="28.0" top="10.0" />
                      </HBox.margin>
                   </CheckBox>
-                  <TextField fx:id="txtCountry" prefHeight="23.0" prefWidth="131.0">
+                  <TextField fx:id="txtCountry" prefHeight="23.0" prefWidth="140.0">
                      <HBox.margin>
-                        <Insets bottom="10.0" right="34.0" top="10.0" />
+                        <Insets bottom="10.0" top="10.0" />
                      </HBox.margin>
                   </TextField>
                </children>
@@ -81,12 +81,12 @@
                <children>
                   <CheckBox fx:id="checkAlias" mnemonicParsing="false" onAction="#OnAlias" prefHeight="20.0" prefWidth="100.0" text="지역통상명">
                      <HBox.margin>
-                        <Insets bottom="10.0" left="30.0" right="20.0" top="10.0" />
+                        <Insets bottom="10.0" left="30.0" right="28.0" top="10.0" />
                      </HBox.margin>
                   </CheckBox>
-                  <TextField fx:id="txtAlias" prefHeight="23.0" prefWidth="130.0">
+                  <TextField fx:id="txtAlias" prefHeight="23.0" prefWidth="140.0">
                      <HBox.margin>
-                        <Insets bottom="10.0" right="34.0" top="10.0" />
+                        <Insets bottom="10.0" top="10.0" />
                      </HBox.margin>
                   </TextField>
                </children>
@@ -95,26 +95,26 @@
                <children>
                   <CheckBox fx:id="checkButterflyName" mnemonicParsing="false" onAction="#OnButterflyName" prefHeight="20.0" prefWidth="100.0" text="나비명">
                      <HBox.margin>
-                        <Insets bottom="10.0" left="30.0" right="20.0" top="10.0" />
+                        <Insets bottom="10.0" left="30.0" right="28.0" top="10.0" />
                      </HBox.margin>
                   </CheckBox>
-                  <TextField fx:id="txtAlias1" prefHeight="23.0" prefWidth="130.0">
+                  <TextField fx:id="txtButterflyName" prefHeight="23.0" prefWidth="140.0">
                      <HBox.margin>
-                        <Insets bottom="10.0" right="34.0" top="10.0" />
+                        <Insets bottom="10.0" top="10.0" />
                      </HBox.margin>
                   </TextField>
                </children>
             </HBox>
             <HBox prefHeight="39.0" prefWidth="294.0">
                <children>
-                  <CheckBox fx:id="checkButterflyClass" mnemonicParsing="false" onAction="#OnButterflyClass" prefHeight="20.0" prefWidth="100.0" text="나비과">
+                  <CheckBox fx:id="checkButterflyFamily" mnemonicParsing="false" onAction="#OnButterflyFamily" prefHeight="20.0" prefWidth="100.0" text="나비과">
                      <HBox.margin>
-                        <Insets bottom="10.0" left="30.0" right="20.0" top="10.0" />
+                        <Insets bottom="10.0" left="30.0" right="28.0" top="10.0" />
                      </HBox.margin>
                   </CheckBox>
-                  <TextField fx:id="txtAlias11" prefHeight="23.0" prefWidth="130.0">
+                  <TextField fx:id="txtButterflyFamily" prefHeight="23.0" prefWidth="140.0">
                      <HBox.margin>
-                        <Insets bottom="10.0" right="34.0" top="10.0" />
+                        <Insets bottom="10.0" top="10.0" />
                      </HBox.margin>
                   </TextField>
                </children>

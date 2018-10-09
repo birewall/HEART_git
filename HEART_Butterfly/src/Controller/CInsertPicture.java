@@ -8,15 +8,7 @@ import java.util.ResourceBundle;
 
 import javax.imageio.plugins.bmp.BMPImageWriteParam;
 
-import Model.MDBButterflyGuide;
-import Model.MDBCameraInfo;
-import Model.MDBCollectionInfo;
-import Model.MDBImage;
-import Model.MDBImageObjectInfo;
-import Model.MDBLocation;
-import Model.MDBObservation;
-import Model.MDBPerson;
-import Model.MSharedData;
+import Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -216,7 +208,7 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
         }
 
         /* Data Acquisition */
-    	String date = dateInsertPictureDate.getEditor().getText().replaceAll(". ","-");
+    	String date = MDateConvertor.convert2DBFormat(dateInsertPictureDate.getEditor().getText());
     	String time = comboInsertPictureTime.getSelectionModel().getSelectedItem();
     	String country = txtInsertPictureNation.getText();
     	String location = txtInsertPictureLoc.getText();

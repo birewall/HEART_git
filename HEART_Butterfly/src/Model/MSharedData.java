@@ -69,7 +69,7 @@ public class MSharedData extends AbsMetaModel{
 	public int getIndex(String name) {
 		int index = -1;
 		for(int i = 0 ; i < this.catalog.size() ; i++) {
-			if(this.catalog.get(index).equals(name)) {
+			if(this.catalog.get(i).equals(name)) {
 				index = i;
 				break;
 			}
@@ -87,10 +87,16 @@ public class MSharedData extends AbsMetaModel{
 	
 	public void remove(String name) {
 		int index = getIndex(name);
-		if(index-1 > this.catalog.size()) return;
-		else{
+		if(index != -1) {
 			this.data.remove(index);
 			this.catalog.remove(index);
 		}
+	}
+
+	public boolean isExist(String name) {
+		for (String aCatalog : this.catalog) {
+			if (aCatalog.equals(name)) return true;
+		}
+		return false;
 	}
 }

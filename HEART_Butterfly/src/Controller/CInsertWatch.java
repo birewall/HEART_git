@@ -145,7 +145,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     @FXML
     void addInsertWatch(ActionEvent event) {
         /* Data Acquisition */
-    	String date = dateInsertWatchDate.getEditor().getText().replaceAll(". ", "-");
+    	String date = MDateConvertor.convert2DBFormat(dateInsertWatchDate.getEditor().getText());
     	String time = comboInsertWatchTime.getSelectionModel().getSelectedItem();
     	String country = txtInsertWatchNation.getText();
     	String location = txtInsertWatchLoc.getText();
@@ -173,25 +173,6 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     	String quantity = txtInsertWatchQuan.getText();
     	if(quantity.length() == 0) quantity = "0";
     	String note = txtInsertWatchRemark.getText();
-
-    	/* Debug */
-        System.out.println(date);
-        System.out.println(time);
-        System.out.println(country);
-        System.out.println(location);
-        System.out.println(location_detail);
-        System.out.println(gps);
-        System.out.println(alias);
-        System.out.println(section);
-        System.out.println(section_detail);
-        System.out.println(person_name);
-        System.out.println(butterfly_name);
-        System.out.println(butterfly_family);
-        System.out.println(scientific_name);
-        System.out.println(sex);
-        System.out.println(status);
-        System.out.println(quantity);
-        System.out.println(note);
 
     	/* DB Instance initialization */
         MDBButterflyGuide db_butterfly_guide = new MDBButterflyGuide(((MSharedData)this.shared_model).getDB().getConnection());
@@ -438,6 +419,24 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
     }
 
+    public void update_collection_info() {
+        /* Model name is collectionInfo_table */
+        MPassingData passed_data = (MPassingData) ((MSharedData)this.shared_model).get("collectionInfo_table");
+
+        /* View Updating */
+        String date = passed_data.getData(0);
+        dateInsertWatchDate.getEditor().setText(date.substring(0,4) + ". " + Integer.parseInt(date.substring(4,6)) + ". " + Integer.parseInt(date.substring(6,8)));
+        txtInsertWatchNation.setText(passed_data.getData(1));
+        txtInsertWatchLocname.setText(passed_data.getData(2));
+        txtInsertWatchBname.setText(passed_data.getData(3));
+        txtInsertWatchFamily.setText(passed_data.getData(4));
+        // 5 for method
+        comboInsertWatchWho.getSelectionModel().select(passed_data.getData(6));
+
+        /* Remove date from shared model */
+        ((MSharedData)this.shared_model).remove("collectInfo_table");
+    }
+
     public void update_person() {
         /* Clear All Names from List */
         this.comboInsertWatchWho.getItems().clear();
@@ -462,6 +461,10 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
     @Override
     public void view_update() {
+        /* Model name is collectionInfo_table */
+        if(((MSharedData)this.shared_model).isExist("collectionInfo_table")) {
+            update_collection_info();
+        }
         update_person();
     }
 
