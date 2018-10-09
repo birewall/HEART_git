@@ -20,6 +20,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleGroup;
 
+import javax.swing.*;
+
 public class CInsertWatch extends AbsMetaController implements Initializable {
 	
 	MDBPerson PersonDB;
@@ -34,7 +36,10 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     private TextField txtInsertWatchLoc;
 
     @FXML
-    private Button btnInsertWatchSearchLoc;
+    private Button btnInsertWatchPersonManagement;
+
+    @FXML
+    private Button btnInsertWatchImportCollectionInfo;
 
     @FXML
     private TextField txtInsertWatchDo;
@@ -140,7 +145,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     @FXML
     void addInsertWatch(ActionEvent event) {
         /* Data Acquisition */
-    	String date = dateInsertWatchDate.getEditor().getText();
+    	String date = dateInsertWatchDate.getEditor().getText().replaceAll(". ", "-");
     	String time = comboInsertWatchTime.getSelectionModel().getSelectedItem();
     	String country = txtInsertWatchNation.getText();
     	String location = txtInsertWatchLoc.getText();
@@ -214,7 +219,6 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
         }
 
         db_person.setName("조윤호");
-        db_person.setSort("관찰자");
         int id_person = db_person.getIdPersonFromDB();
         if(id_person == 0) {
             if(!db_person.insert()){
@@ -275,38 +279,13 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     }
 
     @FXML
-    void choosewhoInsertWatch(ActionEvent event) {	
-		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("관찰자를 등록하세요");
-		dialog.setHeaderText(null);
-		dialog.setContentText(null);
-		dialog.showAndWait();
-		String new_name = dialog.getEditor().getText();
-
-		PersonDB.setName(new_name);
-		PersonDB.setSort("관찰자");
-		if(!PersonDB.insert()){
-		    System.out.println("Failed.");
-		    return;
-        }
-		
-		this.comboInsertWatchWho.getItems().add(new_name);
+    void OnImportCollectionInfo(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertWatchExit.getScene().getWindow(), "VCollectionInfoSelector");
     }
 
     @FXML
-    void clearInsertWatch(ActionEvent event) {
-        MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-        person.delete_by_type("관찰자");
-        this.comboInsertWatchWho.getItems().clear();
-
-        person.setName("조윤호");
-        person.setSort("관찰자");
-        if(!person.insert()){
-            System.out.println("Failed.");
-            return;
-        }
-        this.comboInsertWatchWho.getItems().add("조윤호");
-        this.comboInsertWatchWho.getSelectionModel().select(0);
+    void OnPersonManagement(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertWatchExit.getScene().getWindow(), "VPersonManagement");
     }
 
     @FXML
@@ -459,6 +438,33 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
     }
 
+    public void update_person() {
+        /* Clear All Names from List */
+        this.comboInsertWatchWho.getItems().clear();
+
+        /* DB Querying */
+        String query = "select name from Person";
+        PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+        ResultSet rs = PersonDB.selectQuery(query);
+        try {
+            while(rs.next()) {
+                /* View Updating */
+                this.comboInsertWatchWho.getItems().add(rs.getString(1));   // get name
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        /* Initializing */
+        this.comboInsertWatchWho.getSelectionModel().select("조윤호"); // DB에 '조윤호'는 반드시 존재한다.
+    }
+
+    @Override
+    public void view_update() {
+        update_person();
+    }
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -474,6 +480,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 	
 	@Override
 	public void init_procedure() {
+
 		// Set Watcher
 		String query = "select distinct name from Person where sort = '관찰자'";
 		System.out.println(this.shared_model);
@@ -487,5 +494,6 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 }

@@ -24,8 +24,7 @@
       <TextField fx:id="txtInsertWatchDong" layoutX="331.0" layoutY="261.0" onAction="#dongInsertWatch" prefHeight="29.0" prefWidth="85.0" promptText="내촌면" />
       <Text layoutX="33.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="관찰자" />
       <ComboBox fx:id="comboInsertWatchWho" layoutX="111.0" layoutY="447.0" onAction="#whoInsertWatch" prefHeight="29.0" prefWidth="203.0" promptText="조윤호" />
-      <Button fx:id="btnInsertWatchChoosewho" layoutX="325.0" layoutY="447.0" mnemonicParsing="false" onAction="#choosewhoInsertWatch" text="직접 입력" />
-      <Button fx:id="btnInsertWatchClear" layoutX="324.0" layoutY="485.0" mnemonicParsing="false" onAction="#clearInsertWatch" text="입력 초기화" />
+      <Button fx:id="btnInsertWatchPersonManagement" layoutX="325.0" layoutY="447.0" mnemonicParsing="false" onAction="#OnPersonManagement" prefHeight="29.0" prefWidth="52.0" text="관리" />
       <Text layoutX="33.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="나비 명" />
       <TextField fx:id="txtInsertWatchBname" layoutX="111.0" layoutY="515.0" onAction="#bnameInsertWatch" promptText="배추흰나비" />
       <Text layoutX="63.0" layoutY="569.0" strokeType="OUTSIDE" strokeWidth="0.0" text="과" />
@@ -37,7 +36,7 @@
       <ComboBox fx:id="comboInsertWatchSex" layoutX="111.0" layoutY="618.0" onAction="#sexInsertWatch" prefHeight="29.0" prefWidth="124.0" promptText="암" />
       <Text layoutX="26.0" layoutY="638.0" strokeType="OUTSIDE" strokeWidth="0.0" text="성별" />
       <Button fx:id="btnInsertWatchAdd" layoutX="325.0" layoutY="742.0" mnemonicParsing="false" onAction="#addInsertWatch" text="추가" />
-      <Button fx:id="btnInsertWatchExit" layoutX="485.0" layoutY="742.0" mnemonicParsing="false" onAction="#exitInsertWatch" text="종료" />
+      <Button fx:id="btnInsertWatchExit" layoutX="485.0" layoutY="742.0" mnemonicParsing="false" onAction="#exitInsertWatch" text="이전" />
       <TextField fx:id="txtInsertWatchNation" layoutX="111.0" layoutY="170.0" onAction="#NationInsertWatch" promptText="대한민국" />
       <Text layoutX="33.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="국가" />
       <Text layoutX="33.0" layoutY="706.0" strokeType="OUTSIDE" strokeWidth="0.0" text="비고" />
@@ -68,5 +67,6 @@
       <TextField fx:id="txtInsertWatchQuan" layoutX="382.0" layoutY="623.0" onAction="#quanInsertWatch" prefHeight="39.0" prefWidth="84.0" />
       <Text layoutX="476.0" layoutY="647.0" strokeType="OUTSIDE" strokeWidth="0.0" text="마리" />
       <Button fx:id="btnInsertWatchCorrect" layoutX="410.0" layoutY="742.0" mnemonicParsing="false" onAction="#correctInsertWatch" text="수정" />
+      <Button fx:id="btnInsertWatchImportCollectionInfo" layoutX="444.0" layoutY="69.0" mnemonicParsing="false" onAction="#OnImportCollectionInfo" prefHeight="23.0" prefWidth="124.0" text="관찰정보 불러오기" />
    </children>
 </Pane>

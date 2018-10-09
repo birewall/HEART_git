@@ -9,6 +9,7 @@ import Model.MDBButterflyGuide;
 import Model.MDBLocation;
 import Model.MDBPerson;
 import Model.MDBSpecimen;
+
 import Model.MSharedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class CAnalysisSummary extends AbsMetaController {
 
@@ -203,5 +207,4 @@ public class CAnalysisSummary extends AbsMetaController {
     	this.CombFamily.setDisable(true);
 		
     }
-
 }

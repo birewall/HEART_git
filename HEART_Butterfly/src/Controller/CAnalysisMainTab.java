@@ -112,7 +112,9 @@ public class CAnalysisMainTab extends AbsMetaController implements Initializable
                 }
             }
         });
+    }
 
+    public void init_procedure() {
         // For Initial Display
         FXMLLoader loader = new FXMLLoader();
         Parent root = null;
@@ -122,7 +124,7 @@ public class CAnalysisMainTab extends AbsMetaController implements Initializable
             e.printStackTrace();
         }
         AbsMetaController controller = (AbsMetaController)loader.getController();
-        controller.setParentController(this_controller);
+        controller.setParentController(this);
         controller.setSharedModel(shared_model);
         controller.init_procedure();
         tabSummary.setContent(root);

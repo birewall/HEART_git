@@ -20,15 +20,7 @@ import Model.MSharedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -38,7 +30,8 @@ import javafx.stage.Stage;
 public class CInsertPicture extends AbsMetaController implements Initializable {
 
 	MDBPerson PersonDB;
-	MDBImage ImageDB;
+	String filepath;
+	File selectedFile;
 
     @FXML
     private DatePicker dateInsertPictureDate;
@@ -56,10 +49,7 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     private ComboBox<String> comboInsertPictureWho;
 
     @FXML
-    private Button btnInsertPictureChoosewho;
-
-    @FXML
-    private Button btnInsertPictureClear;
+    private Button btnInsertPicturePersonManagement;
 
     @FXML
     private TextField txtInsertPictureBname;
@@ -185,6 +175,9 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     private RadioButton radioInsertPicturesec1;
 
     @FXML
+    private Label txtResult;
+
+    @FXML
     void BlocInsertPicture(ActionEvent event) {
 
     }
@@ -201,6 +194,27 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 
     @FXML
     void addInsertPicture(ActionEvent event) {
+        /* View Updating */
+        this.txtResult.setText("사진을 저장중입니다...");
+
+        /* File Copy */
+        String dest_filename = null;
+        try {
+            FileInputStream fis = new FileInputStream(selectedFile.getAbsoluteFile());
+            dest_filename = "HEART_Butterfly/img/" + selectedFile.getName();
+            FileOutputStream fos = new FileOutputStream(dest_filename);
+
+            int data = 0;
+            while((data=fis.read())!=-1) {
+                fos.write(data);
+            }
+            fis.close();
+            fos.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         /* Data Acquisition */
     	String date = dateInsertPictureDate.getEditor().getText().replaceAll(". ","-");
     	String time = comboInsertPictureTime.getSelectionModel().getSelectedItem();
@@ -266,7 +280,6 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
         }
 
         db_person.setName(person_name);
-        db_person.setSort("촬영자");
         int id_person = db_person.getIdPersonFromDB();
         if(id_person == 0) {
             if(!db_person.insert()){
@@ -323,7 +336,7 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
         db_image.setIdButterflyGuide(id_butterflyGuide);
         db_image.setDate(date);
         db_image.setTime(time);
-        db_image.setPath(filepath);
+        db_image.setPath(dest_filename);
         int id_image = db_image.getIdImageFromDB();
         if(id_image == 0) {
             if(!db_image.insert()){
@@ -332,7 +345,9 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
             }
         }
 
+        /* View Updating */
         this.txtInsertPictureSpath.setText(filepath);
+        this.txtResult.setText("사진 저장이 완료되었습니다.");
     }
 
     @FXML
@@ -346,26 +361,8 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     }
 
     @FXML
-    void choosewhoInsertPicture(ActionEvent event) {
-		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("Insert New Name");
-		dialog.setHeaderText(null);
-		dialog.setContentText(null);
-		dialog.showAndWait();
-		String new_name = dialog.getEditor().getText();
-
-		PersonDB.setName(new_name);
-		PersonDB.setSort("촬영자");
-		if(!PersonDB.insert()) System.out.println("Failed.");
-		
-		this.comboInsertPictureWho.getItems().add(new_name);
-    }
-
-    @FXML
-    void clearInsertPicture(ActionEvent event) {
-        MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-        person.delete_by_type("촬영자");
-        this.comboInsertPictureWho.getItems().clear();
+    void OnPersonManagement(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertPictureExit.getScene().getWindow(), "VPersonManagement");
     }
 
     @FXML
@@ -437,59 +434,39 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     void matingInsertPicture(ActionEvent event) {
 
     }
-    
-    File ImageSelectedFile;
-    String filepath;
-    
+
+    /*
+     *   Load selectedFile and filepath
+     *   and update imageView
+     * */
     @FXML
     void pictureInsertPicture(ActionEvent event) throws IOException {
         FileChooser fc = new FileChooser();
-        fc.setInitialDirectory(new File ("C:/Temp"));
-        fc.getExtensionFilters().addAll(new ExtensionFilter("jpg files","*.jpg"));
-        fc.getExtensionFilters().addAll(new ExtensionFilter("png files", "*.png"));
-        fc.getExtensionFilters().addAll(new ExtensionFilter("bmp files", "*.bmp"));
-        ImageSelectedFile = fc.showOpenDialog(null);
-        if(ImageSelectedFile == null){
-            this.lblLoadPictureStatus.setText("File is not valid");
+        //fc.setInitialDirectory(new File("./HEART_Butterfly/img"));
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("images","*.jpg", "*.png", ".bmp", ".tif", ".gif"));
+
+        selectedFile = fc.showOpenDialog(null);
+        /* Error Handling */
+        if(selectedFile == null){
             return;
         }
-        else{
-            if(ImageSelectedFile.getAbsolutePath() == null) return;
-            String dest_filename = null;
-            /* File Copy */
-            try {
-                FileInputStream fis = new FileInputStream(ImageSelectedFile.getAbsoluteFile());
-                dest_filename = "HEART_Butterfly/img/" + ImageSelectedFile.getName();
-                File f1 = new File(dest_filename);
 
-                if(f1.exists()) {
-                    this.lblLoadPictureStatus.setText("Same name exists in image folder already");
-                    return;
-                }
+        String dest_filename = "HEART_Butterfly/img/" + selectedFile.getName();
+        File f1 = new File(dest_filename);
 
-                FileOutputStream fos = new FileOutputStream(dest_filename);
-
-                int data = 0;
-                while((data=fis.read())!=-1) {
-                    fos.write(data);
-                }
-                fis.close();
-                fos.close();
-
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-    		//Determine path
-            ImageSelectedFile = new File(dest_filename);
-            filepath = ImageSelectedFile.getAbsolutePath();
-
-            //Set image at view
-            File file = new File(filepath);
-            Image image = new Image(file.toURI().toString());
-            this.ImvImage.setImage(image);
+        if(f1.exists()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("불러오기 실패");
+            alert.setHeaderText(null);
+            alert.setContentText("이미 존재하는 사진입니다.");
+            alert.show();
+            return;
         }
+
+        /* View Updating */
+        File file = this.selectedFile;
+        Image image = new Image(file.toURI().toString());
+        this.ImvImage.setImage(image);
     }
 
     @FXML
@@ -601,7 +578,34 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     void zoologicalInsertPicture(ActionEvent event) {
 
     }
-    
+
+    public void update_person() {
+        /* Clear All Names from List */
+        this.comboInsertPictureWho.getItems().clear();
+
+        /* DB Querying */
+        String query = "select name from Person";
+        PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+        ResultSet rs = PersonDB.selectQuery(query);
+        try {
+            while(rs.next()) {
+                /* View Updating */
+                this.comboInsertPictureWho.getItems().add(rs.getString(1));   // get name
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        /* Initializing */
+        if(this.comboInsertPictureWho.getItems().size() > 0) this.comboInsertPictureWho.getSelectionModel().select("조윤호"); // DB에 '조윤호'는 반드시 존재한다.
+    }
+
+    @Override
+    public void view_update() {
+        update_person();
+    }
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -632,19 +636,6 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 
 	@Override
 	public void init_procedure() {
-		// Set Watcher
-		String query = "select name from Person where sort = '촬영자'";
-		System.out.println(this.shared_model);
-		PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-		ResultSet rs = PersonDB.selectQuery(query);
-		try {
-			while(rs.next()) {
-				this.comboInsertPictureWho.getItems().add(rs.getString(1));   // get name
-			}
-			if(this.comboInsertPictureWho.getItems().size() > 0) this.comboInsertPictureWho.getSelectionModel().select(0);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		view_update();
     }
 }

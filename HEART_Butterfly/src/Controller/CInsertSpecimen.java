@@ -2,6 +2,8 @@ package Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import Model.*;
@@ -25,16 +27,19 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     private TextField txtInsertSpecimenCollectoc;
 
     @FXML
-    private Button btnInsertSpecimenSearchcollectloc;
+    private Button btnInsertSpecimenImportCollectionInfo;
+
+    @FXML
+    private Button btnInsertSpecimenImportSpecimen;
+
+    @FXML
+    private Button btnInsertSpecimenGiverManagement;
+
+    @FXML
+    private Button btnInsertSpecimenWorkerManagement;
 
     @FXML
     private ComboBox<String> comboInsertSpecimenWho;
-
-    @FXML
-    private Button btnInsertSpecimenChoosewho;
-
-    @FXML
-    private Button btnInsertSpecimenClear;
 
     @FXML
     private TextField txtInsertSpecimenBname;
@@ -44,9 +49,6 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 
     @FXML
     private TextField txtInsertSpecimenZoological;
-
-    @FXML
-    private Button btnInsertSpecimenAdd;
 
     @FXML
     private Button btnInsertSpecimenExit;
@@ -65,9 +67,6 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 
     @FXML
     private TextField txtInsertSpecimenRemark;
-
-    @FXML
-    private Button btnInsertSpecimenChoosecollectwho;
 
     @FXML
     private ComboBox<String> comboInsertSpecimenCollectwho;
@@ -103,16 +102,10 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     private TextField txtInsertSpecimenDo;
 
     @FXML
-    private Button btnInsertSpecimenLabel;
-
-    @FXML
     private ComboBox<String> comboInsertSpecimenLoc2type;
 
     @FXML
     private ComboBox<String> comboInsertSpecimenLoc3;
-
-    @FXML
-    private Button btnInsertSpecimenCorrect;
 
     @FXML
     void addInsertSpecimen(ActionEvent event) {
@@ -173,7 +166,6 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
         
         // db_person_제공자 & 작업자
         db_person.setName(collectwho);
-        db_person.setSort("제공자");
         int id_person_col = db_person.getIdPersonFromDB();
         if(id_person_col == 0) {
             if(!db_person.insert()){
@@ -183,7 +175,6 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
             id_person_col = db_person.getIdPersonFromDB();
         }
         db_person.setName(SpecimenWho);
-        db_person.setSort("작업자");
         int id_person_speci = db_person.getIdPersonFromDB();
         if(id_person_speci == 0) {
             if(!db_person.insert()){
@@ -280,52 +271,27 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     }
 
     @FXML
-    void choosecollectwhoInsertSpecimen(ActionEvent event) {
-    	TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("Insert New Name");
-		dialog.setHeaderText(null);
-		dialog.setContentText(null);
-		dialog.showAndWait();
-		String new_name = dialog.getEditor().getText();
-
-//		PersonDB.setName(new_name);
-//		PersonDB.setSort("제공자");
-//		if(!PersonDB.insert()){
-//		    System.out.println("Failed.");
-//		    return;
-//        }
-		
-		this.comboInsertSpecimenCollectwho.getItems().add(new_name);
-		
+    void OnImportCollectionInfo(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VCollectionInfoSelector");
     }
 
     @FXML
-    void choosewhoInsertSpecimen(ActionEvent event) {
-    	TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("Insert New Name");
-		dialog.setHeaderText(null);
-		dialog.setContentText(null);
-		dialog.showAndWait();
-		String new_name = dialog.getEditor().getText();
-		
-		this.comboInsertSpecimenWho.getItems().add(new_name);
-
+    void OnImportSpecimen(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VSpecimenSelector");
     }
 
     @FXML
-    void clearInsertSpecimen(ActionEvent event) {
-    	MDBPerson person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-        person.delete_by_type("제공자");
-        this.comboInsertSpecimenCollectwho.getItems().clear();
+    void OnGiverManagement(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VPersonManagement");
+    }
 
-        person.setName("조윤호");
-        person.setSort("제공자");
-        if(!person.insert()){
-            System.out.println("Failed.");
-            return;
-        }
-        this.comboInsertSpecimenCollectwho.getItems().add("조윤호");
-        this.comboInsertSpecimenCollectwho.getSelectionModel().select(0);
+    @FXML
+    void OnWorkerManagement(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VPersonManagement");
+    }
+
+    @FXML
+    void collectwhoInsertSpecimen(ActionEvent event) {
 
     }
 
@@ -341,11 +307,6 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 
     @FXML
     void collectwayInsertSpecimen(ActionEvent event) {
-
-    }
-
-    @FXML
-    void collectwhoInsertSpecimen(ActionEvent event) {
 
     }
 
@@ -463,6 +424,36 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     void zoologicalInsertSpecimen(ActionEvent event) {
 
     }
+
+    public void update_person() {
+        /* Clear All Names from List */
+        this.comboInsertSpecimenCollectwho.getItems().clear();
+        this.comboInsertSpecimenWho.getItems().clear();
+
+        /* DB Querying */
+        String query = "select name from Person";
+        PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+        ResultSet rs = PersonDB.selectQuery(query);
+        try {
+            while(rs.next()) {
+                /* View Updating */
+                this.comboInsertSpecimenWho.getItems().add(rs.getString(1));   // get name
+                this.comboInsertSpecimenCollectwho.getItems().add(rs.getString(1));   // get name
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        /* Initializing */
+        if(this.comboInsertSpecimenWho.getItems().size() > 0) this.comboInsertSpecimenWho.getSelectionModel().select("조윤호"); // DB에 '조윤호'는 반드시 존재한다.
+        if(this.comboInsertSpecimenCollectwho.getItems().size() > 0) this.comboInsertSpecimenCollectwho.getSelectionModel().select("조윤호");
+    }
+
+    @Override
+    public void view_update() {
+        update_person();
+    }
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -489,4 +480,9 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
         this.comboInsertSpecimenLoc2.getSelectionModel().select(0);
         this.comboInsertSpecimenLoc3.getSelectionModel().select(0);
 	}
+
+    @Override
+    public void init_procedure() {
+        view_update();
+    }
 }
