@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -14,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class CMain extends AbsMetaController{
@@ -41,6 +43,18 @@ public class CMain extends AbsMetaController{
 
     @FXML
     private Button btnMainSpecimenMove;
+
+    @FXML
+    private Button btnImportDB;
+
+    @FXML
+    void OnImportDB(ActionEvent event) {
+        /* 채워주세요 */
+        FileChooser fc = new FileChooser();
+        fc.setTitle("DB 불러오기");
+        //fc.setInitialDirectory(null);
+        File db_file = fc.showOpenDialog(null);
+    }
 
     @FXML
     void mainAnalysis(ActionEvent event) throws IOException {
