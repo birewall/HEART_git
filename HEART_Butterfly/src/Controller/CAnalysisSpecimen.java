@@ -76,6 +76,7 @@ public class CAnalysisSpecimen extends AbsMetaController {
     private RadioButton radioPoorPreservativeStatus;
 
     Double array[][];
+
     
     @FXML
     void exitSpecStatus(ActionEvent event) throws IOException {
@@ -94,10 +95,35 @@ public class CAnalysisSpecimen extends AbsMetaController {
 
     @FXML
     void searchSpecStatus(ActionEvent event) throws SQLException {
+
+
+    }
+
+    @FXML
+    void exportSpecStatusDataAnalysis(ActionEvent event) {
+
+    }
+
+    @FXML
+    void SearchPreservativeStatus(ActionEvent event) throws SQLException {
+    	if(this.CheckPreservativeStatus.isSelected()) {
+    		this.radioGoodPreservativeStatus.setDisable(false);
+    		this.radioFairPreservativeStatus.setDisable(false);
+    		this.radioPoorPreservativeStatus.setDisable(false);
+    	}
+    	else {
+    		this.radioGoodPreservativeStatus.setSelected(false);
+    		this.radioFairPreservativeStatus.setSelected(false);
+    		this.radioPoorPreservativeStatus.setSelected(false);
+        	this.radioGoodPreservativeStatus.setDisable(true);
+        	this.radioFairPreservativeStatus.setDisable(true);
+        	this.radioPoorPreservativeStatus.setDisable(true);
+    	}
+    	
         MDBSpecimen db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
         MDBSpecimenize db_specimenize = new MDBSpecimenize(((MSharedData)this.shared_model).getDB().getConnection());
-
-        ResultSet rs = db_specimen.selectQuery("SELECT * FROM Specimen, Specimenize");
+        
+    	ResultSet rs = db_specimen.selectQuery("SELECT * FROM Specimen, Specimenize");
     	tblSpecStatus.getColumns().clear();
     	tblSpecStatus.getItems().clear();
     	
@@ -145,28 +171,6 @@ public class CAnalysisSpecimen extends AbsMetaController {
     }
 
     @FXML
-    void exportSpecStatusDataAnalysis(ActionEvent event) {
-
-    }
-
-    @FXML
-    void SearchPreservativeStatus(ActionEvent event) {
-    	if(this.CheckPreservativeStatus.isSelected()) {
-    		this.radioGoodPreservativeStatus.setDisable(false);
-    		this.radioFairPreservativeStatus.setDisable(false);
-    		this.radioPoorPreservativeStatus.setDisable(false);
-    	}
-    	else {
-    		this.radioGoodPreservativeStatus.setSelected(false);
-    		this.radioFairPreservativeStatus.setSelected(false);
-    		this.radioPoorPreservativeStatus.setSelected(false);
-        	this.radioGoodPreservativeStatus.setDisable(true);
-        	this.radioFairPreservativeStatus.setDisable(true);
-        	this.radioPoorPreservativeStatus.setDisable(true);
-    	}
-    }
-
-    @FXML
     void checkFairPreservativeStatus(ActionEvent event) {
 
     }
@@ -201,6 +205,7 @@ public class CAnalysisSpecimen extends AbsMetaController {
     		this.radioFairBStatus.setDisable(true);
     		this.radioPoorBStatus.setDisable(true);
     	}
+    	
     }
 
     @FXML
