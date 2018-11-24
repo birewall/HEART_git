@@ -13,5 +13,6 @@
       <Button fx:id="btnMainPicture" layoutX="50.0" layoutY="339.0" mnemonicParsing="false" onAction="#mainPicture" prefHeight="50.0" prefWidth="300.0" text="사진 불러오기" />
       <Text fx:id="txtMain1" layoutX="116.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="어떤 기능을 사용하시겠습니까?" />
       <Button fx:id="btnMainSpecimenMove" layoutX="50.0" layoutY="200.0" mnemonicParsing="false" onAction="#specimenmoveMainSpecimen" prefHeight="50.0" prefWidth="300.0" text="표본 위치 이동 정보" />
+      <Button fx:id="btnImportDB" layoutX="50.0" layoutY="426.0" mnemonicParsing="false" onAction="#OnImportDB" prefHeight="23.0" prefWidth="95.0" text="DB 불러오기" />
    </children>
 </Pane>
