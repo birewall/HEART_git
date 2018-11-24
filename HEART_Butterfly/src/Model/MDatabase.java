@@ -54,7 +54,7 @@ public class MDatabase extends AbsMetaModel {
 			return false;
 		}
 
-		System.out.println(query);
+		//System.out.println(query);
 		logger.info(query);
 
 		boolean error = false;
@@ -68,7 +68,7 @@ public class MDatabase extends AbsMetaModel {
 		}
 
 		if(error) {
-			System.out.println(query);
+			//System.out.println(query);
 			logger.error("Query failed.");
 			return false;
 		}else {

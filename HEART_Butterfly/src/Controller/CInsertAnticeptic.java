@@ -118,9 +118,15 @@ public class CInsertAnticeptic extends AbsMetaController implements Initializabl
 
     @FXML
     void saveAnticepticDate(ActionEvent event) {
-    	
-    	String queryAnticepticName = "insert into Specimenize(anticepticName) value(" + txtAnticepticName.getText() + ")";
-    	
+
+    	String queryDateName = "update Butterfly.Specimenize as spn, Butterfly.Specimen as sp set spn.anticepticName = '"
+    			+ txtAnticepticName.getText() + "', spn.embalmingDate = '" + lblDateInsert.getText() 
+    			+ "' where sp.storageRoom = '" + comboPlace.getSelectionModel().getSelectedItem()
+    			+ "' and sp.storageCabinet = '" + comboCabinet.getSelectionModel().getSelectedItem() 
+    			+ "' and sp.storageChest = '" + comboBox.getSelectionModel().getSelectedItem() + "' and spn.idSpecimen = sp.idSpecimen";
+    	if(!this.db_specimenize.modifyingQuery(queryDateName)) {
+    		return;
+    	}
     }
 
     @FXML
@@ -130,7 +136,7 @@ public class CInsertAnticeptic extends AbsMetaController implements Initializabl
 
     @FXML
     void dateInsertAnticeptic(ActionEvent event) {
-    	String confrimedDate = datepickerInsertAnticeptic.getEditor().getText();
+    	String confrimedDate = datepickerInsertAnticeptic.getEditor().getText().replaceAll(". ", "-");
     	lblDateInsert.setText(confrimedDate);
     }
         

@@ -110,7 +110,7 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     @FXML
     void addInsertSpecimen(ActionEvent event) {
     	String Collectway = comboInsertSpecimenCollectway.getSelectionModel().getSelectedItem();
-    	String Collect_date = dateInsertSpecimenCollectdate.getEditor().getText().replaceAll(". ","-");
+    	String Collect_date = MDateConvertor.convert2DBFormat(dateInsertSpecimenCollectdate.getEditor().getText());
     	String country = txtInsertSpecimenNation.getText();
     	String location = txtInsertSpecimenCollectoc.getText();
     	String location_detail = txtInsertSpecimenDo.getText() + " " + txtInsertSpecimenSi.getText() + " " + txtInsertSpecimenDong.getText();
@@ -126,7 +126,7 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     	String butterfly_name = txtInsertSpecimenBname.getText();
     	String butterfly_family = txtInsertSpecimenFamily.getText();
     	String scientific_name = txtInsertSpecimenZoological.getText();
-    	String Specimen_date = dateInsertSpecimenDate.getEditor().getText().replaceAll(". ","-");
+    	String Specimen_date = MDateConvertor.convert2DBFormat(dateInsertSpecimenDate.getEditor().getText());
     	String status = comboInsertSpecimenStatus.getSelectionModel().getSelectedItem();
     	String sex = comboInsertSpecimenSex.getSelectionModel().getSelectedItem();
     	String note = txtInsertSpecimenRemark.getText();
