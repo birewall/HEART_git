@@ -354,7 +354,7 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 
     @FXML
     void OnPersonManagement(ActionEvent event) throws IOException {
-        spawnChildWindow(this.btnInsertPictureExit.getScene().getWindow(), "VPersonManagement");
+        spawnChildWindow(this.btnInsertPictureExit.getScene().getWindow(), "VPersonManager");
     }
 
     @FXML

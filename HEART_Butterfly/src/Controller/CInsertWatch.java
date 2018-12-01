@@ -266,7 +266,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
     @FXML
     void OnPersonManagement(ActionEvent event) throws IOException {
-        spawnChildWindow(this.btnInsertWatchExit.getScene().getWindow(), "VPersonManagement");
+        spawnChildWindow(this.btnInsertWatchExit.getScene().getWindow(), "VPersonManager");
     }
 
     @FXML

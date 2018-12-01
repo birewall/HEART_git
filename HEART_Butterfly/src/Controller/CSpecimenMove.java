@@ -116,6 +116,9 @@ public class CSpecimenMove extends AbsMetaController implements Initializable {
     private Button btnImportSpecimen;
 
     @FXML
+    private Button btnSpecimenLocationManager;
+
+    @FXML
     void OnImportCollectionInfo(ActionEvent event) throws IOException {
         spawnChildWindow(this.btnImportCollectionInfo.getScene().getWindow(), "VCollectionInfoSelector");
     }
@@ -127,7 +130,12 @@ public class CSpecimenMove extends AbsMetaController implements Initializable {
 
     @FXML
     void OnPersonManager(ActionEvent event) throws IOException {
-        spawnChildWindow(this.btnPersonManager.getScene().getWindow(), "VPersonManagement");
+        spawnChildWindow(this.btnPersonManager.getScene().getWindow(), "VPersonManager");
+    }
+
+    @FXML
+    void OnSpecimenLocationManager(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnPersonManager.getScene().getWindow(), "VSpecimenLocationManager");
     }
 
     @FXML
