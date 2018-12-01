@@ -71,19 +71,20 @@ import javafx.stage.Stage;
 	    }
 
 	    @FXML
-	    void OnDelete(ActionEvent event) {
+	    void OnDelete(ActionEvent event) throws IOException {
 			/* Delete from View */
 			this.imvImage.setImage(null);
 			
 			/* Delete from List*/
-			
+			listExplorer.getItems().remove(listExplorer.getSelectionModel().getSelectedIndex());
 	    }
 
 	    @FXML
-	    void OnDone(ActionEvent event) {
+	    void OnDone(ActionEvent event) throws IOException {
 	    	for (String path : listExplorer.getItems()) {
 	    		System.out.println(path);		
 	    	}
+	    	changeWindow(this.Exit.getScene().getWindow(), "VInsertPicture");
 	    }
 
 	    @FXML
