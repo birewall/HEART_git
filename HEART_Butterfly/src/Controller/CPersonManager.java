@@ -15,7 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class CPersonManagement extends AbsMetaController implements Initializable {
+public class CPersonManager extends AbsMetaController implements Initializable {
 
     MDBPerson db_person = null;
 

@@ -282,12 +282,12 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 
     @FXML
     void OnGiverManagement(ActionEvent event) throws IOException {
-        spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VPersonManagement");
+        spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VPersonManager");
     }
 
     @FXML
     void OnWorkerManagement(ActionEvent event) throws IOException {
-        spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VPersonManagement");
+        spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VPersonManager");
     }
 
     @FXML
