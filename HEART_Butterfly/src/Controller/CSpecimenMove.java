@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -135,7 +137,58 @@ public class CSpecimenMove extends AbsMetaController implements Initializable {
 
     @FXML
     void OnSpecimenLocationManager(ActionEvent event) throws IOException {
-        spawnChildWindow(this.btnPersonManager.getScene().getWindow(), "VSpecimenLocationManager");
+        spawnChildWindow(this.btnSpecimenLocationManager.getScene().getWindow(), "VSpecimenLocationManager");
+    }
+
+    public void setStorage(String room, String cabinet, String chest) {
+        MDBSpecimen db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
+        ResultSet queryResult = null;
+
+        /* Initialize */
+       // if(chest == null)         this.comboSpecimenMoveLoc3.getItems().clear();
+
+       // this.comboSpecimenMoveLoc1.getItems().clear();
+       // this.comboSpecimenMoveLoc2.getItems().clear();
+
+        /* Update Room */
+        queryResult = db_specimen.selectQuery("select storageRoom from Specimen");
+
+        try {
+            while(queryResult.next()) {
+                this.comboSpecimenMoveLoc1.getItems().add(queryResult.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        /* Update Cabinet */
+        if(room == null) return;
+        queryResult = db_specimen.selectQuery("select storageCabinet from Specimen where storageRoom='" + room + "'");
+
+        try {
+            while(queryResult.next()) {
+                this.comboSpecimenMoveLoc2.getItems().add(queryResult.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        /* Update Chest */
+        if(cabinet == null) return;
+        queryResult = db_specimen.selectQuery("select storageChest from Specimen where storageRoom='" + room + "' and storageCabinet='" + cabinet + "'");
+
+        try {
+            while(queryResult.next()) {
+                this.comboSpecimenMoveLoc3.getItems().add(queryResult.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        this.comboSpecimenMoveLoc1.getSelectionModel().select(room);
+        this.comboSpecimenMoveLoc2.getSelectionModel().select(cabinet);
+        if(chest == null) return;
+        this.comboSpecimenMoveLoc3.getSelectionModel().select(chest);
     }
 
     @FXML
@@ -446,23 +499,36 @@ public class CSpecimenMove extends AbsMetaController implements Initializable {
         //this.comboSpecimenMoveLoc3type.getItems().addAll();
         //this.comboSpecimenMoveWorker.getItems().addAll();
         this.comboSpecimenMoveStatus.getItems().addAll("상","중","하");
+
+        /* Set Room Listener */
+        this.comboSpecimenMoveLoc1.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                /* Error Handling */
+                if(comboSpecimenMoveLoc1.getSelectionModel() == null) return;
+
+                /* Set View */
+                setStorage(newValue,null,null);
+            }
+        });
+
+        /* Set Cabinet Listener */
+        this.comboSpecimenMoveLoc2.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                /* Error Handling */
+                if(comboSpecimenMoveLoc1.getSelectionModel() == null) return;
+                if(comboSpecimenMoveLoc2.getSelectionModel() == null) return;
+
+                /* Set View */
+                setStorage(comboSpecimenMoveLoc1.getSelectionModel().getSelectedItem(), newValue,null);
+            }
+        });
     }
 
     @Override
     public void init_procedure() {
-        // Set Watcher
-        String query = "select name from Person";
-        System.out.println(this.shared_model);
-        PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-        ResultSet rs = PersonDB.selectQuery(query);
-        try {
-            while(rs.next()) {
-                this.comboSpecimenMoveWorker.getItems().add(rs.getString(1));   // get name
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        view_update();
     }
 
 //    public void update_collection_info() {
@@ -505,6 +571,27 @@ public class CSpecimenMove extends AbsMetaController implements Initializable {
         this.comboSpecimenMoveWorker.getSelectionModel().select("조윤호"); // DB에 '조윤호'는 반드시 존재한다.
     }
 
+    public void update_storage() {
+        /* Clear All Storages from List */
+        this.comboSpecimenMoveLoc1.getItems().clear();
+        this.comboSpecimenMoveLoc2.getItems().clear();
+        this.comboSpecimenMoveLoc3.getItems().clear();
+
+        /* DB Querying */
+        MDBSpecimen db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
+
+        /* Update Room */
+        ResultSet storage_list = db_specimen.selectQuery("select storageRoom from Specimen");
+
+        try {
+            while(storage_list.next()) {
+                this.comboSpecimenMoveLoc1.getItems().add(storage_list.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void view_update() {
         /* Model name is collectionInfo_table */
@@ -512,5 +599,6 @@ public class CSpecimenMove extends AbsMetaController implements Initializable {
             //update_collection_info();
         }
         update_person();
+        update_storage();
     }
 }
