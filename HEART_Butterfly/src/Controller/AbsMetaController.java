@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -61,6 +62,8 @@ public abstract class AbsMetaController {
         controller.setParentController(this);
         controller.setSharedModel(shared_model);
         Stage newStage = new Stage();
+        newStage.initModality(Modality.WINDOW_MODAL);
+        newStage.initOwner(nowWindow);
         controller.setStage(nowStage);
         controller.init_procedure();
         Scene scene = new Scene(root);
