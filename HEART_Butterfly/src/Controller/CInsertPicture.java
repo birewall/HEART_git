@@ -84,6 +84,9 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 
     @FXML
     private ComboBox<String> comboInsertPictureFtype;
+    
+    @FXML
+    private Button btnInsertSection;
 
     @FXML
     private TextField txtInsertPictureSpath;
@@ -113,9 +116,6 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     private TextField txtInsertPictureLocname;
 
     @FXML
-    private Label lblLoadPictureStatus;
-    
-    @FXML
     private ComboBox<String> comboInsertPictureAng;
 
     @FXML
@@ -131,45 +131,31 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     private Button btnInsertPicturepicture;
 
     @FXML
-    private TextField txtInsertPictureSecremark;
-
-    @FXML
-    private RadioButton radioInsertPicturesec6;
-
-    @FXML
-    private ToggleGroup sectionToggle1;
-
-    @FXML
-    private RadioButton radioInsertPicturesec7;
-
-    @FXML
-    private RadioButton radioInsertPicturesec8;
-
-    @FXML
-    private RadioButton radioInsertPicturesec9;
-
-    @FXML
-    private RadioButton radioInsertPicturesec10;
-
-    @FXML
-    private RadioButton radioInsertPicturesec5;
-
-    @FXML
-    private RadioButton radioInsertPicturesec4;
-
-    @FXML
-    private RadioButton radioInsertPicturesec3;
-
-    @FXML
-    private RadioButton radioInsertPicturesec2;
-
-    @FXML
-    private RadioButton radioInsertPicturesec1;
-
-    @FXML
     private Label txtResult;
-
+    
     @FXML
+    private Label lblSection;
+    
+    @FXML
+    private Label lblMaxSection;
+
+    public String getTextLblSection() {
+		return lblSection.getText();
+	}
+
+	public void setTextLblSection(String Label) {
+		this.lblSection.setText(Label);
+	}
+
+	public String getTextLblMaxSection() {
+		return lblMaxSection.getText();
+	}
+
+	public void setTextLblMaxSection(String max_label) {
+		this.lblMaxSection.setText(max_label);
+	}
+
+	@FXML
     void BlocInsertPicture(ActionEvent event) {
 
     }
@@ -222,12 +208,7 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 
     	String alias = txtInsertPictureLocname.getText();
 
-        String section = null;
-    	if(this.sectionToggle1.getSelectedToggle() != null) {
-            section = (String)sectionToggle1.getSelectedToggle().getUserData();
-        }
 
-    	String section_detail = txtInsertPictureSecremark.getText();
     	String person_name = comboInsertPictureWho.getSelectionModel().getSelectedItem();
     	String butterfly_name = txtInsertPictureBname.getText();
     	String butterfly_family = txtInsertPictureFamily.getText();
@@ -259,8 +240,7 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
         db_location.setLocationDetail(location_detail);
         db_location.setGps(gps);
         db_location.setAlias(alias);
-        db_location.setSection(section);
-        db_location.setSectionDetail(section_detail);
+
         //db_location.printContents();
         int id_location = db_location.getIdLocationFromDB();
         if(id_location == 0) {
@@ -354,7 +334,7 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 
     @FXML
     void OnPersonManagement(ActionEvent event) throws IOException {
-        spawnChildWindow(this.btnInsertPictureExit.getScene().getWindow(), "VPersonManagement");
+        spawnChildWindow(this.btnInsertPictureExit.getScene().getWindow(), "VPersonManager");
     }
 
     @FXML
@@ -389,42 +369,42 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 
     @FXML
     void ftypeInsertPicture(ActionEvent event) {
-
+    	
     }
 
     @FXML
     void iscorrectedInsertPicture(ActionEvent event) {
-
+    	
     }
 
     @FXML
     void latInsertPicture(ActionEvent event) {
-
+    	
     }
 
     @FXML
     void locInsertPicture(ActionEvent event) {
-
+    	
     }
 
     @FXML
     void locnameInsertPicture(ActionEvent event) {
-
+    	
     }
 
     @FXML
     void longInsertPicture(ActionEvent event) {
-
+    	
     }
 
     @FXML
     void ltypeInsertPicture(ActionEvent event) {
-
+    	
     }
 
     @FXML
     void matingInsertPicture(ActionEvent event) {
-
+    	
     }
 
     /*
@@ -433,32 +413,7 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
      * */
     @FXML
     void pictureInsertPicture(ActionEvent event) throws IOException {
-        FileChooser fc = new FileChooser();
-        //fc.setInitialDirectory(new File("./HEART_Butterfly/img"));
-        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("images","*.jpg", "*.png", ".bmp", ".tif", ".gif"));
-
-        selectedFile = fc.showOpenDialog(null);
-        /* Error Handling */
-        if(selectedFile == null){
-            return;
-        }
-
-        String dest_filename = "HEART_Butterfly/img/" + selectedFile.getName();
-        File f1 = new File(dest_filename);
-
-        if(f1.exists()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("불러오기 실패");
-            alert.setHeaderText(null);
-            alert.setContentText("이미 존재하는 사진입니다.");
-            alert.show();
-            return;
-        }
-
-        /* View Updating */
-        File file = this.selectedFile;
-        Image image = new Image(file.toURI().toString());
-        this.ImvImage.setImage(image);
+    	changeWindow(this.btnInsertPictureExit.getScene().getWindow(), "VImageView");
     }
 
     @FXML
@@ -468,62 +423,12 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 
     @FXML
     void remarkInsertPicture(ActionEvent event) {
-
+    	
     }
 
     @FXML
-    void searchLocInsertPicture(ActionEvent event) {
-
-    }
-
-    @FXML
-    void sec10InsertPicture(ActionEvent event) {
-
-    }
-
-    @FXML
-    void sec1InsertPicture(ActionEvent event) {
-
-    }
-
-    @FXML
-    void sec2InsertPicture(ActionEvent event) {
-
-    }
-
-    @FXML
-    void sec3InsertPicture(ActionEvent event) {
-
-    }
-
-    @FXML
-    void sec4InsertPicture(ActionEvent event) {
-
-    }
-
-    @FXML
-    void sec5InsertPicture(ActionEvent event) {
-
-    }
-
-    @FXML
-    void sec6InsertPicture(ActionEvent event) {
-
-    }
-
-    @FXML
-    void sec7InsertPicture(ActionEvent event) {
-
-    }
-
-    @FXML
-    void sec8InsertPicture(ActionEvent event) {
-
-    }
-
-    @FXML
-    void sec9InsertPicture(ActionEvent event) {
-
+    void searchLocInsertPicture(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertPictureExit.getScene().getWindow(), "VSectionManagement");
     }
 
     @FXML
