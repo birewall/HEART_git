@@ -427,8 +427,13 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     }
 
     @FXML
-    void searchLocInsertPicture(ActionEvent event) throws IOException {
+    void searchLocInsertSection(ActionEvent event) throws IOException {
         spawnChildWindow(this.btnInsertPictureExit.getScene().getWindow(), "VSectionManagement");
+    }
+    
+    @FXML
+    void searchLocInsertPicture(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertPictureExit.getScene().getWindow(), "VLocSearchManagement");
     }
 
     @FXML

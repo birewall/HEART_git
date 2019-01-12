@@ -81,7 +81,7 @@
       <ImageView fx:id="ImvImage" fitHeight="150.0" fitWidth="200.0" layoutX="370.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
       <CheckBox fx:id="cboxInsertPictureMatching" layoutX="247.0" layoutY="639.0" mnemonicParsing="false" onAction="#matingInsertPicture" text="짝짓기" />
       <Label fx:id="txtResult" layoutX="45.0" layoutY="851.0" prefHeight="15.0" prefWidth="200.0" />
-      <Button fx:id="btnInsertSection" layoutX="109.0" layoutY="330.0" mnemonicParsing="false" onAction="#searchLocInsertPicture" prefHeight="29.0" prefWidth="162.0" text="구간 정보 입력" />
+      <Button fx:id="btnInsertSection" layoutX="109.0" layoutY="330.0" mnemonicParsing="false" onAction="#searchLocInsertSection" prefHeight="29.0" prefWidth="162.0" text="구간 정보 입력" />
       <Label fx:id="lblSection" layoutX="304.0" layoutY="335.0" text="선택구간" />
       <Label fx:id="lblMaxSection" layoutX="418.0" layoutY="335.0" text="최대구간" />
       <Label layoutX="381.0" layoutY="335.0" text="/" />
