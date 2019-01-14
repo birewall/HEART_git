@@ -464,8 +464,6 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 		this.comboInsertSpecimenStatus.getItems().addAll("상", "중", "하");
 		this.comboInsertSpecimenLoc1.getItems().addAll("집", "사무실", "학교");
 		this.comboInsertSpecimenSex.getItems().addAll("암", "수");
-		this.comboInsertSpecimenLoc2type.getItems().addAll("구형", "신형", "기타");
-		this.comboInsertSpecimenLoc3type.getItems().addAll("구형", "신형", "기타");
 		this.comboInsertSpecimenLoc2.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 		this.comboInsertSpecimenLoc3.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 
@@ -475,8 +473,6 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
         this.comboInsertSpecimenStatus.getSelectionModel().select(0);
         this.comboInsertSpecimenLoc1.getSelectionModel().select(0);
         this.comboInsertSpecimenSex.getSelectionModel().select(0);
-        this.comboInsertSpecimenLoc2type.getSelectionModel().select(0);
-        this.comboInsertSpecimenLoc3type.getSelectionModel().select(0);
         this.comboInsertSpecimenLoc2.getSelectionModel().select(0);
         this.comboInsertSpecimenLoc3.getSelectionModel().select(0);
 	}
