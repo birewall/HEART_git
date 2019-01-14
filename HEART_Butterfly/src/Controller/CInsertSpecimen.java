@@ -342,7 +342,8 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 
     @FXML
     void labelInsertSpecimen(ActionEvent event) {
-
+    	
+    	
     }
 
     @FXML
