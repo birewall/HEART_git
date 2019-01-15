@@ -93,8 +93,8 @@
                   </GridPane>
                   <GridPane GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <children>
-                        <TextField fx:id="txtInsertSpecimenLat" maxWidth="150.0" onAction="#latInsertSpecimen" prefHeight="29.0" prefWidth="100.0" promptText="37.772351" />
-                        <TextField fx:id="txtInsertSpecimenLong" maxWidth="150.0" onAction="#longInsertSpecimen" prefHeight="29.0" prefWidth="100.0" promptText="127.227921" GridPane.columnIndex="1" />
+                        <TextField fx:id="txtInsertSpecimenLat" editable="false" maxWidth="150.0" onAction="#latInsertSpecimen" prefHeight="29.0" prefWidth="100.0" promptText="37.772351" />
+                        <TextField fx:id="txtInsertSpecimenLong" editable="false" maxWidth="150.0" onAction="#longInsertSpecimen" prefHeight="29.0" prefWidth="100.0" promptText="127.227921" GridPane.columnIndex="1" />
                      </children>
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

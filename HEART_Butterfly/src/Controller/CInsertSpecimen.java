@@ -21,40 +21,34 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
 	MDBPerson PersonDB;
 
     @FXML
+    private Button btnInsertSpecimenSearchcollectloc;
+    
+    @FXML
+    private Button btnInsertSpecimenWorkerManagement;
+    
+    @FXML
+    private TextField txtInsertSpecimenLocname;
+    
+    @FXML
     private DatePicker dateInsertSpecimenCollectdate;
 
     @FXML
-    private TextField txtInsertSpecimenCollectoc;
+    private Button btnInsertSpecimenGiverManagement;
+    
+    @FXML
+    private ComboBox<String> comboInsertSpecimenCollectwho;
 
     @FXML
     private Button btnInsertSpecimenImportCollectionInfo;
-
+    
     @FXML
-    private Button btnInsertSpecimenImportSpecimen;
-
-    @FXML
-    private Button btnInsertSpecimenGiverManagement;
-
-    @FXML
-    private Button btnInsertSpecimenWorkerManagement;
-
+    private TextField txtInsertSpecimenLat;
+    
     @FXML
     private ComboBox<String> comboInsertSpecimenWho;
-
+    
     @FXML
-    private TextField txtInsertSpecimenBname;
-
-    @FXML
-    private TextField txtInsertSpecimenFamily;
-
-    @FXML
-    private TextField txtInsertSpecimenZoological;
-
-    @FXML
-    private Button btnInsertSpecimenExit;
-
-    @FXML
-    private ComboBox<String> comboInsertSpecimenStatus;
+    private ComboBox<String> comboInsertSpecimenLoc3;
 
     @FXML
     private ComboBox<String> comboInsertSpecimenLoc1;
@@ -63,51 +57,61 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     private ComboBox<String> comboInsertSpecimenLoc2;
 
     @FXML
-    private ComboBox<String> comboInsertSpecimenSex;
+    private TextField txtInsertSpecimenZoological;
 
     @FXML
-    private TextField txtInsertSpecimenRemark;
+    private Button btnInsertSpecimenLabel;
 
     @FXML
-    private ComboBox<String> comboInsertSpecimenCollectwho;
+    private TextField txtInsertSpecimenCollectoc;
 
     @FXML
-    private TextField txtInsertSpecimenNation;
-
-    @FXML
-    private DatePicker dateInsertSpecimenDate;
-
-    @FXML
-    private ComboBox<String> comboInsertSpecimenLoc3type;
-
-    @FXML
-    private ComboBox<String> comboInsertSpecimenCollectway;
-
-    @FXML
-    private TextField txtInsertSpecimenLocname;
-
-    @FXML
-    private TextField txtInsertSpecimenLong;
-
-    @FXML
-    private TextField txtInsertSpecimenLat;
-
-    @FXML
-    private TextField txtInsertSpecimenDong;
+    private Button btnInsertSpecimenCorrect;
 
     @FXML
     private TextField txtInsertSpecimenSi;
 
     @FXML
+    private Button btnInsertSpecimenImportSpecimen;
+    
+    @FXML
+    private TextField txtInsertSpecimenBname;
+
+    @FXML
+    private ComboBox<String> comboInsertSpecimenStatus;
+    
+    @FXML
     private TextField txtInsertSpecimenDo;
 
     @FXML
-    private ComboBox<String> comboInsertSpecimenLoc2type;
+    private TextField txtInsertSpecimenDong;
 
     @FXML
-    private ComboBox<String> comboInsertSpecimenLoc3;
+    private ComboBox<String> comboInsertSpecimenSex;
 
     @FXML
+    private TextField txtInsertSpecimenNation;
+
+    @FXML
+    private Button btnInsertSpecimenAdd;
+
+    @FXML
+    private DatePicker dateInsertSpecimenDate;
+
+    @FXML
+    private Button btnInsertSpecimenExit;
+
+    @FXML
+    private TextField txtInsertSpecimenLong;
+    
+    @FXML
+    private TextField txtInsertSpecimenFamily;
+    
+    @FXML
+    private ComboBox<String> comboInsertSpecimenCollectway;
+
+    
+	@FXML
     void addInsertSpecimen(ActionEvent event) {
     	String Collectway = comboInsertSpecimenCollectway.getSelectionModel().getSelectedItem();
     	String Collect_date = MDateConvertor.convert2DBFormat(dateInsertSpecimenCollectdate.getEditor().getText());
@@ -129,11 +133,8 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     	String Specimen_date = MDateConvertor.convert2DBFormat(dateInsertSpecimenDate.getEditor().getText());
     	String status = comboInsertSpecimenStatus.getSelectionModel().getSelectedItem();
     	String sex = comboInsertSpecimenSex.getSelectionModel().getSelectedItem();
-    	String note = txtInsertSpecimenRemark.getText();
     	String Loc1 = comboInsertSpecimenLoc1.getSelectionModel().getSelectedItem();
-    	String Loc2type = comboInsertSpecimenLoc2type.getSelectionModel().getSelectedItem();
     	String Loc2 = comboInsertSpecimenLoc2.getSelectionModel().getSelectedItem();
-    	String Loc3type = comboInsertSpecimenLoc3type.getSelectionModel().getSelectedItem();
     	String Loc3 = comboInsertSpecimenLoc3.getSelectionModel().getSelectedItem();
     	String SpecimenWho = comboInsertSpecimenWho.getSelectionModel().getSelectedItem();
 
@@ -220,9 +221,6 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
         db_specimen.setStatus(status);
         db_specimen.setSex(sex);
         db_specimen.setStorageRoom(Loc1);
-        db_specimen.setStorageCabinet(Loc2 + "_" + Loc2type);
-        db_specimen.setStorageChest(Loc3 + "_" + Loc3type);
-        db_specimen.setComment(note);
         db_specimen.setIdCollectionInfo(id_collectionInfo);
         db_specimen.setIdImage(0);   // 추후 채워야함
         int id_specimen = db_specimen.getIdSpecimenFromDB();
@@ -341,9 +339,8 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     }
 
     @FXML
-    void labelInsertSpecimen(ActionEvent event) {
-    	
-    	
+    void labelInsertSpecimen(ActionEvent event) throws IOException {
+    	changeWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VSpecimenLabel");
     }
 
     @FXML
