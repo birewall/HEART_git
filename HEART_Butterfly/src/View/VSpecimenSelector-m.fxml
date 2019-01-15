@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane GridPane.columnIndex="1">
+         <children>
+            <GridPane>
+               <children>
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="84.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="150.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <CheckBox fx:id="checkStorageRoom" mnemonicParsing="false" onAction="#OnStorageRoom" prefHeight="20.0" prefWidth="100.0" text="보관실" />
+                        <CheckBox fx:id="checkStorageCabinet" mnemonicParsing="false" onAction="#OnStorageCabinet" prefHeight="20.0" prefWidth="100.0" text="보관대" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="checkStorageChest" mnemonicParsing="false" onAction="#OnStorageChest" prefHeight="20.0" prefWidth="100.0" text="보관함" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="comboStorageRoom" onAction="#OnStorageRoom" prefWidth="150.0" GridPane.columnIndex="1" />
+                        <ComboBox fx:id="comboStorageCabinet" onAction="#OnStorageCabinet" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="comboStorageChest" onAction="#OnStorageChest" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+                  <CheckBox fx:id="checkDateBegin" mnemonicParsing="false" onAction="#OnDateBegin" prefHeight="20.0" prefWidth="100.0" selected="true" text="검색시작일" GridPane.halignment="CENTER" />
+                  <DatePicker fx:id="dateBegin" GridPane.columnIndex="1" />
+                  <CheckBox fx:id="checkDateEnd" mnemonicParsing="false" onAction="#OnDateEnd" prefHeight="20.0" prefWidth="100.0" text="검색종료일" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <DatePicker fx:id="dateEnd" prefWidth="163.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <CheckBox fx:id="checkCountry" mnemonicParsing="false" onAction="#OnCountry" prefHeight="20.0" prefWidth="100.0" selected="true" text="국가" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <TextField fx:id="txtCountry" prefHeight="23.0" prefWidth="140.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="txtAlias" prefHeight="23.0" prefWidth="140.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <CheckBox fx:id="checkButterflyName" mnemonicParsing="false" onAction="#OnButterflyName" prefHeight="20.0" prefWidth="100.0" text="나비명" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                  <TextField fx:id="txtAlias1" prefHeight="23.0" prefWidth="140.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <CheckBox fx:id="checkButterflyClass" mnemonicParsing="false" onAction="#OnButterflyClass" prefHeight="20.0" prefWidth="100.0" text="나비과" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                  <TextField fx:id="txtAlias11" prefHeight="23.0" prefWidth="140.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label text="보관장소" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+                  <CheckBox fx:id="checkAlias" mnemonicParsing="false" onAction="#OnAlias" prefHeight="20.0" prefWidth="100.0" text="지역통상명" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="191.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="234.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#OnSearch" prefHeight="40.0" prefWidth="100.0" text="조회" />
+                  <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#OnCancel" prefHeight="40.0" prefWidth="100.0" text="이전" GridPane.columnIndex="1" />
+                  <Button fx:id="btnSelect" mnemonicParsing="false" onAction="#OnSelect" prefHeight="40.0" prefWidth="100.0" text="선택" GridPane.columnIndex="2" />
+               </children>
+            </GridPane>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="520.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <TableView fx:id="tblSpecimen" prefHeight="200.0" prefWidth="200.0">
+         <GridPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </GridPane.margin>
+      </TableView>
+   </children>
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="775.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="425.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+</GridPane>

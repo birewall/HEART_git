@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CInsertSpecimen">
+   <children>
+      <Text layoutX="33.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="수집 날짜" />
+      <DatePicker fx:id="dateInsertSpecimenCollectdate" layoutX="111.0" layoutY="69.0" onAction="#collectdateInsertSpecimen" />
+      <Text layoutX="33.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="국가" />
+      <TextField fx:id="txtInsertSpecimenCollectoc" layoutX="114.0" layoutY="150.0" onAction="#collectlocInsertSpecimen" promptText="음현리" />
+      <Button fx:id="btnInsertSpecimenSearchcollectloc" layoutX="303.0" layoutY="150.0" mnemonicParsing="false" onAction="#searchcollectlocInsertSpecimen" text="검색" />
+      <Text layoutX="35.0" layoutY="726.0" strokeType="OUTSIDE" strokeWidth="0.0" text="작업자" />
+      <ComboBox fx:id="comboInsertSpecimenWho" layoutX="113.0" layoutY="706.0" onAction="#whoInsertSpecimen" prefHeight="29.0" prefWidth="203.0" promptText="조윤호" />
+      <Button fx:id="btnInsertSpecimenWorkerManagement" layoutX="327.0" layoutY="706.0" mnemonicParsing="false" onAction="#OnWorkerManagement" prefHeight="29.0" prefWidth="52.0" text="관리" />
+      <Text layoutX="36.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="나비 명" />
+      <TextField fx:id="txtInsertSpecimenBname" layoutX="114.0" layoutY="400.0" onAction="#bnameInsertSpecimen" promptText="배추흰나비" />
+      <Text layoutX="304.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="과" />
+      <TextField fx:id="txtInsertSpecimenFamily" layoutX="352.0" layoutY="400.0" onAction="#familyInsertSpecimen" promptText="흰나비과" />
+      <TextField fx:id="txtInsertSpecimenZoological" layoutX="351.0" layoutY="437.0" onAction="#zoologicalInsertSpecimen" promptText="Pieris(Artogeia) rapae" />
+      <Text layoutX="303.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" text="학명" />
+      <Text layoutX="33.0" layoutY="501.0" strokeType="OUTSIDE" strokeWidth="0.0" text="작업 날짜" />
+      <Button fx:id="btnInsertSpecimenAdd" layoutX="297.0" layoutY="806.0" mnemonicParsing="false" onAction="#addInsertSpecimen" text="추가" />
+      <Button fx:id="btnInsertSpecimenExit" layoutX="426.0" layoutY="806.0" mnemonicParsing="false" onAction="#exitInsertSpecimen" text="이전" />
+      <ComboBox fx:id="comboInsertSpecimenStatus" layoutX="118.0" layoutY="520.0" onAction="#statusInsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="상" />
+      <Text layoutX="42.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="상태" />
+      <ComboBox fx:id="comboInsertSpecimenLoc1" layoutX="161.0" layoutY="596.0" onAction="#loc1InsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="집" />
+      <Text layoutX="39.0" layoutY="616.0" strokeType="OUTSIDE" strokeWidth="0.0" text="보관 장소" />
+      <Text layoutX="36.0" layoutY="651.0" strokeType="OUTSIDE" strokeWidth="0.0" text="캐비닛 번호" />
+      <ComboBox fx:id="comboInsertSpecimenLoc2" layoutX="288.0" layoutY="631.0" onAction="#loc2InsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="12" />
+      <Text layoutX="297.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="성별" />
+      <ComboBox fx:id="comboInsertSpecimenSex" layoutX="373.0" layoutY="520.0" onAction="#sexInsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="암" />
+      <Text layoutX="42.0" layoutY="578.0" strokeType="OUTSIDE" strokeWidth="0.0" text="비고" />
+      <TextField fx:id="txtInsertSpecimenRemark" layoutX="117.0" layoutY="558.0" onAction="#remarkInsertSpecimen" prefHeight="29.0" prefWidth="381.0" />
+      <Text layoutX="33.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="제공자" />
+      <Button fx:id="btnInsertSpecimenGiverManagement" layoutX="332.0" layoutY="297.0" mnemonicParsing="false" onAction="#OnGiverManagement" prefHeight="29.0" prefWidth="52.0" text="관리" />
+      <ComboBox fx:id="comboInsertSpecimenCollectwho" layoutX="118.0" layoutY="297.0" onAction="#collectwhoInsertSpecimen" prefHeight="29.0" prefWidth="203.0" promptText="조윤호" />
+      <TextField fx:id="txtInsertSpecimenNation" layoutX="114.0" layoutY="109.0" onAction="#nationInsertSpecimen" promptText="대한민국" />
+      <Text layoutX="33.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="수집 장소" />
+      <DatePicker fx:id="dateInsertSpecimenDate" layoutX="116.0" layoutY="481.0" onAction="#dateInsertSpecimen" promptText="(defalut=today)" />
+      <ComboBox fx:id="comboInsertSpecimenLoc3type" layoutX="161.0" layoutY="667.0" onAction="#loc3typeInsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="구입" />
+      <Text layoutX="37.0" layoutY="687.0" strokeType="OUTSIDE" strokeWidth="0.0" text="상자 번호" />
+      <Text layoutX="31.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="수집 방식" />
+      <ComboBox fx:id="comboInsertSpecimenCollectway" layoutX="109.0" layoutY="31.0" onAction="#collectwayInsertSpecimen" prefHeight="29.0" prefWidth="203.0" promptText="직접 채집" />
+      <Text layoutX="66.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="통상명" />
+      <TextField fx:id="txtInsertSpecimenLocname" layoutX="152.0" layoutY="260.0" onAction="#locnameInsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="주금산" />
+      <TextField fx:id="txtInsertSpecimenLong" layoutX="281.0" layoutY="225.0" onAction="#longInsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="127.227921" />
+      <TextField fx:id="txtInsertSpecimenLat" layoutX="151.0" layoutY="225.0" onAction="#latInsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="37.772351" />
+      <Text layoutX="65.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GPS" />
+      <TextField fx:id="txtInsertSpecimenDong" layoutX="335.0" layoutY="188.0" onAction="#dongInsertSpecimen" prefHeight="29.0" prefWidth="85.0" promptText="내촌면" />
+      <TextField fx:id="txtInsertSpecimenSi" layoutX="243.0" layoutY="188.0" onAction="#siInsertSpecimen" prefHeight="29.0" prefWidth="85.0" promptText="포천시" />
+      <TextField fx:id="txtInsertSpecimenDo" layoutX="151.0" layoutY="188.0" onAction="#doInsertSpecimen" prefHeight="29.0" prefWidth="85.0" promptText="경기도" />
+      <Text layoutX="67.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="상세 주소" />
+      <Button fx:id="btnInsertSpecimenLabel" layoutX="174.0" layoutY="755.0" mnemonicParsing="false" onAction="#labelInsertSpecimen" prefHeight="29.0" prefWidth="179.0" text="레이블 내보내기 (.csv)" />
+      <ComboBox fx:id="comboInsertSpecimenLoc2type" layoutX="161.0" layoutY="631.0" onAction="#loc2typeInsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="제작" />
+      <ComboBox fx:id="comboInsertSpecimenLoc3" layoutX="288.0" layoutY="667.0" onAction="#loc3InsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="15" />
+      <Button fx:id="btnInsertSpecimenCorrect" layoutX="364.0" layoutY="806.0" mnemonicParsing="false" onAction="#correctInsertSpecimen" text="수정" />
+      <Button fx:id="btnInsertSpecimenImportCollectionInfo" layoutX="426.0" layoutY="28.0" mnemonicParsing="false" onAction="#OnImportCollectionInfo" prefHeight="29.0" prefWidth="150.0" text="수집정보 불러오기" />
+      <Button fx:id="btnInsertSpecimenImportSpecimen" layoutX="426.0" layoutY="69.0" mnemonicParsing="false" onAction="#OnImportSpecimen" prefHeight="29.0" prefWidth="150.0" text="표본정보 불러오기" />
+   </children>
+</Pane>
