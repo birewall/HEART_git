@@ -10,6 +10,7 @@ import Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -19,6 +20,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.WindowEvent;
 
 import javax.swing.*;
 
@@ -267,6 +269,8 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     @FXML
     void OnPersonManagement(ActionEvent event) throws IOException {
         spawnChildWindow(this.btnInsertWatchExit.getScene().getWindow(), "VPersonManager");
+        
+        
     }
 
     @FXML

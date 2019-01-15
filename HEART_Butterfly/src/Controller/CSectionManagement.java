@@ -69,6 +69,17 @@ public class CSectionManagement extends AbsMetaController implements Initializab
 
     @FXML
     void OnDone(ActionEvent event) {
+    	
+    	if(ListSection.getSelectionModel().getSelectedItem() == null) {
+    		Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("입력 실패");
+            alert.setHeaderText(null);
+            alert.setContentText("구간을 선택하세요");
+            alert.show();
+            return;    		
+    	}
+    	
+    	
         Stage thisStage = (Stage)this.btnDone.getScene().getWindow();
         this.parent_controller.view_update();
       	((CInsertPicture)this.parent_controller).setTextLblMaxSection(maxSecNum);
