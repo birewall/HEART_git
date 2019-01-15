@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 
@@ -306,6 +307,12 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     @FXML
     void collectwayInsertSpecimen(ActionEvent event) {
 
+    }
+    
+    @FXML
+    void OnCreateSpecimenID(ActionEvent event) {
+    	String specimenDateID = this.dateInsertSpecimenCollectdate.getEditor().getText();
+        MDBSpecimen db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
     }
 
     @FXML

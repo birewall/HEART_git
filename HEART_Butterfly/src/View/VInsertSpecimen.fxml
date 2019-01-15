@@ -155,7 +155,6 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="나비 정보" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="작업 날짜" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="상태" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="성별" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
@@ -197,6 +196,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="나비 정보" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
