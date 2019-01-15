@@ -1,5 +1,6 @@
 package Controller;
 
+import javafx.scene.control.Label;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -28,117 +29,111 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 	
 	MDBPerson PersonDB;
 		
-    @FXML
-    private DatePicker dateInsertWatchDate;
+	 	@FXML
+	    private TextField txtInsertWatchDo;
 
-    @FXML
-    private ComboBox<String> comboInsertWatchTime;
+	    @FXML
+	    private Label lblSection_watch;
 
-    @FXML
-    private TextField txtInsertWatchLoc;
+	    @FXML
+	    private Button btnInsertWatchExit;
 
-    @FXML
-    private Button btnInsertWatchPersonManagement;
+	    @FXML
+	    private TextField txtInsertWatchBname;
 
-    @FXML
-    private Button btnInsertWatchImportCollectionInfo;
+	    @FXML
+	    private TextField txtInsertWatchRemark;
 
-    @FXML
-    private TextField txtInsertWatchDo;
+	    @FXML
+	    private ComboBox<String> comboInsertWatchSex;
 
-    @FXML
-    private TextField txtInsertWatchSi;
+	    @FXML
+	    private TextField txtInsertWatchNation;
 
-    @FXML
-    private TextField txtInsertWatchDong;
+	    @FXML
+	    private TextField txtInsertWatchSi;
 
-    @FXML
-    private ComboBox<String> comboInsertWatchWho;
+	    @FXML
+	    private TextField txtInsertWatchQuan;
 
-    @FXML
-    private Button btnInsertWatchChoosewho;
+	    @FXML
+	    private TextField txtInsertWatchLong;
 
-    @FXML
-    private Button btnInsertWatchClear;
+	    @FXML
+	    private ComboBox<String> comboInsertWatchTime;
 
-    @FXML
-    private TextField txtInsertWatchBname;
+	    @FXML
+	    private Button btnInsertWatchPersonManagement;
 
-    @FXML
-    private TextField txtInsertWatchFamily;
+	    @FXML
+	    private TextField txtInsertWatchDong;
 
-    @FXML
-    private TextField txtInsertWatchZoological;
+	    @FXML
+	    private Label lblMaxSection_watch;
 
-    @FXML
-    private ComboBox<String> comboInsertWatchStatus;
+	    @FXML
+	    private TextField txtInsertWatchLat;
 
-    @FXML
-    private ComboBox<String> comboInsertWatchSex;
+	    @FXML
+	    private Button btnInsertWatchCorrect;
 
-    @FXML
-    private Button btnInsertWatchAdd;
+	    @FXML
+	    private ComboBox<String> comboInsertWatchWho;
 
-    @FXML
-    private Button btnInsertWatchExit;
+	    @FXML
+	    private Button btnInsertSection_watch;
 
-    @FXML
-    private TextField txtInsertWatchNation;
+	    @FXML
+	    private ComboBox<String> comboInsertWatchStatus;
 
-    @FXML
-    private TextField txtInsertWatchRemark;
+	    @FXML
+	    private Button btnInsertWatchSearchLoc;
 
-    @FXML
-    private TextField txtInsertWatchLat;
+	    @FXML
+	    private Button btnInsertWatchAdd;
 
-    @FXML
-    private TextField txtInsertWatchLong;
+	    @FXML
+	    private DatePicker dateInsertWatchDate;
 
-    @FXML
-    private TextField txtInsertWatchLocname;
+	    @FXML
+	    private TextField txtInsertWatchZoological;
 
-    @FXML
-    private RadioButton radioInsertWatchsec1;
+	    @FXML
+	    private TextField txtInsertWatchFamily;
 
-    @FXML
-    private ToggleGroup sectionToggle;
+	    @FXML
+	    private TextField txtInsertWatchLoc;
 
-    @FXML
-    private RadioButton radioInsertWatchsec2;
+	    @FXML
+	    private TextField txtInsertWatchLocname;
 
-    @FXML
-    private RadioButton radioInsertWatchsec3;
+	    @FXML
+	    private Button btnInsertWatchImportCollectionInfo;
 
-    @FXML
-    private RadioButton radioInsertWatchsec4;
+    public String getTextLblSection() {
+		return lblSection_watch.getText();
+	}
 
-    @FXML
-    private RadioButton radioInsertWatchsec5;
+	public void setTextLblSection(String Label) {
+		this.lblSection_watch.setText(Label);
+	}
 
-    @FXML
-    private RadioButton radioInsertWatchsec10;
+	public String getTextLblMaxSection() {
+		return lblMaxSection_watch.getText();
+	}
 
-    @FXML
-    private RadioButton radioInsertWatchsec9;
+	public void setTextLblMaxSection(String max_label) {
+		this.lblMaxSection_watch.setText(max_label);
+	}
 
+	
+    
     @FXML
-    private RadioButton radioInsertWatchsec8;
-
-    @FXML
-    private RadioButton radioInsertWatchsec7;
-
-    @FXML
-    private RadioButton radioInsertWatchsec6;
-
-    @FXML
-    private TextField txtInsertWatchSecremark;
-
-    @FXML
-    private TextField txtInsertWatchQuan;
-
-    @FXML
-    private Button btnInsertWatchCorrect;
-
+    void searchLocInsertSection_watch(ActionEvent event) throws IOException {
+    	spawnChildWindow(this.btnInsertSection_watch.getScene().getWindow(), "VSectionManagement");
+    	
+    }
+    
     @FXML
     void NationInsertWatch(ActionEvent event) {
     	
@@ -160,12 +155,10 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
         String gps =  gps_x + "," + gps_y;
 
         String alias = txtInsertWatchLocname.getText();
-    	String section = "";
-    	if(sectionToggle.getSelectedToggle() != null) {
-    	    section = (String)sectionToggle.getSelectedToggle().getUserData();
-    	    System.out.println(section);
-        }
-    	String section_detail = txtInsertWatchSecremark.getText();
+    	String section = lblSection_watch.getText() + " / " + lblMaxSection_watch.getText();
+    	
+    	
+    	//String section_detail = txtInsertWatchSecremark.getText();
     	String person_name = comboInsertWatchWho.getSelectionModel().getSelectedItem(); // 조윤호 교수님은 반드시 DB에 있어야 함
     	String butterfly_name = txtInsertWatchBname.getText();
     	String butterfly_family = txtInsertWatchFamily.getText();
@@ -190,8 +183,8 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
         db_location.setGps(gps);
         db_location.setAlias(alias);
         db_location.setSection(section);
-        db_location.setSectionDetail(section_detail);
-        // db_location.printContents();
+        //db_location.setSectionDetail(section_detail);*/
+        db_location.printContents();
         int id_location = db_location.getIdLocationFromDB();
         if(id_location == 0) {
             if(!db_location.insert()){
@@ -269,7 +262,6 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     @FXML
     void OnPersonManagement(ActionEvent event) throws IOException {
         spawnChildWindow(this.btnInsertWatchExit.getScene().getWindow(), "VPersonManager");
-        
         
     }
 
