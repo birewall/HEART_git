@@ -2,6 +2,7 @@ package Controller;
 
 import java.io.IOException;
 
+import javafx.stage.Modality;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,8 +47,8 @@ public class CInitial extends AbsMetaController {
     	
     	// Login Sequence
     	if(this.textLoginID.getText().equals(id) && this.txtLoginPW.getText().equals(password)) {
-        	changeWindow(this.btnLogin.getScene().getWindow(), "VMain");
-        } else {
+    		changeWindow(this.btnLogin.getScene().getWindow(), "VMain");
+    	} else {
     		this.lblLoginFail.setText("?��보�? ?��치하�? ?��?��?��?��.");
     	}
     }
