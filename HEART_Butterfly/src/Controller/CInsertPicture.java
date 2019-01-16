@@ -431,6 +431,11 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 
     @FXML
     void searchLocInsertSection(ActionEvent event) throws IOException {
+        /* Make Passing Data */
+        MPassingData parent_info = new MPassingData(1);
+        parent_info.setData("CInsertPicture",0);
+        ((MSharedData)(this.shared_model)).add(parent_info, "parent_name");
+
         spawnChildWindow(this.btnInsertPictureExit.getScene().getWindow(), "VSectionManagement");
     }
     
