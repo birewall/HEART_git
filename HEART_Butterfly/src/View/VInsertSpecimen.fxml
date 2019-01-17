@@ -157,33 +157,41 @@
                   </GridPane>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="작업 날짜" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="상태" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="성별" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="보관 정보" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="보관 정보" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="보관 장소" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="캐비닛 번호" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="상자 번호" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                        <ComboBox fx:id="comboInsertSpecimenLoc1" onAction="#loc1InsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="집" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                        <ComboBox fx:id="comboInsertSpecimenLoc2" onAction="#loc2InsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="12" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <ComboBox fx:id="comboInsertSpecimenLoc3" onAction="#loc3InsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="15" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="보관 장소" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="캐비닛 번호" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="상자 번호" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="comboInsertSpecimenLoc2" onAction="#loc2InsertSpecimen" prefHeight="29.0" prefWidth="124.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="comboInsertSpecimenLoc3" onAction="#loc3InsertSpecimen" prefHeight="29.0" prefWidth="124.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="comboInsertSpecimenLoc1" onAction="#loc1InsertSpecimen" prefHeight="29.0" prefWidth="124.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <RadioButton fx:id="rdoPreviousStorage" mnemonicParsing="false" onAction="#OnPreviousStorage" text="기존" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="StorageSelection" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rdoNewStorage" mnemonicParsing="false" onAction="#OnNewStorage" text="신규" toggleGroup="$StorageSelection" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <TextField fx:id="txtInsertLoc1" maxWidth="120.0" prefWidth="120.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <TextField fx:id="txtInsertLoc2" maxWidth="120.0" prefWidth="120.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <TextField fx:id="txtInsertLoc3" maxWidth="120.0" prefWidth="120.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                      </children>
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="80.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="80.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="작업자" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="작업자" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
                   <DatePicker fx:id="dateInsertSpecimenDate" onAction="#dateInsertSpecimen" promptText="(defalut=today)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="comboInsertSpecimenStatus" onAction="#statusInsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="상" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <ComboBox fx:id="comboInsertSpecimenSex" onAction="#sexInsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="암" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
                         <ComboBox fx:id="comboInsertSpecimenWho" onAction="#whoInsertSpecimen" prefHeight="29.0" prefWidth="203.0" promptText="조윤호" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                         <Button fx:id="btnInsertSpecimenWorkerManagement" mnemonicParsing="false" onAction="#OnWorkerManagement" prefHeight="29.0" prefWidth="52.0" text="관리" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
@@ -197,17 +205,31 @@
                      </rowConstraints>
                   </GridPane>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="나비 정보" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ComboBox fx:id="comboInsertSpecimenStatus" onAction="#statusInsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="상" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="comboInsertSpecimenSex" onAction="#sexInsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="암" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="성별" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                     </children>
+                  </GridPane>
                </children>
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="448.0" minWidth="10.0" prefWidth="399.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>

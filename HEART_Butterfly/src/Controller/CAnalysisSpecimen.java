@@ -24,6 +24,7 @@ import javafx.scene.control.ToggleGroup;
 
 public class CAnalysisSpecimen extends AbsMetaController {
 
+    
     @FXML
     private CheckBox CheckBSpecStatus;
 
@@ -76,7 +77,6 @@ public class CAnalysisSpecimen extends AbsMetaController {
     private RadioButton radioPoorPreservativeStatus;
 
     Double array[][];
-
     
     @FXML
     void exitSpecStatus(ActionEvent event) throws IOException {
