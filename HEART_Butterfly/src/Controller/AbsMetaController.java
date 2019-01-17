@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Model.AbsMetaModel;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -67,11 +68,21 @@ public abstract class AbsMetaController {
         newStage.initOwner(nowWindow);
         controller.setStage(nowStage);
         controller.init_procedure();
+        newStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                boolean exit_flag = controller.on_close_stage();
+                if(!exit_flag) we.consume();
+            }
+        });
+
         Scene scene = new Scene(root);
         newStage.setScene(scene);
         newStage.show();
-        
-        
+    }
+
+    public boolean on_close_stage() {
+        /* For Overriding */
+        return true;
     }
 
     public void init_procedure() {

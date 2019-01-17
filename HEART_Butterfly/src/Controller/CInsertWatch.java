@@ -130,8 +130,12 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     
     @FXML
     void searchLocInsertSection_watch(ActionEvent event) throws IOException {
+        /* Make Passing Data */
+        MPassingData parent_info = new MPassingData(1);
+        parent_info.setData("CInsertWatch",0);
+        ((MSharedData)(this.shared_model)).add(parent_info, "parent_name");
+
     	spawnChildWindow(this.btnInsertSection_watch.getScene().getWindow(), "VSectionManagement");
-    	
     }
     
     @FXML
