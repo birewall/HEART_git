@@ -32,7 +32,7 @@
                   <Insets />
                </opaqueInsets>
             </TextField>
-            <Button fx:id="btnInsert" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnInsert" prefHeight="60.0" prefWidth="140.0" text="추가" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+            <Button fx:id="btnInsert" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnInsert" prefHeight="60.0" prefWidth="140.0" style="-fx-border-color: black;" text="추가" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -40,7 +40,7 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button fx:id="btnDone" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnDone" prefHeight="60.0" prefWidth="140.0" text="완료" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+            <Button fx:id="btnDone" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnDone" prefHeight="60.0" prefWidth="140.0" style="-fx-border-color: black;" text="완료" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

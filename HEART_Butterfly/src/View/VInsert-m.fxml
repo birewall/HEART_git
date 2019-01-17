@@ -10,30 +10,30 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="283.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="283.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="어떤 정보를 입력하시겠습니까?" GridPane.halignment="CENTER">
          <font>
             <Font size="17.0" />
          </font>
       </Text>
-      <Button fx:id="btnInsertWatch" mnemonicParsing="false" onAction="#insertWatch" prefHeight="40.0" prefWidth="170.0" text="관찰 정보" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+      <Button fx:id="btnInsertWatch" mnemonicParsing="false" onAction="#insertWatch" prefHeight="50.0" prefWidth="170.0" style="-fx-border-color: blue;" text="관찰 정보" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Button fx:id="btnInsertPicture" mnemonicParsing="false" onAction="#insertPicture" prefHeight="40.0" prefWidth="170.0" text="사진" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+      <Button fx:id="btnInsertPicture" mnemonicParsing="false" onAction="#insertPicture" prefHeight="50.0" prefWidth="170.0" style="-fx-border-color: blue;" text="사진" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Button fx:id="btnInsertSpecimen" mnemonicParsing="false" onAction="#insertSpecimen" prefHeight="40.0" prefWidth="170.0" text="표본" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+      <Button fx:id="btnInsertSpecimen" mnemonicParsing="false" onAction="#insertSpecimen" prefHeight="50.0" prefWidth="170.0" style="-fx-border-color: blue;" text="표본" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Button fx:id="btnInsertAnticeptic" mnemonicParsing="false" onAction="#insertAnticeptic" prefHeight="40.0" prefWidth="170.0" text="방부제" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+      <Button fx:id="btnInsertAnticeptic" mnemonicParsing="false" onAction="#insertAnticeptic" prefHeight="50.0" prefWidth="170.0" style="-fx-border-color: blue;" text="방부제" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Button fx:id="btnInsertExit" mnemonicParsing="false" onAction="#insertExit" prefHeight="40.0" prefWidth="170.0" text="이전" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+      <Button fx:id="btnInsertExit" mnemonicParsing="false" onAction="#insertExit" prefHeight="50.0" prefWidth="170.0" style="-fx-border-color: black;" text="이전" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP">
          <font>
             <Font size="15.0" />
          </font></Button>

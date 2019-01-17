@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="analysisMainTabExit" mnemonicParsing="false" onAction="#analysisExit" prefHeight="50.0" prefWidth="120.0" style="-fx-border-color: black;" text="종료" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <GridPane.margin>
+            <Insets right="30.0" />
+         </GridPane.margin>
+      </Button>
+      <TabPane prefHeight="900.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="100.0" tabMaxWidth="150.0" GridPane.halignment="CENTER">
+         <tabs>
+            <Tab fx:id="tabSummary" text="요약 통계">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" />
+               </content>
+            </Tab>
+            <Tab fx:id="tabGraph" text="데이터 그래프">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" />
+               </content>
+            </Tab>
+            <Tab fx:id="tabSpecimenIO" text="표본 출납기록">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" />
+               </content>
+            </Tab>
+            <Tab fx:id="tabSpecimenStatus" text="표본 상태 정보">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" />
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="283.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="732.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+</GridPane>

@@ -36,27 +36,78 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <CheckBox fx:id="checkStorageRoom" mnemonicParsing="false" onAction="#OnStorageRoom" prefHeight="20.0" prefWidth="100.0" text="보관실" />
-                        <CheckBox fx:id="checkStorageCabinet" mnemonicParsing="false" onAction="#OnStorageCabinet" prefHeight="20.0" prefWidth="100.0" text="보관대" GridPane.rowIndex="1" />
-                        <CheckBox fx:id="checkStorageChest" mnemonicParsing="false" onAction="#OnStorageChest" prefHeight="20.0" prefWidth="100.0" text="보관함" GridPane.rowIndex="2" />
-                        <ComboBox fx:id="comboStorageRoom" onAction="#OnStorageRoom" prefWidth="150.0" GridPane.columnIndex="1" />
-                        <ComboBox fx:id="comboStorageCabinet" onAction="#OnStorageCabinet" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <ComboBox fx:id="comboStorageChest" onAction="#OnStorageChest" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="checkStorageRoom" mnemonicParsing="false" onAction="#OnStorageRoom" prefHeight="20.0" prefWidth="100.0" text="보관실">
+                           <font>
+                              <Font size="14.0" />
+                           </font></CheckBox>
+                        <CheckBox fx:id="checkStorageCabinet" mnemonicParsing="false" onAction="#OnStorageCabinet" prefHeight="20.0" prefWidth="100.0" text="보관대" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="14.0" />
+                           </font></CheckBox>
+                        <CheckBox fx:id="checkStorageChest" mnemonicParsing="false" onAction="#OnStorageChest" prefHeight="20.0" prefWidth="100.0" text="보관함" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="14.0" />
+                           </font></CheckBox>
+                        <ComboBox fx:id="comboStorageRoom" onAction="#OnStorageRoom" prefWidth="150.0" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets right="30.0" />
+                           </GridPane.margin></ComboBox>
+                        <ComboBox fx:id="comboStorageCabinet" onAction="#OnStorageCabinet" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets right="30.0" />
+                           </GridPane.margin></ComboBox>
+                        <ComboBox fx:id="comboStorageChest" onAction="#OnStorageChest" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets right="30.0" />
+                           </GridPane.margin></ComboBox>
                      </children>
                   </GridPane>
-                  <CheckBox fx:id="checkDateBegin" mnemonicParsing="false" onAction="#OnDateBegin" prefHeight="20.0" prefWidth="100.0" selected="true" text="검색시작일" GridPane.halignment="CENTER" />
-                  <DatePicker fx:id="dateBegin" GridPane.columnIndex="1" />
-                  <CheckBox fx:id="checkDateEnd" mnemonicParsing="false" onAction="#OnDateEnd" prefHeight="20.0" prefWidth="100.0" text="검색종료일" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                  <DatePicker fx:id="dateEnd" prefWidth="163.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <CheckBox fx:id="checkCountry" mnemonicParsing="false" onAction="#OnCountry" prefHeight="20.0" prefWidth="100.0" selected="true" text="국가" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                  <TextField fx:id="txtCountry" prefHeight="23.0" prefWidth="140.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="txtAlias" prefHeight="23.0" prefWidth="140.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <CheckBox fx:id="checkButterflyName" mnemonicParsing="false" onAction="#OnButterflyName" prefHeight="20.0" prefWidth="100.0" text="나비명" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                  <TextField fx:id="txtAlias1" prefHeight="23.0" prefWidth="140.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <CheckBox fx:id="checkButterflyClass" mnemonicParsing="false" onAction="#OnButterflyClass" prefHeight="20.0" prefWidth="100.0" text="나비과" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-                  <TextField fx:id="txtAlias11" prefHeight="23.0" prefWidth="140.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Label text="보관장소" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-                  <CheckBox fx:id="checkAlias" mnemonicParsing="false" onAction="#OnAlias" prefHeight="20.0" prefWidth="100.0" text="지역통상명" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <CheckBox fx:id="checkDateBegin" mnemonicParsing="false" onAction="#OnDateBegin" prefHeight="20.0" prefWidth="150.0" selected="true" text="검색시작일" GridPane.halignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font></CheckBox>
+                  <DatePicker fx:id="dateBegin" prefWidth="215.0" GridPane.columnIndex="1" />
+                  <CheckBox fx:id="checkDateEnd" mnemonicParsing="false" onAction="#OnDateEnd" prefHeight="20.0" prefWidth="150.0" text="검색종료일" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font></CheckBox>
+                  <DatePicker fx:id="dateEnd" prefWidth="215.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <CheckBox fx:id="checkCountry" mnemonicParsing="false" onAction="#OnCountry" prefHeight="20.0" prefWidth="150.0" selected="true" text="국가" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font></CheckBox>
+                  <TextField fx:id="txtCountry" prefHeight="29.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin></TextField>
+                  <TextField fx:id="txtAlias" prefHeight="29.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin></TextField>
+                  <CheckBox fx:id="checkButterflyName" mnemonicParsing="false" onAction="#OnButterflyName" prefHeight="20.0" prefWidth="150.0" text="나비명" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="14.0" />
+                     </font></CheckBox>
+                  <TextField fx:id="txtAlias1" prefHeight="29.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin></TextField>
+                  <CheckBox fx:id="checkButterflyClass" mnemonicParsing="false" onAction="#OnButterflyClass" prefHeight="20.0" prefWidth="150.0" text="나비과" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="14.0" />
+                     </font></CheckBox>
+                  <TextField fx:id="txtAlias11" prefHeight="29.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin></TextField>
+                  <Label prefWidth="150.0" text="보관장소" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <CheckBox fx:id="checkAlias" mnemonicParsing="false" onAction="#OnAlias" prefHeight="20.0" prefWidth="150.0" text="지역통상명" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="14.0" />
+                     </font></CheckBox>
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="191.0" />
@@ -82,9 +133,18 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#OnSearch" prefHeight="40.0" prefWidth="100.0" text="조회" />
-                  <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#OnCancel" prefHeight="40.0" prefWidth="100.0" text="이전" GridPane.columnIndex="1" />
-                  <Button fx:id="btnSelect" mnemonicParsing="false" onAction="#OnSelect" prefHeight="40.0" prefWidth="100.0" text="선택" GridPane.columnIndex="2" />
+                  <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#OnSearch" prefHeight="50.0" prefWidth="120.0" style="-fx-border-color: black;" text="조회" GridPane.halignment="CENTER">
+                     <font>
+                        <Font size="17.0" />
+                     </font></Button>
+                  <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#OnCancel" prefHeight="50.0" prefWidth="120.0" style="-fx-border-color: black;" text="이전" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                     <font>
+                        <Font size="17.0" />
+                     </font></Button>
+                  <Button fx:id="btnSelect" mnemonicParsing="false" onAction="#OnSelect" prefHeight="50.0" prefWidth="120.0" style="-fx-border-color: black;" text="선택" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                     <font>
+                        <Font size="17.0" />
+                     </font></Button>
                </children>
             </GridPane>
          </children>

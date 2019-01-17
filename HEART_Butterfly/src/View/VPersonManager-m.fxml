@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="524.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CPersonManager">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="524.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CPersonManager">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.0" minWidth="10.0" prefWidth="275.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="207.0" />
@@ -34,28 +34,28 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </GridPane.margin>
       </ListView>
-      <Button fx:id="btnInsert" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnInsert" prefHeight="40.0" prefWidth="187.0" text="추가" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+      <Button fx:id="btnInsert" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnInsert" prefHeight="40.0" prefWidth="187.0" style="-fx-border-color: black;" text="추가" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
          <font>
             <Font size="18.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="btnDelete" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnDelete" prefHeight="40.0" prefWidth="187.0" text="삭제" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
+      <Button fx:id="btnDelete" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnDelete" prefHeight="40.0" prefWidth="187.0" style="-fx-border-color: black;" text="삭제" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
          <font>
             <Font size="18.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="btnDone" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnDone" prefHeight="40.0" prefWidth="187.0" text="완료" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP">
+      <Button fx:id="btnDone" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnDone" prefHeight="40.0" prefWidth="187.0" style="-fx-border-color: black;" text="완료" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP">
          <font>
             <Font size="18.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="btnEdit" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnEdit" prefHeight="40.0" prefWidth="187.0" text="수정" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+      <Button fx:id="btnEdit" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#OnEdit" prefHeight="40.0" prefWidth="187.0" style="-fx-border-color: black;" text="수정" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
          <font>
             <Font size="18.0" />
          </font>

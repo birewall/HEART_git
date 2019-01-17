@@ -14,14 +14,20 @@
    <children>
       <GridPane fx:id="Gridpane2Main" GridPane.rowIndex="6">
          <children>
-            <Button fx:id="btnImportDB" mnemonicParsing="false" onAction="#OnImportDB" prefHeight="51.0" prefWidth="171.0" text="DB 불러오기" GridPane.halignment="CENTER">
+            <Button fx:id="btnImportDB" mnemonicParsing="false" onAction="#OnImportDB" prefHeight="51.0" prefWidth="171.0" style="-fx-border-color: green;" text="DB 불러오기" GridPane.halignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Button>
-            <Button fx:id="btnMainExit" mnemonicParsing="false" onAction="#mainExit" prefHeight="51.0" prefWidth="171.0" text="종료" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               </cursor>
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
+            <Button fx:id="btnMainExit" mnemonicParsing="false" onAction="#mainExit" prefHeight="51.0" prefWidth="171.0" style="-fx-border-color: black;" text="종료" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Button>
+               </cursor>
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -31,22 +37,34 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <Button fx:id="btnMainPicture" mnemonicParsing="false" onAction="#mainPicture" prefHeight="50.0" prefWidth="300.0" text="사진 불러오기" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+      <Button fx:id="btnMainPicture" mnemonicParsing="false" onAction="#mainPicture" prefHeight="50.0" prefWidth="300.0" style="-fx-border-color: blue;" text="사진 불러오기" GridPane.halignment="CENTER" GridPane.rowIndex="5">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button fx:id="btnMainAnalysis" mnemonicParsing="false" onAction="#mainAnalysis" prefHeight="50.0" prefWidth="300.0" text="통계 분석" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+         </cursor>
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="btnMainAnalysis" mnemonicParsing="false" onAction="#mainAnalysis" prefHeight="50.0" prefWidth="300.0" style="-fx-border-color: blue;" text="통계 분석" GridPane.halignment="CENTER" GridPane.rowIndex="4">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button fx:id="btnMainSpecimenMove" mnemonicParsing="false" onAction="#specimenmoveMainSpecimen" prefHeight="50.0" prefWidth="300.0" text="표본 위치 이동 정보" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+         </cursor>
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="btnMainSpecimenMove" mnemonicParsing="false" onAction="#specimenmoveMainSpecimen" prefHeight="50.0" prefWidth="300.0" style="-fx-border-color: blue;" text="표본 위치 이동 정보" GridPane.halignment="CENTER" GridPane.rowIndex="3">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button fx:id="btnMainInsert" mnemonicParsing="false" onAction="#mainInsert" prefHeight="50.0" prefWidth="300.0" text="정보 입력" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+         </cursor>
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="btnMainInsert" mnemonicParsing="false" onAction="#mainInsert" prefHeight="50.0" prefWidth="300.0" style="-fx-border-color: blue;" text="정보 입력" GridPane.halignment="CENTER" GridPane.rowIndex="2">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
+         </cursor>
+         <font>
+            <Font size="18.0" />
+         </font></Button>
       <Text fx:id="txtMain1" strokeType="OUTSIDE" strokeWidth="0.0" text="어떤 기능을 사용하시겠습니까?" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <font>
             <Font size="24.0" />

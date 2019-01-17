@@ -19,7 +19,7 @@
    <children>
       <GridPane GridPane.rowIndex="1">
          <children>
-            <Button fx:id="btnInsert" mnemonicParsing="false" onAction="#OnInsert" prefHeight="45.0" prefWidth="110.0" text="추가" textAlignment="CENTER" GridPane.halignment="CENTER">
+            <Button fx:id="btnInsert" mnemonicParsing="false" onAction="#OnInsert" prefHeight="45.0" prefWidth="110.0" style="-fx-border-color: black;" text="추가" textAlignment="CENTER" GridPane.halignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -33,7 +33,7 @@
                   <Insets bottom="10.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#OnDelete" prefHeight="45.0" prefWidth="110.0" text="삭제" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+            <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#OnDelete" prefHeight="45.0" prefWidth="110.0" style="-fx-border-color: black;" text="삭제" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -47,7 +47,7 @@
                   <Insets bottom="10.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btnSelect" mnemonicParsing="false" onAction="#OnSelect" prefHeight="45.0" prefWidth="110.0" text="선택 완료" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+            <Button fx:id="btnSelect" mnemonicParsing="false" onAction="#OnSelect" prefHeight="45.0" prefWidth="110.0" style="-fx-border-color: black;" text="선택 완료" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -61,7 +61,7 @@
                   <Insets bottom="10.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#OnCancel" prefHeight="45.0" prefWidth="110.0" text="종료" GridPane.columnIndex="3" GridPane.halignment="CENTER">
+            <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#OnCancel" prefHeight="45.0" prefWidth="110.0" style="-fx-border-color: black;" text="종료" GridPane.columnIndex="3" GridPane.halignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
