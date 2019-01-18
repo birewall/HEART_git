@@ -8,7 +8,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CAnalysisMainTab">
    <children>
       <Button fx:id="analysisMainTabExit" mnemonicParsing="false" onAction="#analysisExit" prefHeight="50.0" prefWidth="120.0" style="-fx-border-color: black;" text="종료" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
          <font>
