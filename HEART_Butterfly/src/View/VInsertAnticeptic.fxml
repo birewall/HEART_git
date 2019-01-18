@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -19,15 +20,21 @@
           <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveAnticepticDate" prefHeight="50.0" prefWidth="100.0" text="저장" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveAnticepticDate" prefHeight="50.0" prefWidth="100.0" style="-fx-border-color: blue;" text="저장" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
-            <Button fx:id="btnExitAnticeptic" mnemonicParsing="false" onAction="#exitAnticeptic" prefHeight="50.0" prefWidth="100.0" text="종료" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button fx:id="btnExitAnticeptic" mnemonicParsing="false" onAction="#exitAnticeptic" prefHeight="50.0" prefWidth="100.0" style="-fx-border-color: black;" text="종료" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </GridPane>
