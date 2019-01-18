@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -9,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CInsertWatch">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CInsertWatch">
    <children>
       <Text layoutX="33.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="관찰 날짜" />
       <Text layoutX="33.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="시간대" />
@@ -46,27 +50,14 @@
       <TextField fx:id="txtInsertWatchLong" layoutX="277.0" layoutY="298.0" onAction="#longInsertWatch" prefHeight="29.0" prefWidth="124.0" promptText="127.227921" />
       <TextField fx:id="txtInsertWatchLocname" layoutX="148.0" layoutY="333.0" onAction="#locnameInsertWatch" prefHeight="29.0" prefWidth="124.0" promptText="주금산" />
       <Text layoutX="62.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="통상명" />
-      <RadioButton fx:id="radioInsertWatchsec1" layoutX="75.0" layoutY="380.0" mnemonicParsing="false" onAction="#sec1InsertWatch" text="1">
-         <toggleGroup>
-            <ToggleGroup fx:id="sectionToggle" />
-         </toggleGroup>
-      </RadioButton>
-      <Text layoutX="33.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="구간" />
-      <RadioButton fx:id="radioInsertWatchsec2" layoutX="120.0" layoutY="381.0" mnemonicParsing="false" onAction="#sec2InsertWatch" text="2" toggleGroup="$sectionToggle" />
-      <RadioButton fx:id="radioInsertWatchsec3" layoutX="165.0" layoutY="381.0" mnemonicParsing="false" onAction="#sec3InsertWatch" text="3" toggleGroup="$sectionToggle" />
-      <RadioButton fx:id="radioInsertWatchsec4" layoutX="201.0" layoutY="381.0" mnemonicParsing="false" onAction="#sec4InsertWatch" text="4" toggleGroup="$sectionToggle" />
-      <RadioButton fx:id="radioInsertWatchsec5" layoutX="239.0" layoutY="381.0" mnemonicParsing="false" onAction="#sec5InsertWatch" text="5" toggleGroup="$sectionToggle" />
-      <RadioButton fx:id="radioInsertWatchsec10" layoutX="446.0" layoutY="381.0" mnemonicParsing="false" onAction="#sec10InsertWatch" text="10" toggleGroup="$sectionToggle" />
-      <RadioButton fx:id="radioInsertWatchsec9" layoutX="408.0" layoutY="381.0" mnemonicParsing="false" onAction="#sec9InsertWatch" text="9" toggleGroup="$sectionToggle" />
-      <RadioButton fx:id="radioInsertWatchsec8" layoutX="372.0" layoutY="381.0" mnemonicParsing="false" onAction="#sec8InsertWatch" text="8" toggleGroup="$sectionToggle" />
-      <RadioButton fx:id="radioInsertWatchsec7" layoutX="327.0" layoutY="381.0" mnemonicParsing="false" onAction="#sec7InsertWatch" text="7" toggleGroup="$sectionToggle" />
-      <RadioButton fx:id="radioInsertWatchsec6" layoutX="282.0" layoutY="380.0" mnemonicParsing="false" onAction="#sec6InsertWatch" text="6" toggleGroup="$sectionToggle" />
-      <Text layoutX="33.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="구간 비고" />
-      <TextField fx:id="txtInsertWatchSecremark" layoutX="109.0" layoutY="410.0" onAction="#secremarkInsertWatch" prefHeight="29.0" prefWidth="379.0" promptText="관찰 구간 기준을 입력해주세요." />
       <Text layoutX="284.0" layoutY="648.0" strokeType="OUTSIDE" strokeWidth="0.0" text="관찰 개체 수" />
       <TextField fx:id="txtInsertWatchQuan" layoutX="382.0" layoutY="623.0" onAction="#quanInsertWatch" prefHeight="39.0" prefWidth="84.0" />
       <Text layoutX="476.0" layoutY="647.0" strokeType="OUTSIDE" strokeWidth="0.0" text="마리" />
       <Button fx:id="btnInsertWatchCorrect" layoutX="410.0" layoutY="742.0" mnemonicParsing="false" onAction="#correctInsertWatch" text="수정" />
       <Button fx:id="btnInsertWatchImportCollectionInfo" layoutX="444.0" layoutY="69.0" mnemonicParsing="false" onAction="#OnImportCollectionInfo" prefHeight="23.0" prefWidth="124.0" text="관찰정보 불러오기" />
+      <Label layoutX="378.0" layoutY="397.0" text="/" />
+      <Label fx:id="lblMaxSection_watch" layoutX="415.0" layoutY="397.0" text="최대구간" />
+      <Label fx:id="lblSection_watch" layoutX="301.0" layoutY="397.0" text="선택구간" />
+      <Button fx:id="btnInsertSection_watch" layoutX="106.0" layoutY="392.0" mnemonicParsing="false" onAction="#searchLocInsertSection_watch" prefHeight="29.0" prefWidth="162.0" text="구간 정보 입력" />
    </children>
 </Pane>

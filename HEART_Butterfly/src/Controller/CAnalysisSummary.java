@@ -4,21 +4,26 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Optional;
 
 import Model.MDBButterflyGuide;
+import Model.MDBImage;
 import Model.MDBLocation;
 import Model.MDBPerson;
 import Model.MDBSpecimen;
-
+import Model.MDBSpecimenize;
 import Model.MSharedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -72,6 +77,11 @@ public class CAnalysisSummary extends AbsMetaController {
 
     @FXML
     private Button btnSearch;
+    
+    String Nation;
+    String Family;
+    String Period_Start;
+    String Period_End;
 
     @FXML
     void OnCheckFamily(ActionEvent event) throws SQLException {
@@ -136,25 +146,28 @@ public class CAnalysisSummary extends AbsMetaController {
 
     @FXML
     void OnClear(ActionEvent event) {
+    	checkNation.setSelected(false);
+    	checkFamaily.setSelected(false);
+    	CheckBPeriod.setSelected(false);
+    	this.PeriodStart.setDisable(true);
+    	this.PeriodEnd.setDisable(true);
+    	this.comboNation.setDisable(true);
+    	this.CombFamily.setDisable(true);
     	
-
+    	
+    
     }
 
     @FXML
     void OnCombFamily(ActionEvent event) {
-    	if(this.CheckBPeriod.isSelected()) {
-    		this.PeriodStart.setDisable(false);
-    		this.PeriodEnd.setDisable(false);
-    	}
-    	else {    		
-    		this.PeriodStart.setDisable(true);
-    		this.PeriodEnd.setDisable(true);
-    	}
+    	Family = CombFamily.getSelectionModel().getSelectedItem();
 
     }
 
     @FXML
     void OnCombNation(ActionEvent event) {
+    	Nation = comboNation.getSelectionModel().getSelectedItem();
+
 
     }
 
@@ -174,6 +187,7 @@ public class CAnalysisSummary extends AbsMetaController {
     	else {    		
     		this.PeriodStart.setDisable(true);
     		this.PeriodEnd.setDisable(true);
+    		
     	}
 
 
@@ -181,16 +195,38 @@ public class CAnalysisSummary extends AbsMetaController {
 
     @FXML
     void OnSearch(ActionEvent event) {
+    	Alert confirm_popup = new Alert(AlertType.CONFIRMATION);
+		confirm_popup.setTitle("검색조건을 확인하세요");
+		confirm_popup.setHeaderText(null);
+		confirm_popup.setContentText(Period_Start + " ~ " + Period_End + ", " + Nation + ", " + Family);
+		
+		Optional<ButtonType> result = confirm_popup.showAndWait();
+		
+		if(result.get() == ButtonType.CANCEL) {
+			return;
+		}
+		
+		MDBImage db_image = new MDBImage(((MSharedData)this.shared_model).getDB().getConnection());
+		
+        ResultSet rs = db_image.selectQuery("SELECT idImage FROM Butterfly.Image where date = '2018-10-10'");
+
+    	
+    	
 
     }
 
     @FXML
     void calenderPeriodEnd(ActionEvent event) {
+    	Period_End = PeriodEnd.getEditor().getText().replaceAll(". ","-");
+
 
     }
 
     @FXML
     void calenderPeriodStart(ActionEvent event) {
+    	Period_Start = PeriodStart.getEditor().getText().replaceAll(". ","-");
+
+
 
     }
 

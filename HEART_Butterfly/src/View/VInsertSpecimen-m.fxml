@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CInsertSpecimen">
+   <bottom>
+      <GridPane BorderPane.alignment="CENTER">
+         <children>
+            <GridPane GridPane.rowIndex="1">
+               <children>
+                  <Button fx:id="btnInsertSpecimenAdd" mnemonicParsing="false" onAction="#addInsertSpecimen" prefWidth="150.0" style="-fx-border-color: black;" text="추가" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button fx:id="btnInsertSpecimenCorrect" mnemonicParsing="false" onAction="#correctInsertSpecimen" prefWidth="150.0" style="-fx-border-color: black;" text="수정" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button fx:id="btnInsertSpecimenExit" mnemonicParsing="false" onAction="#exitInsertSpecimen" prefWidth="150.0" style="-fx-border-color: black;" text="이전" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <Button fx:id="btnInsertSpecimenLabel" mnemonicParsing="false" onAction="#labelInsertSpecimen" prefHeight="29.0" prefWidth="179.0" style="-fx-border-color: blue;" text="레이블 정보 복사하기" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="8.0" prefHeight="38.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+   </bottom>
+   <center>
+      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+         <items>
+            <GridPane>
+               <children>
+                  <Label text="수집 방식" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label text="수집일" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Label text="국가" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Label text="수집 장소" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Label text="상세 주소" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                  <Label text="GPS" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="65.0" text="통상명" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                  <Label text="제공자" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                  <ComboBox fx:id="comboInsertSpecimenCollectway" onAction="#collectwayInsertSpecimen" prefHeight="29.0" prefWidth="200.0" promptText="직접 채집" GridPane.columnIndex="1" />
+                  <DatePicker fx:id="dateInsertSpecimenCollectdate" onAction="#collectdateInsertSpecimen" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtInsertSpecimenNation" alignment="CENTER" onAction="#nationInsertSpecimen" prefHeight="29.0" prefWidth="200.0" promptText="대한민국" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin></TextField>
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <TextField fx:id="txtInsertSpecimenCollectoc" alignment="CENTER" onAction="#collectlocInsertSpecimen" prefWidth="200.0" promptText="음현리" />
+                        <Button fx:id="btnInsertSpecimenSearchcollectloc" mnemonicParsing="false" onAction="#searchcollectlocInsertSpecimen" prefWidth="120.0" style="-fx-border-color: blue;" text="검색" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <TextField fx:id="txtInsertSpecimenDo" alignment="CENTER" onAction="#doInsertSpecimen" prefHeight="29.0" prefWidth="75.0" promptText="경기도">
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin></TextField>
+                        <TextField fx:id="txtInsertSpecimenSi" alignment="CENTER" onAction="#siInsertSpecimen" prefHeight="29.0" prefWidth="75.0" promptText="포천시" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin></TextField>
+                        <TextField fx:id="txtInsertSpecimenDong" alignment="CENTER" onAction="#dongInsertSpecimen" prefHeight="29.0" prefWidth="75.0" promptText="내촌면" GridPane.columnIndex="2">
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin></TextField>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <children>
+                        <TextField fx:id="txtInsertSpecimenLat" editable="false" onAction="#latInsertSpecimen" prefHeight="29.0" prefWidth="100.0" promptText="37.772351">
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin></TextField>
+                        <TextField fx:id="txtInsertSpecimenLong" editable="false" onAction="#longInsertSpecimen" prefHeight="29.0" prefWidth="100.0" promptText="127.227921" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin></TextField>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <TextField fx:id="txtInsertSpecimenLocname" onAction="#locnameInsertSpecimen" prefHeight="29.0" prefWidth="100.0" promptText="주금산" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin></TextField>
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <children>
+                        <ComboBox fx:id="comboInsertSpecimenCollectwho" onAction="#collectwhoInsertSpecimen" prefHeight="29.0" prefWidth="200.0" promptText="조윤호" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button fx:id="btnInsertSpecimenGiverManagement" mnemonicParsing="false" onAction="#OnGiverManagement" prefHeight="29.0" prefWidth="120.0" style="-fx-border-color: blue;" text="관리" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="448.0" minWidth="10.0" prefWidth="399.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane>
+               <children>
+                  <GridPane GridPane.columnIndex="1">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="이름" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="과" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="학명" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <TextField fx:id="txtInsertSpecimenBname" onAction="#bnameInsertSpecimen" promptText="배추흰나비" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" right="20.0" top="5.0" />
+                           </GridPane.margin></TextField>
+                        <TextField fx:id="txtInsertSpecimenFamily" onAction="#familyInsertSpecimen" promptText="흰나비과" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" right="20.0" top="5.0" />
+                           </GridPane.margin></TextField>
+                        <TextField fx:id="txtInsertSpecimenZoological" onAction="#zoologicalInsertSpecimen" promptText="Pieris(Artogeia) rapae" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" right="20.0" top="5.0" />
+                           </GridPane.margin></TextField>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="작업 날짜" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="상태" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="보관 정보" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="보관 장소" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="캐비닛 번호" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="상자 번호" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="comboInsertSpecimenLoc2" onAction="#loc2InsertSpecimen" prefHeight="29.0" prefWidth="124.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="comboInsertSpecimenLoc3" onAction="#loc3InsertSpecimen" prefHeight="29.0" prefWidth="124.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="comboInsertSpecimenLoc1" onAction="#loc1InsertSpecimen" prefHeight="29.0" prefWidth="124.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <RadioButton fx:id="rdoPreviousStorage" mnemonicParsing="false" onAction="#OnPreviousStorage" text="기존" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="StorageSelection" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rdoNewStorage" mnemonicParsing="false" onAction="#OnNewStorage" text="신규" toggleGroup="$StorageSelection" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <TextField fx:id="txtInsertLoc1" prefWidth="120.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin></TextField>
+                        <TextField fx:id="txtInsertLoc2" prefWidth="120.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin></TextField>
+                        <TextField fx:id="txtInsertLoc3" prefWidth="120.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin></TextField>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="작업자" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                  <DatePicker fx:id="dateInsertSpecimenDate" onAction="#dateInsertSpecimen" promptText="(defalut=today)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <ComboBox fx:id="comboInsertSpecimenWho" onAction="#whoInsertSpecimen" prefHeight="29.0" prefWidth="203.0" promptText="조윤호" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button fx:id="btnInsertSpecimenWorkerManagement" mnemonicParsing="false" onAction="#OnWorkerManagement" prefHeight="29.0" prefWidth="120.0" style="-fx-border-color: blue;" text="관리" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="나비 정보" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ComboBox fx:id="comboInsertSpecimenStatus" onAction="#statusInsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="상" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="comboInsertSpecimenSex" onAction="#sexInsertSpecimen" prefHeight="29.0" prefWidth="124.0" promptText="암" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="성별" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                     </children>
+                  </GridPane>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="399.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </items>
+      </SplitPane>
+   </center>
+   <top>
+      <GridPane BorderPane.alignment="CENTER">
+         <children>
+            <GridPane GridPane.rowIndex="2">
+               <children>
+                  <Button fx:id="btnInsertSpecimenImportCollectionInfo" mnemonicParsing="false" onAction="#OnImportCollectionInfo" style="-fx-border-color: blue;" text="관찰 정보 입력" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button fx:id="btnInsertSpecimenImportSpecimen" mnemonicParsing="false" onAction="#OnImportSpecimen" style="-fx-border-color: blue;" text="표본 정보 입력" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <Label text="표본정보입력창" textFill="BLUE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+   </top>
+</BorderPane>

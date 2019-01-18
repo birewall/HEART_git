@@ -225,7 +225,8 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     	String file_type = comboInsertPictureFtype.getSelectionModel().getSelectedItem();
     	String matching = cboxInsertPictureMatching.isSelected()?"y":"n";
     	String note = txtInsertPictureRemark.getText();
-
+    	String section = lblSection.getText() + " / " + lblMaxSection.getText();
+    	
     	/* DB Instance initialization */
         MDBButterflyGuide db_butterfly_guide = new MDBButterflyGuide(((MSharedData)this.shared_model).getDB().getConnection());
         MDBPerson db_person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
@@ -240,6 +241,8 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
         db_location.setLocationDetail(location_detail);
         db_location.setGps(gps);
         db_location.setAlias(alias);
+        db_location.setSection(section);
+
 
         //db_location.printContents();
         int id_location = db_location.getIdLocationFromDB();
@@ -428,6 +431,11 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 
     @FXML
     void searchLocInsertSection(ActionEvent event) throws IOException {
+        /* Make Passing Data */
+        MPassingData parent_info = new MPassingData(1);
+        parent_info.setData("CInsertPicture",0);
+        ((MSharedData)(this.shared_model)).add(parent_info, "parent_name");
+
         spawnChildWindow(this.btnInsertPictureExit.getScene().getWindow(), "VSectionManagement");
     }
     

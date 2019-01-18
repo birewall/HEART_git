@@ -1,6 +1,9 @@
 package Controller;
 
 import Model.MDBPerson;
+import javafx.stage.WindowEvent;
+import javafx.event.EventHandler;
+
 import Model.MSharedData;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -37,6 +40,7 @@ public class CPersonManager extends AbsMetaController implements Initializable {
     @FXML
     private TextField txtName;
 
+    
     @FXML
     void OnDelete(ActionEvent event) {
         /* Error Handling */
@@ -167,6 +171,10 @@ public class CPersonManager extends AbsMetaController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+    	
+    	
+    	
+    	
         this.lsvName.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -178,7 +186,13 @@ public class CPersonManager extends AbsMetaController implements Initializable {
             }
         });
     }
+    
+    
 
+    
+
+    
+    
     public void init_procedure() {
         db_person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
         ResultSet person_list = db_person.selectQuery("select name from Person");
@@ -191,4 +205,6 @@ public class CPersonManager extends AbsMetaController implements Initializable {
             e.printStackTrace();
         }
     }
+    
+    
 }
