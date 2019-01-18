@@ -130,12 +130,8 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     
     @FXML
     void searchLocInsertSection_watch(ActionEvent event) throws IOException {
-        /* Make Passing Data */
-        MPassingData parent_info = new MPassingData(1);
-        parent_info.setData("CInsertWatch",0);
-        ((MSharedData)(this.shared_model)).add(parent_info, "parent_name");
-
     	spawnChildWindow(this.btnInsertSection_watch.getScene().getWindow(), "VSectionManagement");
+    	
     }
     
     @FXML
@@ -145,6 +141,9 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
     @FXML
     void addInsertWatch(ActionEvent event) {
+    	
+    	
+    	
         /* Data Acquisition */
     	String date = MDateConvertor.convert2DBFormat(dateInsertWatchDate.getEditor().getText());
     	String time = comboInsertWatchTime.getSelectionModel().getSelectedItem();
@@ -173,6 +172,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     	if(quantity.length() == 0) quantity = "0";
     	String note = txtInsertWatchRemark.getText();
 
+    	
     	/* DB Instance initialization */
         MDBButterflyGuide db_butterfly_guide = new MDBButterflyGuide(((MSharedData)this.shared_model).getDB().getConnection());
         MDBPerson db_person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
