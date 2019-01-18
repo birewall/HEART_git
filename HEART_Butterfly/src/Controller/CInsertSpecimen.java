@@ -503,8 +503,8 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     }
 
     @FXML
-    void searchcollectlocInsertSpecimen(ActionEvent event) {
-
+    void searchcollectlocInsertSpecimen(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertSpecimenAdd.getScene().getWindow(), "VAddressBook");
     }
 
     @FXML

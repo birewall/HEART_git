@@ -392,7 +392,7 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 
     @FXML
     void locnameInsertPicture(ActionEvent event) {
-    	
+
     }
 
     @FXML
@@ -441,7 +441,8 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
     
     @FXML
     void searchLocInsertPicture(ActionEvent event) throws IOException {
-        spawnChildWindow(this.btnInsertPictureExit.getScene().getWindow(), "VLocSearchManagement");
+        //spawnChildWindow(this.btnInsertPictureExit.getScene().getWindow(), "VLocSearchManagement");
+        spawnChildWindow(this.btnInsertPictureExit.getScene().getWindow(), "VAddressBook");
     }
 
     @FXML

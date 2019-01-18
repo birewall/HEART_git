@@ -311,7 +311,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
     @FXML
     void locnameInsertWatch(ActionEvent event) {
-    	
+
     }
 
     @FXML
@@ -330,8 +330,8 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     }
 
     @FXML
-    void searchLocInsertWatch(ActionEvent event) {
-
+    void searchLocInsertWatch(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertSection_watch.getScene().getWindow(), "VAddressBook");
     }
 
     @FXML
