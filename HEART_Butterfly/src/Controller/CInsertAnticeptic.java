@@ -22,7 +22,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.fxml.Initializable;
 
-public class CInsertAnticeptic extends AbsMetaController implements Initializable {
+public class CInsertAnticeptic extends AbsInsertController implements Initializable {
 	
     MDBSpecimen db_specimen=null;
     MDBSpecimenize db_specimenize=null;

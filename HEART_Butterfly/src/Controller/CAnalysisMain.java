@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -69,7 +70,11 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
 
     @FXML
     void OnLocationAnalysis(ActionEvent event) {
-
+        Alert msgBox = new Alert(Alert.AlertType.ERROR);
+        msgBox.setTitle("지역 통계");
+        msgBox.setHeaderText(null);
+        msgBox.setContentText("미구현");
+        msgBox.showAndWait();
     }
 
     @FXML
@@ -79,7 +84,11 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
 
     @FXML
     void OnSpecimenAnalysis(ActionEvent event) {
-
+        Alert msgBox = new Alert(Alert.AlertType.ERROR);
+        msgBox.setTitle("표본 통계");
+        msgBox.setHeaderText(null);
+        msgBox.setContentText("미구현");
+        msgBox.showAndWait();
     }
 
     @Override

@@ -154,6 +154,7 @@ public class MDBLocation extends MDatabase {
         return modifyingQuery(query);
     }
 
+    /* Return Zero if not exist */
     public int getIdLocationFromDB() {
         String query = "select idLocation from Location where "
                 + db_where_formatting(db_string_formatting(getCountry(), "String"), "country") + " and "

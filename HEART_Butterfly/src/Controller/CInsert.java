@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class CInsert extends AbsMetaController {
+public class CInsert extends AbsInsertController {
 
     @FXML
     private Button btnInsertWatch;
