@@ -17,6 +17,7 @@ import javafx.stage.WindowEvent;
 
 public abstract class AbsMetaController {
 	AbsMetaController parent_controller = null;
+	String parent_controller_name = null;
 	AbsMetaModel shared_model = null;
 	Stage nowStage;
 
@@ -44,7 +45,15 @@ public abstract class AbsMetaController {
 		return this.shared_model;
 	}
 
-	public void changeWindow(Window nowWindow, String viewName) throws IOException {
+    public String getParent_controller_name() {
+        return parent_controller_name;
+    }
+
+    public void setParent_controller_name(String parent_controller_name) {
+        this.parent_controller_name = parent_controller_name;
+    }
+
+    public void changeWindow(Window nowWindow, String viewName) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
     	Parent root = loader.load(getClass().getResource("/View/" + viewName + ".fxml").openStream());
         AbsMetaController controller = (AbsMetaController)loader.getController();

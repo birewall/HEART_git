@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleGroup;
 
-public class CInsertSpecimen extends AbsMetaController implements Initializable {
+public class CInsertSpecimen extends AbsInsertController implements Initializable {
 	
     MDBSpecimen db_specimen=null;
     MDBSpecimenize db_specimenize=null;
@@ -581,7 +581,7 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     	
     	this.comboInsertSpecimenLoc1.getItems().add("전체선택");
 
-    	String queryRoom = "select distinct storageRoom from Specimen";
+    	String queryRoom = "se)lect distinct storageRoom from Specimen";
 		ResultSet rsRoom = db_specimen.selectQuery(queryRoom);
 		
 		try {
@@ -616,5 +616,20 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     	
 
         view_update();
-    }  
+    }
+
+    @Override
+    public void passing_address(String location, String locationDetail, String section, String alias) {
+        String[] sectionSplit = section.split(" ");
+        this.txtInsertSpecimenCollectoc.setText(location);
+        this.txtInsertSpecimenDo.setText(locationDetail);
+        if(sectionSplit.length == 1) {
+            this.txtInsertSpecimenSi.setText(section);
+            this.txtInsertSpecimenDong.setText(null);
+        }else{
+            this.txtInsertSpecimenSi.setText(sectionSplit[0]);
+            this.txtInsertSpecimenDong.setText(sectionSplit[1]);
+        }
+        this.txtInsertSpecimenLocname.setText(alias);
+    }
 }

@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CInsertSpecimen">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CInsertSpecimen">
    <bottom>
       <GridPane BorderPane.alignment="CENTER">
          <children>
@@ -76,7 +80,7 @@
                      </GridPane.margin></TextField>
                   <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <TextField fx:id="txtInsertSpecimenCollectoc" alignment="CENTER" onAction="#collectlocInsertSpecimen" prefWidth="200.0" promptText="음현리" />
+                        <TextField fx:id="txtInsertSpecimenCollectoc" alignment="CENTER" onAction="#collectlocInsertSpecimen" prefWidth="200.0" promptText="강원" />
                         <Button fx:id="btnInsertSpecimenSearchcollectloc" mnemonicParsing="false" onAction="#searchcollectlocInsertSpecimen" prefWidth="120.0" style="-fx-border-color: blue;" text="검색" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets />
@@ -96,15 +100,15 @@
                   </GridPane>
                   <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
-                        <TextField fx:id="txtInsertSpecimenDo" alignment="CENTER" onAction="#doInsertSpecimen" prefHeight="29.0" prefWidth="75.0" promptText="경기도">
+                        <TextField fx:id="txtInsertSpecimenDo" alignment="CENTER" onAction="#doInsertSpecimen" prefHeight="29.0" prefWidth="75.0" promptText="춘천시">
                            <GridPane.margin>
                               <Insets right="20.0" />
                            </GridPane.margin></TextField>
-                        <TextField fx:id="txtInsertSpecimenSi" alignment="CENTER" onAction="#siInsertSpecimen" prefHeight="29.0" prefWidth="75.0" promptText="포천시" GridPane.columnIndex="1">
+                        <TextField fx:id="txtInsertSpecimenSi" alignment="CENTER" onAction="#siInsertSpecimen" prefHeight="29.0" prefWidth="75.0" promptText="서면" GridPane.columnIndex="1">
                            <GridPane.margin>
                               <Insets right="20.0" />
                            </GridPane.margin></TextField>
-                        <TextField fx:id="txtInsertSpecimenDong" alignment="CENTER" onAction="#dongInsertSpecimen" prefHeight="29.0" prefWidth="75.0" promptText="내촌면" GridPane.columnIndex="2">
+                        <TextField fx:id="txtInsertSpecimenDong" alignment="CENTER" onAction="#dongInsertSpecimen" prefHeight="29.0" prefWidth="75.0" promptText="덕두원리" GridPane.columnIndex="2">
                            <GridPane.margin>
                               <Insets right="20.0" />
                            </GridPane.margin></TextField>
@@ -137,7 +141,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <TextField fx:id="txtInsertSpecimenLocname" onAction="#locnameInsertSpecimen" prefHeight="29.0" prefWidth="100.0" promptText="주금산" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                  <TextField fx:id="txtInsertSpecimenLocname" onAction="#locnameInsertSpecimen" prefHeight="29.0" prefWidth="100.0" promptText="삼악산" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin></TextField>

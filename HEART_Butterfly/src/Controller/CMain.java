@@ -83,6 +83,9 @@ public class CMain extends AbsMetaController{
     
     @Override
     public void init_procedure() {
+        if(this.shared_model != null) return;
+
+        /* If not initialized */
     	MSharedData data = new MSharedData();
     	try {
 			if(data.getDB().connect("Butterfly")) {

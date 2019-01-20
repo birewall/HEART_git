@@ -19,7 +19,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
-public class CInsertPicture extends AbsMetaController implements Initializable {
+public class CInsertPicture extends AbsInsertController implements Initializable {
 
 	MDBPerson PersonDB;
 	String filepath;
@@ -548,5 +548,20 @@ public class CInsertPicture extends AbsMetaController implements Initializable {
 	@Override
 	public void init_procedure() {
 		view_update();
+    }
+
+    @Override
+    public void passing_address(String location, String locationDetail, String section, String alias) {
+        String[] sectionSplit = section.split(" ");
+        this.txtInsertPictureLoc.setText(location);
+        this.txtInsertPictureDo.setText(locationDetail);
+        if(sectionSplit.length == 1) {
+            this.txtInsertPictureSi.setText(section);
+            this.txtInsertPictureDong.setText(null);
+        }else{
+            this.txtInsertPictureSi.setText(sectionSplit[0]);
+            this.txtInsertPictureDong.setText(sectionSplit[1]);
+        }
+        this.txtInsertPictureLocname.setText(alias);
     }
 }
