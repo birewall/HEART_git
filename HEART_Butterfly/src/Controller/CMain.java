@@ -36,7 +36,7 @@ public class CMain extends AbsMetaController{
     private Text txtMain;
 
     @FXML
-    private Button btnMainPicture;
+    private Button btnInquiry;
 
     @FXML
     private Text txtMain1;
@@ -72,13 +72,13 @@ public class CMain extends AbsMetaController{
     }
 
     @FXML
-    void mainPicture(ActionEvent event) throws IOException {
-    	changeWindow(this.btnMainExit.getScene().getWindow(), "VCreatePictureFolder");
+    void OnSpecimenMove(ActionEvent event) throws IOException {
+    	changeWindow(this.btnMainExit.getScene().getWindow(), "VSpecimenMove");
     }
 
     @FXML
-    void specimenmoveMainSpecimen(ActionEvent event) throws IOException {
-    	changeWindow(this.btnMainExit.getScene().getWindow(), "VSpecimenMove");
+    void OnInquiry(ActionEvent event) throws IOException {
+    	changeWindow(this.btnMainExit.getScene().getWindow(), "VInquiry");
     }
     
     @Override
