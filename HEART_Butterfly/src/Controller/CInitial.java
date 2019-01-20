@@ -15,8 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class CInitial extends AbsMetaController {
-
-    @FXML
+	@FXML
     private TextField textLoginID;
 
     @FXML
@@ -64,3 +63,4 @@ public class CInitial extends AbsMetaController {
     	this.txtLoginPW.setText(password);
     }
 }
+
