@@ -2,6 +2,7 @@ package Controller;
 
 import java.io.IOException;
 
+import Model.MSharedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,4 +52,9 @@ public class CInsert extends AbsInsertController {
     void insertWatch(ActionEvent event) throws IOException {
     	changeWindow(this.btnInsertExit.getScene().getWindow(), "VInsertWatch");
     }
+
+    @Override
+    public void init_procedure() {
+
+    };
 }

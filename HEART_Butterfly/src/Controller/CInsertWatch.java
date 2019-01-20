@@ -482,7 +482,6 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
 	
 	@Override
 	public void init_procedure() {
-
 		// Set Watcher
 		String query = "select name from Person";
 		System.out.println(this.shared_model);

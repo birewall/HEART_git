@@ -581,7 +581,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	
     	this.comboInsertSpecimenLoc1.getItems().add("전체선택");
 
-    	String queryRoom = "select distinct storageRoom from Specimen";
+    	String queryRoom = "se)lect distinct storageRoom from Specimen";
 		ResultSet rsRoom = db_specimen.selectQuery(queryRoom);
 		
 		try {
