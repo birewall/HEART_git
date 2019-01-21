@@ -142,9 +142,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     @FXML
     void addInsertWatch(ActionEvent event) {
     	
-    	
-    	
-        /* Data Acquisition */
+    	/* Data Acquisition */
     	String date = MDateConvertor.convert2DBFormat(dateInsertWatchDate.getEditor().getText());
     	String time = comboInsertWatchTime.getSelectionModel().getSelectedItem();
     	String country = txtInsertWatchNation.getText();
