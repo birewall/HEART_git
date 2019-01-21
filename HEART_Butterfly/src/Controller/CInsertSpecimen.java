@@ -14,11 +14,38 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.ToggleGroup;
 
-public class CInsertSpecimen extends AbsMetaController implements Initializable {
+public class CInsertSpecimen extends AbsInsertController implements Initializable {
 	
+    MDBSpecimen db_specimen=null;
+    MDBSpecimenize db_specimenize=null;
+    
+    String PlaceName;
+    String CabinetName;
+    String BoxName;
+    
+
+    @FXML
+    private ToggleGroup StorageSelection;
+
+    @FXML
+    private RadioButton rdoNewStorage;
+    
+    @FXML
+    private RadioButton rdoPreviousStorage;
+
+    @FXML
+    private TextField txtInsertLoc1;
+
+    @FXML
+    private TextField txtInsertLoc2;
+
+    @FXML
+    private TextField txtInsertLoc3;
     
     @FXML
     private Button btnInsertSpecimenSearchcollectloc;
@@ -109,8 +136,33 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     
     @FXML
     private ComboBox<String> comboInsertSpecimenCollectway;
-
     
+
+    @FXML
+    void OnPreviousStorage(ActionEvent event) {
+    	if(this.rdoPreviousStorage.isSelected()) {
+    		this.txtInsertLoc1.setDisable(true);
+    		this.txtInsertLoc2.setDisable(true);
+    		this.txtInsertLoc3.setDisable(true);
+    		this.comboInsertSpecimenLoc1.setDisable(false);
+    		this.comboInsertSpecimenLoc2.setDisable(false);
+    		this.comboInsertSpecimenLoc3.setDisable(false);
+
+    	}
+    }
+
+    @FXML
+    void OnNewStorage(ActionEvent event) {
+    	if(this.rdoNewStorage.isSelected()) {
+    		this.comboInsertSpecimenLoc1.setDisable(true);
+    		this.comboInsertSpecimenLoc2.setDisable(true);
+    		this.comboInsertSpecimenLoc3.setDisable(true);
+    		this.txtInsertLoc1.setDisable(false);
+    		this.txtInsertLoc2.setDisable(false);
+    		this.txtInsertLoc3.setDisable(false);
+    	}
+    }
+
 	@FXML
     void addInsertSpecimen(ActionEvent event) {
     	/* DB Instance initialization */
@@ -142,9 +194,12 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     	String Specimen_date = MDateConvertor.convert2DBFormat(dateInsertSpecimenDate.getEditor().getText());
     	String status = comboInsertSpecimenStatus.getSelectionModel().getSelectedItem();
     	String sex = comboInsertSpecimenSex.getSelectionModel().getSelectedItem();
-    	String Loc1 = comboInsertSpecimenLoc1.getSelectionModel().getSelectedItem();
-    	String Loc2 = comboInsertSpecimenLoc2.getSelectionModel().getSelectedItem();
-    	String Loc3 = comboInsertSpecimenLoc3.getSelectionModel().getSelectedItem();
+    	String PreviousLoc1 = comboInsertSpecimenLoc1.getSelectionModel().getSelectedItem();
+    	String PreviousLoc2 = comboInsertSpecimenLoc2.getSelectionModel().getSelectedItem();
+    	String PreviousLoc3 = comboInsertSpecimenLoc3.getSelectionModel().getSelectedItem();
+    	String NewLoc1 = txtInsertLoc1.getText();
+    	String NewLoc2 = txtInsertLoc2.getText();
+    	String NewLoc3 = txtInsertLoc3.getText();
     	String SpecimenWho = comboInsertSpecimenWho.getSelectionModel().getSelectedItem();
 
 
@@ -221,7 +276,15 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
         //db_specimen
         db_specimen.setStatus(status);
         db_specimen.setSex(sex);
-        db_specimen.setStorageRoom(Loc1);
+        if(this.rdoPreviousStorage.isSelected()) {
+            db_specimen.setStorageRoom(PreviousLoc1);
+            db_specimen.setStorageCabinet(PreviousLoc2);
+            db_specimen.setStorageChest(PreviousLoc3);
+        } else {
+        	db_specimen.setStorageRoom(NewLoc1);
+        	db_specimen.setStorageCabinet(NewLoc2);
+        	db_specimen.setStorageChest(NewLoc3);
+        }
         db_specimen.setIdCollectionInfo(id_collectionInfo);
         db_specimen.setIdImage(0);   // 추후 채워야함
         int id_specimen = db_specimen.getIdSpecimenFromDB();
@@ -356,13 +419,52 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     }
 
     @FXML
-    void loc1InsertSpecimen(ActionEvent event) {
+    void loc1InsertSpecimen(ActionEvent event) throws SQLException {
+     	String queryCabinet = null;
+    	ResultSet rsCabinet = null;
+    	System.out.println("Hi");
+    	int PlaceTotalSelection = this.comboInsertSpecimenLoc1.getSelectionModel().getSelectedIndex();
+    	if(PlaceTotalSelection==0) {
+            queryCabinet = "select distinct storageCabinet from Specimen";
+    		rsCabinet = db_specimen.selectQuery(queryCabinet);
+    	}else {
+            queryCabinet = "select distinct storageCabinet from Specimen where storageRoom='" + this.comboInsertSpecimenLoc1.getSelectionModel().getSelectedItem() + "'";
+    		rsCabinet = db_specimen.selectQuery(queryCabinet);
+    	}
+    	
+		this.comboInsertSpecimenLoc2.getItems().clear();
+    	this.comboInsertSpecimenLoc2.getItems().add("전체선택");
+		
+			while(rsCabinet.next()) {
+				System.out.println(rsCabinet.getString(1));
+				this.comboInsertSpecimenLoc2.getItems().add(rsCabinet.getString(1));   // get storageCabinet
+			}
 
+    	CabinetName = this.comboInsertSpecimenLoc2.getSelectionModel().getSelectedItem();
     }
 
     @FXML
-    void loc2InsertSpecimen(ActionEvent event) {
-
+    void loc2InsertSpecimen(ActionEvent event) throws SQLException {
+    	String queryBox = null;
+    	ResultSet rsBox =null;
+    	int CabinetTotalSelection = this.comboInsertSpecimenLoc2.getSelectionModel().getSelectedIndex();
+    	if(CabinetTotalSelection==0) {
+            queryBox = "select distinct storageChest from Specimen";
+    		rsBox = db_specimen.selectQuery(queryBox);
+    	} else {
+            queryBox = "select distinct storageChest from Specimen where storageCabinet='" + this.comboInsertSpecimenLoc2.getSelectionModel().getSelectedItem() + "'";
+    		rsBox = db_specimen.selectQuery(queryBox);
+    	}
+		
+		this.comboInsertSpecimenLoc3.getItems().clear();
+    	this.comboInsertSpecimenLoc3.getItems().add("전체선택");
+		
+				while(rsBox.next()) {
+					System.out.println(rsBox.getString(1));
+					this.comboInsertSpecimenLoc3.getItems().add(rsBox.getString(1));
+				}
+		
+    	BoxName = this.comboInsertSpecimenLoc3.getSelectionModel().getSelectedItem();
     }
 
     @FXML
@@ -401,8 +503,8 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     }
 
     @FXML
-    void searchcollectlocInsertSpecimen(ActionEvent event) {
-
+    void searchcollectlocInsertSpecimen(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertSpecimenAdd.getScene().getWindow(), "VAddressBook");
     }
 
     @FXML
@@ -471,108 +573,63 @@ public class CInsertSpecimen extends AbsMetaController implements Initializable 
     @Override
     public void init_procedure() {
 
+    	/* DB Instance initialization */
+    	 db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
+    	 db_specimenize = new MDBSpecimenize(((MSharedData)this.shared_model).getDB().getConnection());
 
-        
-		this.comboInsertSpecimenCollectway.getItems().addAll("직접채집", "구매", "선물");
-		this.comboInsertSpecimenWho.getItems().addAll("작업자를 선택하세요");
-		this.comboInsertSpecimenCollectwho.getItems().addAll("제공자를 선택하세요");
-		this.comboInsertSpecimenStatus.getItems().addAll("상", "중", "하");
-		this.comboInsertSpecimenLoc1.getItems().addAll("집", "사무실", "학교");
-		this.comboInsertSpecimenSex.getItems().addAll("암", "수");
-        this.comboInsertSpecimenCollectway.getSelectionModel().select(0);
-        this.comboInsertSpecimenWho.getSelectionModel().select(0);
-        this.comboInsertSpecimenCollectwho.getSelectionModel().select(0);
-        this.comboInsertSpecimenStatus.getSelectionModel().select(0);
-        this.comboInsertSpecimenLoc1.getSelectionModel().select(0);
-        this.comboInsertSpecimenSex.getSelectionModel().select(0);
-        this.comboInsertSpecimenLoc2.getSelectionModel().select(0);
-        this.comboInsertSpecimenLoc3.getSelectionModel().select(0);
-        
-       /* DB Instance initialization */
-
-        MDBSpecimenize db_specimenize = new MDBSpecimenize(((MSharedData)this.shared_model).getDB().getConnection());
-        MDBSpecimen db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
-	
-	   	 this.comboInsertSpecimenLoc1.getItems().clear();
-	   	
-	   	 this.comboInsertSpecimenLoc1.getItems().add("전체선택");
-	
-	   	 String queryRoom = "select distinct storageRoom from Specimen";
-	   	 ResultSet rsRoom = db_specimen.selectQuery(queryRoom);
-			
-	   	try {
-	   		while(rsRoom.next()) {
-	   			this.comboInsertSpecimenLoc1.getItems().add(rsRoom.getString(1));   // get storageRoom
-			}}
-	   	 catch (SQLException e) {
-	   		 // TODO Auto-generated catch block
-	   		 e.printStackTrace();
-	   	 }
-	   	
-
-    	String queryCabinet = null;
-    	ResultSet rsCabinet = null;
-    	System.out.println("Hi");
-    	int PlaceTotalSelection = this.comboInsertSpecimenLoc1.getSelectionModel().getSelectedIndex();
-    	if(PlaceTotalSelection==0) {
-            queryCabinet = "select distinct storageCabinet from Specimen";
-    		rsCabinet = db_specimen.selectQuery(queryCabinet);
-    	}else {
-            queryCabinet = "select distinct storageCabinet from Specimen where storageRoom='" + this.comboInsertSpecimenLoc1.getSelectionModel().getSelectedItem() + "'";
-    		rsCabinet = db_specimen.selectQuery(queryCabinet);
-    	}
+ 		this.comboInsertSpecimenLoc1.getItems().clear();
     	
-		this.comboInsertSpecimenLoc2.getItems().clear();
-    	this.comboInsertSpecimenLoc2.getItems().add("전체선택");
+    	this.comboInsertSpecimenLoc1.getItems().add("전체선택");
+
+    	String queryRoom = "se)lect distinct storageRoom from Specimen";
+		ResultSet rsRoom = db_specimen.selectQuery(queryRoom);
 		
 		try {
-			while(rsCabinet.next()) {
-				System.out.println(rsCabinet.getString(1));
-				this.comboInsertSpecimenLoc2.getItems().add(rsCabinet.getString(1));   // get storageCabinet
+			while(rsRoom.next()) {
+				this.comboInsertSpecimenLoc1.getItems().add(rsRoom.getString(1));   // get storageRoom
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-    	String CabinetName = this.comboInsertSpecimenLoc2.getSelectionModel().getSelectedItem();
-    	
-    	String queryBox = null;
-    	ResultSet rsBox =null;
-    	int CabinetTotalSelection = this.comboInsertSpecimenLoc1.getSelectionModel().getSelectedIndex();
-    	if(CabinetTotalSelection==0) {
-            queryBox = "select distinct storageChest from Specimen";
-    		rsBox = db_specimen.selectQuery(queryBox);
-    	} else {
-            queryBox = "select distinct storageChest from Specimen where storageCabinet='" + this.comboInsertSpecimenLoc2.getSelectionModel().getSelectedItem() + "'";
-    		rsBox = db_specimen.selectQuery(queryBox);
-    	}
 		
-		this.comboInsertSpecimenLoc3.getItems().clear();
-    	this.comboInsertSpecimenLoc3.getItems().add("전체선택");
-		
-			try {
-				while(rsBox.next()) {
-					System.out.println(rsBox.getString(1));
-					this.comboInsertSpecimenLoc3.getItems().add(rsBox.getString(1));
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-    	String BoxName = this.comboInsertSpecimenLoc3.getSelectionModel().getSelectedItem();
+		this.comboInsertSpecimenCollectway.getItems().addAll("직접채집", "구매", "선물");
+		this.comboInsertSpecimenWho.getItems().addAll("작업자를 선택하세요");
+		this.comboInsertSpecimenCollectwho.getItems().addAll("제공자를 선택하세요");
+		this.comboInsertSpecimenStatus.getItems().addAll("상", "중", "하");
+		this.comboInsertSpecimenSex.getItems().addAll("암", "수");
+        this.comboInsertSpecimenCollectway.getSelectionModel().select(0);
+        this.comboInsertSpecimenWho.getSelectionModel().select(0);
+        this.comboInsertSpecimenCollectwho.getSelectionModel().select(0);
+        this.comboInsertSpecimenStatus.getSelectionModel().select(0);
+        this.comboInsertSpecimenSex.getSelectionModel().select(0);
+		this.txtInsertLoc1.setDisable(true);
+		this.txtInsertLoc2.setDisable(true);
+		this.txtInsertLoc3.setDisable(true);
+		this.comboInsertSpecimenLoc1.setDisable(true);
+		this.comboInsertSpecimenLoc2.setDisable(true);
+		this.comboInsertSpecimenLoc3.setDisable(true);
     }
 
     @FXML
     void boxInsert(ActionEvent event) throws SQLException {
-    	int BoxTotalSelection = this.comboInsertSpecimenLoc1.getSelectionModel().getSelectedIndex();
-    	if(BoxTotalSelection==0) {
-    		
-    	}
     	
-	   	//this.comboInsertSpecimenLoc2.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
-		//this.comboInsertSpecimenLoc3.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+
         view_update();
-    }  
+    }
+
+    @Override
+    public void passing_address(String location, String locationDetail, String section, String alias) {
+        String[] sectionSplit = section.split(" ");
+        this.txtInsertSpecimenCollectoc.setText(location);
+        this.txtInsertSpecimenDo.setText(locationDetail);
+        if(sectionSplit.length == 1) {
+            this.txtInsertSpecimenSi.setText(section);
+            this.txtInsertSpecimenDong.setText(null);
+        }else{
+            this.txtInsertSpecimenSi.setText(sectionSplit[0]);
+            this.txtInsertSpecimenDong.setText(sectionSplit[1]);
+        }
+        this.txtInsertSpecimenLocname.setText(alias);
+    }
 }

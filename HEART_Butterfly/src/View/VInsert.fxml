@@ -1,42 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CInsert">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="283.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CInsert">
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="어떤 정보를 입력하시겠습니까?">
-         <VBox.margin>
-            <Insets bottom="20.0" top="20.0" />
-         </VBox.margin>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="어떤 정보를 입력하시겠습니까?" GridPane.halignment="CENTER">
+         <font>
+            <Font size="17.0" />
+         </font>
       </Text>
-      <Button fx:id="btnInsertWatch" mnemonicParsing="false" onAction="#insertWatch" prefHeight="40.0" prefWidth="120.0" text="관찰 정보">
-         <VBox.margin>
-            <Insets bottom="10.0" top="10.0" />
-         </VBox.margin>
-      </Button>
-      <Button fx:id="btnInsertPicture" mnemonicParsing="false" onAction="#insertPicture" prefHeight="40.0" prefWidth="120.0" text="사진">
-         <VBox.margin>
-            <Insets bottom="10.0" top="10.0" />
-         </VBox.margin>
-      </Button>
-      <Button fx:id="btnInsertSpecimen" mnemonicParsing="false" onAction="#insertSpecimen" prefHeight="40.0" prefWidth="120.0" text="표본">
-         <VBox.margin>
-            <Insets bottom="10.0" top="10.0" />
-         </VBox.margin>
-      </Button>
-      <Button fx:id="btnInsertAnticeptic" mnemonicParsing="false" onAction="#insertAnticeptic" prefHeight="40.0" prefWidth="120.0" text="방부제">
-         <VBox.margin>
-            <Insets bottom="10.0" top="10.0" />
-         </VBox.margin>
-      </Button>
-      <Button fx:id="btnInsertExit" mnemonicParsing="false" onAction="#insertExit" prefHeight="40.0" prefWidth="120.0" text="이전">
-         <VBox.margin>
-            <Insets bottom="10.0" top="50.0" />
-         </VBox.margin>
-      </Button>
+      <Button fx:id="btnInsertWatch" mnemonicParsing="false" onAction="#insertWatch" prefHeight="50.0" prefWidth="170.0" style="-fx-border-color: blue;" text="관찰 정보" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <Button fx:id="btnInsertPicture" mnemonicParsing="false" onAction="#insertPicture" prefHeight="50.0" prefWidth="170.0" style="-fx-border-color: blue;" text="사진" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <Button fx:id="btnInsertSpecimen" mnemonicParsing="false" onAction="#insertSpecimen" prefHeight="50.0" prefWidth="170.0" style="-fx-border-color: blue;" text="표본" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <Button fx:id="btnInsertAnticeptic" mnemonicParsing="false" onAction="#insertAnticeptic" prefHeight="50.0" prefWidth="170.0" style="-fx-border-color: blue;" text="방부제" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <Button fx:id="btnInsertExit" mnemonicParsing="false" onAction="#insertExit" prefHeight="50.0" prefWidth="170.0" style="-fx-border-color: black;" text="이전" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
    </children>
-</VBox>
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+</GridPane>

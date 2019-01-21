@@ -1,22 +1,20 @@
 package Common;
+import Controller.CLogin;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import org.apache.log4j.*;
-import org.apache.log4j.spi.LoggerFactory;
 
-import Controller.AbsMetaController;
-import Controller.CInitial;
+import Controller.CMain;
 
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 	    try {
 	        FXMLLoader loader = new FXMLLoader();
-	    	Parent root = loader.load(getClass().getResource("/View/VInitialLogin.fxml").openStream());
-	        CInitial controller = (CInitial)loader.getController();
+	    	Parent root = loader.load(getClass().getResource("/View/VLogin.fxml").openStream());
+	    	CLogin controller = (CLogin)loader.getController();
 	        controller.setForDebug();
 	    	Scene scene = new Scene(root);
 	    	primaryStage.setScene(scene);

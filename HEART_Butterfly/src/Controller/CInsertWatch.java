@@ -25,7 +25,7 @@ import javafx.stage.WindowEvent;
 
 import javax.swing.*;
 
-public class CInsertWatch extends AbsMetaController implements Initializable {
+public class CInsertWatch extends AbsInsertController implements Initializable {
 	
 	MDBPerson PersonDB;
 		
@@ -264,7 +264,6 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     @FXML
     void OnPersonManagement(ActionEvent event) throws IOException {
         spawnChildWindow(this.btnInsertWatchExit.getScene().getWindow(), "VPersonManager");
-        
     }
 
     @FXML
@@ -309,7 +308,7 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 
     @FXML
     void locnameInsertWatch(ActionEvent event) {
-    	
+
     }
 
     @FXML
@@ -328,8 +327,8 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
     }
 
     @FXML
-    void searchLocInsertWatch(ActionEvent event) {
-
+    void searchLocInsertWatch(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertSection_watch.getScene().getWindow(), "VAddressBook");
     }
 
     @FXML
@@ -481,7 +480,6 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 	
 	@Override
 	public void init_procedure() {
-
 		// Set Watcher
 		String query = "select name from Person";
 		System.out.println(this.shared_model);
@@ -495,6 +493,20 @@ public class CInsertWatch extends AbsMetaController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
+
+	@Override
+    public void passing_address(String location, String locationDetail, String section, String alias) {
+        String[] sectionSplit = section.split(" ");
+        this.txtInsertWatchLoc.setText(location);
+        this.txtInsertWatchDo.setText(locationDetail);
+        if(sectionSplit.length == 1) {
+            this.txtInsertWatchSi.setText(section);
+            this.txtInsertWatchDong.setText(null);
+        }else{
+            this.txtInsertWatchSi.setText(sectionSplit[0]);
+            this.txtInsertWatchDong.setText(sectionSplit[1]);
+        }
+        this.txtInsertWatchLocname.setText(alias);
+    }
 }

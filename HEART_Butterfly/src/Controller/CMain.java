@@ -36,7 +36,7 @@ public class CMain extends AbsMetaController{
     private Text txtMain;
 
     @FXML
-    private Button btnMainPicture;
+    private Button btnInquiry;
 
     @FXML
     private Text txtMain1;
@@ -58,7 +58,7 @@ public class CMain extends AbsMetaController{
 
     @FXML
     void mainAnalysis(ActionEvent event) throws IOException {
-    	changeWindow(this.btnMainExit.getScene().getWindow(), "VAnalysisMainTab");
+    	changeWindow(this.btnMainExit.getScene().getWindow(), "VAnalysisMain");
     }
 
     @FXML
@@ -72,17 +72,20 @@ public class CMain extends AbsMetaController{
     }
 
     @FXML
-    void mainPicture(ActionEvent event) throws IOException {
-    	changeWindow(this.btnMainExit.getScene().getWindow(), "VCreatePictureFolder");
+    void OnSpecimenMove(ActionEvent event) throws IOException {
+    	changeWindow(this.btnMainExit.getScene().getWindow(), "VSpecimenMove");
     }
 
     @FXML
-    void specimenmoveMainSpecimen(ActionEvent event) throws IOException {
-    	changeWindow(this.btnMainExit.getScene().getWindow(), "VSpecimenMove");
+    void OnInquiry(ActionEvent event) throws IOException {
+    	changeWindow(this.btnMainExit.getScene().getWindow(), "VInquiry");
     }
     
     @Override
     public void init_procedure() {
+        if(this.shared_model != null) return;
+
+        /* If not initialized */
     	MSharedData data = new MSharedData();
     	try {
 			if(data.getDB().connect("Butterfly")) {
