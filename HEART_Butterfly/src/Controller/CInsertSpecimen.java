@@ -30,6 +30,9 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     
 
     @FXML
+    private TextField txtWhoInsertSpecimen;
+    
+    @FXML
     private ToggleGroup StorageSelection;
 
     @FXML
@@ -537,7 +540,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	MDBPerson db_person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
 
         /* Clear All Names from List */
-        this.comboInsertSpecimenCollectwho.getItems().clear();
+        this.txtWhoInsertSpecimen.clear();
         this.comboInsertSpecimenWho.getItems().clear();
 
         /* DB Querying */
@@ -546,7 +549,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
         try {
             while(rs.next()) {
                 /* View Updating */
-                this.comboInsertSpecimenWho.getItems().add(rs.getString(1));   // get name
+                this.txtWhoInsertSpecimen.getText();   // get name
                 this.comboInsertSpecimenCollectwho.getItems().add(rs.getString(1));   // get name
             }
         } catch (SQLException e) {
@@ -581,7 +584,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	
     	this.comboInsertSpecimenLoc1.getItems().add("전체선택");
 
-    	String queryRoom = "se)lect distinct storageRoom from Specimen";
+    	String queryRoom = "select distinct storageRoom from Specimen";
 		ResultSet rsRoom = db_specimen.selectQuery(queryRoom);
 		
 		try {

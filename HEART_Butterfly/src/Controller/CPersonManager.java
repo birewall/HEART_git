@@ -172,9 +172,6 @@ public class CPersonManager extends AbsMetaController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	
-    	
-    	
-    	
         this.lsvName.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
