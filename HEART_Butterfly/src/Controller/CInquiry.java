@@ -134,7 +134,10 @@ public class CInquiry extends AbsMetaController implements Initializable {
     private ComboBox<String> cmbCountry;
 
     @FXML
-    private ComboBox<String> cmbCollectingDate;
+    private ComboBox<String> cmbCollectingYear;
+    
+    @FXML
+    private ComboBox<String> cmbCollectingMonth;
 
     @FXML
     private ComboBox<String> cmbCollector;
@@ -192,8 +195,22 @@ public class CInquiry extends AbsMetaController implements Initializable {
     void OnInquiry(ActionEvent event) throws SQLException {
         /* DB Inquiry */
         String query = null;
-
+        
+        String Country = cmbCountry.getSelectionModel().getSelectedItem();
+        //String Year = 
+        String Collector = cmbCollector.getSelectionModel().getSelectedItem();
+        String Location = 
+        //String ButterflyName = 
+        //String ButterflyFName =
+        //String Method = 
+        
+        
+        
         // Complete the query
+        query = "Select";
+        
+        System.out.println(query);
+        
 
         /* Send Query */
         ResultSet result_query = ((MSharedData)this.shared_model).getDB().selectQuery(query);
