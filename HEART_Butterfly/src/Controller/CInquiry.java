@@ -174,14 +174,13 @@ public class CInquiry extends AbsMetaController implements Initializable {
         String query = null;
         
         String Country = cmbCountry.getSelectionModel().getSelectedItem();
-        //String Year = 
+        String Year = cmbCollectingYear.getSelectionModel().getSelectedItem();
+        String Month = cmbCollectingMonth.getSelectionModel().getSelectedItem();
         String Collector = cmbCollector.getSelectionModel().getSelectedItem();
-        String Location = 
-        //String ButterflyName = 
-        //String ButterflyFName =
-        //String Method = 
-        
-        
+        String Location = txtCollectingLocation.getText();
+        String ButterflyName = txtButterflyName.getText();
+        String ButterflyFName = txtButterflyFamily.getText();
+        String Method = cmbCollectingMethod.getSelectionModel().getSelectedItem();
         
         // Complete the query
         query = "Select";
