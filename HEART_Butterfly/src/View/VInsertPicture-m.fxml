@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -18,72 +20,540 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CInsertPicture">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CInsertPicture">
    <children>
-      <Text layoutX="36.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="촬영 날짜" />
-      <Text layoutX="36.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="시간대" />
-      <DatePicker fx:id="dateInsertPictureDate" layoutX="114.0" layoutY="59.0" onAction="#dateInsertPicture" promptText="(default=today)" />
-      <ComboBox fx:id="comboInsertPictureTime" layoutX="114.0" layoutY="97.0" onAction="#timeInsertPicture" prefHeight="29.0" prefWidth="203.0" promptText="오전" />
-      <Text layoutX="37.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="촬영 장소" />
-      <TextField fx:id="txtInsertPictureLoc" layoutX="115.0" layoutY="172.0" onAction="#locInsertPicture" promptText="음현리" />
-      <Button fx:id="btnInsertPictureSearchLoc" layoutX="297.0" layoutY="172.0" mnemonicParsing="false" onAction="#searchLocInsertPicture" text="검색" />
-      <Text layoutX="30.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" text="촬영자" />
-      <ComboBox fx:id="comboInsertPictureWho" layoutX="108.0" layoutY="383.0" onAction="#whoInsertPicture" prefHeight="29.0" prefWidth="203.0" promptText="조윤호" />
-      <Button fx:id="btnInsertPicturePersonManagement" layoutX="322.0" layoutY="383.0" mnemonicParsing="false" onAction="#OnPersonManagement" prefHeight="29.0" prefWidth="91.0" text="관리" />
-      <Text layoutX="33.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" text="나비 명" />
-      <TextField fx:id="txtInsertPictureBname" layoutX="111.0" layoutY="457.0" onAction="#bnameInsertPicture" promptText="배추흰나비" />
-      <Text layoutX="301.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" text="과" />
-      <TextField fx:id="txtInsertPictureFamily" layoutX="349.0" layoutY="457.0" onAction="#familyInsertPicture" promptText="흰나비과" />
-      <TextField fx:id="txtInsertPictureZoological" layoutX="348.0" layoutY="494.0" onAction="#zoologicalInsertPicture" promptText="Pieris(Artogeia) rapae" />
-      <Text layoutX="300.0" layoutY="514.0" strokeType="OUTSIDE" strokeWidth="0.0" text="학명" />
-      <ComboBox fx:id="comboInsertPictureSex" layoutX="359.0" layoutY="528.0" onAction="#sexInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="암" />
-      <Text layoutX="283.0" layoutY="548.0" strokeType="OUTSIDE" strokeWidth="0.0" text="성별" />
-      <Button fx:id="btnInsertPictureAdd" layoutX="288.0" layoutY="847.0" mnemonicParsing="false" onAction="#addInsertPicture" text="추가" />
-      <Button fx:id="btnInsertPictureExit" layoutX="423.0" layoutY="847.0" mnemonicParsing="false" onAction="#exitInsertPicture" text="이전" />
-      <ComboBox fx:id="comboInsertPictureLtype" layoutX="109.0" layoutY="676.0" onAction="#ltypeInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="망원" />
-      <Text layoutX="28.0" layoutY="696.0" strokeType="OUTSIDE" strokeWidth="0.0" text="렌즈 유형" />
-      <ComboBox fx:id="comboInsertPictureBmove" layoutX="109.0" layoutY="534.0" onAction="#BmoveInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="비행" />
-      <Text layoutX="33.0" layoutY="554.0" strokeType="OUTSIDE" strokeWidth="0.0" text="나비동작" />
-      <Text layoutX="283.0" layoutY="586.0" strokeType="OUTSIDE" strokeWidth="0.0" text="배경" />
-      <ComboBox fx:id="comboInsertPictureBground" layoutX="359.0" layoutY="566.0" onAction="#bgroundInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="꽃" />
-      <Text layoutX="33.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="날개상태" />
-      <ComboBox fx:id="comboInsertPictureWing" layoutX="109.0" layoutY="601.0" onAction="#wingInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="펼침" />
-      <ComboBox fx:id="comboInsertPictureSize" layoutX="359.0" layoutY="601.0" onAction="#sizeInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="소" />
-      <Text layoutX="283.0" layoutY="621.0" strokeType="OUTSIDE" strokeWidth="0.0" text="크기" />
-      <Text layoutX="28.0" layoutY="731.0" strokeType="OUTSIDE" strokeWidth="0.0" text="보정 여부" />
-      <ComboBox fx:id="comboInsertPictureIscorrected" layoutX="109.0" layoutY="711.0" onAction="#iscorrectedInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="유" />
-      <Text layoutX="283.0" layoutY="696.0" strokeType="OUTSIDE" strokeWidth="0.0" text="파일 형식" />
-      <ComboBox fx:id="comboInsertPictureFtype" layoutX="359.0" layoutY="676.0" onAction="#ftypeInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="jpg" />
-      <TextField fx:id="txtInsertPictureRemark" layoutX="79.0" layoutY="749.0" onAction="#remarkInsertPicture" prefHeight="29.0" prefWidth="450.0" />
-      <Text layoutX="31.0" layoutY="769.0" strokeType="OUTSIDE" strokeWidth="0.0" text="비고" />
-      <Text layoutX="36.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="국가" />
-      <TextField fx:id="txtInsertPictureNation" layoutX="114.0" layoutY="135.0" onAction="#NationInsertPicture" promptText="대한민국" />
-      <Text layoutX="74.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="상세 주소" />
-      <TextField fx:id="txtInsertPictureDo" editable="false" layoutX="158.0" layoutY="209.0" onAction="#doInsertPicture" prefHeight="29.0" prefWidth="85.0" promptText="경기도" />
-      <TextField fx:id="txtInsertPictureSi" editable="false" layoutX="250.0" layoutY="209.0" onAction="#siInsertPicture" prefHeight="29.0" prefWidth="85.0" promptText="포천시" />
-      <TextField fx:id="txtInsertPictureDong" editable="false" layoutX="342.0" layoutY="209.0" onAction="#dongInsertPicture" prefHeight="29.0" prefWidth="85.0" promptText="내촌면" />
-      <Text layoutX="72.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GPS" />
-      <TextField fx:id="txtInsertPictureLat" editable="false" layoutX="158.0" layoutY="246.0" onAction="#latInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="37.772351" />
-      <TextField fx:id="txtInsertPictureLong" editable="false" layoutX="288.0" layoutY="246.0" onAction="#longInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="127.227921" />
-      <TextField fx:id="txtInsertPictureLocname" layoutX="159.0" layoutY="281.0" onAction="#locnameInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="주금산" />
-      <Text layoutX="73.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="통상명" />
-      <ComboBox fx:id="comboInsertPictureAng" layoutX="109.0" layoutY="567.0" onAction="#BlocInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="정면" />
-      <Text layoutX="33.0" layoutY="587.0" strokeType="OUTSIDE" strokeWidth="0.0" text="사진각도" />
-      <ComboBox fx:id="comboInsertPictureQuan" layoutX="109.0" layoutY="635.0" onAction="#quanInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="1" />
-      <Text layoutX="33.0" layoutY="655.0" strokeType="OUTSIDE" strokeWidth="0.0" text="마릿수" />
-      <Button fx:id="btnInsertPictureCorrect" layoutX="354.0" layoutY="847.0" mnemonicParsing="false" onAction="#correctInsertPicture" text="수정" />
-      <Button fx:id="btnInsertPicturepicture" layoutX="36.0" layoutY="19.0" mnemonicParsing="false" onAction="#pictureInsertPicture" prefHeight="29.0" prefWidth="227.0" text="사진 불러오기" />
-      <Label fx:id="lblLoadPictureStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="292.0" layoutY="23.0" prefHeight="19.0" prefWidth="162.0" textAlignment="CENTER" textFill="RED">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="ImvImage" fitHeight="150.0" fitWidth="200.0" layoutX="370.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
-      <CheckBox fx:id="cboxInsertPictureMatching" layoutX="247.0" layoutY="639.0" mnemonicParsing="false" onAction="#matingInsertPicture" text="짝짓기" />
-      <Label fx:id="txtResult" layoutX="45.0" layoutY="851.0" prefHeight="15.0" prefWidth="200.0" />
-      <Button fx:id="btnInsertSection" layoutX="109.0" layoutY="330.0" mnemonicParsing="false" onAction="#searchLocInsertPicture" prefHeight="29.0" prefWidth="162.0" text="구간 정보 입력" />
-      <Label fx:id="lblSection" layoutX="304.0" layoutY="335.0" text="선택구간" />
-      <Label fx:id="lblMaxSection" layoutX="418.0" layoutY="335.0" text="최대구간" />
-      <Label layoutX="381.0" layoutY="335.0" text="/" />
+      <GridPane>
+         <children>
+            <GridPane GridPane.rowIndex="1">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="촬영 날짜">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <DatePicker fx:id="dateInsertPictureDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#dateInsertPicture" promptText="(default=today)" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" right="20.0" top="10.0" />
+                     </GridPane.margin>
+                  </DatePicker>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="시간대" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <ComboBox fx:id="comboInsertPictureTime" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#timeInsertPicture" prefHeight="29.0" prefWidth="203.0" promptText="오전" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" right="20.0" top="10.0" />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="국가" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <TextField fx:id="txtInsertPictureNation" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#NationInsertPicture" promptText="대한민국" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" right="20.0" top="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="103.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.0" minWidth="10.0" prefWidth="197.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <Button fx:id="btnInsertPicturepicture" mnemonicParsing="false" onAction="#pictureInsertPicture" prefHeight="29.0" prefWidth="227.0" style="-fx-border-color: blue;" text="사진 불러오기">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" top="10.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="138.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane prefHeight="225.0" prefWidth="412.0" GridPane.rowIndex="1">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="촬영 장소" GridPane.halignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <TextField fx:id="txtInsertPictureLoc" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#locInsertPicture" promptText="음현리" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="상세 주소" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="통상명" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="GPS" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <TextField fx:id="txtInsertPictureDo" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#doInsertPicture" prefHeight="29.0" prefWidth="85.0" promptText="경기도" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtInsertPictureSi" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#siInsertPicture" prefHeight="29.0" prefWidth="85.0" promptText="포천시" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtInsertPictureDong" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#dongInsertPicture" prefHeight="29.0" prefWidth="85.0" promptText="내촌면" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtInsertPictureLat" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#latInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="37.772351" GridPane.columnSpan="3" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtInsertPictureLong" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#longInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="127.227921" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtInsertPictureLocname" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#locnameInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="주금산" GridPane.columnSpan="3" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Button fx:id="btnInsertPictureSearchLoc" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#searchLocInsertPicture" style="-fx-border-color: blue;" text="검색" GridPane.columnSpan="2" GridPane.halignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <children>
+            <GridPane GridPane.rowIndex="2">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="과">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="학명" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </Text>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <TextField fx:id="txtInsertPictureFamily" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#familyInsertPicture" promptText="흰나비과">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" right="20.0" top="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="txtInsertPictureZoological" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#zoologicalInsertPicture" promptText="Pieris(Artogeia) rapae" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" right="20.0" top="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <Label fx:id="lblSection" text="선택구간 / 최대구간" GridPane.columnSpan="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Button fx:id="btnInsertPicturePersonManagement" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnPersonManagement" prefHeight="29.0" prefWidth="91.0" style="-fx-border-color: blue;" text="관리" GridPane.rowIndex="1">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="101.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="199.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane GridPane.rowIndex="2">
+         <children>
+            <Button fx:id="btnInsertSection" mnemonicParsing="false" onAction="#searchLocInsertSection" prefHeight="29.0" prefWidth="162.0" style="-fx-border-color: green;" text="구간 정보 입력" GridPane.columnIndex="1">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="촬영자" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <ComboBox fx:id="comboInsertPictureWho" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#whoInsertPicture" prefHeight="29.0" prefWidth="203.0" promptText="조윤호" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="나비 명" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <TextField fx:id="txtInsertPictureBname" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#bnameInsertPicture" promptText="배추흰나비" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="30.0" right="20.0" top="30.0" />
+               </GridPane.margin>
+            </TextField>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="108.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="192.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane GridPane.rowIndex="3">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="나비동작">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <ComboBox fx:id="comboInsertPictureBmove" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#BmoveInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="비행" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="5.0" right="20.0" top="5.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="사진각도" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <ComboBox fx:id="comboInsertPictureAng" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#BlocInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="정면" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="5.0" right="20.0" top="5.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="날개상태" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <ComboBox fx:id="comboInsertPictureWing" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#wingInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="펼침" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="5.0" right="20.0" top="5.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="마릿수" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <ComboBox fx:id="comboInsertPictureQuan" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#quanInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="5.0" right="20.0" top="5.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="렌즈 유형" GridPane.rowIndex="4">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <ComboBox fx:id="comboInsertPictureLtype" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#ltypeInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="망원" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets bottom="5.0" right="20.0" top="5.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="보정 여부" GridPane.rowIndex="5">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <ComboBox fx:id="comboInsertPictureIscorrected" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#iscorrectedInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="유" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets bottom="5.0" right="20.0" top="5.0" />
+               </GridPane.margin>
+            </ComboBox>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="성별">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <ComboBox fx:id="comboInsertPictureSex" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#sexInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="암" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="5.0" right="20.0" top="5.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="배경" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <ComboBox fx:id="comboInsertPictureBground" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#bgroundInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="꽃" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="5.0" right="20.0" top="5.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="크기" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <ComboBox fx:id="comboInsertPictureSize" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#sizeInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="소" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="5.0" right="20.0" top="5.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <CheckBox fx:id="cboxInsertPictureMatching" mnemonicParsing="false" onAction="#matingInsertPicture" text="짝짓기" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="파일 형식" GridPane.rowIndex="4">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <ComboBox fx:id="comboInsertPictureFtype" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#ftypeInsertPicture" prefHeight="29.0" prefWidth="124.0" promptText="jpg" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets bottom="5.0" right="20.0" top="5.0" />
+               </GridPane.margin>
+            </ComboBox>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <children>
+            <Button fx:id="btnInsertPictureCorrect" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#correctInsertPicture" style="-fx-border-color: BLACK;" text="수정">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="btnInsertPictureExit" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#exitInsertPicture" style="-fx-border-color: BLACK;" text="이전" GridPane.columnIndex="1">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <ImageView fx:id="ImvImage" fitHeight="183.0" fitWidth="279.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+         <GridPane.margin>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </GridPane.margin>
+      </ImageView>
+      <GridPane GridPane.rowIndex="4">
+         <children>
+            <Button fx:id="btnInsertPictureAdd" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addInsertPicture" style="-fx-border-color: BLACK;" text="추가" GridPane.columnIndex="1">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
    </children>
-</Pane>
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="210.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="218.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="253.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+</GridPane>
