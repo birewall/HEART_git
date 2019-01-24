@@ -26,28 +26,23 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
+
+import org.controlsfx.control.textfield.TextFields;
 
 public class CInquiry extends AbsMetaController implements Initializable {
-	
-    MDBSpecimen db_specimen=null;
-    MDBSpecimenize db_specimenize=null;
-    MDBLocation db_location=null;
-    MDBCollectionInfo db_collectionInfo=null;
-    MDBPerson db_person=null;
-    MDBButterflyGuide db_butterflyGuide=null;
+
+    MDatabase db = null;
 
     /* Class for Table */
     public class InquiryTableItem {
-        String country;
-        String collecting_date;
-        String collector;
-        String collecting_location;
-        String butterfly_name;
-        String butterfly_family;
-        String specimen_ID;
+        private String country;
+        private String collecting_date;
+        private String collector;
+        private String collecting_location;
+        private String butterfly_name;
+        private String butterfly_family;
+        private String specimen_ID;
 
         public InquiryTableItem(String specimen_ID, String country, String collecting_date, String collector, String collecting_location, String butterfly_name, String butterfly_family) {
             this.specimen_ID = specimen_ID;
@@ -59,14 +54,14 @@ public class CInquiry extends AbsMetaController implements Initializable {
             this.butterfly_family = butterfly_family;
         }
 
-        public String getSpecimenID() {
+        public String getSpecimen_ID() {
             return specimen_ID;
         }
 
-        public void setSpecimenID(String specimen_ID) {
+        public void setSpecimen_ID(String specimen_ID) {
             this.specimen_ID = specimen_ID;
         }
-        
+
         public String getCountry() {
             return country;
         }
@@ -396,15 +391,8 @@ public class CInquiry extends AbsMetaController implements Initializable {
     
     @Override
     public void init_procedure() {
-
     	/* DB Instance initialization */
-    	 MDatabase db = ((MSharedData)this.shared_model).getDB();
-    	 db_location = new MDBLocation(((MSharedData)this.shared_model).getDB().getConnection());
-    	 db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
-    	 db_specimenize = new MDBSpecimenize(((MSharedData)this.shared_model).getDB().getConnection());
-    	 db_butterflyGuide = new MDBButterflyGuide(((MSharedData)this.shared_model).getDB().getConnection());
-    	 db_collectionInfo = new MDBCollectionInfo(((MSharedData)this.shared_model).getDB().getConnection());
-    	 db_person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+    	 this.db = ((MSharedData)this.shared_model).getDB();
     	 
 	     ResultSet rs = null;
 	        
@@ -415,93 +403,131 @@ public class CInquiry extends AbsMetaController implements Initializable {
     	 		+ "inner join ButterflyGuide AS E on B.idButterflyGuide=E.idButterflyGuide "
     	 		+ "ORDER BY date DESC limit 1000";
 
-			try {
-				rs = db_location.selectQuery(InitialTblSetting);
-				while(rs.next()) {
-					InquiryTableItem item = new InquiryTableItem(rs.getString(1), 
-							rs.getString(2), 
-							rs.getString(3), 
-							rs.getString(4),
-							rs.getString(5),
-							rs.getString(6),
-							rs.getString(7));
-					this.tblInquiry.getItems().add(item);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}    
-			
-	        /* Initialize Combo Box */
+        try {
+            rs = db.selectQuery(InitialTblSetting);
+            while(rs.next()) {
+                InquiryTableItem item = new InquiryTableItem(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7));
+                this.tblInquiry.getItems().add(item);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-			/*Country*/
-	   	 	String InitialCountry = null;
-		   	ResultSet rsCountry = null;
-		     
-			InitialCountry = "SELECT distinct country from Location";
-			rsCountry = db_location.selectQuery(InitialCountry);
-			try {
-				while(rsCountry.next()) {
-			        this.cmbCountry.getItems().add(rsCountry.getString(1));
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+        /* Initialize Combo Box */
 
-	        /*Collector*/
-	   	 	String InitialCollector = null;
-		   	ResultSet rsCollector = null;
-			InitialCollector = "SELECT distinct name from Person";
-			rsCollector = db_person.selectQuery(InitialCollector);
-			try {
-				while(rsCollector.next()) {
-			        this.cmbCollector.getItems().add(rsCollector.getString(1));
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-	        /*Collection Year*/
-	   	 	String InitialCollectionYear = null;
-		   	ResultSet rsCollectionYear = null;
-			InitialCollectionYear = "SELECT distinct left(date, 4) from CollectionInfo";
-			rsCollectionYear = db_collectionInfo.selectQuery(InitialCollectionYear);
-			try {
-				while(rsCollectionYear.next()) {
-					String CollectingYear = rsCollectionYear.getString(1);
-			        this.cmbCollectingYear.getItems().add(CollectingYear);
-			        System.out.println(CollectingYear);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+        /*Country*/
+        String InitialCountry = null;
+        ResultSet rsCountry = null;
 
-	        /*Collection Month*/
-			this.cmbCollectingMonth.getItems().addAll("01", "02", "03", "04", "05", "06,", "07", "08", "09", "10", "11", "12");
+        InitialCountry = "SELECT distinct country from Location";
+        rsCountry = db.selectQuery(InitialCountry);
+        try {
+            while(rsCountry.next()) {
+                this.cmbCountry.getItems().add(rsCountry.getString(1));
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-	        /*Collection Method*/
-	   	 	String InitialMethod = null;
-		   	ResultSet rsMethod = null;
-			InitialMethod = "SELECT distinct method from CollectionInfo";
-			rsMethod = db_collectionInfo.selectQuery(InitialMethod);
-			try {
-				while(rsMethod.next()) {
-			        this.cmbCollectingMethod.getItems().add(rsMethod.getString(1));
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        // 수집 방법 채우기
-	        // 전체, 채집, 선물, 교환 등
-	        // this.cmbCollectingMethod
-			cmbCollectingMethod.getItems().add("전체");
-			cmbCollectingMonth.getItems().add("전체");
-			cmbCollectingYear.getItems().add("전체");
-			cmbCollector.getItems().add("전체");
-			cmbCountry.getItems().add("전체");
+        /*Collector*/
+        String InitialCollector = null;
+        ResultSet rsCollector = null;
+        InitialCollector = "SELECT distinct name from Person";
+        rsCollector = db.selectQuery(InitialCollector);
+        try {
+            while(rsCollector.next()) {
+                this.cmbCollector.getItems().add(rsCollector.getString(1));
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        /*Collection Year*/
+        String InitialCollectionYear = null;
+        ResultSet rsCollectionYear = null;
+        InitialCollectionYear = "SELECT distinct left(date, 4) from CollectionInfo";
+        rsCollectionYear = db.selectQuery(InitialCollectionYear);
+        try {
+            while(rsCollectionYear.next()) {
+                String CollectingYear = rsCollectionYear.getString(1);
+                this.cmbCollectingYear.getItems().add(CollectingYear);
+                System.out.println(CollectingYear);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        /*Collection Month*/
+        this.cmbCollectingMonth.getItems().addAll("01", "02", "03", "04", "05", "06,", "07", "08", "09", "10", "11", "12");
+
+        /*Collection Method*/
+        String InitialMethod = null;
+        ResultSet rsMethod = null;
+        InitialMethod = "SELECT distinct method from CollectionInfo";
+        rsMethod = db.selectQuery(InitialMethod);
+        try {
+            while(rsMethod.next()) {
+                this.cmbCollectingMethod.getItems().add(rsMethod.getString(1));
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        // 수집 방법 채우기
+        // 전체, 채집, 선물, 교환 등
+        // this.cmbCollectingMethod
+
+        /* Initialize Combobox */
+        cmbCollectingMethod.getItems().add("전체");
+        cmbCollectingMonth.getItems().add("전체");
+        cmbCollectingYear.getItems().add("전체");
+        cmbCollector.getItems().add("전체");
+        cmbCountry.getItems().add("전체");
+        cmbCollectingMethod.getSelectionModel().select("전체");
+        cmbCollectingMonth.getSelectionModel().select("전체");
+        cmbCollectingYear.getSelectionModel().select("전체");
+        cmbCollector.getSelectionModel().select("전체");
+        cmbCountry.getSelectionModel().select("전체");
+
+        /* Set Auto Complete */
+        try {
+            setAutoComplete();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setAutoComplete() throws SQLException {
+        ObservableList<String> location_autocomplete_list = FXCollections.observableArrayList();
+        ObservableList<String> family_autocomplete_list = FXCollections.observableArrayList();
+        ObservableList<String> name_autocomplete_list = FXCollections.observableArrayList();
+
+        ResultSet result_query = db.selectQuery("select distinct alias from Location");
+        while(result_query.next()) {
+            location_autocomplete_list.add(result_query.getString(1));
+        }
+        TextFields.bindAutoCompletion(this.txtCollectingLocation, location_autocomplete_list);
+
+        result_query = db.selectQuery("select distinct family from ButterflyGuide");
+        while(result_query.next()) {
+            family_autocomplete_list.add(result_query.getString(1));
+        }
+        TextFields.bindAutoCompletion(this.txtButterflyFamily, family_autocomplete_list);
+
+        result_query = db.selectQuery("select distinct name from ButterflyGuide");
+        while(result_query.next()) {
+            name_autocomplete_list.add(result_query.getString(1));
+        }
+        TextFields.bindAutoCompletion(this.txtButterflyName, name_autocomplete_list);
     }
 }
