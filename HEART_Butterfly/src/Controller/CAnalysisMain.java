@@ -100,5 +100,27 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
         this.grpNameCollection.setTitle("나비명별 수집 통계");
 
         /* Set Combobox */
+        /*
+        * 조회 조건: 국가 연도
+        *
+        * 조회 내용: 나비 수집 수, 지역별, 나비명별, 나비과별
+        * 테이블 명세: 관찰 테이블 (id수집정보, 관찰날짜)
+        * 연계테이블 명세: 수집정보 테이블 (id장소, id도감, id사람)
+        * 연계테이블 명세: 도감 테이블 (나비명, 나비과)
+        * 연계테이블 명세: 장소 테이블 (지역명)
+        * */
+
+        /* cmbCountry */
+
+        /* cmbYear */
+
+        /* cmbMeonth */
+
+        /* cmbCollector */
+
+        /* cmbLocation */
+
+        //this.cmbCountry.getItems().add();
+        String query = "select count(*) from Observation, CollectionInfo, ButterflyGuide, Location";
     }
 }
