@@ -524,16 +524,16 @@ public class CInsertPicture extends AbsInsertController implements Initializable
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		this.comboInsertPictureTime.getItems().addAll("새벽", "오전", "오후", "저녁");
-		this.comboInsertPictureSex.getItems().addAll("암", "수");
-		this.comboInsertPictureQuan.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
-		this.comboInsertPictureLtype.getItems().addAll("핸드폰", "망원", "광각");
-		this.comboInsertPictureBmove.getItems().addAll("비행", "정지");
-		this.comboInsertPictureAng.getItems().addAll("정면도", "측면도", "사시도");
-		this.comboInsertPictureWing.getItems().addAll("펼침", "닫힘");		
+		this.comboInsertPictureSex.getItems().addAll("암", "수", "불분명");
+		this.comboInsertPictureQuan.getItems().addAll("1", "2", "3", "4마리 이상");
+		this.comboInsertPictureLtype.getItems().addAll("핸드폰", "망원", "광각", "기타");
+		this.comboInsertPictureBmove.getItems().addAll("비행", "착지", "식사", "기타");
+		this.comboInsertPictureAng.getItems().addAll("정면도", "측면도", "사시도", "기타");
+		this.comboInsertPictureWing.getItems().addAll("폄", "접음", "기타");		
 		this.comboInsertPictureIscorrected.getItems().addAll("유", "무");
-		this.comboInsertPictureBground.getItems().addAll("꽃", "암석", "나무");
-		this.comboInsertPictureSize.getItems().addAll("대", "중", "소");
-		this.comboInsertPictureFtype.getItems().addAll("jpg", "png", "bmp");
+		this.comboInsertPictureBground.getItems().addAll("꽃", "암석", "나무", "기타");
+		this.comboInsertPictureSize.getItems().addAll("대", "중", "소", "기타");
+		this.comboInsertPictureFtype.getItems().addAll("jpg", "png", "bmp", "기타");
 
         this.comboInsertPictureTime.getSelectionModel().select(0);
         this.comboInsertPictureSex.getSelectionModel().select(0);
