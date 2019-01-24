@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -8,51 +14,364 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CInsertWatch">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CInsertWatch">
    <children>
-      <Text layoutX="33.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="관찰 날짜" />
-      <Text layoutX="33.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="시간대" />
-      <DatePicker fx:id="dateInsertWatchDate" layoutX="111.0" layoutY="69.0" onAction="#dateInsertWatch" promptText="(default=today)" />
-      <ComboBox fx:id="comboInsertWatchTime" layoutX="111.0" layoutY="117.0" onAction="#timeInsertWatch" prefHeight="29.0" prefWidth="203.0" promptText="오전" />
-      <Text layoutX="33.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="관찰 장소" />
-      <TextField fx:id="txtInsertWatchLoc" layoutX="111.0" layoutY="211.0" onAction="#locInsertWatch" promptText="강원" />
-      <Button fx:id="btnInsertWatchSearchLoc" layoutX="300.0" layoutY="211.0" mnemonicParsing="false" onAction="#searchLocInsertWatch" text="검색" />
-      <Text layoutX="63.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="상세 주소" />
-      <TextField fx:id="txtInsertWatchDo" layoutX="147.0" layoutY="261.0" onAction="#doInsertWatch" prefHeight="29.0" prefWidth="85.0" promptText="춘천시" />
-      <TextField fx:id="txtInsertWatchSi" layoutX="239.0" layoutY="261.0" onAction="#siInsertWatch" prefHeight="29.0" prefWidth="85.0" promptText="서면" />
-      <TextField fx:id="txtInsertWatchDong" layoutX="331.0" layoutY="261.0" onAction="#dongInsertWatch" prefHeight="29.0" prefWidth="85.0" promptText="덕두원리" />
-      <Text layoutX="33.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="관찰자" />
-      <ComboBox fx:id="comboInsertWatchWho" layoutX="111.0" layoutY="447.0" onAction="#whoInsertWatch" prefHeight="29.0" prefWidth="203.0" promptText="조윤호" />
-      <Button fx:id="btnInsertWatchPersonManagement" layoutX="325.0" layoutY="447.0" mnemonicParsing="false" onAction="#OnPersonManagement" prefHeight="29.0" prefWidth="52.0" text="관리" />
-      <Text layoutX="33.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="나비 명" />
-      <TextField fx:id="txtInsertWatchBname" layoutX="111.0" layoutY="515.0" onAction="#bnameInsertWatch" promptText="배추흰나비" />
-      <Text layoutX="63.0" layoutY="569.0" strokeType="OUTSIDE" strokeWidth="0.0" text="과" />
-      <TextField fx:id="txtInsertWatchFamily" layoutX="111.0" layoutY="549.0" onAction="#familyInsertWatch" promptText="흰나비과" />
-      <TextField fx:id="txtInsertWatchZoological" layoutX="111.0" layoutY="582.0" onAction="#zoologicalInsertWatch" promptText="Pieris(Artogeia) rapae" />
-      <Text layoutX="63.0" layoutY="602.0" strokeType="OUTSIDE" strokeWidth="0.0" text="학명" />
-      <Text layoutX="26.0" layoutY="668.0" strokeType="OUTSIDE" strokeWidth="0.0" text="상태" />
-      <ComboBox fx:id="comboInsertWatchStatus" layoutX="111.0" layoutY="648.0" onAction="#statusInsertWatch" prefHeight="29.0" prefWidth="124.0" promptText="상" />
-      <ComboBox fx:id="comboInsertWatchSex" layoutX="111.0" layoutY="618.0" onAction="#sexInsertWatch" prefHeight="29.0" prefWidth="124.0" promptText="암" />
-      <Text layoutX="26.0" layoutY="638.0" strokeType="OUTSIDE" strokeWidth="0.0" text="성별" />
-      <Button fx:id="btnInsertWatchAdd" layoutX="325.0" layoutY="742.0" mnemonicParsing="false" onAction="#addInsertWatch" text="추가" />
-      <Button fx:id="btnInsertWatchExit" layoutX="485.0" layoutY="742.0" mnemonicParsing="false" onAction="#exitInsertWatch" text="이전" />
-      <TextField fx:id="txtInsertWatchNation" layoutX="111.0" layoutY="170.0" onAction="#NationInsertWatch" promptText="대한민국" />
-      <Text layoutX="33.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="국가" />
-      <Text layoutX="33.0" layoutY="706.0" strokeType="OUTSIDE" strokeWidth="0.0" text="비고" />
-      <TextField fx:id="txtInsertWatchRemark" layoutX="81.0" layoutY="686.0" onAction="#remarkInsertWatch" prefHeight="29.0" prefWidth="450.0" />
-      <Text layoutX="61.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GPS" />
-      <TextField fx:id="txtInsertWatchLat" layoutX="147.0" layoutY="298.0" onAction="#latInsertWatch" prefHeight="29.0" prefWidth="124.0" promptText="37.772351" />
-      <TextField fx:id="txtInsertWatchLong" layoutX="277.0" layoutY="298.0" onAction="#longInsertWatch" prefHeight="29.0" prefWidth="124.0" promptText="127.227921" />
-      <TextField fx:id="txtInsertWatchLocname" layoutX="148.0" layoutY="333.0" onAction="#locnameInsertWatch" prefHeight="29.0" prefWidth="124.0" promptText="삼악산" />
-      <Text layoutX="62.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="통상명" />
-      <Text layoutX="284.0" layoutY="648.0" strokeType="OUTSIDE" strokeWidth="0.0" text="관찰 개체 수" />
-      <TextField fx:id="txtInsertWatchQuan" layoutX="382.0" layoutY="623.0" onAction="#quanInsertWatch" prefHeight="39.0" prefWidth="84.0" />
-      <Text layoutX="476.0" layoutY="647.0" strokeType="OUTSIDE" strokeWidth="0.0" text="마리" />
-      <Button fx:id="btnInsertWatchCorrect" layoutX="410.0" layoutY="742.0" mnemonicParsing="false" onAction="#correctInsertWatch" text="수정" />
-      <Button fx:id="btnInsertWatchImportCollectionInfo" layoutX="444.0" layoutY="69.0" mnemonicParsing="false" onAction="#OnImportCollectionInfo" prefHeight="23.0" prefWidth="124.0" text="관찰정보 불러오기" />
-      <Label layoutX="378.0" layoutY="397.0" text="/" />
-      <Label fx:id="lblMaxSection_watch" layoutX="415.0" layoutY="397.0" text="최대구간" />
-      <Label fx:id="lblSection_watch" layoutX="301.0" layoutY="397.0" text="선택구간" />
-      <Button fx:id="btnInsertSection_watch" layoutX="106.0" layoutY="392.0" mnemonicParsing="false" onAction="#searchLocInsertSection_watch" prefHeight="29.0" prefWidth="162.0" text="구간 정보 입력" />
+      <GridPane>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="관찰 날짜" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="30.0" />
+               </GridPane.margin>
+            </Text>
+            <DatePicker fx:id="dateInsertWatchDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#dateInsertWatch" promptText="(default=today)" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets right="20.0" top="22.0" />
+               </GridPane.margin>
+            </DatePicker>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="시간대" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="30.0" />
+               </GridPane.margin>
+            </Text>
+            <ComboBox fx:id="comboInsertWatchTime" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#timeInsertWatch" prefHeight="29.0" prefWidth="203.0" promptText="오전" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="5.0" right="20.0" top="15.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="국가" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="15.0" left="30.0" />
+               </GridPane.margin>
+            </Text>
+            <TextField fx:id="txtInsertWatchNation" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#NationInsertWatch" promptText="대한민국" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="관찰 장소" GridPane.rowIndex="3">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="30.0" />
+               </GridPane.margin>
+            </Text>
+            <TextField fx:id="txtInsertWatchLoc" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#locInsertWatch" promptText="강원" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Button fx:id="btnInsertWatchSearchLoc" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#searchLocInsertWatch" style="-fx-border-color: blue;" text="검색" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="btnInsertWatchImportCollectionInfo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnImportCollectionInfo" prefHeight="23.0" prefWidth="124.0" style="-fx-border-color: blue;" text="관찰정보&#10;불러오기" GridPane.columnIndex="2" GridPane.rowSpan="2" GridPane.valignment="BOTTOM">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="158.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="249.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="193.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane GridPane.rowIndex="1">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="상세 주소" GridPane.columnIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtInsertWatchDo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#doInsertWatch" prefHeight="29.0" prefWidth="85.0" promptText="춘천시" GridPane.columnIndex="2" GridPane.columnSpan="2">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtInsertWatchSi" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#siInsertWatch" prefHeight="29.0" prefWidth="85.0" promptText="서면" GridPane.columnIndex="4" GridPane.columnSpan="2">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtInsertWatchDong" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#dongInsertWatch" prefHeight="29.0" prefWidth="85.0" promptText="덕두원리" GridPane.columnIndex="6" GridPane.columnSpan="2">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="GPS" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtInsertWatchLat" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#latInsertWatch" prefHeight="29.0" prefWidth="124.0" promptText="37.772351" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtInsertWatchLong" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#longInsertWatch" prefHeight="29.0" prefWidth="124.0" promptText="127.227921" GridPane.columnIndex="5" GridPane.columnSpan="3" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="통상명" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtInsertWatchLocname" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#locnameInsertWatch" prefHeight="29.0" prefWidth="124.0" promptText="삼악산" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Button fx:id="btnInsertSection_watch" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#searchLocInsertSection_watch" prefHeight="29.0" prefWidth="162.0" style="-fx-border-color: blue;" text="구간 정보 입력" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+               </GridPane.margin>
+            </Button>
+            <Label fx:id="lblSection_watch" text="선택구간" GridPane.columnIndex="4" GridPane.rowIndex="3">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label text="/" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+            <Label fx:id="lblMaxSection_watch" text="최대구간" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="3">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="관찰자" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="30.0" />
+               </GridPane.margin>
+            </Text>
+            <ComboBox fx:id="comboInsertWatchWho" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#whoInsertWatch" prefHeight="29.0" prefWidth="203.0" promptText="조윤호" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Button fx:id="btnInsertWatchPersonManagement" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnPersonManagement" prefHeight="29.0" prefWidth="52.0" style="-fx-border-color: blue;" text="관리" GridPane.columnIndex="4" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <GridPane.margin>
+                  <Insets left="10.0" top="10.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane GridPane.rowIndex="2">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="나비 명">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="30.0" />
+               </GridPane.margin>
+            </Text>
+            <TextField fx:id="txtInsertWatchBname" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#bnameInsertWatch" promptText="배추흰나비" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="과" GridPane.columnIndex="2">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <TextField fx:id="txtInsertWatchFamily" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#familyInsertWatch" promptText="흰나비과" GridPane.columnIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="학명" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <TextField fx:id="txtInsertWatchZoological" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#zoologicalInsertWatch" promptText="Pieris(Artogeia) rapae" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="성별" GridPane.rowIndex="2">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="30.0" />
+               </GridPane.margin>
+            </Text>
+            <ComboBox fx:id="comboInsertWatchSex" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#sexInsertWatch" prefHeight="29.0" prefWidth="124.0" promptText="암" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="상태" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <ComboBox fx:id="comboInsertWatchStatus" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#statusInsertWatch" prefHeight="29.0" prefWidth="124.0" promptText="상" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="100.0" top="10.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="관찰 개체 수" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="30.0" />
+               </GridPane.margin>
+            </Text>
+            <TextField fx:id="txtInsertWatchQuan" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#quanInsertWatch" prefHeight="39.0" prefWidth="84.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="10.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="마리" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Text>
+            <GridPane GridPane.columnIndex="3" GridPane.rowIndex="4">
+               <children>
+                  <Button fx:id="btnInsertWatchExit" mnemonicParsing="false" onAction="#exitInsertWatch" prefHeight="60.0" prefWidth="75.0" style="-fx-border-color: black;" text="이전" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="15.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="btnInsertWatchAdd" mnemonicParsing="false" onAction="#addInsertWatch" prefHeight="60.0" prefWidth="75.0" style="-fx-border-color: black;" text="추가" GridPane.halignment="LEFT">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="15.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="btnInsertWatchCorrect" mnemonicParsing="false" onAction="#correctInsertWatch" prefHeight="60.0" prefWidth="75.0" style="-fx-border-color: black;" text="수정" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="15.0" />
+                     </GridPane.margin>
+                  </Button>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="115.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="142.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="259.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
    </children>
-</Pane>
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="244.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="237.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="319.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+</GridPane>

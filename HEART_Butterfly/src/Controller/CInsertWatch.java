@@ -469,8 +469,8 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		this.comboInsertWatchTime.getItems().addAll("오전", "오후", "저녁", "새벽");
-		this.comboInsertWatchSex.getItems().addAll("암컷", "수컷");
-		this.comboInsertWatchStatus.getItems().addAll("상", "중", "하");
+		this.comboInsertWatchSex.getItems().addAll("암컷", "수컷", "불분명");
+		this.comboInsertWatchStatus.getItems().addAll("상", "중", "하", "기타");
 
 		this.comboInsertWatchWho.getSelectionModel().select(0); // 조윤호 교수님은 무조건 DB에 있어야함
         this.comboInsertWatchSex.getSelectionModel().select(0);

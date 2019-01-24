@@ -491,14 +491,14 @@ public class CSpecimenMove extends AbsMetaController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        this.comboSpecimenMoveContent.getItems().addAll("이동","폐기","기증","대여");
-        //this.comboSpecimenMoveLoc1.getItems().addAll();
+        this.comboSpecimenMoveContent.getItems().addAll("이동","폐기","기증","대여", "기타");
+        //this.comboSpecimenMoveLoc1.getItems().addAll("집","사무실","학교","기타");
         //this.comboSpecimenMoveLoc2.getItems().addAll();
-        //this.comboSpecimenMoveLoc2type.getItems().addAll();
+        this.comboSpecimenMoveLoc2type.getItems().addAll("제작","구입","기타");
         //this.comboSpecimenMoveLoc3.getItems().addAll();
-        //this.comboSpecimenMoveLoc3type.getItems().addAll();
+        this.comboSpecimenMoveLoc3type.getItems().addAll("제작","구입","기타");
         //this.comboSpecimenMoveWorker.getItems().addAll();
-        this.comboSpecimenMoveStatus.getItems().addAll("상","중","하");
+        this.comboSpecimenMoveStatus.getItems().addAll("상","중","하","기타");
 
         /* Set Room Listener */
         this.comboSpecimenMoveLoc1.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {

@@ -27,7 +27,6 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     String PlaceName;
     String CabinetName;
     String BoxName;
-    
 
     @FXML
     private TextField txtWhoInsertSpecimen;

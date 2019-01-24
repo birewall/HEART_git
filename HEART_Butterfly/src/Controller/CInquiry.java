@@ -207,21 +207,119 @@ public class CInquiry extends AbsMetaController implements Initializable {
     @FXML
     void OnInquiry(ActionEvent event) throws SQLException {
         /* DB Inquiry */
+    	
+    	tblInquiry.getItems().clear();
+    	
         String query = null;
         
         String Country = cmbCountry.getSelectionModel().getSelectedItem();
-        //String Year = 
+        String Year = cmbCollectingYear.getSelectionModel().getSelectedItem();
+        String Month = cmbCollectingMonth.getSelectionModel().getSelectedItem();
         String Collector = cmbCollector.getSelectionModel().getSelectedItem();
-        String Location = 
-        //String ButterflyName = 
-        //String ButterflyFName =
-        //String Method = 
+        String Location = txtCollectingLocation.getText();
+        String ButterflyName = txtButterflyName.getText();
+        String ButterflyFName = txtButterflyFamily.getText();
+        String Method = cmbCollectingMethod.getSelectionModel().getSelectedItem();
+        
+        query = "select b.country, a.date, c.name, b.alias, d.name, d.family \n" +
+    			"from Butterfly.CollectionInfo as a \n" +
+    			"inner join Butterfly.Location as b on a.idLocation = b.idLocation \n" +
+    			"inner join Butterfly.Person as c on a.idPerson = c.idPerson \n" +
+    			"inner join Butterfly.ButterflyGuide as d on a.idButterflyGuide = d.idButterflyGuide\n";
         
         
+        boolean where_not_used = true;
         
+        if (Country != null) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " b.country = '" + Country + "'";
+        }
+        
+        if (Year != null) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " left(a.date,4) = '" + Year + "'";
+        }
+        
+        if (Month != null) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " substr(a.date,5,2) = '" + Month + "'";
+        }
+        
+        if (Collector != null) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " c.name = '" + Collector + "'";
+        }
+        
+        if (Location.length() != 0) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " b.alias = '" + Location + "'";
+        }
+        
+        if (ButterflyName.length() != 0) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " d.name = '" + ButterflyName + "'";
+        }
+                
+        if (ButterflyFName.length() != 0) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " d.family = '" + ButterflyFName + "'";
+        }
+        
+        if (Method != null) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " a.method = '" + Method + "'";
+        }
+              
         // Complete the query
-        query = "Select";
-        
+        /*"where left(a.date,4) = '" + Year
+        				+ "'\n and substr(a.date,5,2) = '" + Month
+        				+ "'\n and c.name = '" + Collector
+        				+ "'\n and b.country = '" + Country
+        				+ "'\n and b.alias = '" + Location
+        				+ "'\n and d.name = '" + ButterflyName
+        				+ "'\n and d.family = '" + ButterflyFName
+        				+ "'\n and a.method = '" + Method + "'";
+        */         
         System.out.println(query);
         
 
@@ -231,6 +329,15 @@ public class CInquiry extends AbsMetaController implements Initializable {
         /* Apply to TableView */
         while(result_query.next()) {
             /* Add Itemp to TableView */
+        	InquiryTableItem item = new InquiryTableItem(result_query.getString(1), 
+        			result_query.getString(2), 
+        			result_query.getString(3), 
+        			result_query.getString(4),
+        			result_query.getString(5),
+        			result_query.getString(6),
+        			result_query.getString(7));
+			
+			this.tblInquiry.getItems().add(item);
 
         }
     }
@@ -274,6 +381,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
     public void init_procedure() {
 
     	/* DB Instance initialization */
+    	 MDatabase db = ((MSharedData)this.shared_model).getDB();
     	 db_location = new MDBLocation(((MSharedData)this.shared_model).getDB().getConnection());
     	 db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
     	 db_specimenize = new MDBSpecimenize(((MSharedData)this.shared_model).getDB().getConnection());
