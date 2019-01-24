@@ -1,20 +1,43 @@
 package Controller;
 
+import Model.MDBButterflyGuide;
+import Model.MDBCollectionInfo;
+import Model.MDBLocation;
+import Model.MDBPerson;
+import Model.MDBSpecimen;
+import Model.MDBSpecimenize;
+import Model.MDatabase;
 import Model.MSharedData;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CInquiry extends AbsMetaController implements Initializable {
+	
+    MDBSpecimen db_specimen=null;
+    MDBSpecimenize db_specimenize=null;
+    MDBLocation db_location=null;
+    MDBCollectionInfo db_collectionInfo=null;
+    MDBPerson db_person=null;
+    MDBButterflyGuide db_butterflyGuide=null;
 
     /* Class for Table */
     public class InquiryTableItem {
@@ -210,6 +233,14 @@ public class CInquiry extends AbsMetaController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+    	
+   	 tclCountry.setCellValueFactory(new PropertyValueFactory<>("country")); 
+   	 tclCollectingDate.setCellValueFactory(new PropertyValueFactory<>("collecting_date"));
+   	 tclCollector.setCellValueFactory(new PropertyValueFactory<>("collector"));
+   	 tclCollectingLocate.setCellValueFactory(new PropertyValueFactory<>("collecting_location"));
+   	 tclButterflyName.setCellValueFactory(new PropertyValueFactory<>("butterfly_name"));
+   	 tclButterflyFamily.setCellValueFactory(new PropertyValueFactory<>("butterfly_family"));
+	    	 
         /* Initialize Combo Bos */
         // 국가 채우기
         // 전체, 한국, 곰국 등
@@ -227,5 +258,40 @@ public class CInquiry extends AbsMetaController implements Initializable {
         // 전체, 채집, 선물, 교환 등
         // this.cmbCollectingMethod
 
+    }
+    
+    @Override
+    public void init_procedure() {
+
+    	/* DB Instance initialization */
+    	 db_location = new MDBLocation(((MSharedData)this.shared_model).getDB().getConnection());
+    	 db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
+    	 db_specimenize = new MDBSpecimenize(((MSharedData)this.shared_model).getDB().getConnection());
+    	 db_butterflyGuide = new MDBButterflyGuide(((MSharedData)this.shared_model).getDB().getConnection());
+    	 db_collectionInfo = new MDBCollectionInfo(((MSharedData)this.shared_model).getDB().getConnection());
+    	 db_person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
+    	 
+	     ResultSet rs = null;
+	        
+    	 String InitialTblSetting = "SELECT distinct A.country, B.date, C.name, A.alias, D.name, D.family "
+    	 		+ "FROM Location AS A, CollectionInfo AS B, Person AS C, ButterflyGuide AS D ORDER BY date DESC limit 1000";
+
+			try {
+				rs = db_location.selectQuery(InitialTblSetting);
+				while(rs.next()) {
+					InquiryTableItem item = new InquiryTableItem(rs.getString(1), 
+							rs.getString(2), 
+							rs.getString(3), 
+							rs.getString(4),
+							rs.getString(5),
+							rs.getString(6));
+					
+					this.tblInquiry.getItems().add(item);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        
     }
 }

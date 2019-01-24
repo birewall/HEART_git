@@ -84,12 +84,12 @@ import javafx.stage.Stage;
 	    	for (String path : listExplorer.getItems()) {
 	    		System.out.println(path);		
 	    	}
-	    	changeWindow(this.Exit.getScene().getWindow(), "VInsertPicture");
+	    	changeWindow(this.Exit.getScene().getWindow(), "VInsertPicture-m");
 	    }
 
 	    @FXML
 	    void OnExit(ActionEvent event) throws IOException {
-	    	changeWindow(this.Exit.getScene().getWindow(), "VInsertPicture");
+	    	changeWindow(this.Exit.getScene().getWindow(), "VInsertPicture-m");
 	    }
 	    
 	    @Override
