@@ -596,11 +596,11 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 			e.printStackTrace();
 		}
 		
-		this.comboInsertSpecimenCollectway.getItems().addAll("직접채집", "구매", "선물");
+		this.comboInsertSpecimenCollectway.getItems().addAll("직접채집", "구매", "선물", "기타");
 		this.comboInsertSpecimenWho.getItems().addAll("작업자를 선택하세요");
 		this.comboInsertSpecimenCollectwho.getItems().addAll("제공자를 선택하세요");
-		this.comboInsertSpecimenStatus.getItems().addAll("상", "중", "하");
-		this.comboInsertSpecimenSex.getItems().addAll("암", "수");
+		this.comboInsertSpecimenStatus.getItems().addAll("상", "중", "하", "기타");
+		this.comboInsertSpecimenSex.getItems().addAll("암", "수", "불분명");
         this.comboInsertSpecimenCollectway.getSelectionModel().select(0);
         this.comboInsertSpecimenWho.getSelectionModel().select(0);
         this.comboInsertSpecimenCollectwho.getSelectionModel().select(0);
