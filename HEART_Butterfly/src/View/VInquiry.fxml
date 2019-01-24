@@ -43,15 +43,15 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="7.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label text="국가" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -74,22 +74,22 @@
                         <Insets top="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="채집장소" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                  <Label text="채집장소" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets top="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="나비명" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                  <Label text="나비명" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets top="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="수집방법" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                  <Label text="수집방법" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets top="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="나비과" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                  <Label text="나비과" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets top="10.0" />
                      </GridPane.margin>
@@ -114,22 +114,22 @@
                         <Insets bottom="10.0" left="5.0" right="5.0" />
                      </GridPane.margin>
                   </ComboBox>
-                  <ComboBox fx:id="cmbCollectingMethod" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+                  <ComboBox fx:id="cmbCollectingMethod" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" />
                      </GridPane.margin>
                   </ComboBox>
-                  <TextField fx:id="txtCollectingLocation" onAction="#OnCollectingLocation" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                  <TextField fx:id="txtCollectingLocation" onAction="#OnCollectingLocation" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="txtButterflyName" onAction="#OnButterflyName" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                  <TextField fx:id="txtButterflyName" onAction="#OnButterflyName" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="txtButterflyFamily" alignment="CENTER" onAction="#OnButterflyFamily" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+                  <TextField fx:id="txtButterflyFamily" alignment="CENTER" onAction="#OnButterflyFamily" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="5.0" right="5.0" />
                      </GridPane.margin>

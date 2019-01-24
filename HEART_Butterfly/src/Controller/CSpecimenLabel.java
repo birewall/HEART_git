@@ -78,7 +78,7 @@ public class CSpecimenLabel extends AbsMetaController {
 
     @FXML
     void OnExit(ActionEvent event) throws IOException {
-    	changeWindow(this.btnExit.getScene().getWindow(), "VInsertSpecimen");
+    	changeWindow(this.btnExit.getScene().getWindow(), "VInquiry");
 
     }
 
