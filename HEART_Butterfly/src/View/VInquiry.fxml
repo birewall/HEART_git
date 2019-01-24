@@ -19,10 +19,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="600.0" maxWidth="900.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CInquiry">
+<HBox maxHeight="600.0" maxWidth="1000.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CInquiry">
    <children>
-      <TableView fx:id="tblInquiry" prefHeight="200.0" prefWidth="700.0">
+      <TableView fx:id="tblInquiry" prefHeight="560.0" prefWidth="840.0">
         <columns>
+            <TableColumn fx:id="tclSpecimenID" prefWidth="75.0" text="표본 ID" />
           <TableColumn fx:id="tclCountry" prefWidth="75.0" text="국가" />
           <TableColumn fx:id="tclCollectingDate" prefWidth="98.0" text="채집일자" />
             <TableColumn fx:id="tclCollector" prefWidth="81.0" text="채집자" />

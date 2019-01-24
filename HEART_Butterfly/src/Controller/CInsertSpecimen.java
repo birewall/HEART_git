@@ -27,7 +27,6 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     String PlaceName;
     String CabinetName;
     String BoxName;
-    
 
     @FXML
     private TextField txtWhoInsertSpecimen;
@@ -75,9 +74,6 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     private TextField txtInsertSpecimenLat;
     
     @FXML
-    private ComboBox<String> comboInsertSpecimenWho;
-    
-    @FXML
     private ComboBox<String> comboInsertSpecimenLoc3;
 
     @FXML
@@ -88,9 +84,6 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 
     @FXML
     private TextField txtInsertSpecimenZoological;
-
-    @FXML
-    private Button btnInsertSpecimenLabel;
 
     @FXML
     private TextField txtInsertSpecimenCollectoc;
@@ -190,7 +183,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
         String gps =  gps_x + "," + gps_y;
 
     	String alias = txtInsertSpecimenLocname.getText();
-    	String collectwho = comboInsertSpecimenCollectwho.getSelectionModel().getSelectedItem();
+    	String collectwho = txtWhoInsertSpecimen.getText();
     	String butterfly_name = txtInsertSpecimenBname.getText();
     	String butterfly_family = txtInsertSpecimenFamily.getText();
     	String scientific_name = txtInsertSpecimenZoological.getText();
@@ -203,7 +196,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	String NewLoc1 = txtInsertLoc1.getText();
     	String NewLoc2 = txtInsertLoc2.getText();
     	String NewLoc3 = txtInsertLoc3.getText();
-    	String SpecimenWho = comboInsertSpecimenWho.getSelectionModel().getSelectedItem();
+    	String SpecimenWho = txtWhoInsertSpecimen.getText();
 
 
         /* Value Mapping */
@@ -356,11 +349,6 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     }
 
     @FXML
-    void collectwhoInsertSpecimen(ActionEvent event) {
-
-    }
-
-    @FXML
     void collectdateInsertSpecimen(ActionEvent event) {
 
     }
@@ -409,11 +397,6 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     @FXML
     void familyInsertSpecimen(ActionEvent event) {
 
-    }
-
-    @FXML
-    void labelInsertSpecimen(ActionEvent event) throws IOException {
-    	changeWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VSpecimenLabel");
     }
 
     @FXML
@@ -541,7 +524,6 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 
         /* Clear All Names from List */
         this.txtWhoInsertSpecimen.clear();
-        this.comboInsertSpecimenWho.getItems().clear();
 
         /* DB Querying */
         String query = "select name from Person";
@@ -550,7 +532,6 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
             while(rs.next()) {
                 /* View Updating */
                 this.txtWhoInsertSpecimen.getText();   // get name
-                this.comboInsertSpecimenCollectwho.getItems().add(rs.getString(1));   // get name
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -558,7 +539,6 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
         }
 
         /* Initializing */
-        if(this.comboInsertSpecimenWho.getItems().size() > 0) this.comboInsertSpecimenWho.getSelectionModel().select("조윤호"); // DB에 '조윤호'는 반드시 존재한다.
         if(this.comboInsertSpecimenCollectwho.getItems().size() > 0) this.comboInsertSpecimenCollectwho.getSelectionModel().select("조윤호");
     }
 
@@ -596,14 +576,10 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 			e.printStackTrace();
 		}
 		
-		this.comboInsertSpecimenCollectway.getItems().addAll("직접채집", "구매", "선물", "기타");
-		this.comboInsertSpecimenWho.getItems().addAll("작업자를 선택하세요");
-		this.comboInsertSpecimenCollectwho.getItems().addAll("제공자를 선택하세요");
-		this.comboInsertSpecimenStatus.getItems().addAll("상", "중", "하", "기타");
-		this.comboInsertSpecimenSex.getItems().addAll("암", "수", "불분명");
+		this.comboInsertSpecimenCollectway.getItems().addAll("직접채집", "구매", "선물");
+		this.comboInsertSpecimenStatus.getItems().addAll("상", "중", "하");
+		this.comboInsertSpecimenSex.getItems().addAll("암", "수");
         this.comboInsertSpecimenCollectway.getSelectionModel().select(0);
-        this.comboInsertSpecimenWho.getSelectionModel().select(0);
-        this.comboInsertSpecimenCollectwho.getSelectionModel().select(0);
         this.comboInsertSpecimenStatus.getSelectionModel().select(0);
         this.comboInsertSpecimenSex.getSelectionModel().select(0);
 		this.txtInsertLoc1.setDisable(true);

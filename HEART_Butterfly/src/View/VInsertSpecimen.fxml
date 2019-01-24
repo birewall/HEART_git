@@ -51,10 +51,6 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <Button fx:id="btnInsertSpecimenLabel" mnemonicParsing="false" onAction="#labelInsertSpecimen" prefHeight="29.0" prefWidth="179.0" style="-fx-border-color: blue;" text="레이블 정보 복사하기" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -153,12 +149,11 @@
                      </GridPane.margin></TextField>
                   <GridPane GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <children>
-                        <ComboBox fx:id="comboInsertSpecimenCollectwho" onAction="#collectwhoInsertSpecimen" prefHeight="29.0" prefWidth="200.0" promptText="조윤호" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                         <Button fx:id="btnInsertSpecimenGiverManagement" mnemonicParsing="false" onAction="#OnGiverManagement" prefHeight="29.0" prefWidth="120.0" style="-fx-border-color: blue;" text="관리" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <TextField fx:id="txtWhoInsertSpecimen" editable="false" />
+                        <TextField fx:id="txtWhoInsertSpecimen" editable="false" promptText="제공자를 선택하세요" />
                      </children>
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
