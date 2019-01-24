@@ -230,6 +230,31 @@ public class CInquiry extends AbsMetaController implements Initializable {
         
         boolean where_not_used = true;
         
+        if(Country == "전체") {
+        	Country = null;
+        }
+        if(Year == "전체") {
+        	Year = null;
+        }
+        if(Month == "전체") {
+        	Month = null;
+        }
+        if(Collector == "전체") {
+        	Collector = null;
+        }
+        if(Location == "전체") {
+        	Location = null;
+        }
+        if(ButterflyName == "전체") {
+        	ButterflyName = null;
+        }
+        if(ButterflyFName == "전체") {
+        	ButterflyFName = null;
+        }
+        if(Method == "전체") {
+        	Method = null;
+        }
+        
         if (Country != null) {
             if (where_not_used) {
                 query += " where";
@@ -300,7 +325,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
             query += " d.family = '" + ButterflyFName + "'";
         }
         
-        if (Method != null) {
+        if (Method != null ) {
             if (where_not_used) {
                 query += " where";
                 where_not_used = false;
@@ -311,16 +336,8 @@ public class CInquiry extends AbsMetaController implements Initializable {
         }
               
         // Complete the query
-        /*"where left(a.date,4) = '" + Year
-        				+ "'\n and substr(a.date,5,2) = '" + Month
-        				+ "'\n and c.name = '" + Collector
-        				+ "'\n and b.country = '" + Country
-        				+ "'\n and b.alias = '" + Location
-        				+ "'\n and d.name = '" + ButterflyName
-        				+ "'\n and d.family = '" + ButterflyFName
-        				+ "'\n and a.method = '" + Method + "'";
-        */         
-        System.out.println(query);
+      
+        //System.out.println(query);
         
 
         /* Send Query */
@@ -478,6 +495,13 @@ public class CInquiry extends AbsMetaController implements Initializable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+	        // 수집 방법 채우기
+	        // 전체, 채집, 선물, 교환 등
+	        // this.cmbCollectingMethod
+			cmbCollectingMethod.getItems().add("전체");
+			cmbCollectingMonth.getItems().add("전체");
+			cmbCollectingYear.getItems().add("전체");
+			cmbCollector.getItems().add("전체");
+			cmbCountry.getItems().add("전체");
     }
 }
