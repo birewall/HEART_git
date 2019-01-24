@@ -227,8 +227,9 @@ public class CInquiry extends AbsMetaController implements Initializable {
     }
 
     @FXML
-    void OnPrintLabel(ActionEvent event) {
+    void OnPrintLabel(ActionEvent event) throws IOException {
         /* Copy Table Item to Clipboard */
+    	changeWindow(this.btnPrevious.getScene().getWindow(), "VSpecimenLabel");
     }
 
     @Override
@@ -241,22 +242,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
    	 tclButterflyName.setCellValueFactory(new PropertyValueFactory<>("butterfly_name"));
    	 tclButterflyFamily.setCellValueFactory(new PropertyValueFactory<>("butterfly_family"));
 	    	 
-        /* Initialize Combo Bos */
-        // 국가 채우기
-        // 전체, 한국, 곰국 등
-        // this.cmbCountry
 
-        // 수집자 채우기
-        // 전체, 문문문, 조까치, 최소쌍녀 등
-        // this.cmbCollector
-
-        // 수집 날짜 채우기
-        // 전체, 2000년 이전, 2000~2010, 2010~현재 등
-        // this.cmbCollectingDate
-
-        // 수집 방법 채우기
-        // 전체, 채집, 선물, 교환 등
-        // this.cmbCollectingMethod
 
     }
     
@@ -273,8 +259,10 @@ public class CInquiry extends AbsMetaController implements Initializable {
     	 
 	     ResultSet rs = null;
 	        
-    	 String InitialTblSetting = "SELECT distinct A.country, B.date, C.name, A.alias, D.name, D.family "
-    	 		+ "FROM Location AS A, CollectionInfo AS B, Person AS C, ButterflyGuide AS D ORDER BY date DESC limit 1000";
+    	 String InitialTblSetting = "SELECT distinct A.country, B.date, C.name, A.alias, D.name, D.family\n" + 
+    	 		"FROM Location AS A inner join CollectionInfo AS B on A.idLocation=B.idLocation \n" + 
+    	 		"inner join Person AS C on B.idPerson=C.idPerson \n" + 
+    	 		"inner join ButterflyGuide AS D on B.idButterflyGuide=D.idButterflyGuide ORDER BY date DESC limit 1000";
 
 			try {
 				rs = db_location.selectQuery(InitialTblSetting);
@@ -291,7 +279,74 @@ public class CInquiry extends AbsMetaController implements Initializable {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}    
+			
+	        /* Initialize Combo Box */
+
+			/*Country*/
+	   	 	String InitialCountry = null;
+		   	ResultSet rsCountry = null;
+		     
+			InitialCountry = "SELECT distinct country from Location";
+			rsCountry = db_location.selectQuery(InitialCountry);
+			try {
+				while(rsCountry.next()) {
+			        this.cmbCountry.getItems().add(rsCountry.getString(1));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-	        
+
+	        /*Collector*/
+	   	 	String InitialCollector = null;
+		   	ResultSet rsCollector = null;
+			InitialCollector = "SELECT distinct name from Person";
+			rsCollector = db_person.selectQuery(InitialCollector);
+			try {
+				while(rsCollector.next()) {
+			        this.cmbCollector.getItems().add(rsCollector.getString(1));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	        /*Collection Year*/
+	   	 	String InitialCollectionYear = null;
+		   	ResultSet rsCollectionYear = null;
+			InitialCollectionYear = "SELECT distinct left(date, 4) from CollectionInfo";
+			rsCollectionYear = db_collectionInfo.selectQuery(InitialCollectionYear);
+			try {
+				while(rsCollectionYear.next()) {
+					String CollectingYear = rsCollectionYear.getString(1);
+			        this.cmbCollectingYear.getItems().add(CollectingYear);
+			        System.out.println(CollectingYear);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+	        /*Collection Month*/
+			this.cmbCollectingMonth.getItems().addAll("01", "02", "03", "04", "05", "06,", "07", "08", "09", "10", "11", "12");
+
+	        /*Collection Method*/
+	   	 	String InitialMethod = null;
+		   	ResultSet rsMethod = null;
+			InitialMethod = "SELECT distinct method from CollectionInfo";
+			rsMethod = db_collectionInfo.selectQuery(InitialMethod);
+			try {
+				while(rsMethod.next()) {
+			        this.cmbCollectingMethod.getItems().add(rsMethod.getString(1));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        // 수집 방법 채우기
+	        // 전체, 채집, 선물, 교환 등
+	        // this.cmbCollectingMethod
+
     }
 }
