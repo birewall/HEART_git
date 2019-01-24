@@ -3,10 +3,14 @@ package Controller;
 import Model.MDBLocation;
 import Model.MDatabase;
 import Model.MSharedData;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -57,6 +61,30 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
 
     @FXML
     private BarChart<String, Number> grpNameCollection;
+
+    @FXML
+    private CategoryAxis grpTotalXAxis;
+
+    @FXML
+    private NumberAxis grpTotalYAxis;
+
+    @FXML
+    private CategoryAxis grpRegionalXAxis;
+
+    @FXML
+    private NumberAxis grpRegionalYAxis;
+
+    @FXML
+    private CategoryAxis grpFamilyXAxis;
+
+    @FXML
+    private NumberAxis grpFamilyYAxis;
+
+    @FXML
+    private CategoryAxis grpNameXAxis;
+
+    @FXML
+    private NumberAxis grpNameYAxis;
 
     @FXML
     void OnInquiry(ActionEvent event) throws SQLException {
@@ -170,15 +198,12 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
         String query = "select count(*) from Observation, CollectionInfo, ButterflyGuide, Location";
     }
 
-    void drawTotalChart() throws SQLException {
+    private void drawTotalChart() throws SQLException {
         boolean where_not_used = true;
 
         /* Initialized Chart */
         this.grpTotalCollection.getData().clear();
-        XYChart.Series chart_series = new XYChart.Series();
-        chart_series.setName("월별 수집 개체수");
-        //chart_series.getChart().getXAxis().setLabel("월");
-        //chart_series.getChart().getYAxis().setLabel("수집 개체수");
+        XYChart.Series<String, Number> chart_series = new XYChart.Series<>();
 
         for(int i = 1 ; i < 13 ; i++) { // 12 months
             String query = "select count(*) from CollectionInfo " +
@@ -220,7 +245,9 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
             } else {
                 query += " and";
             }
-            query += " substr(date, 5, 2) = " + i;
+            query += " substr(date, 5, 2) = '";
+            if(i < 10) query += "0";
+            query += i + "'";
 
             /* Make Charts */
             ResultSet result_query = this.db.selectQuery(query);
@@ -228,20 +255,22 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
             if(result_query.next()) {
                 cnt = Integer.parseInt(result_query.getString(1));
             }
-            chart_series.getData().add(new XYChart.Data(String.valueOf(i), cnt));
+            //chart_series.getData().add(new XYChart.Data<>(i + "월", cnt));
+            chart_series.getData().add(new XYChart.Data<>(String.valueOf(i), cnt));
         }
         this.grpTotalCollection.getData().add(chart_series);
-    }
-
-    void drawRegionalChart() {
 
     }
 
-    void drawFamilyGhart() {
+    private void drawRegionalChart() {
 
     }
 
-    void drawNameChart() {
+    private void drawFamilyGhart() {
+
+    }
+
+    private void drawNameChart() {
 
     }
 }
