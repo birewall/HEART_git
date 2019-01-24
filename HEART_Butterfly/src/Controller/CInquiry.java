@@ -293,7 +293,6 @@ public class CInquiry extends AbsMetaController implements Initializable {
 			try {
 				rs = db_location.selectQuery(InitialTblSetting);
 				while(rs.next()) {
-					System.out.println(rs.getString(1));
 					InquiryTableItem item = new InquiryTableItem(rs.getString(1), 
 							rs.getString(2), 
 							rs.getString(3), 
@@ -301,9 +300,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
 							rs.getString(5),
 							rs.getString(6),
 							rs.getString(7));
-					System.out.println(item.getSpecimenID());
 					this.tblInquiry.getItems().add(item);
-					
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
