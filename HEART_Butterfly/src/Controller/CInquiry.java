@@ -47,9 +47,11 @@ public class CInquiry extends AbsMetaController implements Initializable {
         String collecting_location;
         String butterfly_name;
         String butterfly_family;
+        String specimen_ID;
 
-        public InquiryTableItem(String country, String collecting_date, String collector, String collecting_location, String butterfly_name, String butterfly_family) {
-            this.country = country;
+        public InquiryTableItem(String specimen_ID, String country, String collecting_date, String collector, String collecting_location, String butterfly_name, String butterfly_family) {
+            this.specimen_ID = specimen_ID;
+        	this.country = country;
             this.collecting_date = collecting_date;
             this.collector = collector;
             this.collecting_location = collecting_location;
@@ -57,6 +59,14 @@ public class CInquiry extends AbsMetaController implements Initializable {
             this.butterfly_family = butterfly_family;
         }
 
+        public String getSpecimenID() {
+            return specimen_ID;
+        }
+
+        public void setSpecimenID(String specimen_ID) {
+            this.specimen_ID = specimen_ID;
+        }
+        
         public String getCountry() {
             return country;
         }
@@ -126,6 +136,9 @@ public class CInquiry extends AbsMetaController implements Initializable {
 
     @FXML
     private TableColumn<InquiryTableItem, String> tclButterflyFamily;
+    
+    @FXML
+    private TableColumn<InquiryTableItem, String> tclSpecimenID;
 
     @FXML
     private ImageView imvButterflyImage;
@@ -236,15 +249,25 @@ public class CInquiry extends AbsMetaController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	
-   	 tclCountry.setCellValueFactory(new PropertyValueFactory<>("country")); 
-   	 tclCollectingDate.setCellValueFactory(new PropertyValueFactory<>("collecting_date"));
-   	 tclCollector.setCellValueFactory(new PropertyValueFactory<>("collector"));
-   	 tclCollectingLocate.setCellValueFactory(new PropertyValueFactory<>("collecting_location"));
-   	 tclButterflyName.setCellValueFactory(new PropertyValueFactory<>("butterfly_name"));
-   	 tclButterflyFamily.setCellValueFactory(new PropertyValueFactory<>("butterfly_family"));
-	    	 
-
-
+	   	 tclSpecimenID.setCellValueFactory(new PropertyValueFactory<>("specimen_ID")); 
+	   	 tclCountry.setCellValueFactory(new PropertyValueFactory<>("country")); 
+	   	 tclCollectingDate.setCellValueFactory(new PropertyValueFactory<>("collecting_date"));
+	   	 tclCollector.setCellValueFactory(new PropertyValueFactory<>("collector"));
+	   	 tclCollectingLocate.setCellValueFactory(new PropertyValueFactory<>("collecting_location"));
+	   	 tclButterflyName.setCellValueFactory(new PropertyValueFactory<>("butterfly_name"));
+	   	 tclButterflyFamily.setCellValueFactory(new PropertyValueFactory<>("butterfly_family"));
+	   	 
+	   	 tblInquiry.setRowFactory( tv -> {
+	   		 TableRow<InquiryTableItem> row = new TableRow<>();
+	   		 row.setOnMouseClicked(event -> {
+	   			 if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
+	   				 InquiryTableItem rowData = row.getItem();
+	   				 String PathCountry = rowData.getCountry();
+	   				 System.out.println(PathCountry);
+	   			 }
+	   		 });
+	   		 return row ;
+	   	 });
     }
     
     @Override
@@ -260,22 +283,27 @@ public class CInquiry extends AbsMetaController implements Initializable {
     	 
 	     ResultSet rs = null;
 	        
-    	 String InitialTblSetting = "SELECT distinct A.country, B.date, C.name, A.alias, D.name, D.family\n" + 
-    	 		"FROM Location AS A inner join CollectionInfo AS B on A.idLocation=B.idLocation \n" + 
-    	 		"inner join Person AS C on B.idPerson=C.idPerson \n" + 
-    	 		"inner join ButterflyGuide AS D on B.idButterflyGuide=D.idButterflyGuide ORDER BY date DESC limit 1000";
+    	 String InitialTblSetting = "SELECT distinct A.idSpecimen, C.country, B.date, D.name, C.alias, E.name, E.family "
+    	 		+ "FROM Specimen AS A inner join CollectionInfo AS B on A.idCollectionInfo=B.idCollectionInfo "
+    	 		+ "inner join Location AS C on B.idLocation=C.idLocation "
+    	 		+ "inner join Person AS D on B.idPerson=D.idPerson "
+    	 		+ "inner join ButterflyGuide AS E on B.idButterflyGuide=E.idButterflyGuide "
+    	 		+ "ORDER BY date DESC limit 1000";
 
 			try {
 				rs = db_location.selectQuery(InitialTblSetting);
 				while(rs.next()) {
+					System.out.println(rs.getString(1));
 					InquiryTableItem item = new InquiryTableItem(rs.getString(1), 
 							rs.getString(2), 
 							rs.getString(3), 
 							rs.getString(4),
 							rs.getString(5),
-							rs.getString(6));
-					
+							rs.getString(6),
+							rs.getString(7));
+					System.out.println(item.getSpecimenID());
 					this.tblInquiry.getItems().add(item);
+					
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -345,9 +373,6 @@ public class CInquiry extends AbsMetaController implements Initializable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	        // 수집 방법 채우기
-	        // 전체, 채집, 선물, 교환 등
-	        // this.cmbCollectingMethod
 
     }
 }
