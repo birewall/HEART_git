@@ -1,9 +1,13 @@
 package Controller;
 
+import Model.MDBLocation;
+import Model.MDatabase;
+import Model.MSharedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -11,15 +15,21 @@ import javafx.scene.control.ComboBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class CAnalysisMain extends AbsMetaController implements Initializable {
+    MDatabase db = null;
 
     @FXML
     private ComboBox<String> cmbCountry;
 
     @FXML
     private ComboBox<String> cmbInquiryYear;
+
+    @FXML
+    private ComboBox<String> cmbInquiryMonth;
 
     @FXML
     private CheckBox ckbAccumulation;
@@ -49,6 +59,23 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
     private BarChart<String, Number> grpNameCollection;
 
     @FXML
+    void OnInquiry(ActionEvent event) throws SQLException {
+        /*
+         * 조회 조건: 국가 연도
+         *
+         * 조회 내용: 나비 수집 수, 지역별, 나비명별, 나비과별
+         * 테이블 명세: 관찰 테이블 (id수집정보, 관찰날짜)
+         * 연계테이블 명세: 수집정보 테이블 (id장소, id도감, id사람)
+         * 연계테이블 명세: 도감 테이블 (나비명, 나비과)
+         * 연계테이블 명세: 장소 테이블 (지역명)
+         * */
+        drawTotalChart();
+        drawRegionalChart();
+        drawFamilyGhart();
+        drawNameChart();
+    }
+
+    @FXML
     void OnAccumulation(ActionEvent event) {
 
     }
@@ -59,12 +86,12 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
     }
 
     @FXML
-    void OnInquiry(ActionEvent event) {
+    void OnInquiryYear(ActionEvent event) {
 
     }
 
     @FXML
-    void OnInquiryYear(ActionEvent event) {
+    void OnInquiryMonth(ActionEvent event) {
 
     }
 
@@ -98,29 +125,123 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
         this.grpRegionalCollection.setTitle("지역별 수집 통계");
         this.grpFamilyCollection.setTitle("나비과별 수집 통계");
         this.grpNameCollection.setTitle("나비명별 수집 통계");
+    }
 
-        /* Set Combobox */
-        /*
-        * 조회 조건: 국가 연도
-        *
-        * 조회 내용: 나비 수집 수, 지역별, 나비명별, 나비과별
-        * 테이블 명세: 관찰 테이블 (id수집정보, 관찰날짜)
-        * 연계테이블 명세: 수집정보 테이블 (id장소, id도감, id사람)
-        * 연계테이블 명세: 도감 테이블 (나비명, 나비과)
-        * 연계테이블 명세: 장소 테이블 (지역명)
-        * */
+    @Override
+    public void init_procedure() {
+        this.db = ((MSharedData)this.shared_model).getDB();
+        fillComboBox();
+
+        /* Initialize View Selection */
+        this.cmbCountry.getSelectionModel().select("대한민국");
+        this.cmbInquiryYear.getSelectionModel().select("전체");
+        this.cmbInquiryMonth.getSelectionModel().select("전체");
+    }
+
+    void fillComboBox() {
+        ResultSet result_query = null;
 
         /* cmbCountry */
+        this.cmbCountry.getItems().clear();
+        result_query = db.selectQuery("select distinct country from Location");
+        try {
+            while (result_query.next()) {
+                this.cmbCountry.getItems().add(result_query.getString(1));
+            }
+        }catch(Exception exp){
+            System.out.println("Location is empty");
+        }
 
         /* cmbYear */
+        this.cmbInquiryYear.getItems().clear();
+        result_query = db.selectQuery("select distinct left(date, 4) from Observation");
+        try {
+            while (result_query.next()) {
+                this.cmbInquiryYear.getItems().add(result_query.getString(1));
+            }
+        }catch(Exception exp){
+            System.out.println("Year is empty");
+        }
 
-        /* cmbMeonth */
+        /* cmbMonth */
+        this.cmbInquiryMonth.getItems().clear();
+        this.cmbInquiryMonth.getItems().addAll("전체");
 
-        /* cmbCollector */
-
-        /* cmbLocation */
-
-        //this.cmbCountry.getItems().add();
         String query = "select count(*) from Observation, CollectionInfo, ButterflyGuide, Location";
+    }
+
+    void drawTotalChart() throws SQLException {
+        boolean where_not_used = true;
+
+        /* Initialized Chart */
+        this.grpTotalCollection.getData().clear();
+        XYChart.Series chart_series = new XYChart.Series();
+        chart_series.setName("월별 수집 개체수");
+        //chart_series.getChart().getXAxis().setLabel("월");
+        //chart_series.getChart().getYAxis().setLabel("수집 개체수");
+
+        for(int i = 1 ; i < 13 ; i++) { // 12 months
+            String query = "select count(*) from CollectionInfo " +
+                    "inner join Location on CollectionInfo.idLocation = Location.idLocation ";
+            where_not_used = true;
+
+            if (!this.cmbCountry.getSelectionModel().getSelectedItem().equals("전체")) {
+                if (where_not_used) {
+                    query += " where";
+                    where_not_used = false;
+                } else {
+                    query += " and";
+                }
+                query += " country = '" + this.cmbCountry.getSelectionModel().getSelectedItem() + "'";
+            }
+
+            if (!this.cmbInquiryYear.getSelectionModel().getSelectedItem().equals("전체")) {
+                if (where_not_used) {
+                    query += " where";
+                    where_not_used = false;
+                } else {
+                    query += " and";
+                }
+                query += " left(date, 4) = " + this.cmbInquiryYear.getSelectionModel().getSelectedItem();
+            }
+
+//            if (!this.cmbInquiryMonth.getSelectionModel().getSelectedItem().equals("전체")) {
+//                if (where_not_used) {
+//                    query += " where";
+//                    where_not_used = false;
+//                } else {
+//                    query += " and";
+//                }
+//                query += " substr(date, 5, 2) = " + this.cmbInquiryMonth.getSelectionModel().getSelectedItem();
+//            }
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " substr(date, 5, 2) = " + i;
+
+            /* Make Charts */
+            ResultSet result_query = this.db.selectQuery(query);
+            int cnt = 0;
+            if(result_query.next()) {
+                cnt = Integer.parseInt(result_query.getString(1));
+            }
+            chart_series.getData().add(new XYChart.Data(String.valueOf(i), cnt));
+        }
+        this.grpTotalCollection.getData().add(chart_series);
+    }
+
+    void drawRegionalChart() {
+
+    }
+
+    void drawFamilyGhart() {
+
+    }
+
+    void drawNameChart() {
+
     }
 }
