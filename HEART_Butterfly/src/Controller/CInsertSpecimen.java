@@ -537,9 +537,6 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        /* Initializing */
-        if(this.comboInsertSpecimenCollectwho.getItems().size() > 0) this.comboInsertSpecimenCollectwho.getSelectionModel().select("조윤호");
     }
 
     @Override
