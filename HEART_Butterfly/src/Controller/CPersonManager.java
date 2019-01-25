@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.MDBPerson;
+import Model.MPassingData;
 import javafx.stage.WindowEvent;
 import javafx.event.EventHandler;
 
@@ -71,6 +72,13 @@ public class CPersonManager extends AbsMetaController implements Initializable {
     @FXML
     void OnDone(ActionEvent event) {
         ((AbsInsertController)this.parent_controller).passing_person(this.lsvName.getSelectionModel().getSelectedItem());
+        /* Get Previous Information */
+        MPassingData data = (MPassingData) (((MSharedData)this.shared_model).get("button_name"));
+        System.out.println(data.getData(0));
+        ((MSharedData)this.shared_model).remove("button_name");
+
+        /* Set Parent View */
+        //((AbsInsertController)this.parent_controller).passing_person("");
         Stage thisStage = (Stage)this.btnDone.getScene().getWindow();
         //this.parent_controller.view_update();
         thisStage.close();
