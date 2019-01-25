@@ -561,7 +561,6 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 
     @Override
     public void init_procedure() {
-
     	/* DB Instance initialization */
     	 db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
     	 db_specimenize = new MDBSpecimenize(((MSharedData)this.shared_model).getDB().getConnection());
@@ -598,8 +597,6 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 
     @FXML
     void boxInsert(ActionEvent event) throws SQLException {
-    	
-
         view_update();
     }
 
@@ -625,5 +622,21 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	} else if(prev_button == "worker") {
         	this.txtWhoWorkSpecimen.setText(name);
     	}
+    }
+
+    @Override
+    public void passing_collection_info(String date, String country, String loc_alias, String butter_name, String butter_family, String person_name) {
+        /* View Updating */
+        this.dateInsertSpecimenCollectdate.getEditor().setText(date);
+        this.txtInsertSpecimenNation.setText(country);
+        this.txtInsertSpecimenLocname.setText(loc_alias);
+        this.txtInsertSpecimenBname.setText(butter_name);
+        this.txtInsertSpecimenFamily.setText(butter_family);
+        this.txtWhoInsertSpecimen.setText(person_name);
+    }
+
+    @Override
+    public void passing_specimen_info(String date, String country, String loc_alias, String butter_name, String butter_family, String person_name) {
+        /* Not Implemented */
     }
 }

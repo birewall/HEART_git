@@ -434,6 +434,17 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
         ((MSharedData)this.shared_model).remove("collectInfo_table");
     }
 
+    @Override
+    public void passing_collection_info(String date, String country, String loc_alias, String butter_name, String butter_family, String person_name) {
+        /* View Updating */
+        this.dateInsertWatchDate.getEditor().setText(date);
+        this.txtInsertWatchNation.setText(country);
+        this.txtInsertWatchLocname.setText(loc_alias);
+        this.txtInsertWatchBname.setText(butter_name);
+        this.txtInsertWatchFamily.setText(butter_family);
+        this.comboInsertWatchWho.getSelectionModel().select(person_name);
+    }
+
     public void update_person() {
         /* Clear All Names from List */
         this.comboInsertWatchWho.getItems().clear();

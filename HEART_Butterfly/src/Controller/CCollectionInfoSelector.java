@@ -352,15 +352,16 @@ public class CCollectionInfoSelector extends AbsMetaController implements Initia
     @FXML
     void OnSelect(ActionEvent event) {
         /* Data Passing */
-        if(selected_item != null) {
-            MPassingData passing_data = new MPassingData(selected_item.getSize());
-            for (int i = 0 ; i < selected_item.getSize() ; i++ ) {
-                passing_data.setData(selected_item.getRecord(i), i);
-            }
-            ((MSharedData)this.shared_model).add(passing_data, "collectionInfo_table");
-        }
         Stage thisStage = (Stage)this.btnSelect.getScene().getWindow();
-        this.parent_controller.view_update();
+        String date = selected_item.getRecord(0);
+        String parsed_date = date.substring(0,4) + ". " + Integer.parseInt(date.substring(4,6)) + ". " + Integer.parseInt(date.substring(6,8));
+        ((AbsInsertController)this.parent_controller).passing_collection_info(parsed_date,
+                                                                                selected_item.getRecord(1),
+                                                                                selected_item.getRecord(2),
+                                                                                selected_item.getRecord(3),
+                                                                                selected_item.getRecord(4),
+                                                                                selected_item.getRecord(5));
+
         thisStage.close();
     }
 
