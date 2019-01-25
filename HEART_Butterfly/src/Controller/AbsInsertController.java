@@ -5,7 +5,7 @@ public abstract class AbsInsertController extends AbsMetaController {
         /* For Overriding */
     }
 
-    public void passing_person(String name) {
+    public void passing_person(String prev_button, String name) {
         /* For Overriding */
     }
 }

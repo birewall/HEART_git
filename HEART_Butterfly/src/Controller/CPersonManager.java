@@ -73,11 +73,11 @@ public class CPersonManager extends AbsMetaController implements Initializable {
     void OnDone(ActionEvent event) {
         /* Get Previous Information */
         MPassingData data = (MPassingData) (((MSharedData)this.shared_model).get("button_name"));
-        System.out.println(data.getData(0));
+        String prev_btn = data.getData(0);
         ((MSharedData)this.shared_model).remove("button_name");
 
         /* Set Parent View */
-        //((AbsInsertController)this.parent_controller).passing_person("");
+        ((AbsInsertController)this.parent_controller).passing_person(prev_btn, this.lsvName.getSelectionModel().getSelectedItem());
         Stage thisStage = (Stage)this.btnDone.getScene().getWindow();
         //this.parent_controller.view_update();
         thisStage.close();
