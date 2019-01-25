@@ -16,9 +16,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -33,6 +35,7 @@ import org.controlsfx.control.textfield.TextFields;
 public class CInquiry extends AbsMetaController implements Initializable {
 
     MDatabase db = null;
+    String ImagePath=null;
 
     /* Class for Table */
     public class InquiryTableItem {
@@ -378,18 +381,6 @@ public class CInquiry extends AbsMetaController implements Initializable {
         tclCollectingLocate.setCellValueFactory(new PropertyValueFactory<>("collecting_location"));
         tclButterflyName.setCellValueFactory(new PropertyValueFactory<>("butterfly_name"));
         tclButterflyFamily.setCellValueFactory(new PropertyValueFactory<>("butterfly_family"));
-
-        tblInquiry.setRowFactory( tv -> {
-            TableRow<InquiryTableItem> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
-                    InquiryTableItem rowData = row.getItem();
-                    String PathCountry = rowData.getCountry();
-                    System.out.println(PathCountry);
-                }
-            });
-            return row ;
-        });
     }
 
     @Override
@@ -397,6 +388,39 @@ public class CInquiry extends AbsMetaController implements Initializable {
         /* DB Instance initialization */
         this.db = ((MSharedData)this.shared_model).getDB();
 
+        ResultSet rsImage = null;
+        
+        String ImageLoadingPath = "SELECT distinct Image.path from Image inner join Specimen "
+        		+ "on Image.idImage = Specimen.idImage where Specimen.idSpecimen = "
+        		+ this.tblInquiry.getSelectionModel().getSelectedItem().specimen_ID;
+        
+        rsImage = db.selectQuery(ImageLoadingPath);
+        
+        try {
+			while(rsImage.next()) {
+			    ImagePath = rsImage.getString(1);
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        
+        tblInquiry.setRowFactory( tv -> {
+            TableRow<InquiryTableItem> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
+                    InquiryTableItem rowData = row.getItem();
+                    
+            		//Set image
+                    System.out.println(ImagePath);
+            		//Image image = new Image(file.toURI().toString());
+            		//this.imvButterflyImage.setImage(image);
+            		//System.out.println(ImageLoadingPath);
+                }
+            });
+            return row ;
+        });
+        
         ResultSet rs = null;
 
         String InitialTblSetting = "SELECT distinct A.idSpecimen, C.country, B.date, D.name, C.alias, E.name, E.family "
