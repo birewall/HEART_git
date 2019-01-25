@@ -392,7 +392,11 @@ public class CInquiry extends AbsMetaController implements Initializable {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
                     InquiryTableItem rowData = row.getItem();
-
+            		
+            		//Set image
+            		File file = new File(LoadImagePath);
+            		Image image = new Image(file.toURI().toString());
+            		this.imvButterflyImage.setImage(image);
                     System.out.println(LoadImagePath);
                 }
             });
