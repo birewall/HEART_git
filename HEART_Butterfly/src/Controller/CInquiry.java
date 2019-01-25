@@ -387,8 +387,31 @@ public class CInquiry extends AbsMetaController implements Initializable {
             if( tblInquiry.getSelectionModel().getSelectedItem() != null) {
                 InquiryTableItem item = tblInquiry.getSelectionModel().getSelectedItem();
 
-                /* BlahBlahBlah */
+                /* DB Instance initialization */
+                this.db = ((MSharedData)this.shared_model).getDB();
 
+                ResultSet rsImage = null;
+                
+                String ImageLoadingPath = "SELECT distinct Image.path from Image inner join Specimen "
+                		+ "on Image.idImage = Specimen.idImage where Specimen.idSpecimen = "
+                		+ this.tblInquiry.getSelectionModel().getSelectedItem().specimen_ID;
+                
+                rsImage = db.selectQuery(ImageLoadingPath);
+                
+                try {
+        			while(rsImage.next()) {
+        			    ImagePath = rsImage.getString(1);
+        			}
+        		} catch (SQLException e1) {
+        			// TODO Auto-generated catch block
+        			e1.printStackTrace();
+        		}
+                
+        		//Set image
+                System.out.println(ImagePath);
+        		//Image image = new Image(file.toURI().toString());
+        		//this.imvButterflyImage.setImage(image);
+        		//System.out.println(ImageLoadingPath);
             }
         });
     }
@@ -398,39 +421,6 @@ public class CInquiry extends AbsMetaController implements Initializable {
         /* DB Instance initialization */
         this.db = ((MSharedData)this.shared_model).getDB();
 
-        ResultSet rsImage = null;
-        
-        String ImageLoadingPath = "SELECT distinct Image.path from Image inner join Specimen "
-        		+ "on Image.idImage = Specimen.idImage where Specimen.idSpecimen = "
-        		+ this.tblInquiry.getSelectionModel().getSelectedItem().specimen_ID;
-        
-        rsImage = db.selectQuery(ImageLoadingPath);
-        
-        try {
-			while(rsImage.next()) {
-			    ImagePath = rsImage.getString(1);
-			}
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        
-        tblInquiry.setRowFactory( tv -> {
-            TableRow<InquiryTableItem> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
-                    InquiryTableItem rowData = row.getItem();
-                    
-            		//Set image
-                    System.out.println(ImagePath);
-            		//Image image = new Image(file.toURI().toString());
-            		//this.imvButterflyImage.setImage(image);
-            		//System.out.println(ImageLoadingPath);
-                }
-            });
-            return row ;
-        });
-        
         ResultSet rs = null;
 
         String InitialTblSetting = "SELECT distinct A.idSpecimen, C.country, B.date, D.name, C.alias, E.name, E.family "
