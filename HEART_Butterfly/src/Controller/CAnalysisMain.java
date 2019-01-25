@@ -259,11 +259,9 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
             chart_series.getData().add(new XYChart.Data<>(String.valueOf(i), cnt));
         }
         this.grpTotalCollection.getData().add(chart_series);
-
     }
 
     private void drawRegionalChart() {
-
     }
 
     private void drawFamilyGhart() {
