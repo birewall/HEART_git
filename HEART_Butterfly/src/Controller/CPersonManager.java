@@ -70,8 +70,9 @@ public class CPersonManager extends AbsMetaController implements Initializable {
 
     @FXML
     void OnDone(ActionEvent event) {
+        ((AbsInsertController)this.parent_controller).passing_person("");
         Stage thisStage = (Stage)this.btnDone.getScene().getWindow();
-        this.parent_controller.view_update();
+        //this.parent_controller.view_update();
         thisStage.close();
     }
 

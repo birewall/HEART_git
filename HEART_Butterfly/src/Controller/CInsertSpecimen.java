@@ -611,4 +611,9 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
         }
         this.txtInsertSpecimenLocname.setText(alias);
     }
+
+    @Override
+    public void passing_person(String person) {
+
+    }
 }
