@@ -163,6 +163,9 @@ public class CInquiry extends AbsMetaController implements Initializable {
     private TextField txtButterflyFamily;
 
     @FXML
+    private TextField txtIDSpecimen;
+    
+    @FXML
     private Button btnPrintLabel;
 
     @FXML
