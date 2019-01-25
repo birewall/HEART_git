@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -367,8 +368,48 @@ public class CInquiry extends AbsMetaController implements Initializable {
 
     @FXML
     void OnPrintLabel(ActionEvent event) throws IOException {
+    	
+        String strSpcimenID=null;
+        String strCountry=null;
+        String strButterflyName=null;
+        String strCatchDate=null;
+        String strCatchPlace=null;
+        String strCatcher=null;
+        String strButterflyFamily=null;
+        
         /* Copy Table Item to Clipboard */
-        changeWindow(this.btnPrevious.getScene().getWindow(), "VSpecimenLabel");
+    	
+    	if(this.tblInquiry.getSelectionModel().getSelectedItem() != null) {
+    		strSpcimenID = this.tblInquiry.getSelectionModel().getSelectedItem().specimen_ID;
+        	strCountry = this.tblInquiry.getSelectionModel().getSelectedItem().country;
+        	strCatchDate = this.tblInquiry.getSelectionModel().getSelectedItem().collecting_date;
+        	strCatcher = this.tblInquiry.getSelectionModel().getSelectedItem().collector;
+        	strCatchPlace = this.tblInquiry.getSelectionModel().getSelectedItem().collecting_location;
+        	strButterflyName = this.tblInquiry.getSelectionModel().getSelectedItem().butterfly_name;
+        	strButterflyFamily = this.tblInquiry.getSelectionModel().getSelectedItem().butterfly_family;
+        			
+        	SystemClipboard.copy("표본 ID : " + strSpcimenID + "\n"
+        			+ "수집 국가 : " + strCountry + "\n"
+        			+ "수집 날짜 : " + strCatchDate + "\n"
+        			+ "채집자 : " + strCatcher + "\n"			
+        			+ "수집 장소 : " + strCatchPlace + "\n"
+        			+ "나비 이름 : " + strButterflyName + "\n"
+        			+ "나비 과 : " + strButterflyFamily);
+        	/* Alert confirm_popup = new Alert(AlertType.CONFIRMATION);
+    		confirm_popup.setTitle("Load");
+    		confirm_popup.setHeaderText(null);
+    		confirm_popup.setContentText("클립보드에 정보가 저장되었습니다.");
+    		confirm_popup.show();
+    		return; */
+    	} else {
+			Alert confirm_popup = new Alert(AlertType.ERROR);
+			confirm_popup.setTitle("Load");
+			confirm_popup.setHeaderText(null);
+			confirm_popup.setContentText("나비 표본을 선택해주세요.");
+			confirm_popup.show();
+			return;
+    	}
+
     }
 
     @Override
