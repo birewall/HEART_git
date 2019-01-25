@@ -16,9 +16,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -367,7 +369,16 @@ public class CInquiry extends AbsMetaController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        /* DB Instance initialization */
+        this.db = ((MSharedData)this.shared_model).getDB();
+        
+        /*LoadImagepath*/
+        ResultSet rsImage = null;
 
+        String LoadImagePath = "SELECT Image.path from Image inner join Specimen "
+        		+ "on Specimen.idImage=Image.idImage where Specimen.idSpecimen=" 
+        		+ this.tblInquiry.getSelectionModel().getSelectedItem().specimen_ID;
+        
         tclSpecimenID.setCellValueFactory(new PropertyValueFactory<>("specimen_ID"));
         tclCountry.setCellValueFactory(new PropertyValueFactory<>("country"));
         tclCollectingDate.setCellValueFactory(new PropertyValueFactory<>("collecting_date"));
@@ -381,12 +392,13 @@ public class CInquiry extends AbsMetaController implements Initializable {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
                     InquiryTableItem rowData = row.getItem();
-                    String PathCountry = rowData.getCountry();
-                    System.out.println(PathCountry);
+
+                    System.out.println(LoadImagePath);
                 }
             });
             return row ;
         });
+
     }
 
     @Override
