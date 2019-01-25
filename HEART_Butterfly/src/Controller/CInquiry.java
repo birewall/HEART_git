@@ -369,6 +369,19 @@ public class CInquiry extends AbsMetaController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        
+        tclSpecimenID.setCellValueFactory(new PropertyValueFactory<>("specimen_ID"));
+        tclCountry.setCellValueFactory(new PropertyValueFactory<>("country"));
+        tclCollectingDate.setCellValueFactory(new PropertyValueFactory<>("collecting_date"));
+        tclCollector.setCellValueFactory(new PropertyValueFactory<>("collector"));
+        tclCollectingLocate.setCellValueFactory(new PropertyValueFactory<>("collecting_location"));
+        tclButterflyName.setCellValueFactory(new PropertyValueFactory<>("butterfly_name"));
+        tclButterflyFamily.setCellValueFactory(new PropertyValueFactory<>("butterfly_family"));
+
+    }
+
+    @Override
+    public void init_procedure() {
         /* DB Instance initialization */
         this.db = ((MSharedData)this.shared_model).getDB();
         
@@ -379,14 +392,6 @@ public class CInquiry extends AbsMetaController implements Initializable {
         		+ "on Specimen.idImage=Image.idImage where Specimen.idSpecimen=" 
         		+ this.tblInquiry.getSelectionModel().getSelectedItem().specimen_ID;
         
-        tclSpecimenID.setCellValueFactory(new PropertyValueFactory<>("specimen_ID"));
-        tclCountry.setCellValueFactory(new PropertyValueFactory<>("country"));
-        tclCollectingDate.setCellValueFactory(new PropertyValueFactory<>("collecting_date"));
-        tclCollector.setCellValueFactory(new PropertyValueFactory<>("collector"));
-        tclCollectingLocate.setCellValueFactory(new PropertyValueFactory<>("collecting_location"));
-        tclButterflyName.setCellValueFactory(new PropertyValueFactory<>("butterfly_name"));
-        tclButterflyFamily.setCellValueFactory(new PropertyValueFactory<>("butterfly_family"));
-
         tblInquiry.setRowFactory( tv -> {
             TableRow<InquiryTableItem> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -402,13 +407,6 @@ public class CInquiry extends AbsMetaController implements Initializable {
             });
             return row ;
         });
-
-    }
-
-    @Override
-    public void init_procedure() {
-        /* DB Instance initialization */
-        this.db = ((MSharedData)this.shared_model).getDB();
 
         ResultSet rs = null;
 
