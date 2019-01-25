@@ -29,6 +29,9 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     String BoxName;
 
     @FXML
+    private TextField txtWhoWorkSpecimen;
+    
+    @FXML
     private TextField txtWhoInsertSpecimen;
     
     @FXML
@@ -616,7 +619,11 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     }
 
     @Override
-    public void passing_person(String person) {
-    	this.txtWhoInsertSpecimen.setText(person);
+    public void passing_person(String prev_button, String name) {
+    	if(prev_button.equals("giver")) {
+        	this.txtWhoInsertSpecimen.setText(name);
+    	} else if(prev_button == "worker") {
+        	this.txtWhoWorkSpecimen.setText(name);
+    	}
     }
 }

@@ -75,14 +75,14 @@
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="65.0" text="통상명" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
                   <Label text="제공자" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
                   <ComboBox fx:id="comboInsertSpecimenCollectway" onAction="#collectwayInsertSpecimen" prefHeight="29.0" prefWidth="200.0" promptText="직접 채집" GridPane.columnIndex="1" />
-                  <DatePicker fx:id="dateInsertSpecimenCollectdate" onAction="#collectdateInsertSpecimen" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtInsertSpecimenNation" alignment="CENTER" onAction="#nationInsertSpecimen" prefHeight="29.0" prefWidth="200.0" promptText="대한민국" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <DatePicker fx:id="dateInsertSpecimenCollectdate" editable="false" onAction="#collectdateInsertSpecimen" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtInsertSpecimenNation" alignment="CENTER" editable="false" onAction="#nationInsertSpecimen" prefHeight="29.0" prefWidth="200.0" promptText="대한민국" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin></TextField>
                   <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <TextField fx:id="txtInsertSpecimenCollectoc" alignment="CENTER" onAction="#collectlocInsertSpecimen" prefWidth="200.0" promptText="강원" />
+                        <TextField fx:id="txtInsertSpecimenCollectoc" alignment="CENTER" editable="false" onAction="#collectlocInsertSpecimen" prefWidth="200.0" promptText="강원" />
                         <Button fx:id="btnInsertSpecimenSearchcollectloc" mnemonicParsing="false" onAction="#searchcollectlocInsertSpecimen" prefWidth="120.0" style="-fx-border-color: blue;" text="검색" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets />
@@ -102,15 +102,15 @@
                   </GridPane>
                   <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
-                        <TextField fx:id="txtInsertSpecimenDo" alignment="CENTER" onAction="#doInsertSpecimen" prefHeight="29.0" prefWidth="75.0" promptText="춘천시">
+                        <TextField fx:id="txtInsertSpecimenDo" alignment="CENTER" editable="false" onAction="#doInsertSpecimen" prefHeight="29.0" prefWidth="75.0" promptText="춘천시">
                            <GridPane.margin>
                               <Insets right="20.0" />
                            </GridPane.margin></TextField>
-                        <TextField fx:id="txtInsertSpecimenSi" alignment="CENTER" onAction="#siInsertSpecimen" prefHeight="29.0" prefWidth="75.0" promptText="서면" GridPane.columnIndex="1">
+                        <TextField fx:id="txtInsertSpecimenSi" alignment="CENTER" editable="false" onAction="#siInsertSpecimen" prefHeight="29.0" prefWidth="75.0" promptText="서면" GridPane.columnIndex="1">
                            <GridPane.margin>
                               <Insets right="20.0" />
                            </GridPane.margin></TextField>
-                        <TextField fx:id="txtInsertSpecimenDong" alignment="CENTER" onAction="#dongInsertSpecimen" prefHeight="29.0" prefWidth="75.0" promptText="덕두원리" GridPane.columnIndex="2">
+                        <TextField fx:id="txtInsertSpecimenDong" alignment="CENTER" editable="false" onAction="#dongInsertSpecimen" prefHeight="29.0" prefWidth="75.0" promptText="덕두원리" GridPane.columnIndex="2">
                            <GridPane.margin>
                               <Insets right="20.0" />
                            </GridPane.margin></TextField>
@@ -143,7 +143,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <TextField fx:id="txtInsertSpecimenLocname" onAction="#locnameInsertSpecimen" prefHeight="29.0" prefWidth="100.0" promptText="삼악산" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                  <TextField fx:id="txtInsertSpecimenLocname" editable="false" onAction="#locnameInsertSpecimen" prefHeight="29.0" prefWidth="100.0" promptText="삼악산" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin></TextField>
@@ -256,11 +256,11 @@
                   <DatePicker fx:id="dateInsertSpecimenDate" onAction="#dateInsertSpecimen" promptText="(defalut=today)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
-                        <ComboBox fx:id="comboInsertSpecimenWho" onAction="#whoInsertSpecimen" prefHeight="29.0" prefWidth="203.0" promptText="조윤호" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                         <Button fx:id="btnInsertSpecimenWorkerManagement" mnemonicParsing="false" onAction="#OnWorkerManagement" prefHeight="29.0" prefWidth="120.0" style="-fx-border-color: blue;" text="관리" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
+                        <TextField fx:id="txtWhoWorkSpecimen" editable="false" promptText="작업자를 선택하세요" />
                      </children>
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
