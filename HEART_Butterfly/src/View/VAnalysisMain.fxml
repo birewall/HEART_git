@@ -68,7 +68,7 @@
             <Button fx:id="btnInquiry" mnemonicParsing="false" onAction="#OnInquiry" text="조회" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
-      <BarChart fx:id="grpTotalCollection" title="전체 수집 개체수" GridPane.rowIndex="1">
+      <BarChart fx:id="grpTotalCollection" animated="false" title="전체 수집 개체수" GridPane.rowIndex="1">
         <xAxis>
           <CategoryAxis fx:id="grpTotalXAxis" animated="false" side="BOTTOM" />
         </xAxis>
@@ -79,7 +79,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </BarChart>
-      <BarChart fx:id="grpRegionalCollection" title="지역별 수집 개체수" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <BarChart fx:id="grpRegionalCollection" animated="false" title="지역별 수집 개체수" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <xAxis>
           <CategoryAxis fx:id="grpRegionalXAxis" side="BOTTOM" />
         </xAxis>
@@ -90,7 +90,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </BarChart>
-      <BarChart fx:id="grpFamilyCollection" title="나비과별 수집 개체수" GridPane.rowIndex="2">
+      <BarChart fx:id="grpFamilyCollection" animated="false" title="나비과별 수집 개체수" GridPane.rowIndex="2">
         <xAxis>
           <CategoryAxis fx:id="grpFamilyXAxis" side="BOTTOM" />
         </xAxis>
@@ -101,7 +101,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </BarChart>
-      <BarChart fx:id="grpNameCollection" title="나비명별 수집 개체수" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <BarChart fx:id="grpNameCollection" animated="false" title="나비명별 수집 개체수" GridPane.columnIndex="1" GridPane.rowIndex="2">
         <xAxis>
           <CategoryAxis fx:id="grpNameXAxis" side="BOTTOM" />
         </xAxis>
