@@ -373,7 +373,6 @@ public class CInquiry extends AbsMetaController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         tclSpecimenID.setCellValueFactory(new PropertyValueFactory<>("specimen_ID"));
         tclCountry.setCellValueFactory(new PropertyValueFactory<>("country"));
         tclCollectingDate.setCellValueFactory(new PropertyValueFactory<>("collecting_date"));
@@ -381,6 +380,17 @@ public class CInquiry extends AbsMetaController implements Initializable {
         tclCollectingLocate.setCellValueFactory(new PropertyValueFactory<>("collecting_location"));
         tclButterflyName.setCellValueFactory(new PropertyValueFactory<>("butterfly_name"));
         tclButterflyFamily.setCellValueFactory(new PropertyValueFactory<>("butterfly_family"));
+
+        /* Click Handler for TableView */
+        //String oldValue = null;
+        this.tblInquiry.setOnMouseClicked(event -> {
+            if( tblInquiry.getSelectionModel().getSelectedItem() != null) {
+                InquiryTableItem item = tblInquiry.getSelectionModel().getSelectedItem();
+
+                /* BlahBlahBlah */
+
+            }
+        });
     }
 
     @Override
