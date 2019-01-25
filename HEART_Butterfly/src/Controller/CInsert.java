@@ -35,7 +35,7 @@ public class CInsert extends AbsInsertController {
 
     @FXML
     void insertPicture(ActionEvent event) throws IOException {
-    	changeWindow(this.btnInsertExit.getScene().getWindow(), "VInsertPicture-m");
+    	changeWindow(this.btnInsertExit.getScene().getWindow(), "VInsertPicture");
     }
 
     @FXML

@@ -409,7 +409,6 @@ public class CInquiry extends AbsMetaController implements Initializable {
 			confirm_popup.show();
 			return;
     	}
-
     }
 
     @Override
