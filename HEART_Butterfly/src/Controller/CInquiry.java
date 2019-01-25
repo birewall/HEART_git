@@ -16,9 +16,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -48,7 +50,8 @@ public class CInquiry extends AbsMetaController implements Initializable {
         String butterfly_name;
         String butterfly_family;
 
-        public InquiryTableItem(String country, String collecting_date, String collector, String collecting_location, String butterfly_name, String butterfly_family) {
+        public InquiryTableItem(String specimen_ID, String country, String collecting_date, String collector, String collecting_location, String butterfly_name, String butterfly_family) {
+            this.specimen_ID = specimen_ID;
             this.country = country;
             this.collecting_date = collecting_date;
             this.collector = collector;
@@ -128,6 +131,9 @@ public class CInquiry extends AbsMetaController implements Initializable {
     private TableColumn<InquiryTableItem, String> tclButterflyFamily;
 
     @FXML
+    private TableColumn<InquiryTableItem, String> tclSpecimenID;
+
+    @FXML
     private ImageView imvButterflyImage;
 
     @FXML
@@ -135,7 +141,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
 
     @FXML
     private ComboBox<String> cmbCollectingYear;
-    
+
     @FXML
     private ComboBox<String> cmbCollectingMonth;
 
@@ -194,11 +200,11 @@ public class CInquiry extends AbsMetaController implements Initializable {
     @FXML
     void OnInquiry(ActionEvent event) throws SQLException {
         /* DB Inquiry */
-    	
-    	tblInquiry.getItems().clear();
-    	
+
+        tblInquiry.getItems().clear();
+
         String query = null;
-        
+
         String Country = cmbCountry.getSelectionModel().getSelectedItem();
         String Year = cmbCollectingYear.getSelectionModel().getSelectedItem();
         String Month = cmbCollectingMonth.getSelectionModel().getSelectedItem();
@@ -207,41 +213,41 @@ public class CInquiry extends AbsMetaController implements Initializable {
         String ButterflyName = txtButterflyName.getText();
         String ButterflyFName = txtButterflyFamily.getText();
         String Method = cmbCollectingMethod.getSelectionModel().getSelectedItem();
-        
+
         query = "select b.country, a.date, c.name, b.alias, d.name, d.family \n" +
-    			"from Butterfly.CollectionInfo as a \n" +
-    			"inner join Butterfly.Location as b on a.idLocation = b.idLocation \n" +
-    			"inner join Butterfly.Person as c on a.idPerson = c.idPerson \n" +
-    			"inner join Butterfly.ButterflyGuide as d on a.idButterflyGuide = d.idButterflyGuide\n";
-        
-        
+                "from Butterfly.CollectionInfo as a \n" +
+                "inner join Butterfly.Location as b on a.idLocation = b.idLocation \n" +
+                "inner join Butterfly.Person as c on a.idPerson = c.idPerson \n" +
+                "inner join Butterfly.ButterflyGuide as d on a.idButterflyGuide = d.idButterflyGuide\n";
+
+
         boolean where_not_used = true;
-        
+
         if(Country == "전체") {
-        	Country = null;
+            Country = null;
         }
         if(Year == "전체") {
-        	Year = null;
+            Year = null;
         }
         if(Month == "전체") {
-        	Month = null;
+            Month = null;
         }
         if(Collector == "전체") {
-        	Collector = null;
+            Collector = null;
         }
         if(Location == "전체") {
-        	Location = null;
+            Location = null;
         }
         if(ButterflyName == "전체") {
-        	ButterflyName = null;
+            ButterflyName = null;
         }
         if(ButterflyFName == "전체") {
-        	ButterflyFName = null;
+            ButterflyFName = null;
         }
         if(Method == "전체") {
-        	Method = null;
+            Method = null;
         }
-        
+
         if (Country != null) {
             if (where_not_used) {
                 query += " where";
@@ -251,7 +257,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
             }
             query += " b.country = '" + Country + "'";
         }
-        
+
         if (Year != null) {
             if (where_not_used) {
                 query += " where";
@@ -261,7 +267,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
             }
             query += " left(a.date,4) = '" + Year + "'";
         }
-        
+
         if (Month != null) {
             if (where_not_used) {
                 query += " where";
@@ -271,7 +277,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
             }
             query += " substr(a.date,5,2) = '" + Month + "'";
         }
-        
+
         if (Collector != null) {
             if (where_not_used) {
                 query += " where";
@@ -281,7 +287,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
             }
             query += " c.name = '" + Collector + "'";
         }
-        
+
         if (Location.length() != 0) {
             if (where_not_used) {
                 query += " where";
@@ -291,7 +297,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
             }
             query += " b.alias = '" + Location + "'";
         }
-        
+
         if (ButterflyName.length() != 0) {
             if (where_not_used) {
                 query += " where";
@@ -301,7 +307,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
             }
             query += " d.name = '" + ButterflyName + "'";
         }
-                
+
         if (ButterflyFName.length() != 0) {
             if (where_not_used) {
                 query += " where";
@@ -311,7 +317,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
             }
             query += " d.family = '" + ButterflyFName + "'";
         }
-        
+
         if (Method != null ) {
             if (where_not_used) {
                 query += " where";
@@ -321,11 +327,11 @@ public class CInquiry extends AbsMetaController implements Initializable {
             }
             query += " a.method = '" + Method + "'";
         }
-              
+
         // Complete the query
-      
+
         //System.out.println(query);
-        
+
 
         /* Send Query */
         ResultSet result_query = ((MSharedData)this.shared_model).getDB().selectQuery(query);
@@ -333,15 +339,15 @@ public class CInquiry extends AbsMetaController implements Initializable {
         /* Apply to TableView */
         while(result_query.next()) {
             /* Add Itemp to TableView */
-        	InquiryTableItem item = new InquiryTableItem(result_query.getString(1), 
-        			result_query.getString(2), 
-        			result_query.getString(3), 
-        			result_query.getString(4),
-        			result_query.getString(5),
-        			result_query.getString(6));
-			
-			this.tblInquiry.getItems().add(item);
+            InquiryTableItem item = new InquiryTableItem(result_query.getString(1),
+                    result_query.getString(2),
+                    result_query.getString(3),
+                    result_query.getString(4),
+                    result_query.getString(5),
+                    result_query.getString(6),
+                    result_query.getString(7));
 
+            this.tblInquiry.getItems().add(item);
         }
     }
 
@@ -353,41 +359,55 @@ public class CInquiry extends AbsMetaController implements Initializable {
     @FXML
     void OnPrintLabel(ActionEvent event) throws IOException {
         /* Copy Table Item to Clipboard */
-    	changeWindow(this.btnPrevious.getScene().getWindow(), "VSpecimenLabel");
+        changeWindow(this.btnPrevious.getScene().getWindow(), "VSpecimenLabel");
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    	
-   	 tclCountry.setCellValueFactory(new PropertyValueFactory<>("country")); 
-   	 tclCollectingDate.setCellValueFactory(new PropertyValueFactory<>("collecting_date"));
-   	 tclCollector.setCellValueFactory(new PropertyValueFactory<>("collector"));
-   	 tclCollectingLocate.setCellValueFactory(new PropertyValueFactory<>("collecting_location"));
-   	 tclButterflyName.setCellValueFactory(new PropertyValueFactory<>("butterfly_name"));
-   	 tclButterflyFamily.setCellValueFactory(new PropertyValueFactory<>("butterfly_family"));
-	    	 
+        /* DB Instance initialization */
+        this.db = ((MSharedData)this.shared_model).getDB();
+        
+        /*LoadImagepath*/
+        ResultSet rsImage = null;
 
+        String LoadImagePath = "SELECT Image.path from Image inner join Specimen "
+        		+ "on Specimen.idImage=Image.idImage where Specimen.idSpecimen=" 
+        		+ this.tblInquiry.getSelectionModel().getSelectedItem().specimen_ID;
+        
+        tclSpecimenID.setCellValueFactory(new PropertyValueFactory<>("specimen_ID"));
+        tclCountry.setCellValueFactory(new PropertyValueFactory<>("country"));
+        tclCollectingDate.setCellValueFactory(new PropertyValueFactory<>("collecting_date"));
+        tclCollector.setCellValueFactory(new PropertyValueFactory<>("collector"));
+        tclCollectingLocate.setCellValueFactory(new PropertyValueFactory<>("collecting_location"));
+        tclButterflyName.setCellValueFactory(new PropertyValueFactory<>("butterfly_name"));
+        tclButterflyFamily.setCellValueFactory(new PropertyValueFactory<>("butterfly_family"));
 
+        tblInquiry.setRowFactory( tv -> {
+            TableRow<InquiryTableItem> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
+                    InquiryTableItem rowData = row.getItem();
+
+                    System.out.println(LoadImagePath);
+                }
+            });
+            return row ;
+        });
     }
-    
+
     @Override
     public void init_procedure() {
+        /* DB Instance initialization */
+        this.db = ((MSharedData)this.shared_model).getDB();
 
-    	/* DB Instance initialization */
-    	 MDatabase db = ((MSharedData)this.shared_model).getDB();
-    	 db_location = new MDBLocation(((MSharedData)this.shared_model).getDB().getConnection());
-    	 db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
-    	 db_specimenize = new MDBSpecimenize(((MSharedData)this.shared_model).getDB().getConnection());
-    	 db_butterflyGuide = new MDBButterflyGuide(((MSharedData)this.shared_model).getDB().getConnection());
-    	 db_collectionInfo = new MDBCollectionInfo(((MSharedData)this.shared_model).getDB().getConnection());
-    	 db_person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-    	 
-	     ResultSet rs = null;
-	        
-    	 String InitialTblSetting = "SELECT distinct A.country, B.date, C.name, A.alias, D.name, D.family\n" + 
-    	 		"FROM Location AS A inner join CollectionInfo AS B on A.idLocation=B.idLocation \n" + 
-    	 		"inner join Person AS C on B.idPerson=C.idPerson \n" + 
-    	 		"inner join ButterflyGuide AS D on B.idButterflyGuide=D.idButterflyGuide ORDER BY date DESC limit 1000";
+        ResultSet rs = null;
+
+        String InitialTblSetting = "SELECT distinct A.idSpecimen, C.country, B.date, D.name, C.alias, E.name, E.family "
+                + "FROM Specimen AS A inner join CollectionInfo AS B on A.idCollectionInfo=B.idCollectionInfo "
+                + "inner join Location AS C on B.idLocation=C.idLocation "
+                + "inner join Person AS D on B.idPerson=D.idPerson "
+                + "inner join ButterflyGuide AS E on B.idButterflyGuide=E.idButterflyGuide "
+                + "ORDER BY date DESC limit 1000";
 
 			try {
 				rs = db_location.selectQuery(InitialTblSetting);
