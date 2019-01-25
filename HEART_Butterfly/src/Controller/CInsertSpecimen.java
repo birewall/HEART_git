@@ -6,7 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import org.controlsfx.control.textfield.TextFields;
+
 import Model.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,9 +24,8 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleGroup;
 
 public class CInsertSpecimen extends AbsInsertController implements Initializable {
-	
-    MDBSpecimen db_specimen=null;
-    MDBSpecimenize db_specimenize=null;
+
+    MDatabase db=null;
     
     String PlaceName;
     String CabinetName;
@@ -421,10 +424,10 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	int PlaceTotalSelection = this.comboInsertSpecimenLoc1.getSelectionModel().getSelectedIndex();
     	if(PlaceTotalSelection==0) {
             queryCabinet = "select distinct storageCabinet from Specimen";
-    		rsCabinet = db_specimen.selectQuery(queryCabinet);
+    		rsCabinet = db.selectQuery(queryCabinet);
     	}else {
             queryCabinet = "select distinct storageCabinet from Specimen where storageRoom='" + this.comboInsertSpecimenLoc1.getSelectionModel().getSelectedItem() + "'";
-    		rsCabinet = db_specimen.selectQuery(queryCabinet);
+    		rsCabinet = db.selectQuery(queryCabinet);
     	}
     	
 		this.comboInsertSpecimenLoc2.getItems().clear();
@@ -445,10 +448,10 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	int CabinetTotalSelection = this.comboInsertSpecimenLoc2.getSelectionModel().getSelectedIndex();
     	if(CabinetTotalSelection==0) {
             queryBox = "select distinct storageChest from Specimen";
-    		rsBox = db_specimen.selectQuery(queryBox);
+    		rsBox = db.selectQuery(queryBox);
     	} else {
             queryBox = "select distinct storageChest from Specimen where storageCabinet='" + this.comboInsertSpecimenLoc2.getSelectionModel().getSelectedItem() + "'";
-    		rsBox = db_specimen.selectQuery(queryBox);
+    		rsBox = db.selectQuery(queryBox);
     	}
 		
 		this.comboInsertSpecimenLoc3.getItems().clear();
@@ -561,16 +564,16 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 
     @Override
     public void init_procedure() {
+
     	/* DB Instance initialization */
-    	 db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
-    	 db_specimenize = new MDBSpecimenize(((MSharedData)this.shared_model).getDB().getConnection());
+    	db = ((MSharedData)this.shared_model).getDB();
 
  		this.comboInsertSpecimenLoc1.getItems().clear();
     	
     	this.comboInsertSpecimenLoc1.getItems().add("전체선택");
 
     	String queryRoom = "select distinct storageRoom from Specimen";
-		ResultSet rsRoom = db_specimen.selectQuery(queryRoom);
+		ResultSet rsRoom = db.selectQuery(queryRoom);
 		
 		try {
 			while(rsRoom.next()) {
@@ -593,6 +596,13 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 		this.comboInsertSpecimenLoc1.setDisable(true);
 		this.comboInsertSpecimenLoc2.setDisable(true);
 		this.comboInsertSpecimenLoc3.setDisable(true);
+
+        /* Set Auto Complete */
+        try {
+            setAutoComplete();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -622,6 +632,16 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	} else if(prev_button == "worker") {
         	this.txtWhoWorkSpecimen.setText(name);
     	}
+    }
+
+    private void setAutoComplete() throws SQLException {
+        ObservableList<String> name_autocomplete_list = FXCollections.observableArrayList();
+
+        ResultSet result_query = db.selectQuery("select distinct name from ButterflyGuide");
+        while(result_query.next()) {
+            name_autocomplete_list.add(result_query.getString(1));
+        }
+        TextFields.bindAutoCompletion(this.txtInsertSpecimenBname, name_autocomplete_list);
     }
 
     @Override
