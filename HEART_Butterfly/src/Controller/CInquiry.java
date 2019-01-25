@@ -362,7 +362,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
 
     @FXML
     void OnPrevious(ActionEvent event) throws IOException {
-        changeWindow(this.btnDetailView.getScene().getWindow(), "VMain");
+        changeWindow(this.btnPrevious.getScene().getWindow(), "VMain");
     }
 
     @FXML
