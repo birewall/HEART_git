@@ -340,11 +340,17 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 
     @FXML
     void OnGiverManagement(ActionEvent event) throws IOException {
+        MPassingData data = new MPassingData(1);
+        data.setData("giver", 0);
+        ((MSharedData)this.shared_model).add(data, "button_name");
         spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VPersonManager");
     }
 
     @FXML
     void OnWorkerManagement(ActionEvent event) throws IOException {
+        MPassingData data = new MPassingData(1);
+        data.setData("worker", 0);
+        ((MSharedData)this.shared_model).add(data, "button_name");
         spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VPersonManager");
     }
 

@@ -262,55 +262,59 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
     }
 
     private void drawRegionalChart() throws SQLException {
-//        boolean where_not_used = true;
-//
-//        /* Initialized Chart */
-//        this.grpRegionalCollection.getData().clear();
-//        XYChart.Series<String, Number> chart_series = new XYChart.Series<>();
-//
-//        String query = "select count(*) from CollectionInfo " +
-//                "inner join Location on CollectionInfo.idLocation = Location.idLocation ";
-//        where_not_used = true;
-//
-//        if (!this.cmbCountry.getSelectionModel().getSelectedItem().equals("전체")) {
-//            if (where_not_used) {
-//                query += " where";
-//                where_not_used = false;
-//            } else {
-//                query += " and";
-//            }
-//            query += " country = '" + this.cmbCountry.getSelectionModel().getSelectedItem() + "'";
-//        }
-//
-//        if (!this.cmbInquiryYear.getSelectionModel().getSelectedItem().equals("전체")) {
-//            if (where_not_used) {
-//                query += " where";
-//                where_not_used = false;
-//            } else {
-//                query += " and";
-//            }
-//            query += " left(date, 4) = " + this.cmbInquiryYear.getSelectionModel().getSelectedItem();
-//        }
-//
-//        if (!this.cmbInquiryMonth.getSelectionModel().getSelectedItem().equals("전체")) {
-//            if (where_not_used) {
-//                query += " where";
-//                where_not_used = false;
-//            } else {
-//                query += " and";
-//            }
-//            query += " substr(date, 5, 2) = " + this.cmbInquiryMonth.getSelectionModel().getSelectedItem();
-//        }
-//
-//        /* Make Charts */
-//        ResultSet result_query = this.db.selectQuery(query);
-//        int cnt = 0;
-//        if(result_query.next()) {
-//            cnt = Integer.parseInt(result_query.getString(1));
-//        }
-//        //chart_series.getData().add(new XYChart.Data<>(i + "월", cnt));
-//        chart_series.getData().add(new XYChart.Data<>(String.valueOf(i), cnt));
-//        this.grpTotalCollection.getData().add(chart_series);
+        boolean where_not_used = true;
+
+        /* Initialized Chart */
+        this.grpRegionalCollection.getData().clear();
+        XYChart.Series<String, Number> chart_series = new XYChart.Series<>();
+
+        String query = "select alias, count(*) from CollectionInfo " +
+                "inner join Location on CollectionInfo.idLocation = Location.idLocation " +
+                "group by alias" +
+                "order by count(alias) desc";
+        where_not_used = true;
+
+        if (!this.cmbCountry.getSelectionModel().getSelectedItem().equals("전체")) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " country = '" + this.cmbCountry.getSelectionModel().getSelectedItem() + "'";
+        }
+
+        if (!this.cmbInquiryYear.getSelectionModel().getSelectedItem().equals("전체")) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " left(date, 4) = " + this.cmbInquiryYear.getSelectionModel().getSelectedItem();
+        }
+
+        if (!this.cmbInquiryMonth.getSelectionModel().getSelectedItem().equals("전체")) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " substr(date, 5, 2) = " + this.cmbInquiryMonth.getSelectionModel().getSelectedItem();
+        }
+
+        /* Make Charts */
+        ResultSet result_query = this.db.selectQuery(query);
+        int cnt = 0;
+        while(result_query.next()) {
+            chart_series.getData().add(new XYChart.Data<>(
+                    //result_query.get
+            ));
+        }
+        //chart_series.getData().add(new XYChart.Data<>(i + "월", cnt));
+        //chart_series.getData().add(new XYChart.Data<>(String.valueOf(i), cnt));
+        this.grpTotalCollection.getData().add(chart_series);
     }
 
     private void drawFamilyGhart() {
