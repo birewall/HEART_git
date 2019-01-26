@@ -341,7 +341,6 @@ public class CInquiry extends AbsMetaController implements Initializable {
 
         //System.out.println(query);
 
-
         /* Send Query */
         ResultSet result_query = ((MSharedData)this.shared_model).getDB().selectQuery(query);
 
@@ -355,9 +354,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
                     result_query.getString(5),
                     result_query.getString(6),
                     result_query.getString(7));
-
             this.tblInquiry.getItems().add(item);
-
         }
     }
 
@@ -368,7 +365,6 @@ public class CInquiry extends AbsMetaController implements Initializable {
 
     @FXML
     void OnPrintLabel(ActionEvent event) throws IOException {
-    	
         String strSpcimenID=null;
         String strCountry=null;
         String strButterflyName=null;
