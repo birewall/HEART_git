@@ -228,8 +228,6 @@ public class CInsertPicture extends AbsInsertController implements Initializable
     	String section = lblSection.getText() + " / " + lblMaxSection.getText();
     	
     	/* DB Instance initialization */
-        MDBButterflyGuide db_butterfly_guide = new MDBButterflyGuide(((MSharedData)this.shared_model).getDB().getConnection());
-        MDBPerson db_person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
         MDBLocation db_location = new MDBLocation(((MSharedData)this.shared_model).getDB().getConnection());
         MDBImage db_image = new MDBImage(((MSharedData)this.shared_model).getDB().getConnection());
         MDBImageObjectInfo db_image_object = new MDBImageObjectInfo(((MSharedData)this.shared_model).getDB().getConnection());
@@ -243,7 +241,6 @@ public class CInsertPicture extends AbsInsertController implements Initializable
         db_location.setAlias(alias);
         db_location.setSection(section);
 
-
         //db_location.printContents();
         int id_location = db_location.getIdLocationFromDB();
         if(id_location == 0) {
@@ -252,28 +249,6 @@ public class CInsertPicture extends AbsInsertController implements Initializable
                 return;
             }
             id_location = db_location.getIdLocationFromDB();
-        }
-
-        db_person.setName(person_name);
-        int id_person = db_person.getIdPersonFromDB();
-        if(id_person == 0) {
-            if(!db_person.insert()){
-                ((MSharedData)this.shared_model).getLogger().error("[CInsertPicture] Person Insert Failed.");
-                return;
-            }
-            id_person = db_person.getIdPersonFromDB();
-        }
-
-        db_butterfly_guide.setName(butterfly_name);
-        db_butterfly_guide.setFamily(butterfly_family);
-        db_butterfly_guide.setScientific_name(scientific_name);
-        int id_butterflyGuide = db_butterfly_guide.getIdButterflyGuideFromDB();
-        if(id_butterflyGuide == 0) {
-            if(!db_butterfly_guide.insert()){
-                ((MSharedData)this.shared_model).getLogger().error("[CInsertPicture] ButterflyGuide Insert Failed.");
-                return;
-            }
-            id_butterflyGuide = db_butterfly_guide.getIdButterflyGuideFromDB();
         }
 
         db_camera.setLens(type_lens);
@@ -308,7 +283,6 @@ public class CInsertPicture extends AbsInsertController implements Initializable
         db_image.setIdLocation(id_location);
         db_image.setIdImageObjectInfo(id_image_object);
         db_image.setIdCameraInfo(id_camera);
-        db_image.setIdButterflyGuide(id_butterflyGuide);
         db_image.setDate(date);
         db_image.setTime(time);
         db_image.setPath(dest_filename);
