@@ -27,7 +27,7 @@ public class CSectionManagement extends AbsMetaController implements Initializab
 	
 
     @FXML
-    private ListView<String> ListSection;
+    private ListView<String> listSection;
 
     @FXML
     private Button btnInsert;
@@ -41,7 +41,7 @@ public class CSectionManagement extends AbsMetaController implements Initializab
    	String maxSecNum = null;
     @FXML
     void OnInsert(ActionEvent event) {
-        this.ListSection.getItems().clear();
+        this.listSection.getItems().clear();
 
         /* Error Handling */
     	maxSecNum = txtMaxSection.getText();
@@ -61,7 +61,7 @@ public class CSectionManagement extends AbsMetaController implements Initializab
             int maxNumber = Integer.parseInt(maxSecNum);
             for (int i=1; i <= maxNumber; i ++) {
             	AllSection = ""+i+"";
-            	this.ListSection.getItems().add(AllSection);
+            	this.listSection.getItems().add(AllSection);
             }
     	} else {
     		return;
@@ -71,20 +71,6 @@ public class CSectionManagement extends AbsMetaController implements Initializab
 
     @FXML
     void OnDone(ActionEvent event) {
-        /*
-        if(ListSection.getSelectionModel().getSelectedItem() == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("입력 실패");
-            alert.setHeaderText(null);
-            alert.setContentText("구간을 선택하세요");
-            alert.show();
-            return;
-        }else {
-            // Close and Call Close Handler
-            on_close_stage();
-            ((Stage) this.btnDone.getScene().getWindow()).close();
-        }
-        */
         Stage this_stage = ((Stage) this.btnDone.getScene().getWindow());
         this_stage.fireEvent(new WindowEvent(this_stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
@@ -101,7 +87,7 @@ public class CSectionManagement extends AbsMetaController implements Initializab
 
     @Override
     public boolean on_close_stage() {
-        if(ListSection.getSelectionModel().getSelectedItem() == null) {
+        if(listSection.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("입력 실패");
             alert.setHeaderText(null);
@@ -111,23 +97,9 @@ public class CSectionManagement extends AbsMetaController implements Initializab
         }
 
         Stage thisStage = (Stage)this.btnDone.getScene().getWindow();
-        this.parent_controller.view_update();
+        ((AbsInsertController)this.parent_controller).passing_section_info(listSection.getSelectionModel().getSelectedItem(), maxSecNum);
+        //this.parent_controller.view_update();
 
-        /* Get Parent Information and Update Parent View */
-        MPassingData data = (MPassingData)((MSharedData)(this.shared_model)).get("parent_name");
-        String parent_info = data.getData(0);
-        ((MSharedData)(this.shared_model)).remove("parent_name");
-        if(parent_info.equals("CInsertWatch")) {
-            ((CInsertWatch)this.parent_controller).setTextLblMaxSection(maxSecNum);
-            ((CInsertWatch)this.parent_controller).setTextLblSection(ListSection.getSelectionModel().getSelectedItem());
-        }else if(parent_info.equals("CInsertPicture")) {
-            ((CInsertPicture)this.parent_controller).setTextLblMaxSection(maxSecNum);
-            ((CInsertPicture)this.parent_controller).setTextLblSection(ListSection.getSelectionModel().getSelectedItem());
-        }else{
-            System.out.println("Section Manager: Problem Occurs when closing and updating parent's view");
-        }
-        // thisStage.close();
         return true;
     }
-
 }

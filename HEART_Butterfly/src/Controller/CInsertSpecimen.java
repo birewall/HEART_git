@@ -1,11 +1,13 @@
 package Controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import javafx.scene.image.Image;
 import org.controlsfx.control.textfield.TextFields;
 
 import Model.*;
@@ -361,22 +363,26 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 		}
 
         ResultSet result_ImagePath = db.selectQuery("SELECT distinct A.path from Image AS A "
-        		+ "inner join ButterflyGuide AS B on A.idImage = B.idImage where B.name ="
-        		+ "'" + this.txtInsertSpecimenBname.getText() +"'");
-        
-		try {
-			while(result_ImagePath.next()) {
+        		+ "inner join ButterflyGuide AS B on A.idImage = B.idImage "
+                + "inner join CollectionImage AS C on B.idButterflyGuide = C.idButterflyGuide "
+                + "where B.name = '"
+        		+ this.txtInsertSpecimenBname.getText() +"'");
+
+		try{
+		    if(result_ImagePath.next()) {
 				ImagePath = result_ImagePath.getString(1);
-			}
+			}else{
+		        return;
+            }
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		//Set image
         System.out.println(ImagePath);
+		//File file = new File("./img/kor/" + ImagePath);
 		//Image image = new Image(file.toURI().toString());
 		//this.imvButterflyImage.setImage(image);
-		//System.out.println(ImageLoadingPath);
     }
 
     @FXML
@@ -702,6 +708,11 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 
     @Override
     public void passing_specimen_info(String date, String country, String loc_alias, String butter_name, String butter_family, String person_name) {
+        /* Not Implemented */
+    }
+
+    @Override
+    public void passing_section_info(String nowSection, String maxSection) {
         /* Not Implemented */
     }
 }

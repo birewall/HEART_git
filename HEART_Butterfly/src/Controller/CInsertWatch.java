@@ -131,7 +131,6 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
     @FXML
     void searchLocInsertSection_watch(ActionEvent event) throws IOException {
     	spawnChildWindow(this.btnInsertSection_watch.getScene().getWindow(), "VSectionManagement");
-    	
     }
     
     @FXML
@@ -519,5 +518,11 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
             this.txtInsertWatchDong.setText(sectionSplit[1]);
         }
         this.txtInsertWatchLocname.setText(alias);
+    }
+
+    @Override
+    public void passing_section_info(String nowSection, String maxSection) {
+        this.lblSection_watch.setText(nowSection);
+        this.lblMaxSection_watch.setText(maxSection);
     }
 }

@@ -454,9 +454,11 @@ public class CInquiry extends AbsMetaController implements Initializable {
                 rsImage = db.selectQuery(ImageLoadingPath);
                 
                 try {
-        			while(rsImage.next()) {
+        			if(rsImage.next()) {
         			    ImagePath = rsImage.getString(1);
-        			}
+        			}else{
+        			    return;
+                    }
         		} catch (SQLException e1) {
         			// TODO Auto-generated catch block
         			e1.printStackTrace();

@@ -405,14 +405,7 @@ public class CInsertPicture extends AbsInsertController implements Initializable
 
     @FXML
     void searchLocInsertSection(ActionEvent event) throws IOException {
-        /* Make Passing Data */
-    	/*
-        MPassingData parent_info = new MPassingData(1);
-        parent_info.setData("CInsertPicture",0);
-        ((MSharedData)(this.shared_model)).add(parent_info, "parent_name");
-
         spawnChildWindow(this.btnInsertPictureExit.getScene().getWindow(), "VSectionManagement");
-        */
     }
     
     @FXML
@@ -553,4 +546,9 @@ public class CInsertPicture extends AbsInsertController implements Initializable
         this.comboInsertPictureWho.getSelectionModel().select(person_name);
     }
 
+    @Override
+    public void passing_section_info(String nowSection, String maxSection) {
+        this.lblSection.setText(nowSection);
+        this.lblMaxSection.setText(maxSection);
+    }
 }
