@@ -22,15 +22,20 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
 
 public class CInsertSpecimen extends AbsInsertController implements Initializable {
 
     MDatabase db=null;
+    String ImagePath=null;
     
     String PlaceName;
     String CabinetName;
     String BoxName;
 
+    @FXML
+    private ImageView ImgSpecimen;
+    
     @FXML
     private TextField txtWhoWorkSpecimen;
     
@@ -330,7 +335,48 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 
     @FXML
     void bnameInsertSpecimen(ActionEvent event) {
+        
+        ResultSet result_ButterflyFamily = db.selectQuery("select distinct family from ButterflyGuide where name = " 
+        + "'" + this.txtInsertSpecimenBname.getText() + "'");
+        
+        try {
+			while(result_ButterflyFamily.next()) {
+				this.txtInsertSpecimenFamily.setText(result_ButterflyFamily.getString(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        ResultSet result_ButterflyZoological = db.selectQuery("select distinct scientific_name from ButterflyGuide where name = " 
+        + "'" + this.txtInsertSpecimenBname.getText() + "'");
+        
+		try {
+			while(result_ButterflyZoological.next()) {
+				this.txtInsertSpecimenZoological.setText(result_ButterflyZoological.getString(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+        ResultSet result_ImagePath = db.selectQuery("SELECT distinct A.path from Image AS A "
+        		+ "inner join ButterflyGuide AS B on A.idImage = B.idImage where B.name ="
+        		+ "'" + this.txtInsertSpecimenBname.getText() +"'");
+        
+		try {
+			while(result_ImagePath.next()) {
+				ImagePath = result_ImagePath.getString(1);
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		//Set image
+        System.out.println(ImagePath);
+		//Image image = new Image(file.toURI().toString());
+		//this.imvButterflyImage.setImage(image);
+		//System.out.println(ImageLoadingPath);
     }
 
     @FXML
@@ -636,9 +682,9 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     private void setAutoComplete() throws SQLException {
         ObservableList<String> name_autocomplete_list = FXCollections.observableArrayList();
 
-        ResultSet result_query = db.selectQuery("select distinct name from ButterflyGuide");
-        while(result_query.next()) {
-            name_autocomplete_list.add(result_query.getString(1));
+        ResultSet result_ButterflyName = db.selectQuery("select distinct name from ButterflyGuide");
+        while(result_ButterflyName.next()) {
+            name_autocomplete_list.add(result_ButterflyName.getString(1));
         }
         TextFields.bindAutoCompletion(this.txtInsertSpecimenBname, name_autocomplete_list);
     }
