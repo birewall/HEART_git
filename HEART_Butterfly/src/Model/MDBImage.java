@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 public class MDBImage extends MDatabase {
     int idImage;
-    int idLocation;
     int idImageObjectInfo;
     int idCameraInfo;
     String date;    //varchar(11)
@@ -20,7 +19,6 @@ public class MDBImage extends MDatabase {
     }
 
     public void initialize() {
-        this.idLocation = 0;
         this.idImageObjectInfo = 0;
         this.idCameraInfo = 0;
         this.date = null;
@@ -41,17 +39,6 @@ public class MDBImage extends MDatabase {
 
     public void setIdImage(int idImage) {
         this.idImage = idImage;
-    }
-
-    public String getIdLocation() {
-        if(idLocation == 0)
-            return null;
-        else
-            return String.valueOf(idLocation);
-    }
-
-    public void setIdLocation(int idLocation) {
-        this.idLocation = idLocation;
     }
 
     public String getIdImageObjectInfo() {
@@ -106,7 +93,6 @@ public class MDBImage extends MDatabase {
     public void printContents() {
         logger.info("[" + this.table_name + "]");
         logger.info("[idImage] " + idImage);
-        logger.info("[idLocation] " + idLocation);
         logger.info("[idImageObjectInfo] " + idImageObjectInfo);
         logger.info("[idCameraInfo] " + idCameraInfo);
         logger.info("[date] " + date);
@@ -116,7 +102,6 @@ public class MDBImage extends MDatabase {
 
     public boolean insert() {
         String query = "insert into Image (idLocation, idImageObjectInfo, idCameraInfo, date, time, path) values ("
-                + db_string_formatting(getIdLocation(), "int") + ","
                 + db_string_formatting(getIdImageObjectInfo(), "int") + ","
                 + db_string_formatting(getIdCameraInfo(), "int") + ","
                 + db_string_formatting(getDate(), "string") + ","
@@ -134,7 +119,6 @@ public class MDBImage extends MDatabase {
     public boolean update(int idImage) {
         String query = "update Image set ";
         int initial_length = query.length();
-        query += db_update_formatting(db_string_formatting(getIdLocation(), "int"), "idLocation");
         query += db_update_formatting(db_string_formatting(getIdImageObjectInfo(), "int"), "idImageObjectInfo");
         query += db_update_formatting(db_string_formatting(getIdCameraInfo(), "int"), "idCameraInfo");
         query += db_update_formatting(db_string_formatting(getDate(), "string"), "date");
@@ -148,7 +132,6 @@ public class MDBImage extends MDatabase {
 
     public int getIdImageFromDB() {
         String query = "select idImage from Image where "
-                + db_where_formatting(db_string_formatting(getIdLocation(), "int"), "idLocation") + " and "
                 + db_where_formatting(db_string_formatting(getIdImageObjectInfo(), "int"), "idImageObjectInfo") + " and "
                 + db_where_formatting(db_string_formatting(getIdCameraInfo(), "int"), "idCameraInfo") + " and "
                 + db_where_formatting(db_string_formatting(getDate(), "String"), "date") + " and "

@@ -241,6 +241,7 @@ public class CInsertPicture extends AbsInsertController implements Initializable
         db_location.setAlias(alias);
         db_location.setSection(section);
 
+
         //db_location.printContents();
         int id_location = db_location.getIdLocationFromDB();
         if(id_location == 0) {
@@ -280,7 +281,6 @@ public class CInsertPicture extends AbsInsertController implements Initializable
             id_image_object = db_image_object.getIdImageObjectInfoFromDB();
         }
         
-        db_image.setIdLocation(id_location);
         db_image.setIdImageObjectInfo(id_image_object);
         db_image.setIdCameraInfo(id_camera);
         db_image.setDate(date);
