@@ -17,7 +17,7 @@ import javafx.stage.WindowEvent;
 
 public abstract class AbsMetaController {
 	AbsMetaController parent_controller = null;
-	String parent_controller_name = null;
+	String previous_controller_name = null;
 	AbsMetaModel shared_model = null;
 	Stage nowStage;
 
@@ -45,12 +45,12 @@ public abstract class AbsMetaController {
 		return this.shared_model;
 	}
 
-    public String getParent_controller_name() {
-        return parent_controller_name;
+    public String getPreviousControllerName() {
+        return previous_controller_name;
     }
 
-    public void setParent_controller_name(String parent_controller_name) {
-        this.parent_controller_name = parent_controller_name;
+    public void setPreviousControllerName(String previous_controller_name) {
+        this.previous_controller_name = previous_controller_name;
     }
 
     public void changeWindow(Window nowWindow, String viewName) throws IOException {
@@ -58,6 +58,7 @@ public abstract class AbsMetaController {
     	Parent root = loader.load(getClass().getResource("/View/" + viewName + ".fxml").openStream());
         AbsMetaController controller = (AbsMetaController)loader.getController();
         controller.setParentController(this);
+        controller.setPreviousControllerName(this.getClass().toString().split(" ")[1]);
 		controller.setSharedModel(shared_model);
 		nowStage = (Stage)nowWindow;
 		controller.setStage(nowStage);
@@ -71,6 +72,7 @@ public abstract class AbsMetaController {
         Parent root = loader.load(getClass().getResource("/View/" + viewName + ".fxml").openStream());
         AbsMetaController controller = (AbsMetaController)loader.getController();
         controller.setParentController(this);
+        controller.setPreviousControllerName(this.getClass().toString().split(" ")[1]);
         controller.setSharedModel(shared_model);
         Stage newStage = new Stage();
         newStage.initModality(Modality.WINDOW_MODAL);

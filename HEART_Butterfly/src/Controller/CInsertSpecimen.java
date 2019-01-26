@@ -6,7 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import org.controlsfx.control.textfield.TextFields;
+
 import Model.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,14 +24,16 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleGroup;
 
 public class CInsertSpecimen extends AbsInsertController implements Initializable {
-	
-    MDBSpecimen db_specimen=null;
-    MDBSpecimenize db_specimenize=null;
+
+    MDatabase db=null;
     
     String PlaceName;
     String CabinetName;
     String BoxName;
 
+    @FXML
+    private TextField txtWhoWorkSpecimen;
+    
     @FXML
     private TextField txtWhoInsertSpecimen;
     
@@ -340,11 +346,17 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 
     @FXML
     void OnGiverManagement(ActionEvent event) throws IOException {
+        MPassingData data = new MPassingData(1);
+        data.setData("giver", 0);
+        ((MSharedData)this.shared_model).add(data, "button_name");
         spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VPersonManager");
     }
 
     @FXML
     void OnWorkerManagement(ActionEvent event) throws IOException {
+        MPassingData data = new MPassingData(1);
+        data.setData("worker", 0);
+        ((MSharedData)this.shared_model).add(data, "button_name");
         spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VPersonManager");
     }
 
@@ -412,10 +424,10 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	int PlaceTotalSelection = this.comboInsertSpecimenLoc1.getSelectionModel().getSelectedIndex();
     	if(PlaceTotalSelection==0) {
             queryCabinet = "select distinct storageCabinet from Specimen";
-    		rsCabinet = db_specimen.selectQuery(queryCabinet);
+    		rsCabinet = db.selectQuery(queryCabinet);
     	}else {
             queryCabinet = "select distinct storageCabinet from Specimen where storageRoom='" + this.comboInsertSpecimenLoc1.getSelectionModel().getSelectedItem() + "'";
-    		rsCabinet = db_specimen.selectQuery(queryCabinet);
+    		rsCabinet = db.selectQuery(queryCabinet);
     	}
     	
 		this.comboInsertSpecimenLoc2.getItems().clear();
@@ -436,10 +448,10 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	int CabinetTotalSelection = this.comboInsertSpecimenLoc2.getSelectionModel().getSelectedIndex();
     	if(CabinetTotalSelection==0) {
             queryBox = "select distinct storageChest from Specimen";
-    		rsBox = db_specimen.selectQuery(queryBox);
+    		rsBox = db.selectQuery(queryBox);
     	} else {
             queryBox = "select distinct storageChest from Specimen where storageCabinet='" + this.comboInsertSpecimenLoc2.getSelectionModel().getSelectedItem() + "'";
-    		rsBox = db_specimen.selectQuery(queryBox);
+    		rsBox = db.selectQuery(queryBox);
     	}
 		
 		this.comboInsertSpecimenLoc3.getItems().clear();
@@ -537,9 +549,6 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        /* Initializing */
-        if(this.comboInsertSpecimenCollectwho.getItems().size() > 0) this.comboInsertSpecimenCollectwho.getSelectionModel().select("조윤호");
     }
 
     @Override
@@ -557,15 +566,14 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     public void init_procedure() {
 
     	/* DB Instance initialization */
-    	 db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
-    	 db_specimenize = new MDBSpecimenize(((MSharedData)this.shared_model).getDB().getConnection());
+    	db = ((MSharedData)this.shared_model).getDB();
 
  		this.comboInsertSpecimenLoc1.getItems().clear();
     	
     	this.comboInsertSpecimenLoc1.getItems().add("전체선택");
 
     	String queryRoom = "select distinct storageRoom from Specimen";
-		ResultSet rsRoom = db_specimen.selectQuery(queryRoom);
+		ResultSet rsRoom = db.selectQuery(queryRoom);
 		
 		try {
 			while(rsRoom.next()) {
@@ -588,12 +596,17 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 		this.comboInsertSpecimenLoc1.setDisable(true);
 		this.comboInsertSpecimenLoc2.setDisable(true);
 		this.comboInsertSpecimenLoc3.setDisable(true);
+
+        /* Set Auto Complete */
+        try {
+            setAutoComplete();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void boxInsert(ActionEvent event) throws SQLException {
-    	
-
         view_update();
     }
 
@@ -610,5 +623,40 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
             this.txtInsertSpecimenDong.setText(sectionSplit[1]);
         }
         this.txtInsertSpecimenLocname.setText(alias);
+    }
+
+    @Override
+    public void passing_person(String prev_button, String name) {
+    	if(prev_button.equals("giver")) {
+        	this.txtWhoInsertSpecimen.setText(name);
+    	} else if(prev_button == "worker") {
+        	this.txtWhoWorkSpecimen.setText(name);
+    	}
+    }
+
+    private void setAutoComplete() throws SQLException {
+        ObservableList<String> name_autocomplete_list = FXCollections.observableArrayList();
+
+        ResultSet result_query = db.selectQuery("select distinct name from ButterflyGuide");
+        while(result_query.next()) {
+            name_autocomplete_list.add(result_query.getString(1));
+        }
+        TextFields.bindAutoCompletion(this.txtInsertSpecimenBname, name_autocomplete_list);
+    }
+
+    @Override
+    public void passing_collection_info(String date, String country, String loc_alias, String butter_name, String butter_family, String person_name) {
+        /* View Updating */
+        this.dateInsertSpecimenCollectdate.getEditor().setText(date);
+        this.txtInsertSpecimenNation.setText(country);
+        this.txtInsertSpecimenLocname.setText(loc_alias);
+        this.txtInsertSpecimenBname.setText(butter_name);
+        this.txtInsertSpecimenFamily.setText(butter_family);
+        this.txtWhoInsertSpecimen.setText(person_name);
+    }
+
+    @Override
+    public void passing_specimen_info(String date, String country, String loc_alias, String butter_name, String butter_family, String person_name) {
+        /* Not Implemented */
     }
 }

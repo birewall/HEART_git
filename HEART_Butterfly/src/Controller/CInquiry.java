@@ -15,10 +15,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -33,6 +36,7 @@ import org.controlsfx.control.textfield.TextFields;
 public class CInquiry extends AbsMetaController implements Initializable {
 
     MDatabase db = null;
+    String ImagePath=null;
 
     /* Class for Table */
     public class InquiryTableItem {
@@ -353,7 +357,6 @@ public class CInquiry extends AbsMetaController implements Initializable {
 
         System.out.println(query);
 
-
         /* Send Query */
         ResultSet result_query = ((MSharedData)this.shared_model).getDB().selectQuery(query);
 
@@ -367,9 +370,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
                     result_query.getString(5),
                     result_query.getString(6),
                     result_query.getString(7));
-
             this.tblInquiry.getItems().add(item);
-
         }
     }
 
@@ -380,13 +381,50 @@ public class CInquiry extends AbsMetaController implements Initializable {
 
     @FXML
     void OnPrintLabel(ActionEvent event) throws IOException {
+        String strSpcimenID=null;
+        String strCountry=null;
+        String strButterflyName=null;
+        String strCatchDate=null;
+        String strCatchPlace=null;
+        String strCatcher=null;
+        String strButterflyFamily=null;
+        
         /* Copy Table Item to Clipboard */
-        changeWindow(this.btnPrevious.getScene().getWindow(), "VSpecimenLabel");
+    	
+    	if(this.tblInquiry.getSelectionModel().getSelectedItem() != null) {
+    		strSpcimenID = this.tblInquiry.getSelectionModel().getSelectedItem().specimen_ID;
+        	strCountry = this.tblInquiry.getSelectionModel().getSelectedItem().country;
+        	strCatchDate = this.tblInquiry.getSelectionModel().getSelectedItem().collecting_date;
+        	strCatcher = this.tblInquiry.getSelectionModel().getSelectedItem().collector;
+        	strCatchPlace = this.tblInquiry.getSelectionModel().getSelectedItem().collecting_location;
+        	strButterflyName = this.tblInquiry.getSelectionModel().getSelectedItem().butterfly_name;
+        	strButterflyFamily = this.tblInquiry.getSelectionModel().getSelectedItem().butterfly_family;
+        			
+        	SystemClipboard.copy("표본 ID : " + strSpcimenID + "\n"
+        			+ "수집 국가 : " + strCountry + "\n"
+        			+ "수집 날짜 : " + strCatchDate + "\n"
+        			+ "채집자 : " + strCatcher + "\n"			
+        			+ "수집 장소 : " + strCatchPlace + "\n"
+        			+ "나비 이름 : " + strButterflyName + "\n"
+        			+ "나비 과 : " + strButterflyFamily);
+        	/* Alert confirm_popup = new Alert(AlertType.CONFIRMATION);
+    		confirm_popup.setTitle("Load");
+    		confirm_popup.setHeaderText(null);
+    		confirm_popup.setContentText("클립보드에 정보가 저장되었습니다.");
+    		confirm_popup.show();
+    		return; */
+    	} else {
+			Alert confirm_popup = new Alert(AlertType.ERROR);
+			confirm_popup.setTitle("Load");
+			confirm_popup.setHeaderText(null);
+			confirm_popup.setContentText("나비 표본을 선택해주세요.");
+			confirm_popup.show();
+			return;
+    	}
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         tclSpecimenID.setCellValueFactory(new PropertyValueFactory<>("specimen_ID"));
         tclCountry.setCellValueFactory(new PropertyValueFactory<>("country"));
         tclCollectingDate.setCellValueFactory(new PropertyValueFactory<>("collecting_date"));
@@ -395,16 +433,38 @@ public class CInquiry extends AbsMetaController implements Initializable {
         tclButterflyName.setCellValueFactory(new PropertyValueFactory<>("butterfly_name"));
         tclButterflyFamily.setCellValueFactory(new PropertyValueFactory<>("butterfly_family"));
 
-        tblInquiry.setRowFactory( tv -> {
-            TableRow<InquiryTableItem> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
-                    InquiryTableItem rowData = row.getItem();
-                    String PathCountry = rowData.getCountry();
-                    System.out.println(PathCountry);
-                }
-            });
-            return row ;
+        /* Click Handler for TableView */
+        //String oldValue = null;
+        this.tblInquiry.setOnMouseClicked(event -> {
+            if( tblInquiry.getSelectionModel().getSelectedItem() != null) {
+                InquiryTableItem item = tblInquiry.getSelectionModel().getSelectedItem();
+
+                /* DB Instance initialization */
+                this.db = ((MSharedData)this.shared_model).getDB();
+
+                ResultSet rsImage = null;
+                
+                String ImageLoadingPath = "SELECT distinct Image.path from Image inner join Specimen "
+                		+ "on Image.idImage = Specimen.idImage where Specimen.idSpecimen = "
+                		+ this.tblInquiry.getSelectionModel().getSelectedItem().specimen_ID;
+                
+                rsImage = db.selectQuery(ImageLoadingPath);
+                
+                try {
+        			while(rsImage.next()) {
+        			    ImagePath = rsImage.getString(1);
+        			}
+        		} catch (SQLException e1) {
+        			// TODO Auto-generated catch block
+        			e1.printStackTrace();
+        		}
+                
+        		//Set image
+                System.out.println(ImagePath);
+        		//Image image = new Image(file.toURI().toString());
+        		//this.imvButterflyImage.setImage(image);
+        		//System.out.println(ImageLoadingPath);
+            }
         });
     }
 

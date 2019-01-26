@@ -567,4 +567,16 @@ public class CInsertPicture extends AbsInsertController implements Initializable
         }
         this.txtInsertPictureLocname.setText(alias);
     }
+
+    @Override
+    public void passing_collection_info(String date, String country, String loc_alias, String butter_name, String butter_family, String person_name) {
+        /* View Updating */
+        this.dateInsertPictureDate.getEditor().setText(date);
+        this.txtInsertPictureNation.setText(country);
+        this.txtInsertPictureLocname.setText(loc_alias);
+        this.txtInsertPictureBname.setText(butter_name);
+        this.txtInsertPictureFamily.setText(butter_family);
+        this.comboInsertPictureWho.getSelectionModel().select(person_name);
+    }
+
 }

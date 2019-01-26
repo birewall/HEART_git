@@ -193,7 +193,7 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
 
         /* cmbMonth */
         this.cmbInquiryMonth.getItems().clear();
-        this.cmbInquiryMonth.getItems().addAll("전체");
+        this.cmbInquiryMonth.getItems().addAll("전체", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
 
         String query = "select count(*) from Observation, CollectionInfo, ButterflyGuide, Location";
     }
@@ -205,11 +205,13 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
         this.grpTotalCollection.getData().clear();
         XYChart.Series<String, Number> chart_series = new XYChart.Series<>();
 
-        for(int i = 1 ; i < 13 ; i++) { // 12 months
+        /* 12 Months */
+        for(int i = 1 ; i < 13 ; i++) {
             String query = "select count(*) from CollectionInfo " +
                     "inner join Location on CollectionInfo.idLocation = Location.idLocation ";
             where_not_used = true;
 
+            /* Country */
             if (!this.cmbCountry.getSelectionModel().getSelectedItem().equals("전체")) {
                 if (where_not_used) {
                     query += " where";
@@ -220,6 +222,7 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
                 query += " country = '" + this.cmbCountry.getSelectionModel().getSelectedItem() + "'";
             }
 
+            /* Year */
             if (!this.cmbInquiryYear.getSelectionModel().getSelectedItem().equals("전체")) {
                 if (where_not_used) {
                     query += " where";
@@ -230,15 +233,7 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
                 query += " left(date, 4) = " + this.cmbInquiryYear.getSelectionModel().getSelectedItem();
             }
 
-//            if (!this.cmbInquiryMonth.getSelectionModel().getSelectedItem().equals("전체")) {
-//                if (where_not_used) {
-//                    query += " where";
-//                    where_not_used = false;
-//                } else {
-//                    query += " and";
-//                }
-//                query += " substr(date, 5, 2) = " + this.cmbInquiryMonth.getSelectionModel().getSelectedItem();
-//            }
+            /* Month */
             if (where_not_used) {
                 query += " where";
                 where_not_used = false;
@@ -259,18 +254,187 @@ public class CAnalysisMain extends AbsMetaController implements Initializable {
             chart_series.getData().add(new XYChart.Data<>(String.valueOf(i), cnt));
         }
         this.grpTotalCollection.getData().add(chart_series);
-
     }
 
-    private void drawRegionalChart() {
+    private void drawRegionalChart() throws SQLException {
+        boolean where_not_used = true;
 
+        /* Initialized Chart */
+        this.grpRegionalCollection.getData().clear();
+        XYChart.Series<String, Number> chart_series = new XYChart.Series<>();
+
+        String query = "select alias, count(*) from CollectionInfo " +
+                "inner join Location on CollectionInfo.idLocation = Location.idLocation ";
+        where_not_used = true;
+
+        /* Country */
+        if (!this.cmbCountry.getSelectionModel().getSelectedItem().equals("전체")) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " country = '" + this.cmbCountry.getSelectionModel().getSelectedItem() + "'";
+        }
+
+        /* Year */
+        if (!this.cmbInquiryYear.getSelectionModel().getSelectedItem().equals("전체")) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " left(date, 4) = " + this.cmbInquiryYear.getSelectionModel().getSelectedItem();
+        }
+
+        /* Month */
+        if (!this.cmbInquiryMonth.getSelectionModel().getSelectedItem().equals("전체")) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " substr(date, 5, 2) = " + this.cmbInquiryMonth.getSelectionModel().getSelectedItem();
+        }
+
+        /* Group by */
+        query += " group by alias " +
+                "order by count(alias) desc";
+
+        /* Make Charts */
+        ResultSet result_query = this.db.selectQuery(query);
+        int cnt = 0;
+        while(result_query.next()) {
+            chart_series.getData().add(new XYChart.Data<>(
+                    result_query.getString(1),
+                    Integer.parseInt(result_query.getString(2))
+            ));
+        }
+        this.grpRegionalCollection.getData().add(chart_series);
     }
 
-    private void drawFamilyGhart() {
+    private void drawFamilyGhart() throws SQLException {
+        boolean where_not_used = true;
 
+        /* Initialized Chart */
+        this.grpFamilyCollection.getData().clear();
+        XYChart.Series<String, Number> chart_series = new XYChart.Series<>();
+
+        String query = "select family, count(*) from CollectionInfo " +
+                "inner join Location on CollectionInfo.idLocation = Location.idLocation " +
+                "inner join ButterflyGuide on CollectionInfo.idButterflyGuide = ButterflyGuide.idButterflyGuide ";
+        where_not_used = true;
+
+        /* Country */
+        if (!this.cmbCountry.getSelectionModel().getSelectedItem().equals("전체")) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " country = '" + this.cmbCountry.getSelectionModel().getSelectedItem() + "'";
+        }
+
+        /* Year */
+        if (!this.cmbInquiryYear.getSelectionModel().getSelectedItem().equals("전체")) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " left(date, 4) = " + this.cmbInquiryYear.getSelectionModel().getSelectedItem();
+        }
+
+        /* Month */
+        if (!this.cmbInquiryMonth.getSelectionModel().getSelectedItem().equals("전체")) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " substr(date, 5, 2) = " + this.cmbInquiryMonth.getSelectionModel().getSelectedItem();
+        }
+
+        /* Group by */
+        query += " group by family " +
+                "order by count(family) desc";
+
+        /* Make Charts */
+        ResultSet result_query = this.db.selectQuery(query);
+        int cnt = 0;
+        while(result_query.next()) {
+            chart_series.getData().add(new XYChart.Data<>(
+                    result_query.getString(1),
+                    Integer.parseInt(result_query.getString(2))
+            ));
+        }
+        this.grpFamilyCollection.getData().add(chart_series);
     }
 
-    private void drawNameChart() {
+    private void drawNameChart() throws SQLException {
+        boolean where_not_used = true;
 
+        /* Initialized Chart */
+        this.grpNameCollection.getData().clear();
+        XYChart.Series<String, Number> chart_series = new XYChart.Series<>();
+
+        String query = "select name, count(*) from CollectionInfo " +
+                "inner join Location on CollectionInfo.idLocation = Location.idLocation " +
+                "inner join ButterflyGuide on CollectionInfo.idButterflyGuide = ButterflyGuide.idButterflyGuide ";
+        where_not_used = true;
+
+        /* Country */
+        if (!this.cmbCountry.getSelectionModel().getSelectedItem().equals("전체")) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " country = '" + this.cmbCountry.getSelectionModel().getSelectedItem() + "'";
+        }
+
+        /* Year */
+        if (!this.cmbInquiryYear.getSelectionModel().getSelectedItem().equals("전체")) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " left(date, 4) = " + this.cmbInquiryYear.getSelectionModel().getSelectedItem();
+        }
+
+        /* Month */
+        if (!this.cmbInquiryMonth.getSelectionModel().getSelectedItem().equals("전체")) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " substr(date, 5, 2) = " + this.cmbInquiryMonth.getSelectionModel().getSelectedItem();
+        }
+
+        /* Group by */
+        query += " group by name " +
+                "order by count(name) desc";
+
+        /* Make Charts */
+        ResultSet result_query = this.db.selectQuery(query);
+        int cnt = 0;
+        while(result_query.next()) {
+            chart_series.getData().add(new XYChart.Data<>(
+                    result_query.getString(1),
+                    Integer.parseInt(result_query.getString(2))
+            ));
+        }
+        this.grpNameCollection.getData().add(chart_series);
     }
 }
