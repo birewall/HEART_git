@@ -214,6 +214,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
 
         String query = null;
 
+        String ID_Specimen = txtIDSpecimen.getText();
         String Country = cmbCountry.getSelectionModel().getSelectedItem();
         String Year = cmbCollectingYear.getSelectionModel().getSelectedItem();
         String Month = cmbCollectingMonth.getSelectionModel().getSelectedItem();
@@ -223,15 +224,19 @@ public class CInquiry extends AbsMetaController implements Initializable {
         String ButterflyFName = txtButterflyFamily.getText();
         String Method = cmbCollectingMethod.getSelectionModel().getSelectedItem();
 
-        query = "select b.country, a.date, c.name, b.alias, d.name, d.family \n" +
+        query = "select e.idSpecimen, b.country, a.date, c.name, b.alias, d.name, d.family \n" +
                 "from Butterfly.CollectionInfo as a \n" +
                 "inner join Butterfly.Location as b on a.idLocation = b.idLocation \n" +
                 "inner join Butterfly.Person as c on a.idPerson = c.idPerson \n" +
-                "inner join Butterfly.ButterflyGuide as d on a.idButterflyGuide = d.idButterflyGuide\n";
-
+                "inner join Butterfly.ButterflyGuide as d on a.idButterflyGuide = d.idButterflyGuide \n" +
+                "inner join Butterfly.Specimen as e on a.idCollectionInfo = e.idCollectionInfo \n";
 
         boolean where_not_used = true;
 
+        if(ID_Specimen == "전체") {
+        	ID_Specimen = null;
+        }
+        
         if(Country == "전체") {
             Country = null;
         }
@@ -257,6 +262,17 @@ public class CInquiry extends AbsMetaController implements Initializable {
             Method = null;
         }
 
+        
+        if (ID_Specimen.length() != 0) {
+            if (where_not_used) {
+                query += " where";
+                where_not_used = false;
+            } else {
+                query += " and";
+            }
+            query += " e.idSpecimen = '" + ID_Specimen + "'";
+        }
+        
         if (Country != null) {
             if (where_not_used) {
                 query += " where";
@@ -339,8 +355,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
 
         // Complete the query
 
-        //System.out.println(query);
-
+        System.out.println(query);
 
         /* Send Query */
         ResultSet result_query = ((MSharedData)this.shared_model).getDB().selectQuery(query);
@@ -355,9 +370,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
                     result_query.getString(5),
                     result_query.getString(6),
                     result_query.getString(7));
-
             this.tblInquiry.getItems().add(item);
-
         }
     }
 
@@ -368,7 +381,6 @@ public class CInquiry extends AbsMetaController implements Initializable {
 
     @FXML
     void OnPrintLabel(ActionEvent event) throws IOException {
-    	
         String strSpcimenID=null;
         String strCountry=null;
         String strButterflyName=null;
