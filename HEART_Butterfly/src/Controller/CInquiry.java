@@ -444,10 +444,13 @@ public class CInquiry extends AbsMetaController implements Initializable {
 
                 ResultSet rsImage = null;
                 
-                String ImageLoadingPath = "SELECT distinct Image.path from Image inner join Specimen "
-                		+ "on Image.idImage = Specimen.idImage where Specimen.idSpecimen = "
-                		+ this.tblInquiry.getSelectionModel().getSelectedItem().specimen_ID;
-                
+                String ImageLoadingPath = "SELECT distinct Image.path from Image "
+                        + "inner join CollectionImage on Image.idImage = CollectionImage.idImage "
+                		+ "inner join ButterflyGuide on CollectionImage.idButterflyGuide = ButterflyGuide.idButterflyGuide "
+                        + "where ButterflyGuide.name = '"
+                        + this.tblInquiry.getSelectionModel().getSelectedItem().getButterfly_name() + "'";
+                		//+ this.tblInquiry.getSelectionModel().getSelectedItem().specimen_ID;
+                System.out.println(ImageLoadingPath);
                 rsImage = db.selectQuery(ImageLoadingPath);
                 
                 try {
@@ -460,10 +463,10 @@ public class CInquiry extends AbsMetaController implements Initializable {
         		}
                 
         		//Set image
-                System.out.println(ImagePath);
-        		//Image image = new Image(file.toURI().toString());
-        		//this.imvButterflyImage.setImage(image);
-        		//System.out.println(ImageLoadingPath);
+                //System.out.println(ImagePath);
+                File file = new File("./img/kor/" + ImagePath);
+        		Image image = new Image(file.toURI().toString());
+        		this.imvButterflyImage.setImage(image);
             }
         });
     }

@@ -247,7 +247,6 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
         db_butterfly_guide.setName(butterfly_name);
         db_butterfly_guide.setFamily(butterfly_family);
         db_butterfly_guide.setScientific_name(scientific_name);
-        db_butterfly_guide.setIdImage(0);
         int id_butterflyGuide = db_butterfly_guide.getIdButterflyGuideFromDB();
         if(id_butterflyGuide == 0) {
             if(!db_butterfly_guide.insert()){
