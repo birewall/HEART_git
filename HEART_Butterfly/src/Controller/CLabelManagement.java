@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -20,10 +21,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 
 public class CLabelManagement extends AbsMetaController implements Initializable {
 	
     MDatabase db = null;
+    String ImagePath = null;
     
     /* Class for Table */
     public class LabelTableItem {
@@ -175,7 +178,7 @@ public class CLabelManagement extends AbsMetaController implements Initializable
                 this.lblSpecimenID.setText(item.getSpecimen_ID().toString());
                 this.lblCollector.setText(item.getCollector().toString());
                 this.lblCollectDate.setText(item.getCollecting_date().toString());
-                this.lblCollectPlace.setText(item.getCollecting_place().toString());
+                this.lblCollectPlace.setText(item.getCollecting_place().toString());                
             }
         });
 

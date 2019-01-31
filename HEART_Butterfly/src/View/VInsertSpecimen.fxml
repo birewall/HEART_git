@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
@@ -223,6 +224,8 @@
                            </rowConstraints>
                         </GridPane>
                         <ImageView fx:id="ImgSpecimen" fitHeight="140.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                        <Button fx:id="btnPreviousImage" mnemonicParsing="false" onAction="#OnPreviousImage" text="이전" GridPane.columnIndex="1" GridPane.valignment="BOTTOM" />
+                        <Button fx:id="btnNextImage" mnemonicParsing="false" onAction="#OnNextImage" text="다음" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM" />
                      </children>
                   </GridPane>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="작업 날짜" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
