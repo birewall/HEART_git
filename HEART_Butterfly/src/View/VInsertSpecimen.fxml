@@ -77,7 +77,7 @@
                   <Label text="제공자" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
                   <ComboBox fx:id="comboInsertSpecimenCollectway" onAction="#collectwayInsertSpecimen" prefHeight="29.0" prefWidth="200.0" promptText="직접 채집" GridPane.columnIndex="1" />
                   <DatePicker fx:id="dateInsertSpecimenCollectdate" editable="false" onAction="#collectdateInsertSpecimen" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtInsertSpecimenNation" alignment="CENTER" onAction="#nationInsertSpecimen" prefHeight="29.0" prefWidth="200.0" promptText="대한민국" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextField fx:id="txtInsertSpecimenNation" alignment="CENTER" onAction="#nationInsertSpecimen" prefHeight="29.0" prefWidth="200.0" promptText="대한민국" text="대한민국" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin></TextField>
