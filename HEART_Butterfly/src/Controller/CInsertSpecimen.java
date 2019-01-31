@@ -327,6 +327,43 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
             }
             id_specimenIO = db_specimenIO.getIdSpecimenIOFromDB();
         }
+        
+        int error_code = 0;
+        Alert error_popup = null;
+        String idSpecimen = null;
+
+        String collector = this.txtWhoInsertSpecimen.getText();
+        String collecting_date = this.dateInsertSpecimenCollectdate.getEditor().getText();
+        String location_alias = this.txtInsertSpecimenLocname.getText();
+
+        if(collector.length() * collecting_date.length() * location_alias.length() == 0) error_code = 1;
+        else if(idSpecimen == null) error_code = 2;
+
+        switch(error_code) {
+            case 0:
+                SystemClipboard.copy(idSpecimen + "\n"
+                        + collector + "\n"
+                        + collecting_date + "\n"
+                        + location_alias);
+                break;
+            case 1: // Empty Field Error
+                error_popup = new Alert(Alert.AlertType.ERROR);
+                error_popup.setTitle("레이블 복사");
+                error_popup.setHeaderText(null);
+                error_popup.setContentText("모든 정보를 입력해주세요.");
+                error_popup.show();
+                break;
+            case 2:
+                error_popup = new Alert(Alert.AlertType.ERROR);
+                error_popup.setTitle("레이블 복사");
+                error_popup.setHeaderText(null);
+                error_popup.setContentText("표본ID를 특정할 수 없습니다.");
+                error_popup.show();
+                break;
+            default:
+                ((MSharedData)this.shared_model).getLogger().error("error code has a problem");
+                break;
+        }
     }
 
     @FXML
@@ -391,42 +428,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 
     @FXML
     void OnPrintLabel(ActionEvent event) throws IOException {
-        int error_code = 0;
-        Alert error_popup = null;
-        String idSpecimen = null;
-
-        String collector = this.txtWhoInsertSpecimen.getText();
-        String collecting_date = this.dateInsertSpecimenCollectdate.getEditor().getText();
-        String location_alias = this.txtInsertSpecimenLocname.getText();
-
-        if(collector.length() * collecting_date.length() * location_alias.length() == 0) error_code = 1;
-        else if(idSpecimen == null) error_code = 2;
-
-        switch(error_code) {
-            case 0:
-                SystemClipboard.copy("표본 ID : " + idSpecimen + "\n"
-                        + "수집 날짜 : " + collecting_date + "\n"
-                        + "채집자 : " + collector + "\n"
-                        + "수집 장소 : " + location_alias);
-                break;
-            case 1: // Empty Field Error
-                error_popup = new Alert(Alert.AlertType.ERROR);
-                error_popup.setTitle("레이블 복사");
-                error_popup.setHeaderText(null);
-                error_popup.setContentText("모든 정보를 입력해주세요.");
-                error_popup.show();
-                break;
-            case 2:
-                error_popup = new Alert(Alert.AlertType.ERROR);
-                error_popup.setTitle("레이블 복사");
-                error_popup.setHeaderText(null);
-                error_popup.setContentText("표본ID를 특정할 수 없습니다.");
-                error_popup.show();
-                break;
-            default:
-                ((MSharedData)this.shared_model).getLogger().error("error code has a problem");
-                break;
-        }
+    	changeWindow(this.btnInsertSpecimenPrintLabel.getScene().getWindow(), "VLabelManagement");
     }
 
     @FXML
