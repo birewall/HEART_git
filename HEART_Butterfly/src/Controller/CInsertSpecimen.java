@@ -590,6 +590,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     @FXML
     void searchcollectlocInsertSpecimen(ActionEvent event) throws IOException {
         spawnChildWindow(this.btnInsertSpecimenAdd.getScene().getWindow(), "VAddressBook");
+        System.out.println("국가 고정값 확인: " + txtInsertSpecimenNation.getText());
     }
 
     @FXML
