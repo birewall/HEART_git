@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 public class MDBObservation extends MDatabase {
     int idObservation;
-    int idImage;
     int idCollectionInfo;
     String date;    //varchar(11)
     String time;    //varchar(9)
@@ -15,7 +14,6 @@ public class MDBObservation extends MDatabase {
     int number;
 
     public void initialize() {
-        this.idImage = 0;
         this.idCollectionInfo = 0;
         this.date = null;
         this.time = null;
@@ -42,17 +40,6 @@ public class MDBObservation extends MDatabase {
 
     public void setIdObservation(int idObservation) {
         this.idObservation = idObservation;
-    }
-
-    public String getIdImage() {
-        if(idImage == 0)
-            return null;
-        else
-            return String.valueOf(idImage);
-    }
-
-    public void setIdImage(int idImage) {
-        this.idImage = idImage;
     }
 
     public String getIdCollectionInfo() {
@@ -116,7 +103,6 @@ public class MDBObservation extends MDatabase {
     public void printContents() {
         logger.info("[" + this.table_name + "]");
         logger.info("[idObservation] " + idObservation);
-        logger.info("[idImage] " + idImage);
         logger.info("[idCollectionInfo] " + idCollectionInfo);
         logger.info("[date] " + date);
         logger.info("[time] " + time);
@@ -127,7 +113,6 @@ public class MDBObservation extends MDatabase {
 
     public boolean insert() {
         String query = "insert into Observation (idImage, idCollectionInfo, date, time, sex, status, number) values ("
-                + db_string_formatting(getIdImage(), "int") + ","
                 + db_string_formatting(getIdCollectionInfo(), "int") + ","
                 + db_string_formatting(getDate(), "string") + ","
                 + db_string_formatting(getTime(), "string") + ","
@@ -145,7 +130,6 @@ public class MDBObservation extends MDatabase {
     public boolean update(int idObservation) {
         String query = "update Observation set ";
         int initial_length = query.length();
-        query += db_update_formatting(db_string_formatting(getIdImage(), "int"), "idImage");
         query += db_update_formatting(db_string_formatting(getIdCollectionInfo(), "int"), "idCollectionInfo");
         query += db_update_formatting(db_string_formatting(getDate(), "string"), "date");
         query += db_update_formatting(db_string_formatting(getTime(), "string"), "time");
@@ -160,7 +144,6 @@ public class MDBObservation extends MDatabase {
 
     public int getIdObservationFromDB() {
         String query = "select idObservation from Observation where "
-                + db_where_formatting(db_string_formatting(getIdImage(), "int"), "idImage") + " and "
                 + db_where_formatting(db_string_formatting(getIdCollectionInfo(), "int"), "idCollectionInfo") + " and "
                 + db_where_formatting(db_string_formatting(getDate(), "String"), "date") + " and "
                 + db_where_formatting(db_string_formatting(getTime(), "String"), "time") + " and "

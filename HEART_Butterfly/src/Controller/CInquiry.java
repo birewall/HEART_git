@@ -456,6 +456,10 @@ public class CInquiry extends AbsMetaController implements Initializable {
                 try {
         			if(rsImage.next()) {
         			    ImagePath = rsImage.getString(1);
+                		//Set image
+                        File file = new File("./img/kor/" + ImagePath);
+                		Image image = new Image(file.toURI().toString());
+                		this.imvButterflyImage.setImage(image);
         			}else{
         			    return;
                     }
@@ -464,11 +468,7 @@ public class CInquiry extends AbsMetaController implements Initializable {
         			e1.printStackTrace();
         		}
                 
-        		//Set image
-                //System.out.println(ImagePath);
-                File file = new File("./img/kor/" + ImagePath);
-        		Image image = new Image(file.toURI().toString());
-        		this.imvButterflyImage.setImage(image);
+
             }
         });
     }
