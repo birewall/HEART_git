@@ -177,7 +177,6 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
         	txtInsertSpecimenLocname.setText(alias_sub);
         	txtWhoInsertSpecimen.setText(collectwho_sub);
     	}else
-    		
     	    dateInsertSpecimenCollectdate.getEditor().clear();
 	    	txtInsertSpecimenNation.clear();
 	        txtInsertSpecimenCollectoc.clear();
@@ -220,13 +219,12 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     
     @FXML
     void OnPreviousImage(ActionEvent event) {
-    	
 		//Set image
     	if(image_index <= 0) return;
     	
     	image_index--;
 
-		File file = new File("./img/kor/" + ImagePathList.get(image_index));
+		File file = new File("HEART_Butterfly/img/kor/" + ImagePathList.get(image_index));
 		Image image = new Image(file.toURI().toString());
 		this.ImgSpecimen.setImage(image);
         System.out.println(this.ImagePathList.get(image_index));
@@ -238,11 +236,11 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	if(image_index < ArraySize-1) {
 			image_index++;
 
-			File file = new File("./img/kor/" + ImagePathList.get(image_index));
+			File file = new File("HEART_Butterfly/img/kor/" + ImagePathList.get(image_index));
 			Image image = new Image(file.toURI().toString());
 			this.ImgSpecimen.setImage(image);
 		    System.out.println(this.ImagePathList.get(image_index));
-    	}
+        }
     }
     
     @FXML
@@ -663,21 +661,19 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 		try{
             while(result_ImagePath.next()) {
 				ImagePath = result_ImagePath.getString(1);
-		        ImagePathList.add(ImagePath);
+		        ImagePathList.add(ImagePath + ".jpg");
 			}
     		//Set image
-    		File file = new File("./img/kor/" + ImagePathList.get(0));
+    		File file = new File("HEART_Butterfly/img/kor/" + ImagePathList.get(0));
     		Image image = new Image(file.toURI().toString());
     		this.ImgSpecimen.setImage(image);
 	        System.out.println(this.ImagePathList.get(0));
 	        ArraySize = ImagePathList.size();
 	        System.out.println(ArraySize);
-	       
-            
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
+		} catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
