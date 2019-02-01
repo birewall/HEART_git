@@ -25,9 +25,12 @@ import javafx.stage.WindowEvent;
 
 import javax.swing.*;
 
+import org.controlsfx.control.textfield.TextFields;
+
 public class CInsertWatch extends AbsInsertController implements Initializable {
 	
-	MDBPerson PersonDB;
+    MDatabase db=null;
+    String ImagePath=null;
 		
 	 	@FXML
 	    private TextField txtInsertWatchDo;
@@ -167,7 +170,7 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
     	String status = comboInsertWatchStatus.getSelectionModel().getSelectedItem();
     	String quantity = txtInsertWatchQuan.getText();
     	if(quantity.length() == 0) quantity = "0";
-    	String note = txtInsertWatchRemark.getText();
+    	//String note = txtInsertWatchRemark.getText();
 
     	
     	/* DB Instance initialization */
@@ -252,7 +255,53 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
 
     @FXML
     void bnameInsertWatch(ActionEvent event) {
+        
+        ResultSet result_ButterflyFamily = db.selectQuery("select distinct family from ButterflyGuide where name = " 
+        + "'" + this.txtInsertWatchBname.getText() + "'");
+        
+        try {
+			while(result_ButterflyFamily.next()) {
+				this.txtInsertWatchFamily.setText(result_ButterflyFamily.getString(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        ResultSet result_ButterflyZoological = db.selectQuery("select distinct scientific_name from ButterflyGuide where name = " 
+        + "'" + this.txtInsertWatchBname.getText() + "'");
+        
+		try {
+			while(result_ButterflyZoological.next()) {
+				this.txtInsertWatchZoological.setText(result_ButterflyZoological.getString(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+        ResultSet result_ImagePath = db.selectQuery("SELECT distinct A.path from Image AS A "
+        		+ "inner join ButterflyGuide AS B on A.idImage = B.idImage "
+                + "inner join CollectionImage AS C on B.idButterflyGuide = C.idButterflyGuide "
+                + "where B.name = '"
+        		+ this.txtInsertWatchBname.getText() +"'");
+
+/*		try{
+		    if(result_ImagePath.next()) {
+				ImagePath = result_ImagePath.getString(1);
+			}else{
+		        return;
+            }
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+*/
+		//Set image
+        //System.out.println(ImagePath);
+		//File file = new File("./img/kor/" + ImagePath);
+		//Image image = new Image(file.toURI().toString());
+		//this.imvButterflyImage.setImage(image);
     }
 
     @FXML
@@ -450,8 +499,7 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
 
         /* DB Querying */
         String query = "select name from Person";
-        PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-        ResultSet rs = PersonDB.selectQuery(query);
+        ResultSet rs = db.selectQuery(query);
         try {
             while(rs.next()) {
                 /* View Updating */
@@ -490,11 +538,12 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
 	
 	@Override
 	public void init_procedure() {
+    	db = ((MSharedData)this.shared_model).getDB();
+
 		// Set Watcher
 		String query = "select name from Person";
 		System.out.println(this.shared_model);
-		PersonDB = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
-		ResultSet rs = PersonDB.selectQuery(query);
+		ResultSet rs = db.selectQuery(query);
 		try {
 			while(rs.next()) {
 				this.comboInsertWatchWho.getItems().add(rs.getString(1));   // get name
@@ -503,6 +552,13 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+        /* Set Auto Complete */
+        try {
+            setAutoComplete();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 	}
 
 	@Override
@@ -519,6 +575,25 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
         }
         this.txtInsertWatchLocname.setText(alias);
     }
+	
+    private void setAutoComplete() throws SQLException {
+        ObservableList<String> name_autocomplete_list = FXCollections.observableArrayList();
+        ObservableList<String> nation_autocomplete_list = FXCollections.observableArrayList();
+
+        ResultSet result_ButterflyName = db.selectQuery("select distinct name from ButterflyGuide");
+        while(result_ButterflyName.next()) {
+            name_autocomplete_list.add(result_ButterflyName.getString(1));
+        }
+        
+        ResultSet result_Nation = db.selectQuery("select distinct country from Location");
+        
+        while(result_Nation.next()) {
+        	nation_autocomplete_list.add(result_Nation.getString(1));
+        }
+        TextFields.bindAutoCompletion(this.txtInsertWatchBname, name_autocomplete_list);
+        TextFields.bindAutoCompletion(this.txtInsertWatchNation, nation_autocomplete_list);
+    }
+
 
     @Override
     public void passing_section_info(String nowSection, String maxSection) {

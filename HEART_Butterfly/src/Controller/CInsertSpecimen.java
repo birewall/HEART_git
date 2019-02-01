@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.*;
@@ -23,11 +25,19 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 
     MDatabase db=null;
     String ImagePath=null;
+    List ImagePathList = new ArrayList();
+    int ArraySize = 0;
     
     String PlaceName;
     String CabinetName;
     String BoxName;
 
+    @FXML
+    private Button btnPreviousImage;
+    
+    @FXML
+    private Button btnNextImage;
+    
     @FXML
     private ImageView ImgSpecimen;
     
@@ -140,7 +150,35 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     @FXML
     private ComboBox<String> comboInsertSpecimenCollectway;
     
+    int image_index = 0;
+    
+    @FXML
+    void OnPreviousImage(ActionEvent event) {
+    	
+		//Set image
+    	if(image_index <= 0) return;
+    	
+    	image_index--;
 
+		File file = new File("./img/kor/" + ImagePathList.get(image_index));
+		Image image = new Image(file.toURI().toString());
+		this.ImgSpecimen.setImage(image);
+        System.out.println(this.ImagePathList.get(image_index));
+    }
+
+    @FXML
+    void OnNextImage(ActionEvent event) {
+		//Set image
+    	if(image_index < ArraySize-1) {
+			image_index++;
+
+			File file = new File("./img/kor/" + ImagePathList.get(image_index));
+			Image image = new Image(file.toURI().toString());
+			this.ImgSpecimen.setImage(image);
+		    System.out.println(this.ImagePathList.get(image_index));
+    	}
+    }
+    
     @FXML
     void OnPreviousStorage(ActionEvent event) {
     	if(this.rdoPreviousStorage.isSelected()) {
@@ -436,8 +474,42 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
         dateInsertSpecimenDate.getEditor().clear();
         txtWhoWorkSpecimen.clear();
         
-        
-        
+        int error_code = 0;
+        Alert error_popup = null;
+        String idSpecimen = null;
+
+        String collector = this.txtWhoInsertSpecimen.getText();
+        String collecting_date = this.dateInsertSpecimenCollectdate.getEditor().getText();
+        String location_alias = this.txtInsertSpecimenLocname.getText();
+
+        if(collector.length() * collecting_date.length() * location_alias.length() == 0) error_code = 1;
+        else if(idSpecimen == null) error_code = 2;
+
+        switch(error_code) {
+            case 0:
+                SystemClipboard.copy(idSpecimen + "\n"
+                        + collector + "\n"
+                        + collecting_date + "\n"
+                        + location_alias);
+                break;
+            case 1: // Empty Field Error
+                error_popup = new Alert(Alert.AlertType.ERROR);
+                error_popup.setTitle("레이블 복사");
+                error_popup.setHeaderText(null);
+                error_popup.setContentText("모든 정보를 입력해주세요.");
+                error_popup.show();
+                break;
+            case 2:
+                error_popup = new Alert(Alert.AlertType.ERROR);
+                error_popup.setTitle("레이블 복사");
+                error_popup.setHeaderText(null);
+                error_popup.setContentText("표본ID를 특정할 수 없습니다.");
+                error_popup.show();
+                break;
+            default:
+                ((MSharedData)this.shared_model).getLogger().error("error code has a problem");
+                break;
+        }
     }
 
     @FXML
@@ -467,27 +539,30 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 			e.printStackTrace();
 		}
 
-        ResultSet result_ImagePath = db.selectQuery("SELECT distinct A.path from Image AS A "
-        		+ "inner join ButterflyGuide AS B on A.idImage = B.idImage "
-                + "inner join CollectionImage AS C on B.idButterflyGuide = C.idButterflyGuide "
-                + "where B.name = '"
+        ResultSet result_ImagePath = db.selectQuery("select path "
+        		+ "from Image inner join CollectionImage on Image.idImage = CollectionImage.idImage "
+        		+ "inner join ButterflyGuide on CollectionImage.idButterflyGuide = ButterflyGuide.idButterflyGuide "
+        		+ "where ButterflyGuide.name = '"
         		+ this.txtInsertSpecimenBname.getText() +"'");
 
 		try{
-		    if(result_ImagePath.next()) {
+            while(result_ImagePath.next()) {
 				ImagePath = result_ImagePath.getString(1);
-			}else{
-		        return;
-            }
+		        ImagePathList.add(ImagePath);
+			}
+    		//Set image
+    		File file = new File("./img/kor/" + ImagePathList.get(0));
+    		Image image = new Image(file.toURI().toString());
+    		this.ImgSpecimen.setImage(image);
+	        System.out.println(this.ImagePathList.get(0));
+	        ArraySize = ImagePathList.size();
+	        System.out.println(ArraySize);
+	       
+            
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		//Set image
-        System.out.println(ImagePath);
-		//File file = new File("./img/kor/" + ImagePath);
-		//Image image = new Image(file.toURI().toString());
-		//this.imvButterflyImage.setImage(image);
     }
 
     @FXML
@@ -502,42 +577,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 
     @FXML
     void OnPrintLabel(ActionEvent event) throws IOException {
-        int error_code = 0;
-        Alert error_popup = null;
-        String idSpecimen = null;
-
-        String collector = this.txtWhoInsertSpecimen.getText();
-        String collecting_date = this.dateInsertSpecimenCollectdate.getEditor().getText();
-        String location_alias = this.txtInsertSpecimenLocname.getText();
-
-        if(collector.length() * collecting_date.length() * location_alias.length() == 0) error_code = 1;
-        else if(idSpecimen == null) error_code = 2;
-
-        switch(error_code) {
-            case 0:
-                SystemClipboard.copy("표본 ID : " + idSpecimen + "\n"
-                        + "수집 날짜 : " + collecting_date + "\n"
-                        + "채집자 : " + collector + "\n"
-                        + "수집 장소 : " + location_alias);
-                break;
-            case 1: // Empty Field Error
-                error_popup = new Alert(Alert.AlertType.ERROR);
-                error_popup.setTitle("레이블 복사");
-                error_popup.setHeaderText(null);
-                error_popup.setContentText("모든 정보를 입력해주세요.");
-                error_popup.show();
-                break;
-            case 2:
-                error_popup = new Alert(Alert.AlertType.ERROR);
-                error_popup.setTitle("레이블 복사");
-                error_popup.setHeaderText(null);
-                error_popup.setContentText("표본ID를 특정할 수 없습니다.");
-                error_popup.show();
-                break;
-            default:
-                ((MSharedData)this.shared_model).getLogger().error("error code has a problem");
-                break;
-        }
+    	changeWindow(this.btnInsertSpecimenPrintLabel.getScene().getWindow(), "VLabelManagement");
     }
 
     @FXML
@@ -781,9 +821,9 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 			e.printStackTrace();
 		}
 		
-		this.comboInsertSpecimenCollectway.getItems().addAll("직접채집", "구매", "선물");
-		this.comboInsertSpecimenStatus.getItems().addAll("상", "중", "하");
-		this.comboInsertSpecimenSex.getItems().addAll("암", "수");
+		this.comboInsertSpecimenCollectway.getItems().addAll("직접채집", "구입", "선물","기타");
+		this.comboInsertSpecimenStatus.getItems().addAll("상", "중", "하","기타");
+		this.comboInsertSpecimenSex.getItems().addAll("암", "수","기타");
         this.comboInsertSpecimenCollectway.getSelectionModel().select(0);
         this.comboInsertSpecimenStatus.getSelectionModel().select(0);
         this.comboInsertSpecimenSex.getSelectionModel().select(0);
