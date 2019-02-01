@@ -15,88 +15,109 @@
    <children>
       <GridPane>
          <children>
-            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="시/도" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="시/도" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="시/군/구" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="시/군/구" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="통상명" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="통상명" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="txtAddress" onAction="#OnAddress" GridPane.rowIndex="2">
+            <TextField fx:id="txtAddress" onAction="#OnAddress" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="20.0" right="20.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="txtDetailAddress" onAction="#OnDetailAddress" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="txtDetailAddress" onAction="#OnDetailAddress" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="20.0" right="20.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="txtAlias" onAction="#OnAlias" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <TextField fx:id="txtAlias" onAction="#OnAlias" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="20.0" right="20.0" />
                </GridPane.margin>
             </TextField>
-            <ListView fx:id="lstAddress" prefHeight="220.0" prefWidth="200.0" GridPane.rowIndex="3">
+            <ListView fx:id="lstAddress" prefHeight="220.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </GridPane.margin>
             </ListView>
-            <ListView fx:id="lstDetailAddress" prefHeight="220.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <ListView fx:id="lstDetailAddress" prefHeight="220.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </GridPane.margin>
             </ListView>
-            <ListView fx:id="lstAlias" prefHeight="220.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <ListView fx:id="lstAlias" prefHeight="220.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </GridPane.margin>
             </ListView>
-            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="예: 강원" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="예: 강원" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font>
             </Label>
-            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="예: 철원군" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="예: 철원군" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font>
             </Label>
-            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="읍/면/리" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="읍/면/리" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="예: 서면 덕두원리 (최대 두단어)" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="예: 서면 덕두원리 (최대 두단어)" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font>
             </Label>
-            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="예: 삼악산" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="예: 삼악산" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="txtSection" onAction="#OnSection" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <TextField fx:id="txtSection" onAction="#OnSection" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="20.0" right="20.0" />
                </GridPane.margin>
             </TextField>
-            <ListView fx:id="lstSection" prefHeight="220.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <ListView fx:id="lstSection" prefHeight="220.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+               </GridPane.margin>
+            </ListView>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="국가" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="예: 대한민국" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtCountry" onAction="#OnCountry" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="20.0" right="20.0" />
+               </GridPane.margin>
+            </TextField>
+            <ListView fx:id="lstCountry" prefHeight="220.0" prefWidth="200.0" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </GridPane.margin>
             </ListView>
          </children>
          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

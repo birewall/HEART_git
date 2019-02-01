@@ -862,8 +862,9 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     }
 
     @Override
-    public void passing_address(String location, String locationDetail, String section, String alias) {
+    public void passing_address(String country, String location, String locationDetail, String section, String alias) {
         String[] sectionSplit = section.split(" ");
+        this.txtInsertSpecimenNation.setText(country);
         this.txtInsertSpecimenCollectoc.setText(location);
         this.txtInsertSpecimenDo.setText(locationDetail);
         if(sectionSplit.length == 1) {
@@ -896,13 +897,20 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     }
 
     @Override
-    public void passing_collection_info(String date, String country, String loc_alias, String butter_name, String butter_family, String person_name) {
-        /* View Updating */
+    public void passing_collection_info(String date, String country, String location, String locationDetail,
+                                        String section, String sectionDetail, String loc_alias, String butter_name,
+                                        String butter_family, String butter_sci, String person_name) {
+	    /* View Updating */
         this.dateInsertSpecimenCollectdate.getEditor().setText(date);
         this.txtInsertSpecimenNation.setText(country);
+        this.txtInsertSpecimenCollectoc.setText(location);
+        this.txtInsertSpecimenDo.setText(locationDetail);
+        this.txtInsertSpecimenSi.setText(section);
+        this.txtInsertSpecimenDong.setText(sectionDetail);
         this.txtInsertSpecimenLocname.setText(loc_alias);
         this.txtInsertSpecimenBname.setText(butter_name);
         this.txtInsertSpecimenFamily.setText(butter_family);
+        this.txtInsertSpecimenZoological.setText(butter_sci);
         this.txtWhoInsertSpecimen.setText(person_name);
     }
 
