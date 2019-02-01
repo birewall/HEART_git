@@ -175,7 +175,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     String gps_sub =  null;
 	String alias_sub = null;
 	String collectwho_sub = null;
-	
+
 	//데이터 백업 스플릿(하)
 	String butterfly_name_sub = null;
 	String butterfly_family_sub = null;
@@ -190,13 +190,13 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 	String NewLoc2_sub = null;
 	String NewLoc3_sub = null;
 	String SpecimenWho_sub = null;
-    
+
     @FXML
     void Oncheckbox_InsertSubData_1(ActionEvent event) {
     	if(checkbox_InsertSubData_1.isSelected()) {
             comboInsertSpecimenCollectway.getSelectionModel().select(Collectway_sub);
             dateInsertSpecimenCollectdate.getEditor().setText(Collect_date_sub);
-                       
+
             txtInsertSpecimenNation.setText(country_sub);
             txtInsertSpecimenCollectoc.setText(location_sub);
         	txtInsertSpecimenDo.setText(loc_1_sub);
@@ -207,7 +207,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
         	txtInsertSpecimenLocname.setText(alias_sub);
         	txtWhoInsertSpecimen.setText(collectwho_sub);
     	}else {
-    		
+
     	    dateInsertSpecimenCollectdate.getEditor().clear();
 	    	txtInsertSpecimenNation.clear();
 	        txtInsertSpecimenCollectoc.clear();
@@ -252,13 +252,13 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     
     @FXML
     void OnPreviousImage(ActionEvent event) {
-    	
+
 		//Set image
     	if(image_index <= 0) return;
     	
     	image_index--;
 
-		File file = new File("./img/kor/" + ImagePathList.get(image_index));
+		File file = new File("HEART_Butterfly/img/kor/" + ImagePathList.get(image_index));
 		Image image = new Image(file.toURI().toString());
 		this.ImgSpecimen.setImage(image);
         System.out.println(this.ImagePathList.get(image_index));
@@ -270,11 +270,11 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	if(image_index < ArraySize-1) {
 			image_index++;
 
-			File file = new File("./img/kor/" + ImagePathList.get(image_index));
+			File file = new File("HEART_Butterfly/img/kor/" + ImagePathList.get(image_index));
 			Image image = new Image(file.toURI().toString());
 			this.ImgSpecimen.setImage(image);
 		    System.out.println(this.ImagePathList.get(image_index));
-    	}
+        }
     }
     
     @FXML
@@ -302,7 +302,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	}
     }
 
-	 
+
     
 	@FXML
     void addInsertSpecimen(ActionEvent event) {
@@ -552,7 +552,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
         }
         
         //초기화(init_proc_copy)
-    	
+
         
         dateInsertSpecimenCollectdate.getEditor().clear();
         txtInsertSpecimenNation.clear();
@@ -631,21 +631,19 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 		try{
             while(result_ImagePath.next()) {
 				ImagePath = result_ImagePath.getString(1);
-		        ImagePathList.add(ImagePath);
+		        ImagePathList.add(ImagePath + ".jpg");
 			}
     		//Set image
-    		File file = new File("./img/kor/" + ImagePathList.get(0));
+    		File file = new File("HEART_Butterfly/img/kor/" + ImagePathList.get(0));
     		Image image = new Image(file.toURI().toString());
     		this.ImgSpecimen.setImage(image);
 	        System.out.println(this.ImagePathList.get(0));
 	        ArraySize = ImagePathList.size();
 	        System.out.println(ArraySize);
-	       
-            
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
+		} catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -1001,8 +999,9 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     @Override
     public void passing_collection_info(String date, String country, String location, String locationDetail,
                                         String section, String sectionDetail, String loc_alias, String butter_name,
-                                        String butter_family, String butter_sci, String person_name) {
+                                        String butter_family, String butter_sci, String method, String person_name) {
 	    /* View Updating */
+        this.comboInsertSpecimenCollectway.getSelectionModel().select(method);
         this.dateInsertSpecimenCollectdate.getEditor().setText(date);
         this.txtInsertSpecimenNation.setText(country);
         this.txtInsertSpecimenCollectoc.setText(location);

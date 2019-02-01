@@ -538,7 +538,8 @@ public class CInsertPicture extends AbsInsertController implements Initializable
 
     @Override
     public void passing_collection_info(String date, String country, String location, String locationDetail,
-                                        String section, String sectionDetail, String loc_alias, String butter_name, String butter_family, String butter_sci, String person_name) {
+                                        String section, String sectionDetail, String loc_alias, String butter_name,
+                                        String butter_family, String butter_sci, String method, String person_name) {
         /* View Updating */
         this.dateInsertPictureDate.getEditor().setText(date);
         this.txtInsertPictureNation.setText(country);

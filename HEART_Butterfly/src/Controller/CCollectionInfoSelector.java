@@ -299,17 +299,17 @@ public class CCollectionInfoSelector extends AbsMetaController implements Initia
     }
 
     public String getQuery() {
-        String query = "select c.date, l.country, l.alias, b.name, b.family, c.method, p.name " +
+        String query = "select c.date, l.country, l.alias, b.name, b.family, c.method, p.name" +
                 " from Location l" +
                 " inner join CollectionInfo c on l.idLocation = c.idLocation" +
                 " inner join ButterflyGuide b on b.idButterflyGuide = c.idButterflyGuide" +
-                " inner join Person p on p.idPerson = c.idPerson";
-        if(this.checkDateBegin.isSelected()) query += "c.date >= '" + MDateConvertor.convert2DBFormat(this.dateBegin.getEditor().getText()) + "' and ";
-        if(this.checkDateEnd.isSelected()) query += "c.date <= '" + MDateConvertor.convert2DBFormat(this.dateEnd.getEditor().getText()) + "' and ";
-        if(this.checkCountry.isSelected()) query += "l.country = '" + this.txtCountry.getText() + "' and ";
-        if(this.checkAlias.isSelected()) query += "l.alias = '" + this.txtAlias.getText() + "' and ";
-        if(this.checkButterflyName.isSelected()) query += "b.name = '" + this.txtButterflyName.getText() + "' and ";
-        if(this.checkButterflyFamily.isSelected()) query += "b.family = '" + this.txtButterflyFamily.getText() + "' and ";
+                " inner join Person p on p.idPerson = c.idPerson where";
+        if(this.checkDateBegin.isSelected()) query += " c.date >= '" + MDateConvertor.convert2DBFormat(this.dateBegin.getEditor().getText()) + "' and ";
+        if(this.checkDateEnd.isSelected()) query += " c.date <= '" + MDateConvertor.convert2DBFormat(this.dateEnd.getEditor().getText()) + "' and ";
+        if(this.checkCountry.isSelected()) query += " l.country = '" + this.txtCountry.getText() + "' and ";
+        if(this.checkAlias.isSelected()) query += " l.alias = '" + this.txtAlias.getText() + "' and ";
+        if(this.checkButterflyName.isSelected()) query += " b.name = '" + this.txtButterflyName.getText() + "' and ";
+        if(this.checkButterflyFamily.isSelected()) query += " b.family = '" + this.txtButterflyFamily.getText() + "' and ";
         /* To be implemented */
 //        if(this.checkTimeMorning.isSelected()) query += "";
 //        if(this.checkTimeAfternoon.isSelected()) query += "";
@@ -363,8 +363,8 @@ public class CCollectionInfoSelector extends AbsMetaController implements Initia
                 " inner join ButterflyGuide b on b.idButterflyGuide = c.idButterflyGuide" +
                 " inner join Person p on p.idPerson = c.idPerson" +
                 " where l.country = '" + selected_item.getRecord(1)+ "'" +
-                " and b.name = '" + selected_item.getRecord(3) + "'" +
-                " and p.name = '" + selected_item.getRecord(5) + "'");
+                " and b.name = '" + selected_item.getRecord(3) + "'");
+                //" and p.name = '" + selected_item.getRecord(5) + "'");
 //        public void passing_collection_info(String date, String country, String location, String locationDetail,
 //                String section, String sectionDetail, String loc_alias, String butter_name,
 //                String butter_family, String butter_sci, String person_name) {
@@ -386,7 +386,8 @@ public class CCollectionInfoSelector extends AbsMetaController implements Initia
                     selected_item.getRecord(3),//butter_name
                     selected_item.getRecord(4),//butter_family
                     rs.getString(5),//butter_sci
-                    selected_item.getRecord(5));//person_name
+                    selected_item.getRecord(5),//method
+                    selected_item.getRecord(6));//person_name
         }
         thisStage.close();
     }
