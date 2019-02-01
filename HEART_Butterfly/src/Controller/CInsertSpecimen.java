@@ -161,12 +161,42 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     
     int image_index = 0;
     
+    //데이터 백업 스플릿(상)
+	String Collectway_sub = null;
+	String Collect_date_sub = null;
+	String country_sub = null;
+	String location_sub = null;
+	String location_detail_sub = null;
+	String loc_1_sub = null;
+	String loc_2_sub = null;
+	String loc_3_sub = null;
+    String gps_x_sub = null;
+    String gps_y_sub = null;
+    String gps_sub =  null;
+	String alias_sub = null;
+	String collectwho_sub = null;
+	
+	//데이터 백업 스플릿(하)
+	String butterfly_name_sub = null;
+	String butterfly_family_sub = null;
+	String scientific_name_sub = null;
+	String Specimen_date_sub = null;
+	String status_sub = null;
+	String sex_sub = null;
+	String PreviousLoc1_sub = null;
+	String PreviousLoc2_sub = null;
+	String PreviousLoc3_sub = null;
+	String NewLoc1_sub = null;
+	String NewLoc2_sub = null;
+	String NewLoc3_sub = null;
+	String SpecimenWho_sub = null;
     
     @FXML
     void Oncheckbox_InsertSubData_1(ActionEvent event) {
     	if(checkbox_InsertSubData_1.isSelected()) {
             comboInsertSpecimenCollectway.getSelectionModel().select(Collectway_sub);
             dateInsertSpecimenCollectdate.getEditor().setText(Collect_date_sub);
+                       
             txtInsertSpecimenNation.setText(country_sub);
             txtInsertSpecimenCollectoc.setText(location_sub);
         	txtInsertSpecimenDo.setText(loc_1_sub);
@@ -270,35 +300,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	}
     }
 
-	  //데이터 백업 스플릿(상)
-		String Collectway_sub = null;
-		String Collect_date_sub = null;
-		String country_sub = null;
-		String location_sub = null;
-		String location_detail_sub = null;
-		String loc_1_sub = null;
-		String loc_2_sub = null;
-		String loc_3_sub = null;
-	    String gps_x_sub = null;
-	    String gps_y_sub = null;
-	    String gps_sub =  null;
-		String alias_sub = null;
-		String collectwho_sub = null;
-		
-		//데이터 백업 스플릿(하)
-    	String butterfly_name_sub = null;
-    	String butterfly_family_sub = null;
-    	String scientific_name_sub = null;
-    	String Specimen_date_sub = null;
-    	String status_sub = null;
-    	String sex_sub = null;
-		String PreviousLoc1_sub = null;
-		String PreviousLoc2_sub = null;
-		String PreviousLoc3_sub = null;
-		String NewLoc1_sub = null;
-		String NewLoc2_sub = null;
-		String NewLoc3_sub = null;
-    	String SpecimenWho_sub = null;
+	 
     
 	@FXML
     void addInsertSpecimen(ActionEvent event) {
