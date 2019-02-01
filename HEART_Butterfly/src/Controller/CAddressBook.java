@@ -59,6 +59,27 @@ public class CAddressBook extends AbsMetaController implements Initializable {
     private ListView<String> lstSection;
 
     @FXML
+    private ListView<String> lstCountry;
+
+    @FXML
+    private TextField txtCountry;
+
+    @FXML
+    void OnCountry(ActionEvent event) {
+        this.lstAddress.getItems().clear();
+        this.txtAddress.setText(null);
+        this.lstDetailAddress.getItems().clear();
+        this.txtDetailAddress.setText(null);
+        this.lstSection.getItems().clear();
+        this.txtSection.setText(null);
+        String selected = lstCountry.getSelectionModel().getSelectedItem();
+        if(selected != null) {
+            fillAddress(selected);
+            txtCountry.setText(selected);
+        }
+    }
+
+    @FXML
     void OnSection(ActionEvent event) {
         String selected = this.lstSection.getSelectionModel().getSelectedItem();
         if(selected != null) {
@@ -127,9 +148,29 @@ public class CAddressBook extends AbsMetaController implements Initializable {
     }
 
     @FXML
-    void OnSelect(ActionEvent event) {
+    void OnSelect(ActionEvent event) throws SQLException {
         /* Add to Previous */
-        ((AbsInsertController)this.parent_controller).passing_address(this.txtAddress.getText(),
+        if(this.txtAlias.getText().length() == 0) {
+            String query = null;
+            if(this.txtSection.getText().split(" ").length == 1) {
+                query = "select alias from Location where country = '" + this.txtCountry.getText() + "'"
+                                                + " and location = '" + this.txtAddress.getText() + "'"
+                                                + " and locationDetail = '" + this.txtDetailAddress.getText() + "'"
+                                                + " and section = '" + this.txtSection.getText() + "';";
+            }else{
+                query = "select alias from Location where country = '" + this.txtCountry.getText() + "'"
+                        + " and location = '" + this.txtAddress.getText() + "'"
+                        + " and locationDetail = '" + this.txtDetailAddress.getText() + "'"
+                        + " and section = '" + this.txtSection.getText().split(" ")[0] + "'"
+                        + " and section = '" + this.txtSection.getText().split(" ")[1] + "'";
+            }
+            ResultSet rs = this.db_location.selectQuery(query);
+            if(rs.next()) {
+                this.txtAlias.setText(rs.getString(1));
+            }
+        }
+        ((AbsInsertController)this.parent_controller).passing_address(this.txtCountry.getText(),
+                                                                        this.txtAddress.getText(),
                                                                         this.txtDetailAddress.getText(),
                                                                         this.txtSection.getText(),
                                                                         this.txtAlias.getText());
@@ -176,8 +217,20 @@ public class CAddressBook extends AbsMetaController implements Initializable {
         this.fillAlias();
     }
 
-    private void fillAddress() {
-        ResultSet result_query = this.db_location.selectQuery("select distinct location from Location;");
+    private void fillCountry() {
+        ResultSet result_query = this.db_location.selectQuery("select distinct country from Location;");
+        this.lstCountry.getItems().clear();
+        try{
+            while(result_query.next()) {
+                this.lstCountry.getItems().add(result_query.getString(1));
+            }
+        }catch (SQLException exp){
+            ((MSharedData)this.shared_model).getLogger().debug("No item for country");
+        }
+    }
+
+    private void fillAddress(String address) {
+        ResultSet result_query = this.db_location.selectQuery("select distinct location from Location where country = '" + address + "';");
         this.lstAddress.getItems().clear();
         try{
             while(result_query.next()) {
@@ -232,6 +285,12 @@ public class CAddressBook extends AbsMetaController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         /* Register Click Handler */
+        this.lstCountry.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                OnCountry(null);
+            }
+        });
         this.lstAddress.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -263,7 +322,9 @@ public class CAddressBook extends AbsMetaController implements Initializable {
         this.db_location = new MDBLocation(((MSharedData) this.shared_model).getDB().getConnection());
 
         /* Fill Address and Alias List */
-        fillAddress();
+        this.txtCountry.setText("대한민국");
+        fillCountry();
+        fillAddress("대한민국");
         fillAlias();
     }
 }

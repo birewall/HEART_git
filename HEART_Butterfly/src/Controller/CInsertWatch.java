@@ -483,13 +483,20 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
     }
 
     @Override
-    public void passing_collection_info(String date, String country, String loc_alias, String butter_name, String butter_family, String person_name) {
+    public void passing_collection_info(String date, String country, String location, String locationDetail,
+                                        String section, String sectionDetail, String loc_alias, String butter_name,
+                                        String butter_family, String butter_sci, String person_name) {
         /* View Updating */
         this.dateInsertWatchDate.getEditor().setText(date);
         this.txtInsertWatchNation.setText(country);
+        this.txtInsertWatchLoc.setText(location);
+        this.txtInsertWatchDo.setText(locationDetail);
+        this.txtInsertWatchSi.setText(section);
+        this.txtInsertWatchDong.setText(sectionDetail);
         this.txtInsertWatchLocname.setText(loc_alias);
         this.txtInsertWatchBname.setText(butter_name);
         this.txtInsertWatchFamily.setText(butter_family);
+        this.txtInsertWatchZoological.setText(butter_sci);
         this.comboInsertWatchWho.getSelectionModel().select(person_name);
     }
 
@@ -562,8 +569,9 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
 	}
 
 	@Override
-    public void passing_address(String location, String locationDetail, String section, String alias) {
+    public void passing_address(String country, String location, String locationDetail, String section, String alias) {
         String[] sectionSplit = section.split(" ");
+        this.txtInsertWatchNation.setText(country);
         this.txtInsertWatchLoc.setText(location);
         this.txtInsertWatchDo.setText(locationDetail);
         if(sectionSplit.length == 1) {

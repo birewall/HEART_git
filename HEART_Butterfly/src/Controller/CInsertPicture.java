@@ -521,8 +521,9 @@ public class CInsertPicture extends AbsInsertController implements Initializable
     }
 
     @Override
-    public void passing_address(String location, String locationDetail, String section, String alias) {
+    public void passing_address(String country, String location, String locationDetail, String section, String alias) {
         String[] sectionSplit = section.split(" ");
+        this.txtInsertPictureNation.setText(country);
         this.txtInsertPictureLoc.setText(location);
         this.txtInsertPictureDo.setText(locationDetail);
         if(sectionSplit.length == 1) {
@@ -536,13 +537,19 @@ public class CInsertPicture extends AbsInsertController implements Initializable
     }
 
     @Override
-    public void passing_collection_info(String date, String country, String loc_alias, String butter_name, String butter_family, String person_name) {
+    public void passing_collection_info(String date, String country, String location, String locationDetail,
+                                        String section, String sectionDetail, String loc_alias, String butter_name, String butter_family, String butter_sci, String person_name) {
         /* View Updating */
         this.dateInsertPictureDate.getEditor().setText(date);
         this.txtInsertPictureNation.setText(country);
+        this.txtInsertPictureLoc.setText(location);
+        this.txtInsertPictureDo.setText(locationDetail);
+        this.txtInsertPictureSi.setText(section);
+        this.txtInsertPictureDong.setText(sectionDetail);
         this.txtInsertPictureLocname.setText(loc_alias);
         this.txtInsertPictureBname.setText(butter_name);
         this.txtInsertPictureFamily.setText(butter_family);
+        this.txtInsertPictureZoological.setText(butter_sci);
         this.comboInsertPictureWho.getSelectionModel().select(person_name);
     }
 

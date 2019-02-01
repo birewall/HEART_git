@@ -299,16 +299,17 @@ public class CCollectionInfoSelector extends AbsMetaController implements Initia
     }
 
     public String getQuery() {
-        String query = "select CollectionInfo.date, country, alias, ButterflyGuide.name, family, method, Person.name "
-                + "from CollectionInfo, ButterflyGuide, Location, Person where "
-                + "CollectionInfo.idButterflyGuide = ButterflyGuide.idButterflyGuide and "
-                + "CollectionInfo.idLocation = Location.idLocation and ";
-        if(this.checkDateBegin.isSelected()) query += "CollectionInfo.date >= '" + MDateConvertor.convert2DBFormat(this.dateBegin.getEditor().getText()) + "' and ";
-        if(this.checkDateEnd.isSelected()) query += "CollectionInfo.date <= '" + MDateConvertor.convert2DBFormat(this.dateEnd.getEditor().getText()) + "' and ";
-        if(this.checkCountry.isSelected()) query += "country = '" + this.txtCountry.getText() + "' and ";
-        if(this.checkAlias.isSelected()) query += "alias = '" + this.txtAlias.getText() + "' and ";
-        if(this.checkButterflyName.isSelected()) query += "ButterflyGuide.name = '" + this.txtButterflyName.getText() + "' and ";
-        if(this.checkButterflyFamily.isSelected()) query += "family = '" + this.txtButterflyFamily.getText() + "' and ";
+        String query = "select c.date, l.country, l.alias, b.name, b.family, c.method, p.name " +
+                " from Location l" +
+                " inner join CollectionInfo c on l.idLocation = c.idLocation" +
+                " inner join ButterflyGuide b on b.idButterflyGuide = c.idButterflyGuide" +
+                " inner join Person p on p.idPerson = c.idPerson";
+        if(this.checkDateBegin.isSelected()) query += "c.date >= '" + MDateConvertor.convert2DBFormat(this.dateBegin.getEditor().getText()) + "' and ";
+        if(this.checkDateEnd.isSelected()) query += "c.date <= '" + MDateConvertor.convert2DBFormat(this.dateEnd.getEditor().getText()) + "' and ";
+        if(this.checkCountry.isSelected()) query += "l.country = '" + this.txtCountry.getText() + "' and ";
+        if(this.checkAlias.isSelected()) query += "l.alias = '" + this.txtAlias.getText() + "' and ";
+        if(this.checkButterflyName.isSelected()) query += "b.name = '" + this.txtButterflyName.getText() + "' and ";
+        if(this.checkButterflyFamily.isSelected()) query += "b.family = '" + this.txtButterflyFamily.getText() + "' and ";
         /* To be implemented */
 //        if(this.checkTimeMorning.isSelected()) query += "";
 //        if(this.checkTimeAfternoon.isSelected()) query += "";
@@ -350,18 +351,43 @@ public class CCollectionInfoSelector extends AbsMetaController implements Initia
     }
 
     @FXML
-    void OnSelect(ActionEvent event) {
+    void OnSelect(ActionEvent event) throws SQLException {
         /* Data Passing */
         Stage thisStage = (Stage)this.btnSelect.getScene().getWindow();
         String date = selected_item.getRecord(0);
         String parsed_date = date.substring(0,4) + ". " + Integer.parseInt(date.substring(4,6)) + ". " + Integer.parseInt(date.substring(6,8));
-        ((AbsInsertController)this.parent_controller).passing_collection_info(parsed_date,
-                                                                                selected_item.getRecord(1),
-                                                                                selected_item.getRecord(2),
-                                                                                selected_item.getRecord(3),
-                                                                                selected_item.getRecord(4),
-                                                                                selected_item.getRecord(5));
 
+        ResultSet rs = this.db_collectionInfo.selectQuery("select location, locationDetail, section, sectionDetail, scientific_name" +
+                " from Location l" +
+                " inner join CollectionInfo c on l.idLocation = c.idLocation" +
+                " inner join ButterflyGuide b on b.idButterflyGuide = c.idButterflyGuide" +
+                " inner join Person p on p.idPerson = c.idPerson" +
+                " where l.country = '" + selected_item.getRecord(1)+ "'" +
+                " and b.name = '" + selected_item.getRecord(3) + "'" +
+                " and p.name = '" + selected_item.getRecord(5) + "'");
+//        public void passing_collection_info(String date, String country, String location, String locationDetail,
+//                String section, String sectionDetail, String loc_alias, String butter_name,
+//                String butter_family, String butter_sci, String person_name) {
+        if(!rs.next()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Search");
+            alert.setHeaderText(null);
+            alert.setContentText("수집정보를 찾을 수 없습니다.");
+            alert.showAndWait();
+            return;
+        }else {
+            ((AbsInsertController) this.parent_controller).passing_collection_info(parsed_date,//date
+                    selected_item.getRecord(1),//country
+                    rs.getString(1),//location
+                    rs.getString(2),//locationDetail
+                    rs.getString(3),//section
+                    rs.getString(4),//sectionDetail
+                    selected_item.getRecord(2),//alias
+                    selected_item.getRecord(3),//butter_name
+                    selected_item.getRecord(4),//butter_family
+                    rs.getString(5),//butter_sci
+                    selected_item.getRecord(5));//person_name
+        }
         thisStage.close();
     }
 
