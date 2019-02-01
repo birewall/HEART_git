@@ -152,17 +152,24 @@ public class CAddressBook extends AbsMetaController implements Initializable {
         /* Add to Previous */
         if(this.txtAlias.getText().length() == 0) {
             String query = null;
-            if(this.txtSection.getText().split(" ").length == 1) {
+            if(this.txtSection.getText().length() != 0 && this.txtSection.getText().split(" ").length == 1) {
                 query = "select alias from Location where country = '" + this.txtCountry.getText() + "'"
                                                 + " and location = '" + this.txtAddress.getText() + "'"
                                                 + " and locationDetail = '" + this.txtDetailAddress.getText() + "'"
                                                 + " and section = '" + this.txtSection.getText() + "';";
-            }else{
+            }else if(this.txtSection.getText().length() != 0){
                 query = "select alias from Location where country = '" + this.txtCountry.getText() + "'"
                         + " and location = '" + this.txtAddress.getText() + "'"
                         + " and locationDetail = '" + this.txtDetailAddress.getText() + "'"
                         + " and section = '" + this.txtSection.getText().split(" ")[0] + "'"
                         + " and section = '" + this.txtSection.getText().split(" ")[1] + "'";
+            }else if(this.txtDetailAddress.getText().length() != 0){
+                query = "select alias from Location where country = '" + this.txtCountry.getText() + "'"
+                        + " and location = '" + this.txtAddress.getText() + "'"
+                        + " and locationDetail = '" + this.txtDetailAddress.getText() + "'";
+            }else{
+                query = "select alias from Location where country = '" + this.txtCountry.getText() + "'"
+                        + " and location = '" + this.txtAddress.getText() + "'";
             }
             ResultSet rs = this.db_location.selectQuery(query);
             if(rs.next()) {

@@ -899,8 +899,9 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     @Override
     public void passing_collection_info(String date, String country, String location, String locationDetail,
                                         String section, String sectionDetail, String loc_alias, String butter_name,
-                                        String butter_family, String butter_sci, String person_name) {
+                                        String butter_family, String butter_sci, String method, String person_name) {
 	    /* View Updating */
+        this.comboInsertSpecimenCollectway.getSelectionModel().select(method);
         this.dateInsertSpecimenCollectdate.getEditor().setText(date);
         this.txtInsertSpecimenNation.setText(country);
         this.txtInsertSpecimenCollectoc.setText(location);

@@ -11,7 +11,7 @@ public abstract class AbsInsertController extends AbsMetaController {
 
     public void passing_collection_info(String date, String country, String location, String locationDetail,
                                         String section, String sectionDetail, String loc_alias, String butter_name,
-                                        String butter_family, String butter_sci, String person_name) {
+                                        String butter_family, String butter_sci, String method, String person_name) {
         /* For Overriding */
     }
 
