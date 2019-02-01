@@ -206,7 +206,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
         	txtInsertSpecimenLong.setText(gps_y_sub);
         	txtInsertSpecimenLocname.setText(alias_sub);
         	txtWhoInsertSpecimen.setText(collectwho_sub);
-    	}else
+    	}else {
     		
     	    dateInsertSpecimenCollectdate.getEditor().clear();
 	    	txtInsertSpecimenNation.clear();
@@ -218,6 +218,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 	    	txtInsertSpecimenLong.clear();
 	    	txtInsertSpecimenLocname.clear();
 	    	txtWhoInsertSpecimen.clear();
+    	}
     }
     
     @FXML
@@ -236,7 +237,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     		txtInsertLoc2.setText(NewLoc2_sub);
     		txtInsertLoc3.setText(NewLoc3_sub);
     		txtWhoWorkSpecimen.setText(SpecimenWho_sub);
-    	} else
+    	} else {
     		txtInsertSpecimenBname.clear();
 			txtInsertSpecimenFamily.clear();
 			txtInsertSpecimenZoological.clear();
@@ -245,6 +246,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 			txtInsertLoc2.clear();
 			txtInsertLoc3.clear();
 			txtWhoWorkSpecimen.clear();
+    	}
 
     } 
     
@@ -550,43 +552,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
         }
         
         //초기화(init_proc_copy)
-    	db = ((MSharedData)this.shared_model).getDB();
-
- 		this.comboInsertSpecimenLoc1.getItems().clear();
     	
-    	this.comboInsertSpecimenLoc1.getItems().add("전체선택");
-
-    	String queryRoom = "select distinct storageRoom from Specimen";
-		ResultSet rsRoom = db.selectQuery(queryRoom);
-		
-		try {
-			while(rsRoom.next()) {
-				this.comboInsertSpecimenLoc1.getItems().add(rsRoom.getString(1));   // get storageRoom
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		this.comboInsertSpecimenCollectway.getItems().addAll("직접채집", "구매", "선물");
-		this.comboInsertSpecimenStatus.getItems().addAll("상", "중", "하");
-		this.comboInsertSpecimenSex.getItems().addAll("암", "수");
-        this.comboInsertSpecimenCollectway.getSelectionModel().select(0);
-        this.comboInsertSpecimenStatus.getSelectionModel().select(0);
-        this.comboInsertSpecimenSex.getSelectionModel().select(0);
-		this.txtInsertLoc1.setDisable(true);
-		this.txtInsertLoc2.setDisable(true);
-		this.txtInsertLoc3.setDisable(true);
-		this.comboInsertSpecimenLoc1.setDisable(true);
-		this.comboInsertSpecimenLoc2.setDisable(true);
-		this.comboInsertSpecimenLoc3.setDisable(true);
-
-        /* Set Auto Complete */
-        try {
-            setAutoComplete();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         
         dateInsertSpecimenCollectdate.getEditor().clear();
         txtInsertSpecimenNation.clear();
