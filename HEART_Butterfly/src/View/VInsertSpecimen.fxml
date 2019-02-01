@@ -236,10 +236,10 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                         </GridPane>
-                        <ImageView fx:id="ImgSpecimen" fitHeight="120.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Button fx:id="btnPreviousImage" mnemonicParsing="false" onAction="#OnPreviousImage" text="이전" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-                        <Button fx:id="btnNextImage" mnemonicParsing="false" onAction="#OnNextImage" text="다음" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                        <ImageView fx:id="ImgSpecimen" fitHeight="120.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                         <CheckBox fx:id="checkbox_InsertSubData_2" mnemonicParsing="false" onAction="#Oncheckbox_InsertSubData_2" text="기존정보와 동일" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button fx:id="btnNextImage" mnemonicParsing="false" onAction="#OnNextImage" text="다음" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                        <Button fx:id="btnPreviousImage" mnemonicParsing="false" onAction="#OnPreviousImage" text="이전" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
                      </children>
                   </GridPane>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="작업 날짜" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
