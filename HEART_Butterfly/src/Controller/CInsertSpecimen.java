@@ -1,5 +1,6 @@
 package Controller;
 
+import java.awt.Checkbox;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -32,6 +33,13 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     String CabinetName;
     String BoxName;
 
+
+    @FXML
+    private CheckBox checkbox_InsertSubData_1;
+    
+    @FXML
+    private CheckBox checkbox_InsertSubData_2;
+    
     @FXML
     private Button btnPreviousImage;
     
@@ -149,8 +157,66 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     
     @FXML
     private ComboBox<String> comboInsertSpecimenCollectway;
+
     
     int image_index = 0;
+    
+    
+    @FXML
+    void Oncheckbox_InsertSubData_1(ActionEvent event) {
+    	if(checkbox_InsertSubData_1.isSelected()) {
+            comboInsertSpecimenCollectway.getSelectionModel().select(Collectway_sub);
+            dateInsertSpecimenCollectdate.getEditor().setText(Collect_date_sub);
+            txtInsertSpecimenNation.setText(country_sub);
+            txtInsertSpecimenCollectoc.setText(location_sub);
+        	txtInsertSpecimenDo.setText(loc_1_sub);
+        	txtInsertSpecimenSi.setText(loc_2_sub);
+        	txtInsertSpecimenDong.setText(loc_3_sub);
+        	txtInsertSpecimenLat.setText(gps_x_sub);
+        	txtInsertSpecimenLong.setText(gps_y_sub);
+        	txtInsertSpecimenLocname.setText(alias_sub);
+        	txtWhoInsertSpecimen.setText(collectwho_sub);
+    	}else
+    		
+    	    dateInsertSpecimenCollectdate.getEditor().clear();
+	    	txtInsertSpecimenNation.clear();
+	        txtInsertSpecimenCollectoc.clear();
+	    	txtInsertSpecimenDo.clear();
+	    	txtInsertSpecimenSi.clear();
+	    	txtInsertSpecimenDong.clear();
+	    	txtInsertSpecimenLat.clear();
+	    	txtInsertSpecimenLong.clear();
+	    	txtInsertSpecimenLocname.clear();
+	    	txtWhoInsertSpecimen.clear();
+    }
+    
+    @FXML
+    void Oncheckbox_InsertSubData_2(ActionEvent event) {
+    	if(checkbox_InsertSubData_2.isSelected()) {
+    		txtInsertSpecimenBname.setText(butterfly_name_sub);
+    		txtInsertSpecimenFamily.setText(butterfly_family_sub);
+    		txtInsertSpecimenZoological.setText(scientific_name_sub);
+    		dateInsertSpecimenDate.getEditor().setText(Specimen_date_sub);
+    		comboInsertSpecimenStatus.getSelectionModel().select(status_sub);
+    		comboInsertSpecimenSex.getSelectionModel().select(sex_sub); 
+    		comboInsertSpecimenLoc1.getSelectionModel().select(PreviousLoc1_sub);
+    		comboInsertSpecimenLoc2.getSelectionModel().select(PreviousLoc2_sub);
+    		comboInsertSpecimenLoc3.getSelectionModel().select(PreviousLoc3_sub);
+    		txtInsertLoc1.setText(NewLoc1_sub);
+    		txtInsertLoc2.setText(NewLoc2_sub);
+    		txtInsertLoc3.setText(NewLoc3_sub);
+    		txtWhoWorkSpecimen.setText(SpecimenWho_sub);
+    	} else
+    		txtInsertSpecimenBname.clear();
+			txtInsertSpecimenFamily.clear();
+			txtInsertSpecimenZoological.clear();
+			dateInsertSpecimenDate.getEditor().clear();
+			txtInsertLoc1.clear();
+			txtInsertLoc2.clear();
+			txtInsertLoc3.clear();
+			txtWhoWorkSpecimen.clear();
+
+    } 
     
     @FXML
     void OnPreviousImage(ActionEvent event) {
@@ -165,7 +231,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 		this.ImgSpecimen.setImage(image);
         System.out.println(this.ImagePathList.get(image_index));
     }
-
+    
     @FXML
     void OnNextImage(ActionEvent event) {
 		//Set image
@@ -210,12 +276,9 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
 		String country_sub = null;
 		String location_sub = null;
 		String location_detail_sub = null;
-		String PreviousLoc1_sub = null;
-		String PreviousLoc2_sub = null;
-		String PreviousLoc3_sub = null;
-		String NewLoc1_sub = null;
-		String NewLoc2_sub = null;
-		String NewLoc3_sub = null;
+		String loc_1_sub = null;
+		String loc_2_sub = null;
+		String loc_3_sub = null;
 	    String gps_x_sub = null;
 	    String gps_y_sub = null;
 	    String gps_sub =  null;
@@ -229,6 +292,12 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	String Specimen_date_sub = null;
     	String status_sub = null;
     	String sex_sub = null;
+		String PreviousLoc1_sub = null;
+		String PreviousLoc2_sub = null;
+		String PreviousLoc3_sub = null;
+		String NewLoc1_sub = null;
+		String NewLoc2_sub = null;
+		String NewLoc3_sub = null;
     	String SpecimenWho_sub = null;
     
 	@FXML
@@ -249,13 +318,10 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	String Collect_date = MDateConvertor.convert2DBFormat(dateInsertSpecimenCollectdate.getEditor().getText());
     	String country = txtInsertSpecimenNation.getText();
     	String location = txtInsertSpecimenCollectoc.getText();
-    	String location_detail = txtInsertSpecimenDo.getText() + " " + txtInsertSpecimenSi.getText() + " " + txtInsertSpecimenDong.getText();
-    	String PreviousLoc1 = comboInsertSpecimenLoc1.getSelectionModel().getSelectedItem();
-    	String PreviousLoc2 = comboInsertSpecimenLoc2.getSelectionModel().getSelectedItem();
-    	String PreviousLoc3 = comboInsertSpecimenLoc3.getSelectionModel().getSelectedItem();
-    	String NewLoc1 = txtInsertLoc1.getText();
-    	String NewLoc2 = txtInsertLoc2.getText();
-    	String NewLoc3 = txtInsertLoc3.getText();
+    	String loc_1 = txtInsertSpecimenDo.getText();
+    	String loc_2 = txtInsertSpecimenSi.getText();
+    	String loc_3 = txtInsertSpecimenDong.getText();
+    	String location_detail = loc_1 + " " + loc_2 + " " + loc_3;
         String gps_x = "0";
         String gps_y = "0";
         if(txtInsertSpecimenLat.getText().length() > 0) gps_x = txtInsertSpecimenLat.getText();
@@ -270,12 +336,9 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	country_sub = country;
     	location_sub = location;
     	location_detail_sub = location_detail;
-    	PreviousLoc1_sub = PreviousLoc1;
-    	PreviousLoc2_sub = PreviousLoc2;
-    	PreviousLoc3_sub = PreviousLoc3;
-    	NewLoc1_sub = NewLoc1;
-    	NewLoc2_sub = NewLoc2;
-    	NewLoc3_sub = NewLoc3;
+    	loc_1_sub = loc_1;
+    	loc_2_sub = loc_2;
+    	loc_3_sub = loc_3;
         gps_x_sub = gps_x;
         gps_y_sub = gps_x;
         gps_sub =  gps_x_sub + "," + gps_y_sub;
@@ -283,12 +346,19 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	collectwho_sub = collectwho;
     	
     	//스플릿 기준(하)
+    	
     	String butterfly_name = txtInsertSpecimenBname.getText();
     	String butterfly_family = txtInsertSpecimenFamily.getText();
     	String scientific_name = txtInsertSpecimenZoological.getText();
     	String Specimen_date = MDateConvertor.convert2DBFormat(dateInsertSpecimenDate.getEditor().getText());
     	String status = comboInsertSpecimenStatus.getSelectionModel().getSelectedItem();
     	String sex = comboInsertSpecimenSex.getSelectionModel().getSelectedItem();
+    	String PreviousLoc1 = comboInsertSpecimenLoc1.getSelectionModel().getSelectedItem();
+    	String PreviousLoc2 = comboInsertSpecimenLoc2.getSelectionModel().getSelectedItem();
+    	String PreviousLoc3 = comboInsertSpecimenLoc3.getSelectionModel().getSelectedItem();
+    	String NewLoc1 = txtInsertLoc1.getText();
+    	String NewLoc2 = txtInsertLoc2.getText();
+    	String NewLoc3 = txtInsertLoc3.getText();
     	String SpecimenWho = txtWhoWorkSpecimen.getText();
     	
     	//데이터 백업 스플릿(하)
@@ -298,6 +368,12 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	Specimen_date_sub = Specimen_date;
     	status_sub = status;
     	sex_sub = sex;
+    	PreviousLoc1_sub = PreviousLoc1;
+    	PreviousLoc2_sub = PreviousLoc2;
+    	PreviousLoc3_sub = PreviousLoc3;
+    	NewLoc1_sub = NewLoc1;
+    	NewLoc2_sub = NewLoc2;
+    	NewLoc3_sub = NewLoc3;
     	SpecimenWho_sub = SpecimenWho;
 
     	
@@ -524,7 +600,32 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
         dateInsertSpecimenDate.getEditor().clear();
         txtWhoWorkSpecimen.clear();
         
-            }
+        //체크박스 활성화
+        if(Collectway_sub == null && Collect_date_sub == null
+        		&& country_sub == null && location_sub == null 
+        		&& location_detail_sub == null && PreviousLoc1_sub == null
+        		&& PreviousLoc2_sub == null && PreviousLoc3_sub ==null
+        		&& NewLoc1_sub == null && NewLoc2_sub == null
+        		&& NewLoc3_sub == null && gps_x_sub == null
+        		&& gps_y_sub == null && gps_sub == null
+        		&& alias_sub == null && collectwho_sub == null) {
+        	this.checkbox_InsertSubData_1.setDisable(true);
+        }else {
+        	this.checkbox_InsertSubData_1.setDisable(false);
+
+        }
+        if(butterfly_name_sub == null && butterfly_family_sub == null
+        		&& scientific_name_sub == null && Specimen_date_sub == null 
+        		&& status_sub == null && sex_sub == null
+        		&& PreviousLoc2_sub == null && PreviousLoc3_sub ==null
+        		&& SpecimenWho_sub == null) {
+        	this.checkbox_InsertSubData_2.setDisable(true);
+        }else {
+        	this.checkbox_InsertSubData_2.setDisable(false);
+
+        }
+        
+        }
 
     @FXML
     void bnameInsertSpecimen(ActionEvent event) {
@@ -854,6 +955,39 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
+        if(Collectway_sub == null && Collect_date_sub == null
+        		&& country_sub == null && location_sub == null 
+        		&& location_detail_sub == null && PreviousLoc1_sub == null
+        		&& PreviousLoc2_sub == null && PreviousLoc3_sub ==null
+        		&& NewLoc1_sub == null && NewLoc2_sub == null
+        		&& NewLoc3_sub == null && gps_x_sub == null
+        		&& gps_y_sub == null && gps_sub == null
+        		&& alias_sub == null && collectwho_sub == null) {
+        	this.checkbox_InsertSubData_1.setDisable(true);
+        }else {
+        	this.checkbox_InsertSubData_1.setDisable(false);
+
+        }
+        if(butterfly_name_sub == null && butterfly_family_sub == null
+        		&& scientific_name_sub == null && Specimen_date_sub == null 
+        		&& status_sub == null && sex_sub == null
+        		&& PreviousLoc2_sub == null && PreviousLoc3_sub ==null
+        		&& SpecimenWho_sub == null) {
+        	this.checkbox_InsertSubData_2.setDisable(true);
+        }else {
+        	this.checkbox_InsertSubData_2.setDisable(false);
+
+        }
+        
+
+        	
+        
+		
+	  
+		
+		
+        
     }
 
     @FXML
