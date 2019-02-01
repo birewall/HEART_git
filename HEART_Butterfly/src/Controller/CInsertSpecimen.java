@@ -653,10 +653,10 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
         spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VCollectionInfoSelector");
     }
 
-//    @FXML
-//    void OnImportSpecimen(ActionEvent event) throws IOException {
-//        spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VSpecimenSelector");
-//    }
+    @FXML
+    void OnImportSpecimen(ActionEvent event) throws IOException {
+        spawnChildWindow(this.btnInsertSpecimenExit.getScene().getWindow(), "VSpecimenSelector");
+    }
 
     @FXML
     void OnPrintLabel(ActionEvent event) throws IOException {
