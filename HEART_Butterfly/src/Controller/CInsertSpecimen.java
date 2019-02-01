@@ -233,43 +233,9 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     
 	@FXML
     void addInsertSpecimen(ActionEvent event) {
-        int error_code = 0;
-        Alert error_popup = null;
-        String idSpecimen = null;
 
-        String collector = this.txtWhoInsertSpecimen.getText();
-        String collecting_date = this.dateInsertSpecimenCollectdate.getEditor().getText();
-        String location_alias = this.txtInsertSpecimenLocname.getText();
-
-        if(collector.length() * collecting_date.length() * location_alias.length() == 0) error_code = 1;
-        else if(idSpecimen == null) error_code = 2;
-
-        switch(error_code) {
-            case 0:
-                SystemClipboard.copy(idSpecimen + "\n"
-                        + collector + "\n"
-                        + collecting_date + "\n"
-                        + location_alias);
-                break;
-            case 1: // Empty Field Error
-                error_popup = new Alert(Alert.AlertType.ERROR);
-                error_popup.setTitle("레이블 복사");
-                error_popup.setHeaderText(null);
-                error_popup.setContentText("모든 정보를 입력해주세요.");
-                error_popup.show();
-                break;
-            case 2:
-                error_popup = new Alert(Alert.AlertType.ERROR);
-                error_popup.setTitle("레이블 복사");
-                error_popup.setHeaderText(null);
-                error_popup.setContentText("표본ID를 특정할 수 없습니다.");
-                error_popup.show();
-                break;
-            default:
-                ((MSharedData)this.shared_model).getLogger().error("error code has a problem");
-                break;
-        }
-		/* DB Instance initialization */
+    	/* DB Instance initialization */
+    	db = ((MSharedData)this.shared_model).getDB();
     	MDBCollectionInfo db_collection_info = new MDBCollectionInfo(((MSharedData)this.shared_model).getDB().getConnection());
     	MDBLocation db_location = new MDBLocation(((MSharedData)this.shared_model).getDB().getConnection());
     	MDBPerson db_person = new MDBPerson(((MSharedData)this.shared_model).getDB().getConnection());
@@ -457,6 +423,54 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
             id_specimenIO = db_specimenIO.getIdSpecimenIOFromDB();
         }
 
+        int error_code = 0;
+        Alert error_popup = null;
+        String idSpecimen = null;
+
+        String collector = this.txtWhoInsertSpecimen.getText();
+        String collecting_date = this.dateInsertSpecimenCollectdate.getEditor().getText();
+        String location_alias = this.txtInsertSpecimenLocname.getText();
+    	String LoadSpecimenID = "select distinct idSpecimen from Specimen where idSpecimen = '" + id_specimen + "'";
+		ResultSet rsSpecimenID = db.selectQuery(LoadSpecimenID);
+		
+		try {
+			while(rsSpecimenID.next()) {
+				idSpecimen = rsSpecimenID.getString(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        if(collector.length() * collecting_date.length() * location_alias.length() == 0) error_code = 1;
+        else if(idSpecimen == null) error_code = 2;
+
+        switch(error_code) {
+            case 0:
+                SystemClipboard.copy(idSpecimen + "\n"
+                        + collector + "\n"
+                        + collecting_date + "\n"
+                        + location_alias);
+                break;
+            case 1: // Empty Field Error
+                error_popup = new Alert(Alert.AlertType.ERROR);
+                error_popup.setTitle("레이블 복사");
+                error_popup.setHeaderText(null);
+                error_popup.setContentText("모든 정보를 입력해주세요.");
+                error_popup.show();
+                break;
+            case 2:
+                error_popup = new Alert(Alert.AlertType.ERROR);
+                error_popup.setTitle("레이블 복사");
+                error_popup.setHeaderText(null);
+                error_popup.setContentText("표본ID를 특정할 수 없습니다.");
+                error_popup.show();
+                break;
+            default:
+                ((MSharedData)this.shared_model).getLogger().error("error code has a problem");
+                break;
+        }
+        
         //초기화(init_proc_copy)
     	db = ((MSharedData)this.shared_model).getDB();
 
