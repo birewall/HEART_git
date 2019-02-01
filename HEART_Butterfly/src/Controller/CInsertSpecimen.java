@@ -207,7 +207,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
         	txtInsertSpecimenLocname.setText(alias_sub);
         	txtWhoInsertSpecimen.setText(collectwho_sub);
     	}else {
-    		
+
     	    dateInsertSpecimenCollectdate.getEditor().clear();
 	    	txtInsertSpecimenNation.clear();
 	        txtInsertSpecimenCollectoc.clear();
@@ -252,7 +252,7 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     
     @FXML
     void OnPreviousImage(ActionEvent event) {
-    	
+
 		//Set image
     	if(image_index <= 0) return;
     	
