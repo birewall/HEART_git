@@ -166,6 +166,33 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
     	}
     }
 
+	  //데이터 백업 스플릿(상)
+		String Collectway_sub = null;
+		String Collect_date_sub = null;
+		String country_sub = null;
+		String location_sub = null;
+		String location_detail_sub = null;
+		String PreviousLoc1_sub = null;
+		String PreviousLoc2_sub = null;
+		String PreviousLoc3_sub = null;
+		String NewLoc1_sub = null;
+		String NewLoc2_sub = null;
+		String NewLoc3_sub = null;
+	    String gps_x_sub = null;
+	    String gps_y_sub = null;
+	    String gps_sub =  null;
+		String alias_sub = null;
+		String collectwho_sub = null;
+		
+		//데이터 백업 스플릿(하)
+    	String butterfly_name_sub = null;
+    	String butterfly_family_sub = null;
+    	String scientific_name_sub = null;
+    	String Specimen_date_sub = null;
+    	String status_sub = null;
+    	String sex_sub = null;
+    	String SpecimenWho_sub = null;
+    
 	@FXML
     void addInsertSpecimen(ActionEvent event) {
     	/* DB Instance initialization */
@@ -177,35 +204,63 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
         MDBSpecimen db_specimen = new MDBSpecimen(((MSharedData)this.shared_model).getDB().getConnection());
         MDBSpecimenIO db_specimenIO = new MDBSpecimenIO(((MSharedData)this.shared_model).getDB().getConnection());
         
-    	String Collectway = comboInsertSpecimenCollectway.getSelectionModel().getSelectedItem();
+      //스플릿 기준(상)
+        String Collectway = comboInsertSpecimenCollectway.getSelectionModel().getSelectedItem();
     	String Collect_date = MDateConvertor.convert2DBFormat(dateInsertSpecimenCollectdate.getEditor().getText());
     	String country = txtInsertSpecimenNation.getText();
     	String location = txtInsertSpecimenCollectoc.getText();
     	String location_detail = txtInsertSpecimenDo.getText() + " " + txtInsertSpecimenSi.getText() + " " + txtInsertSpecimenDong.getText();
-
-        String gps_x = "0";
-        String gps_y = "0";
-        if(txtInsertSpecimenLat.getText().length() > 0) gps_x = txtInsertSpecimenLat.getText();
-        if(txtInsertSpecimenLong.getText().length() > 0) gps_y = txtInsertSpecimenLong.getText();
-        String gps =  gps_x + "," + gps_y;
-
-    	String alias = txtInsertSpecimenLocname.getText();
-    	String collectwho = txtWhoInsertSpecimen.getText();
-    	String butterfly_name = txtInsertSpecimenBname.getText();
-    	String butterfly_family = txtInsertSpecimenFamily.getText();
-    	String scientific_name = txtInsertSpecimenZoological.getText();
-    	String Specimen_date = MDateConvertor.convert2DBFormat(dateInsertSpecimenDate.getEditor().getText());
-    	String status = comboInsertSpecimenStatus.getSelectionModel().getSelectedItem();
-    	String sex = comboInsertSpecimenSex.getSelectionModel().getSelectedItem();
     	String PreviousLoc1 = comboInsertSpecimenLoc1.getSelectionModel().getSelectedItem();
     	String PreviousLoc2 = comboInsertSpecimenLoc2.getSelectionModel().getSelectedItem();
     	String PreviousLoc3 = comboInsertSpecimenLoc3.getSelectionModel().getSelectedItem();
     	String NewLoc1 = txtInsertLoc1.getText();
     	String NewLoc2 = txtInsertLoc2.getText();
     	String NewLoc3 = txtInsertLoc3.getText();
-    	String SpecimenWho = txtWhoInsertSpecimen.getText();
+        String gps_x = "0";
+        String gps_y = "0";
+        if(txtInsertSpecimenLat.getText().length() > 0) gps_x = txtInsertSpecimenLat.getText();
+        if(txtInsertSpecimenLong.getText().length() > 0) gps_y = txtInsertSpecimenLong.getText();
+        String gps =  gps_x + "," + gps_y;
+    	String alias = txtInsertSpecimenLocname.getText();
+    	String collectwho = txtWhoInsertSpecimen.getText();
+    	
+    	//데이터 백업 스플릿(상)
+    	Collectway_sub = Collectway;
+    	Collect_date_sub = Collect_date;
+    	country_sub = country;
+    	location_sub = location;
+    	location_detail_sub = location_detail;
+    	PreviousLoc1_sub = PreviousLoc1;
+    	PreviousLoc2_sub = PreviousLoc2;
+    	PreviousLoc3_sub = PreviousLoc3;
+    	NewLoc1_sub = NewLoc1;
+    	NewLoc2_sub = NewLoc2;
+    	NewLoc3_sub = NewLoc3;
+        gps_x_sub = gps_x;
+        gps_y_sub = gps_x;
+        gps_sub =  gps_x_sub + "," + gps_y_sub;
+    	alias_sub = alias;
+    	collectwho_sub = collectwho;
+    	
+    	//스플릿 기준(하)
+    	String butterfly_name = txtInsertSpecimenBname.getText();
+    	String butterfly_family = txtInsertSpecimenFamily.getText();
+    	String scientific_name = txtInsertSpecimenZoological.getText();
+    	String Specimen_date = MDateConvertor.convert2DBFormat(dateInsertSpecimenDate.getEditor().getText());
+    	String status = comboInsertSpecimenStatus.getSelectionModel().getSelectedItem();
+    	String sex = comboInsertSpecimenSex.getSelectionModel().getSelectedItem();
+    	String SpecimenWho = txtWhoWorkSpecimen.getText();
+    	
+    	//데이터 백업 스플릿(하)
+    	butterfly_name_sub = butterfly_name;
+    	butterfly_family_sub = butterfly_family;
+    	scientific_name_sub = scientific_name;
+    	Specimen_date_sub = Specimen_date;
+    	status_sub = status;
+    	sex_sub = sex;
+    	SpecimenWho_sub = SpecimenWho;
 
-
+    	
         /* Value Mapping */
         db_location.setCountry(country);
         db_location.setLocation(location);
@@ -327,6 +382,62 @@ public class CInsertSpecimen extends AbsInsertController implements Initializabl
             }
             id_specimenIO = db_specimenIO.getIdSpecimenIOFromDB();
         }
+        
+        //초기화(init_proc_copy)
+    	db = ((MSharedData)this.shared_model).getDB();
+
+ 		this.comboInsertSpecimenLoc1.getItems().clear();
+    	
+    	this.comboInsertSpecimenLoc1.getItems().add("전체선택");
+
+    	String queryRoom = "select distinct storageRoom from Specimen";
+		ResultSet rsRoom = db.selectQuery(queryRoom);
+		
+		try {
+			while(rsRoom.next()) {
+				this.comboInsertSpecimenLoc1.getItems().add(rsRoom.getString(1));   // get storageRoom
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		this.comboInsertSpecimenCollectway.getItems().addAll("직접채집", "구매", "선물");
+		this.comboInsertSpecimenStatus.getItems().addAll("상", "중", "하");
+		this.comboInsertSpecimenSex.getItems().addAll("암", "수");
+        this.comboInsertSpecimenCollectway.getSelectionModel().select(0);
+        this.comboInsertSpecimenStatus.getSelectionModel().select(0);
+        this.comboInsertSpecimenSex.getSelectionModel().select(0);
+		this.txtInsertLoc1.setDisable(true);
+		this.txtInsertLoc2.setDisable(true);
+		this.txtInsertLoc3.setDisable(true);
+		this.comboInsertSpecimenLoc1.setDisable(true);
+		this.comboInsertSpecimenLoc2.setDisable(true);
+		this.comboInsertSpecimenLoc3.setDisable(true);
+
+        /* Set Auto Complete */
+        try {
+            setAutoComplete();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        dateInsertSpecimenCollectdate.getEditor().clear();
+        txtInsertSpecimenNation.clear();
+        txtInsertSpecimenCollectoc.clear();
+        txtInsertSpecimenDo.clear();
+        txtInsertSpecimenSi.clear();
+        txtInsertSpecimenDong.clear();
+        txtInsertSpecimenLocname.clear();
+        txtWhoInsertSpecimen.clear();
+        txtInsertSpecimenBname.clear();
+        txtInsertSpecimenFamily.clear();
+        txtInsertSpecimenZoological.clear();
+        dateInsertSpecimenDate.getEditor().clear();
+        txtWhoWorkSpecimen.clear();
+        
+        
+        
     }
 
     @FXML
