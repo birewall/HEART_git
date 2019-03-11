@@ -1,17 +1,23 @@
 package Controller;
 
 import Model.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.TextFields;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class CCollectionInfoSelector extends AbsMetaController implements Initializable {
@@ -240,19 +246,6 @@ public class CCollectionInfoSelector extends AbsMetaController implements Initia
     @FXML
     private TextField txtButterflyFamily;
 
-
-    @FXML
-    private CheckBox checkTimeMorning;
-
-    @FXML
-    private CheckBox checkTimeAfternoon;
-
-    @FXML
-    private CheckBox checkTimeEvening;
-
-    @FXML
-    private CheckBox checkTimeDawn;
-
     @FXML
     private Button btnSearch;
 
@@ -263,18 +256,21 @@ public class CCollectionInfoSelector extends AbsMetaController implements Initia
     private Button btnSelect;
 
     @FXML
-    void OnAlias(ActionEvent event) {
+    private Label txtResult;
 
+    @FXML
+    void OnAlias(ActionEvent event) {
+        this.checkAlias.setSelected(true);
     }
 
     @FXML
     void OnButterflyFamily(ActionEvent event) {
-
+        this.checkButterflyFamily.setSelected(true);
     }
 
     @FXML
     void OnButterflyName(ActionEvent event) {
-
+        this.checkButterflyName.setSelected(true);
     }
 
     @FXML
@@ -285,21 +281,21 @@ public class CCollectionInfoSelector extends AbsMetaController implements Initia
 
     @FXML
     void OnCountry(ActionEvent event) {
-
+        this.checkCountry.setSelected(true);
     }
 
     @FXML
     void OnDateBegin(ActionEvent event) {
-
+        this.checkDateBegin.setSelected(true);
     }
 
     @FXML
     void OnDateEnd(ActionEvent event) {
-
+        this.checkDateEnd.setSelected(true);
     }
 
     public String getQuery() {
-        String query = "select c.date, l.country, l.alias, b.name, b.family, c.method, p.name" +
+        String query = "select distinct c.date, l.country, l.alias, b.name, b.family, c.method, p.name" +
                 " from Location l" +
                 " inner join CollectionInfo c on l.idLocation = c.idLocation" +
                 " inner join ButterflyGuide b on b.idButterflyGuide = c.idButterflyGuide" +
@@ -310,14 +306,12 @@ public class CCollectionInfoSelector extends AbsMetaController implements Initia
         if(this.checkAlias.isSelected()) query += " l.alias = '" + this.txtAlias.getText() + "' and ";
         if(this.checkButterflyName.isSelected()) query += " b.name = '" + this.txtButterflyName.getText() + "' and ";
         if(this.checkButterflyFamily.isSelected()) query += " b.family = '" + this.txtButterflyFamily.getText() + "' and ";
-        /* To be implemented */
-//        if(this.checkTimeMorning.isSelected()) query += "";
-//        if(this.checkTimeAfternoon.isSelected()) query += "";
-//        if(this.checkTimeEvening.isSelected()) query += "";
-//        if(this.checkTimeDawn.isSelected()) query += "";
+
         query = query.substring(0, query.length()-4);
+        query = query + " order by c.date desc";
         return query;
     }
+
     @FXML
     void OnSearch(ActionEvent event) throws SQLException {
         /* Clean View */
@@ -329,11 +323,7 @@ public class CCollectionInfoSelector extends AbsMetaController implements Initia
         /* Querying */
         ResultSet query_result = db_collectionInfo.selectQuery(query);
         if(query_result == null) {
-            Alert error_alert = new Alert(Alert.AlertType.ERROR);
-            error_alert.setTitle("관찰정보 조회");
-            error_alert.setHeaderText(null);
-            error_alert.setContentText("없음");
-            error_alert.show();
+            this.txtResult.setText("해당하는 관찰정보가 없습니다.");
             return;
         }
 
@@ -357,14 +347,19 @@ public class CCollectionInfoSelector extends AbsMetaController implements Initia
         String date = selected_item.getRecord(0);
         String parsed_date = date.substring(0,4) + ". " + Integer.parseInt(date.substring(4,6)) + ". " + Integer.parseInt(date.substring(6,8));
 
-        ResultSet rs = this.db_collectionInfo.selectQuery("select location, locationDetail, section, sectionDetail, scientific_name" +
+        ResultSet rs = this.db_collectionInfo.selectQuery("select distinct location, locationDetail, section, sectionDetail, scientific_name" +
                 " from Location l" +
                 " inner join CollectionInfo c on l.idLocation = c.idLocation" +
                 " inner join ButterflyGuide b on b.idButterflyGuide = c.idButterflyGuide" +
                 " inner join Person p on p.idPerson = c.idPerson" +
                 " where l.country = '" + selected_item.getRecord(1)+ "'" +
-                " and b.name = '" + selected_item.getRecord(3) + "'");
+                " and l.alias = '" + selected_item.getRecord(2) + "'" +
+                " and b.name = '" + selected_item.getRecord(3) + "'" +
+                " and b.family = '" + selected_item.getRecord(4) + "'" +
+                " and c.method = '" + selected_item.getRecord(5) + "'" +
+                " and p.name = '" + selected_item.getRecord(6) + "'");
                 //" and p.name = '" + selected_item.getRecord(5) + "'");
+        
 //        public void passing_collection_info(String date, String country, String location, String locationDetail,
 //                String section, String sectionDetail, String loc_alias, String butter_name,
 //                String butter_family, String butter_sci, String person_name) {
@@ -392,26 +387,6 @@ public class CCollectionInfoSelector extends AbsMetaController implements Initia
         thisStage.close();
     }
 
-    @FXML
-    void OnTimeAfternoon(ActionEvent event) {
-
-    }
-
-    @FXML
-    void OnTimeDawn(ActionEvent event) {
-
-    }
-
-    @FXML
-    void OnTimeEvening(ActionEvent event) {
-
-    }
-
-    @FXML
-    void OnTimeMorning(ActionEvent event) {
-
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         /* Column Settings */
@@ -435,5 +410,87 @@ public class CCollectionInfoSelector extends AbsMetaController implements Initia
     @Override
     public void init_procedure() {
         db_collectionInfo = new MDBCollectionInfo(((MSharedData)this.shared_model).getDB().getConnection());
+
+        /* Set Auto Complete */
+        try {
+            setAutoComplete();
+        } catch (SQLException exp) {
+            ((MSharedData) this.shared_model).getLogger().debug("No Autocompletion Data");
+        }
+
+        /* Set Default Country */
+        this.txtCountry.setText("대한민국");
+
+        /* Show 1 Year List */
+        Calendar today = Calendar.getInstance();
+        this.dateBegin.getEditor().setText((today.get(Calendar.YEAR)-1) + " ." + today.get(Calendar.MONTH) + " ." + today.get(Calendar.DATE));
+
+        /* Preparing Query */
+        String query = getQuery();
+
+        /* Querying */
+        ResultSet query_result = db_collectionInfo.selectQuery(query);
+        if(query_result == null) {
+            this.txtResult.setText("해당하는 관찰정보가 없습니다.");
+            return;
+        }
+
+        int columnCount = 0;
+        try {
+            ResultSetMetaData rsmd = query_result.getMetaData();
+            columnCount = rsmd.getColumnCount();
+        } catch (SQLException exp) {
+            ((MSharedData) this.shared_model).getLogger().debug("No data from query");
+            this.txtResult.setText("해당하는 관찰정보가 없습니다.");
+            return;
+        }
+
+        /* View Updating */
+        try {
+            while (query_result.next()) {
+                TableData data = new TableData();
+                for (int i = 0; i < columnCount; i++) {
+                    data.setRecord(i, query_result.getString(i + 1));
+                }
+                this.tblCollectionInfo.getItems().add(data);
+            }
+        } catch (SQLException exp) {
+            ((MSharedData) this.shared_model).getLogger().debug("Table Insertion Failed");
+            this.txtResult.setText("해당하는 관찰정보가 없습니다.");
+            return;
+        }
+
+        /* Success */
+        this.txtResult.setText("최근 1년치 데이터가 조회되었습니다.");
+    }
+
+    private void setAutoComplete() throws SQLException {
+        ObservableList<String> autocomplete_list = FXCollections.observableArrayList();
+        ResultSet result = ((MSharedData)this.shared_model).getDB().selectQuery("select distinct name from ButterflyGuide");
+        while(result.next()) {
+            autocomplete_list.add(result.getString(1));
+        }
+        TextFields.bindAutoCompletion(this.txtButterflyName, autocomplete_list);
+        autocomplete_list.clear();
+
+        result = ((MSharedData)this.shared_model).getDB().selectQuery("select distinct family from ButterflyGuide");
+        while(result.next()) {
+            autocomplete_list.add(result.getString(1));
+        }
+        TextFields.bindAutoCompletion(this.txtButterflyFamily, autocomplete_list);
+        autocomplete_list.clear();
+
+        result = ((MSharedData)this.shared_model).getDB().selectQuery("select distinct country from Location");
+        while(result.next()) {
+            autocomplete_list.add(result.getString(1));
+        }
+        TextFields.bindAutoCompletion(this.txtCountry, autocomplete_list);
+        autocomplete_list.clear();
+
+        result = ((MSharedData)this.shared_model).getDB().selectQuery("select distinct alias from Location");
+        while(result.next()) {
+            autocomplete_list.add(result.getString(1));
+        }
+        TextFields.bindAutoCompletion(this.txtAlias, autocomplete_list);
     }
 }
