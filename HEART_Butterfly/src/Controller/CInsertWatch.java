@@ -32,86 +32,80 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
     MDatabase db=null;
     String ImagePath=null;
 		
-	 	@FXML
-	    private TextField txtInsertWatchDo;
+    @FXML
+    private TextField txtInsertWatchDo;
 
-	    @FXML
-	    private Label lblSection_watch;
+    @FXML
+    private Label lblSection_watch;
 
-	    @FXML
-	    private Button btnInsertWatchExit;
+    @FXML
+    private Button btnInsertWatchExit;
 
-	    @FXML
-	    private TextField txtInsertWatchBname;
+    @FXML
+    private TextField txtInsertWatchBname;
 
-	    @FXML
-	    private TextField txtInsertWatchRemark;
+    @FXML
+    private TextField txtInsertWatchRemark;
 
-	    @FXML
-	    private ComboBox<String> comboInsertWatchSex;
+    @FXML
+    private ComboBox<String> comboInsertWatchSex;
 
-	    @FXML
-	    private TextField txtInsertWatchNation;
+    @FXML
+    private TextField txtInsertWatchNation;
 
-	    @FXML
-	    private TextField txtInsertWatchSi;
+    @FXML
+    private TextField txtInsertWatchSi;
 
-	    @FXML
-	    private TextField txtInsertWatchQuan;
+    @FXML
+    private ComboBox<String> comboInsertWatchTime;
 
-	    @FXML
-	    private TextField txtInsertWatchLong;
+    @FXML
+    private Button btnInsertWatchPersonManagement;
 
-	    @FXML
-	    private ComboBox<String> comboInsertWatchTime;
+    @FXML
+    private TextField txtInsertWatchDong;
 
-	    @FXML
-	    private Button btnInsertWatchPersonManagement;
+    @FXML
+    private Label lblMaxSection_watch;
 
-	    @FXML
-	    private TextField txtInsertWatchDong;
+    @FXML
+    private TextField txtGPS;
 
-	    @FXML
-	    private Label lblMaxSection_watch;
+    @FXML
+    private Label txtResult;
 
-	    @FXML
-	    private TextField txtInsertWatchLat;
+    @FXML
+    private ComboBox<String> comboInsertWatchWho;
 
-	    @FXML
-	    private Button btnInsertWatchCorrect;
+    @FXML
+    private Button btnInsertSection_watch;
 
-	    @FXML
-	    private ComboBox<String> comboInsertWatchWho;
+    @FXML
+    private ComboBox<String> comboInsertWatchStatus;
 
-	    @FXML
-	    private Button btnInsertSection_watch;
+    @FXML
+    private Button btnInsertWatchSearchLoc;
 
-	    @FXML
-	    private ComboBox<String> comboInsertWatchStatus;
+    @FXML
+    private Button btnInsertWatchAdd;
 
-	    @FXML
-	    private Button btnInsertWatchSearchLoc;
+    @FXML
+    private DatePicker dateInsertWatchDate;
 
-	    @FXML
-	    private Button btnInsertWatchAdd;
+    @FXML
+    private TextField txtInsertWatchZoological;
 
-	    @FXML
-	    private DatePicker dateInsertWatchDate;
+    @FXML
+    private TextField txtInsertWatchFamily;
 
-	    @FXML
-	    private TextField txtInsertWatchZoological;
+    @FXML
+    private TextField txtInsertWatchLoc;
 
-	    @FXML
-	    private TextField txtInsertWatchFamily;
+    @FXML
+    private TextField txtInsertWatchLocname;
 
-	    @FXML
-	    private TextField txtInsertWatchLoc;
-
-	    @FXML
-	    private TextField txtInsertWatchLocname;
-
-	    @FXML
-	    private Button btnInsertWatchImportCollectionInfo;
+    @FXML
+    private Button btnInsertWatchImportCollectionInfo;
 
     public String getTextLblSection() {
 		return lblSection_watch.getText();
@@ -151,16 +145,12 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
     	String location = txtInsertWatchLoc.getText();
     	String location_detail = txtInsertWatchDo.getText() + "/" + txtInsertWatchSi.getText() + "/" + txtInsertWatchDong.getText();
 
-    	String gps_x = "0";
-        String gps_y = "0";
-        if(txtInsertWatchLat.getText().length() > 0) gps_x = txtInsertWatchLat.getText();
-        if(txtInsertWatchLat.getText().length() > 0) gps_y = txtInsertWatchLong.getText();
-        String gps =  gps_x + "," + gps_y;
+    	String gps =  null;
+        if(this.txtGPS.getText().length() > 0) gps = "0,0";
+        else gps =  this.txtGPS.getText();
 
         String alias = txtInsertWatchLocname.getText();
     	String section = lblSection_watch.getText() + " / " + lblMaxSection_watch.getText();
-    	
-    	
     	//String section_detail = txtInsertWatchSecremark.getText();
     	String person_name = comboInsertWatchWho.getSelectionModel().getSelectedItem(); // 조윤호 교수님은 반드시 DB에 있어야 함
     	String butterfly_name = txtInsertWatchBname.getText();
@@ -168,8 +158,6 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
     	String scientific_name = txtInsertWatchZoological.getText();
     	String sex = comboInsertWatchSex.getSelectionModel().getSelectedItem();
     	String status = comboInsertWatchStatus.getSelectionModel().getSelectedItem();
-    	String quantity = txtInsertWatchQuan.getText();
-    	if(quantity.length() == 0) quantity = "0";
     	//String note = txtInsertWatchRemark.getText();
 
     	
@@ -239,7 +227,7 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
 
         db_observation.setDate(date);
         db_observation.setIdCollectionInfo(id_collection_info);
-        db_observation.setNumber(Integer.parseInt(quantity));
+        db_observation.setNumber(1);
         db_observation.setSex((sex.equals("남"))?"m":"f");
         db_observation.setStatus(status);
         db_observation.setTime(time);
@@ -315,11 +303,6 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
     }
 
     @FXML
-    void correctInsertWatch(ActionEvent event) {
-
-    }
-
-    @FXML
     void dateInsertWatch(ActionEvent event) {
 
     }
@@ -345,27 +328,12 @@ public class CInsertWatch extends AbsInsertController implements Initializable {
     }
 
     @FXML
-    void latInsertWatch(ActionEvent event) {
-    	
-    }
-
-    @FXML
     void locInsertWatch(ActionEvent event) {
     	
     }
 
     @FXML
     void locnameInsertWatch(ActionEvent event) {
-
-    }
-
-    @FXML
-    void longInsertWatch(ActionEvent event) {
-    	
-    }
-
-    @FXML
-    void quanInsertWatch(ActionEvent event) {
 
     }
 
