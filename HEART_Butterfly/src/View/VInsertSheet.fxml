@@ -6,10 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tblInformation" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="tclSpecimenID" prefWidth="75.0" text="나비 ID" />
           <TableColumn fx:id="tclButterflyName" prefWidth="75.0" text="나비 이름" />
@@ -17,15 +16,15 @@
             <TableColumn fx:id="tclButterflyZoological" prefWidth="75.0" text="나비 학명" />
             <TableColumn fx:id="tclCollectMethod" prefWidth="75.0" text="수집 방식" />
             <TableColumn fx:id="tclCollectYear" prefWidth="75.0" text="수집년도" />
-            <TableColumn fx:id="tclCollectDate" prefWidth="75.0" text="수집월" />
-            <TableColumn fx:id="tclCollectDate1" prefWidth="75.0" text="수집일" />
+            <TableColumn fx:id="tclCollectMonth" prefWidth="75.0" text="수집월" />
+            <TableColumn fx:id="tclCollectDate" prefWidth="75.0" text="수집일" />
             <TableColumn fx:id="tclCollectCountry" prefWidth="75.0" text="수집 국가" />
             <TableColumn fx:id="tclCollectState" prefWidth="75.0" text="특별시/도" />
             <TableColumn fx:id="tclCollectCity" prefWidth="75.0" text="시군구" />
             <TableColumn fx:id="tclCollectVillage" prefWidth="75.0" text="읍/면/리" />
             <TableColumn fx:id="tclCollectPlace" prefWidth="75.0" text="통상명" />
             <TableColumn fx:id="tclCollector" prefWidth="75.0" text="수집자" />
-            <TableColumn fx:id="tclSpecimenizeMonth1" prefWidth="103.0" text="표본 작업년도" />
+            <TableColumn fx:id="tclSpecimenizeYear" prefWidth="103.0" text="표본 작업년도" />
             <TableColumn fx:id="tclSpecimenizeMonth" prefWidth="103.0" text="표본 작업월" />
             <TableColumn fx:id="tclSpecimenizeDate" prefWidth="103.0" text="표본 작업일" />
             <TableColumn fx:id="tclSpecimenSex" prefWidth="75.0" text="표본 성별" />
@@ -34,9 +33,6 @@
             <TableColumn fx:id="tclSpecimenCabinet" prefWidth="101.0" text="보관 캐비닛" />
             <TableColumn fx:id="tclSpecimenBox" prefWidth="75.0" text="상자" />
             <TableColumn fx:id="tclSpecimenPerson" prefWidth="75.0" text="작업자" />
-            <TableColumn fx:id="tclSpecimenizeYear" prefWidth="75.0" text="작업년도" />
-            <TableColumn fx:id="tclSpecimenizeMonth" prefWidth="75.0" text="작업월" />
-            <TableColumn fx:id="tclSpecimenizeDate" prefWidth="75.0" text="작업일" />
         </columns>
       </TableView>
    </center>

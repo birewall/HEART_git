@@ -1,4 +1,5 @@
 package Common;
+import Controller.CAnalysisMain;
 import Controller.CLogin;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,12 +14,11 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 	    try {
 	        FXMLLoader loader = new FXMLLoader();
-	    	Parent root = loader.load(getClass().getResource("/View/VLogin.fxml").openStream());
-	    	CLogin controller = (CLogin)loader.getController();
-	        controller.setForDebug();
+	    	Parent root = loader.load(getClass().getResource("/View/VAnalysisMain.fxml").openStream());
+	    	CAnalysisMain controller = (CAnalysisMain)loader.getController();
 	    	Scene scene = new Scene(root);
 	    	primaryStage.setScene(scene);
-	        primaryStage.setTitle("HEARTLab Butterfly Manager v0.0");
+	        primaryStage.setTitle("HEARTLab LH Freezing Factor Manager v0.0");
 	        primaryStage.show();
 	    } catch(Exception e) {
 	        e.printStackTrace();
